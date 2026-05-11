@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Cinematic Love Story | My Sweet Family</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #080808;
+            background-color: #050505;
             color: #fff;
             font-family: 'Noto Nastaliq Urdu', serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
+        /* Fixed Background */
         .bg-fixed {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('homebg.jpg');
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('homebg.jpg');
             background-size: cover;
             background-position: center;
             z-index: -2;
-            animation: backgroundPan 30s linear infinite alternate;
+            animation: backgroundPan 40s linear infinite alternate;
         }
 
         @keyframes backgroundPan {
             from { transform: scale(1); }
-            to { transform: scale(1.15); }
+            to { transform: scale(1.2); }
         }
 
         .intro-section {
@@ -45,23 +46,23 @@
         .gold-title {
             color: #D4AF37;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
             margin-bottom: 20px;
         }
 
         .sub-poetry {
             font-size: 1.8rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             line-height: 2.5;
         }
 
         .story-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 120px;
+            gap: 150px;
         }
 
         .story-block {
@@ -70,8 +71,8 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1.2s ease-out;
+            transform: translateY(60px);
+            transition: all 1.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
         .story-block.active {
@@ -81,40 +82,63 @@
 
         .picture-card {
             width: 100%;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 12px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            margin-bottom: 30px;
+            transition: 0.5s;
+        }
+
+        .picture-card:hover {
+            border-color: #D4AF37;
+            transform: scale(1.02);
         }
 
         .picture-card img {
             width: 100%;
             height: auto;
-            border-radius: 15px;
+            border-radius: 18px;
             display: block;
         }
 
         .quote-poetry {
-            font-size: 1.6rem;
-            line-height: 2.3;
-            max-width: 550px;
+            font-size: 1.7rem;
+            line-height: 2.4;
+            max-width: 600px;
+            color: #f0f0f0;
         }
 
-        .gold-quote { color: #D4AF37; font-size: 2rem; }
+        .gold-quote { color: #D4AF37; font-size: 2.2rem; }
+
+        footer {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .dev-tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: #888;
+            margin-top: 20px;
+        }
 
         .heart {
             position: fixed;
-            color: rgba(212, 175, 55, 0.7);
+            color: rgba(212, 175, 55, 0.6);
             z-index: -1;
             animation: floatUp 7s linear forwards;
         }
 
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
     </style>
@@ -125,76 +149,47 @@
 
     <section class="intro-section">
         <div>
-            <h1 class="gold-title">ہماری پیاری سی دنیا</h1>
-            <p class="sub-poetry">ہمارے سفر کا ہر لمحہ، ہماری "Sweet Family" کے نام۔</p>
-            <div style="font-size: 40px; margin-top: 30px; color:#D4AF37;">↓</div>
+            <h1 class="gold-title">ہماری پیاری سی دنیا ✨</h1>
+            <p class="sub-poetry">ہمارے سفر کا ہر لمحہ، ہماری "Sweet Family" کے نام 👨‍👩‍👧</p>
+            <div style="font-size: 40px; margin-top: 30px; color:#D4AF37; animation: bounce 2s infinite;">↓</div>
         </div>
     </section>
 
     <div class="story-container">
 
         <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.01 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>خدا کرے کہ ہمارا ساتھ یوں ہی قائم رہے،<br>تمہاری ہنسی سے میرا گھر ہمیشہ روشن رہے۔<span class="gold-quote">"</span></p>
+            <div class="picture-card"><img src="home1.jpg" alt="Memory 1"></div>
+            <p class="quote-poetry"><span class="gold-quote">"</span>خدا کرے کہ ہمارا ساتھ یوں ہی قائم رہے،<br>تمہاری ہنسی سے میرا گھر ہمیشہ روشن رہے 🌹<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تیرے آنے سے زندگی میں بہار آ گئی،<br>ہر دعا میں بس تمہاری ہی پکار آ گئی۔<span class="gold-quote">"</span></p>
+            <div class="picture-card"><img src="home2.jpg" alt="Memory 2"></div>
+            <p class="quote-poetry"><span class="gold-quote">"</span>تیرے آنے سے زندگی میں بہار آ گئی،<br>ہر دعا میں بس تمہاری ہی پکار آ گئی 💞<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.57 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ہماری چھوٹی سی دنیا، ہمارا پیارا سا پھول،<br>مالک رکھے ہمیں ہر بری نظر سے دور۔ آمین۔<span class="gold-quote">"</span></p>
+            <div class="picture-card"><img src="home3.jpg" alt="Memory 3"></div>
+            <p class="quote-poetry"><span class="gold-quote">"</span>ہماری چھوٹی سی دنیا، ہمارا پیارا سا پھول،<br>مالک رکھے ہمیں ہر بری نظر سے دور۔ آمین 🧿<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.00 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ہاتھوں میں ہاتھ رہے، ساتھ تیرا مدام ہو،<br>میری ہر صبح تیرے نام، تیری ہر شام میرے نام ہو۔<span class="gold-quote">"</span></p>
+            <div class="picture-card"><img src="home4.jpg" alt="Memory 4"></div>
+            <p class="quote-poetry"><span class="gold-quote">"</span>ہاتھوں میں ہاتھ رہے، ساتھ تیرا مدام ہو،<br>میری ہر صبح تیرے نام، تیری ہر شام میرے نام ہو 💍<span class="gold-quote">"</span></p>
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.01 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تجھ سے شروع، تجھ پہ ختم ہر داستان ہے،<br>میری محبت کا بس اتنا سا نشان ہے۔<span class="gold-quote">"</span></p>
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.00 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تم سلامت رہو ہزار برس،<br>ہر برس کے دن ہوں پچاس ہزار۔<span class="gold-quote">"</span></p>
-        </div>
-
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.59 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ساری دنیا کی خوشیاں ایک طرف،<br>تمہارے ساتھ گزارا ایک لمحہ ایک طرف۔<span class="gold-quote">"</span></p>
-        </div>
-
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (2).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>سکونِ قلب ہے بس تیری دید میں،<br>ملے جو تو تو ہو جائے عید میرے۔<span class="gold-quote">"</span></p>
-        </div>
-
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>وفا کا رنگ تمہاری آنکھوں سے جھلکتا ہے،<br>میرا ہر خواب تمہاری راہوں میں ٹہلتا ہے۔<span class="gold-quote">"</span></p>
-        </div>
-
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تم میرے وہ ہمدم ہو،<br>جسے پانے کی تمنا ہر دعا میں تھی۔<span class="gold-quote">"</span></p>
-        </div>
-
-    </div>
-
-    <section class="intro-section" style="background: rgba(0,0,0,0.6); height: 50vh;">
-        <h1 class="gold-title" style="font-size: 2.2rem;">میری زندگی کی سب سے خوبصورت حقیقت... امبر کی مما</h1>
-    </section>
+    <footer>
+        <h1 class="gold-title" style="font-size: 2.2rem;">ہماری خوبصورت حقیقت... Ambar ki mama ❤️🥰😘💕💝💖😍</h1>
+        <div class="dev-tag">CREATED BY YOUR HUBBY "AZEEM" | 2026</div>
+    </footer>
 
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.15 });
 
         document.querySelectorAll('.story-block').forEach(block => observer.observe(block));
 
@@ -207,6 +202,13 @@
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 7000);
         }, 500);
-    </script>
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
 </body>
-</html>
+    </html>
+        
