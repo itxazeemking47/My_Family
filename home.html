@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Cinematic Love Story | My Sweet Family</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #050505;
+            background-color: #080808;
             color: #fff;
             font-family: 'Noto Nastaliq Urdu', serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Fixed Background */
         .bg-fixed {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -26,12 +25,12 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
-            animation: backgroundPan 40s linear infinite alternate;
+            animation: backgroundPan 30s linear infinite alternate;
         }
 
         @keyframes backgroundPan {
             from { transform: scale(1); }
-            to { transform: scale(1.2); }
+            to { transform: scale(1.15); }
         }
 
         .intro-section {
@@ -46,23 +45,23 @@
         .gold-title {
             color: #D4AF37;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
             margin-bottom: 20px;
         }
 
         .sub-poetry {
             font-size: 1.8rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.8);
             line-height: 2.5;
         }
 
         .story-container {
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 50px 20px;
             display: flex;
             flex-direction: column;
-            gap: 150px;
+            gap: 120px;
         }
 
         .story-block {
@@ -71,8 +70,8 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+            transform: translateY(50px);
+            transition: all 1.2s ease-out;
         }
 
         .story-block.active {
@@ -82,42 +81,36 @@
 
         .picture-card {
             width: 100%;
-            max-width: 650px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 12px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
-            margin-bottom: 30px;
-            transition: 0.5s;
-        }
-
-        .picture-card:hover {
-            border-color: #D4AF37;
-            transform: scale(1.02);
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin-bottom: 25px;
         }
 
         .picture-card img {
             width: 100%;
             height: auto;
-            border-radius: 18px;
+            border-radius: 15px;
             display: block;
         }
 
         .quote-poetry {
-            font-size: 1.7rem;
-            line-height: 2.4;
-            max-width: 600px;
-            color: #f0f0f0;
+            font-size: 1.6rem;
+            line-height: 2.3;
+            max-width: 550px;
         }
 
-        .gold-quote { color: #D4AF37; font-size: 2.2rem; }
+        .gold-quote { color: #D4AF37; font-size: 2rem; }
 
-        footer {
-            padding: 80px 20px;
-            text-align: center;
+        /* Footer Section Styling */
+        .footer-section {
             background: rgba(0,0,0,0.8);
+            padding: 100px 20px 40px;
+            text-align: center;
             border-top: 1px solid rgba(212, 175, 55, 0.1);
         }
 
@@ -125,20 +118,20 @@
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             letter-spacing: 2px;
-            color: #888;
-            margin-top: 20px;
+            color: rgba(212, 175, 55, 0.7);
+            margin-top: 30px;
+            text-transform: uppercase;
         }
 
         .heart {
             position: fixed;
-            color: rgba(212, 175, 55, 0.6);
+            color: rgba(212, 175, 55, 0.7);
             z-index: -1;
             animation: floatUp 7s linear forwards;
         }
 
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            50% { opacity: 0.8; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
     </style>
@@ -151,37 +144,37 @@
         <div>
             <h1 class="gold-title">ہماری پیاری سی دنیا ✨</h1>
             <p class="sub-poetry">ہمارے سفر کا ہر لمحہ، ہماری "Sweet Family" کے نام 👨‍👩‍👧</p>
-            <div style="font-size: 40px; margin-top: 30px; color:#D4AF37; animation: bounce 2s infinite;">↓</div>
+            <div style="font-size: 40px; margin-top: 30px; color:#D4AF37;">↓</div>
         </div>
     </section>
 
     <div class="story-container">
 
         <div class="story-block">
-            <div class="picture-card"><img src="home1.jpg" alt="Memory 1"></div>
+            <div class="picture-card"><img src="home1.jpg"></div>
             <p class="quote-poetry"><span class="gold-quote">"</span>خدا کرے کہ ہمارا ساتھ یوں ہی قائم رہے،<br>تمہاری ہنسی سے میرا گھر ہمیشہ روشن رہے 🌹<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="home2.jpg" alt="Memory 2"></div>
+            <div class="picture-card"><img src="home2.jpg"></div>
             <p class="quote-poetry"><span class="gold-quote">"</span>تیرے آنے سے زندگی میں بہار آ گئی،<br>ہر دعا میں بس تمہاری ہی پکار آ گئی 💞<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="home3.jpg" alt="Memory 3"></div>
+            <div class="picture-card"><img src="home3.jpg"></div>
             <p class="quote-poetry"><span class="gold-quote">"</span>ہماری چھوٹی سی دنیا، ہمارا پیارا سا پھول،<br>مالک رکھے ہمیں ہر بری نظر سے دور۔ آمین 🧿<span class="gold-quote">"</span></p>
         </div>
 
         <div class="story-block">
-            <div class="picture-card"><img src="home4.jpg" alt="Memory 4"></div>
+            <div class="picture-card"><img src="home4.jpg"></div>
             <p class="quote-poetry"><span class="gold-quote">"</span>ہاتھوں میں ہاتھ رہے، ساتھ تیرا مدام ہو،<br>میری ہر صبح تیرے نام، تیری ہر شام میرے نام ہو 💍<span class="gold-quote">"</span></p>
         </div>
 
         </div>
 
-    <footer>
-        <h1 class="gold-title" style="font-size: 2.2rem;">ہماری خوبصورت حقیقت... Ambar ki mama ❤️🥰😘💕💝💖😍</h1>
-        <div class="dev-tag">CREATED BY YOUR HUBBY "AZEEM" | 2026</div>
+    <footer class="footer-section">
+        <h1 class="gold-title" style="font-size: 2.2rem;">میری زندگی کی سب سے خوبصورت حقیقت... امبر کی مما ❤️</h1>
+        <div class="dev-tag">Created by your hubby Azeem</div>
     </footer>
 
     <script>
@@ -189,7 +182,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.story-block').forEach(block => observer.observe(block));
 
@@ -202,13 +195,6 @@
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 7000);
         }, 500);
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-    </style>
+    </script>
 </body>
-    </html>
-        
+</html>
