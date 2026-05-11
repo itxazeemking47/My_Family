@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Access | Reserved</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Aapki background image */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 60px 40px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            outline: none;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #D4AF37;
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        button:hover { background: #fff; transform: scale(1.02); }
+
+        .shake { animation: shake 0.4s; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            60% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card" id="card">
+        <h1>Private Portal</h1>
+        <p style="color: #ccc; margin-bottom: 20px;">Only for the chosen one.</p>
+        <input type="password" id="passInput" placeholder="Passphrase...">
+        <button onclick="unlock()">Unlock Our Story</button>
+    </div>
+
+    <script>
+        function unlock() {
+            const pass = document.getElementById("passInput").value;
+            const card = document.getElementById("card");
+
+            if (pass === "ambar") {
+                card.style.transition = "1s";
+                card.style.opacity = "0";
+                card.style.transform = "scale(0.9)";
+                
+                setTimeout(() => {
+                    // Ye line apko home.html pe le jaye gi
+                    window.location.href = "home.html";
+                }, 1000);
+            } else {
+                card.classList.add('shake');
+                setTimeout(() => card.classList.remove('shake'), 400);
+                document.getElementById("passInput").value = "";
+            }
+        }
+
+        // Enter press karne se unlock ho jaye
+        document.getElementById("passInput").addEventListener("keyup", function(e) {
+            if (e.key === "Enter") unlock();
+        });
+    </script>
+</body>
+</html>
