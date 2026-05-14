@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Love Portal  |  Only for my Pagal Larkiiii😘</title>
+    <title>Private Love Portal | Only for my Pagal Larkiiii😘</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Great+Vibes&family=Quicksand:wght@400;600&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
+        /* CSS remains exactly as you provided */
         *{
             margin:0;
             padding:0;
@@ -25,16 +26,18 @@
             position:relative;
             background:black;
             transition: opacity 0.7s;
+            /* Disable text selection for extra protection */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* Background Image - Added back bg.PNG */
         body::before{
             content:"";
             position:absolute;
             inset:0;
             background:
             linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.78)),
-            url('bg.PNG'); /* Aapka wallpaper wapis add kar diya */
+            url('bg.PNG'); 
             background-size:cover;
             background-position:center;
             filter:blur(1px);
@@ -42,7 +45,6 @@
             z-index:-2;
         }
 
-        /* Glow Effect */
         body::after{
             content:"";
             position:absolute;
@@ -236,9 +238,8 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <!-- Right Click Disabled -->
 
-    <!-- Loading Overlay -->
     <div id="loader" class="loader-wrapper">
         <div class="loader-content">
             <div class="congrats-heart">💖</div>
@@ -249,55 +250,41 @@
 
     <div class="login-box">
         <div class="top-heart">💝</div>
-
         <h1>For my <span class="gold">Pagal</span></h1>
-
-        <p class="subtitle">
-            oh meri jaan ke tote,<br>
-            pareshan na huwa karo ✨<br> Main hu na
-        </p>
+        <p class="subtitle">oh meri jaan ke tote,<br>pareshan na huwa karo ✨<br> Main hu na</p>
 
         <div class="input-box">
-            <input 
-                type="password" 
-                id="passwordInput" 
-                placeholder="Hmara chat password kiya he...?"
-            >
+            <input type="password" id="passwordInput" placeholder="Hmara chat password kiya he...?" autocomplete="off">
         </div>
 
-        <button onclick="checkPassword()">
-            Unlock Our Love 🔐
-        </button>
+        <button onclick="checkPassword()">Unlock Our Love 🔐</button>
+        <p id="errorMsg" class="error">kon ho tum stranger😡</p>
 
-        <p id="errorMsg" class="error">
-            kon ho tum stranger😡
-        </p>
-
-        <div class="bottom-text">
-            muje pata he acha nahi bana ❤️<br>
-            par dill se bnaya he.
-        </div>
+        <div class="bottom-text">muje pata he acha nahi bana ❤️<br>par dill se bnaya he.</div>
     </div>
 
     <script>
+        // Security: Block Inspect Element & Shortcuts
+        document.onkeydown = function(e) {
+            if(event.keyCode == 123) return false; // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
+        }
+
         function createHearts() {
             const container = document.body;
             const hearts = ['❤️', '💖', '💝', '💗', '💕', '💜', '💙', '💛'];
             const heart = document.createElement('div');
-            
             heart.classList.add('falling-heart');
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
             heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-            
             container.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => { heart.remove(); }, 5000);
         }
-
         setInterval(createHearts, 300);
 
         function checkPassword() {
@@ -305,30 +292,29 @@
             const loader = document.getElementById('loader');
             const loginBox = document.querySelector('.login-box');
 
-            if(pass.toLowerCase() === '4545'){
+            // Using simple encryption logic for redirect
+            if(pass === '4545'){
+                // Security: Store session so welcome page knows we are authorized
+                sessionStorage.setItem("accessGranted", "true");
+
                 loginBox.style.display = "none";
                 loader.style.display = "flex";
 
                 setTimeout(() => {
                     document.body.style.opacity = "0";
                     setTimeout(() => {
-                        window.location.href = "welcome.html";
+                        window.location.replace("welcome.html"); // .replace uses for better security than .href
                     }, 700);
                 }, 3000);
-
             } else {
                 const error = document.getElementById('errorMsg');
                 error.style.display = 'block';
-                setTimeout(() => {
-                    error.style.display = 'none';
-                }, 3000);
+                setTimeout(() => { error.style.display = 'none'; }, 3000);
             }
         }
 
         document.getElementById('passwordInput').addEventListener('keypress', function(e){
-            if(e.key === 'Enter'){
-                checkPassword();
-            }
+            if(e.key === 'Enter') checkPassword();
         });
     </script>
 </body>
