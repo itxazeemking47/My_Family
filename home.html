@@ -1,7 +1,7 @@
 <style>
 
 /* =========================
-    PREMIUM LOVE CINEMATIC UPGRADE
+   ROMANTIC CINEMATIC FONTS UPGRADE
 ========================= */
 
 *{
@@ -14,11 +14,13 @@ body{
     background:#050505;
     color:white;
     overflow-x:hidden;
+
+    /* DEFAULT FONT */
     font-family:'Poppins', sans-serif;
     scroll-behavior:smooth;
 }
 
-/* ===== BACKGROUND (MORE ROMANTIC DEPTH) ===== */
+/* ===== BACKGROUND ===== */
 
 .bg-fixed{
     position:fixed;
@@ -31,21 +33,20 @@ body{
     radial-gradient(circle at 50% 80%, rgba(120,180,255,0.07), transparent 50%),
     linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95));
 
-    background-size:cover;
     animation:bgPulse 18s ease-in-out infinite alternate;
 }
 
 @keyframes bgPulse{
-    from{ transform:scale(1); filter:brightness(1); }
-    to{ transform:scale(1.08); filter:brightness(1.15); }
+    from{ transform:scale(1); }
+    to{ transform:scale(1.08); }
 }
 
-/* ===== CURSOR GLOW (ROMANTIC TOUCH) ===== */
+/* ===== CURSOR GLOW ===== */
 
 .cursor-glow{
     position:fixed;
-    width:25px;
-    height:25px;
+    width:20px;
+    height:20px;
     border-radius:50%;
     background:radial-gradient(circle, rgba(255,105,180,0.8), transparent 70%);
     pointer-events:none;
@@ -53,7 +54,7 @@ body{
     transform:translate(-50%,-50%);
 }
 
-/* ===== HERO ===== */
+/* ===== HERO SECTION ===== */
 
 .intro-section{
     min-height:100vh;
@@ -66,28 +67,31 @@ body{
 
 .hero-box{
     max-width:850px;
-    animation:fadeUp 1.5s ease;
 }
 
 /* badge */
 .top-badge{
-    display:inline-block;
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    letter-spacing:2px;
+
     padding:12px 25px;
     border-radius:50px;
 
     background:rgba(255,255,255,0.06);
     border:1px solid rgba(255,255,255,0.12);
-    backdrop-filter:blur(14px);
 
-    letter-spacing:2px;
-    font-size:14px;
-    color:rgba(255,255,255,0.85);
-    box-shadow:0 0 25px rgba(255,105,180,0.1);
+    display:inline-block;
 }
 
-/* title */
+/* ===== MAIN TITLE (ROMANTIC LUXURY FONT) ===== */
+
 .gold-title{
+    font-family:'Playfair Display', serif;
+
     font-size:clamp(3rem,6vw,5.5rem);
+    font-weight:700;
+
     color:#ffd369;
 
     text-shadow:
@@ -97,53 +101,120 @@ body{
     margin-top:25px;
 }
 
-/* poetry */
-.sub-poetry{
-    margin-top:20px;
-    font-size:1.7rem;
-    line-height:2.2;
+/* ===== POETRY TEXT ===== */
+
+.sub-poetry,
+.quote-poetry,
+.ending-text{
+
+    font-family:'Poppins', sans-serif;
+
     color:rgba(255,255,255,0.85);
 }
 
-/* button */
+/* intro poetry */
+.sub-poetry{
+    margin-top:20px;
+    font-size:1.6rem;
+    line-height:2.2;
+}
+
+/* story poetry */
+.quote-poetry{
+    margin-top:30px;
+    font-size:1.7rem;
+    line-height:2.3;
+}
+
+/* ===== LOVE NAME FONT (HANDWRITING STYLE) ===== */
+
+.ending-name,
+.footer-name{
+    font-family:'Dancing Script', cursive;
+
+    color:#ffd369;
+    text-shadow:0 0 40px rgba(255,211,105,0.4);
+}
+
+/* sizes */
+.ending-name{ font-size:3.5rem; }
+.footer-name{ font-size:3.8rem; }
+
+/* ===== BUTTONS ===== */
+
+.scroll-btn,
+.next-btn{
+    font-family:'Poppins', sans-serif;
+
+    text-decoration:none;
+    font-weight:600;
+
+    border-radius:50px;
+    transition:0.4s;
+}
+
+/* hero button */
 .scroll-btn{
     display:inline-block;
-    margin-top:45px;
+    margin-top:40px;
 
     padding:16px 40px;
-    border-radius:50px;
 
     background:linear-gradient(135deg,#ff4d88,#ff7eb3,#ffd369);
     color:black;
 
-    font-weight:700;
-    text-decoration:none;
-
     box-shadow:0 10px 35px rgba(255,77,136,0.35);
-
-    transition:0.4s;
 }
 
-.scroll-btn:hover{
+/* next button */
+.next-btn{
+    display:inline-block;
+    padding:18px 45px;
+
+    background:linear-gradient(135deg,#ffd369,#ff7eb3);
+    color:black;
+
+    box-shadow:0 20px 50px rgba(255,211,105,0.25);
+}
+
+/* hover */
+.scroll-btn:hover,
+.next-btn:hover{
     transform:scale(1.08);
-    box-shadow:0 0 40px rgba(255,105,180,0.5);
 }
 
-/* ===== STORY BLOCKS ===== */
+/* ===== IMAGE CARDS ===== */
 
-.story-container{
-    max-width:900px;
-    margin:auto;
-    padding:80px 20px;
+.picture-card{
+    border-radius:30px;
+    overflow:hidden;
 
-    display:flex;
-    flex-direction:column;
-    gap:120px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter:blur(14px);
+
+    padding:14px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,0.75);
+
+    transition:0.5s;
 }
+
+.picture-card:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+/* image */
+.picture-card img{
+    width:100%;
+    border-radius:22px;
+    display:block;
+}
+
+/* ===== ANIMATION ===== */
 
 .story-block{
-    text-align:center;
-
     opacity:0;
     transform:translateY(80px);
     transition:1.2s ease;
@@ -154,133 +225,9 @@ body{
     transform:translateY(0);
 }
 
-/* image card */
-.picture-card{
-    overflow:hidden;
-    border-radius:30px;
-
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(14px);
-    padding:14px;
-
-    box-shadow:0 25px 70px rgba(0,0,0,0.75);
-
-    transition:0.5s;
-}
-
-.picture-card:hover{
-    transform:translateY(-10px) scale(1.02);
-    box-shadow:0 35px 90px rgba(255,105,180,0.15);
-}
-
-.picture-card img{
-    width:100%;
-    border-radius:22px;
-}
-
-/* poetry text */
-.quote-poetry{
-    margin-top:30px;
-    font-size:1.8rem;
-    line-height:2.3;
-
-    color:rgba(255,255,255,0.9);
-}
-
-.gold-quote{
-    color:#ffd369;
-    font-size:2.2rem;
-}
-
-/* ===== ENDING ===== */
-
-.ending-section{
-    padding:120px 20px;
-    text-align:center;
-}
-
-.ending-box{
-    max-width:750px;
-    margin:auto;
-
-    padding:70px 35px;
-    border-radius:40px;
-
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(16px);
-
-    box-shadow:0 20px 80px rgba(0,0,0,0.6);
-}
-
-.ending-text{
-    font-size:1.6rem;
-    color:rgba(255,255,255,0.75);
-}
-
-.ending-name{
-    margin-top:20px;
-    font-size:3.2rem;
-
-    color:#ffd369;
-    text-shadow:0 0 35px rgba(255,211,105,0.4);
-}
-
-/* ===== NEXT BUTTON ===== */
-
-.next-btn{
-    display:inline-block;
-    padding:18px 45px;
-    border-radius:60px;
-
-    background:linear-gradient(135deg,#ffd369,#ff7eb3);
-    color:black;
-
-    font-weight:800;
-    text-decoration:none;
-
-    box-shadow:0 20px 50px rgba(255,211,105,0.25);
-
-    transition:0.4s;
-}
-
-.next-btn:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 45px rgba(255,105,180,0.4);
-}
-
-/* ===== FOOTER ===== */
-
-.premium-footer{
-    text-align:center;
-    padding:90px 20px;
-
-    background:rgba(0,0,0,0.8);
-    border-top:1px solid rgba(255,255,255,0.08);
-}
-
-.footer-name{
-    font-size:3.5rem;
-    color:#ffd369;
-
-    text-shadow:0 0 40px rgba(255,211,105,0.5);
-
-    animation:glow 2s infinite alternate;
-}
-
-/* ===== ANIMATIONS ===== */
-
-@keyframes fadeUp{
-    from{opacity:0; transform:translateY(40px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes glow{
-    from{ text-shadow:0 0 20px rgba(255,211,105,0.3); }
-    to{ text-shadow:0 0 50px rgba(255,211,105,0.6); }
+@keyframes bgPulse{
+    from{filter:brightness(1);}
+    to{filter:brightness(1.15);}
 }
 
 /* ===== MOBILE ===== */
@@ -288,7 +235,8 @@ body{
 @media(max-width:768px){
     .sub-poetry{font-size:1.4rem;}
     .quote-poetry{font-size:1.5rem;}
-    .ending-name{font-size:2.5rem;}
+    .ending-name{font-size:2.8rem;}
+    .footer-name{font-size:3rem;}
 }
 
- </style>
+                        </style>
