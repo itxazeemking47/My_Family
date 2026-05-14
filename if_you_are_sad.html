@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suno Pagli... Hasso Na! 🧸</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Lexend', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Luxury Love Story Background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.88)), url('bg.PNG');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .header {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 38px;
+            color: #ffd36b;
+            text-shadow: 0 0 20px rgba(255,211,107,0.4);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #ffb6c1;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        /* Joke Cards Styling */
+        .jokes-container {
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .joke-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-right: 5px solid #ffd36b;
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: 0.4s;
+            animation: slideIn 1s ease both;
+        }
+
+        .joke-card:hover {
+            transform: scale(1.02) rotate(-1deg);
+            background: rgba(255, 255, 255, 0.1);
+            border-right-color: #ff4d88;
+        }
+
+        .urdu-text {
+            font-size: 22px;
+            line-height: 1.8;
+            color: #ffffff;
+            text-align: right;
+            font-weight: 400;
+        }
+
+        .emoji-float {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: 'Fredoka One', cursive;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #ffd36b, #ff9f1c);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255,211,107,0.2);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.1);
+        }
+
+        /* Creator Footer */
+        .creator-footer {
+            margin-bottom: 40px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .creator-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #ffb6c1;
+            letter-spacing: 2px;
+        }
+
+        .creator-name {
+            font-family: 'Fredoka One', cursive;
+            color: #ffd36b;
+            font-size: 18px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media(max-width: 450px) {
+            .btn { width: 80vw; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Suno meri Pagal... 🧸</h1>
+        <p class="subtitle">Udaas ho? Chalo thora hans lo!</p>
+    </div>
+
+    <div class="jokes-container">
+        <div class="joke-card" style="animation-delay: 0.2s;">
+            <span class="emoji-float">😂</span>
+            <p class="urdu-text">
+                شوہر: آج میں نے تمھارے لیے ایک ایسی چیز خریدی ہے جسے پہن کر تم حور لگو گی۔<br>
+                بیوی: (خوشی سے) سچ میں؟ وہ کیا ہے؟<br>
+                شوہر: سفید کفن!
+            </p>
+        </div>
+
+        <div class="joke-card" style="animation-delay: 0.5s;">
+            <span class="emoji-float">😝</span>
+            <p class="urdu-text">
+                لڑکا: میرا دل تمہارے پاس ہے!<br>
+                لڑکی: تو میرے دل کا کیا ہو گا؟<br>
+                لڑکا: تم میرے چھوٹے بھائی کا دل لے لو، وہ بھی بالکل نیا ہے!
+            </p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="portal.html" class="btn back-btn">Go Back</a>
+        <a href="jokes_page2.html" class="btn next-btn">More Jokes ✨</a>
+    </div>
+
+    <div class="creator-footer">
+        <p class="creator-text">DESIGNED WITH LOVE BY</p>
+        <span class="creator-name">AZEEM</span>
+    </div>
+
+    <script>
+        // Floating Heart Particles for extra feel
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.bottom = '-50px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = '12px';
+            heart.style.opacity = '0.4';
+            heart.style.zIndex = '-1';
+            heart.style.transition = '20s linear';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+            }, 100);
+
+            setTimeout(() => heart.remove(), 20000);
+        }
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>
