@@ -1,242 +1,166 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Cinematic Experience</title>
+    
+    <!-- IMPORTANT: Google Fonts Link (Missing in your code) -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-/* =========================
-   ROMANTIC CINEMATIC FONTS UPGRADE
-========================= */
+    <style>
+        /* =========================
+           ROMANTIC CINEMATIC FONTS UPGRADE
+        ========================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-body{
-    background:#050505;
-    color:white;
-    overflow-x:hidden;
+        body{
+            background:#050505;
+            color:white;
+            overflow-x:hidden;
+            font-family:'Poppins', sans-serif;
+            scroll-behavior:smooth;
+        }
 
-    /* DEFAULT FONT */
-    font-family:'Poppins', sans-serif;
-    scroll-behavior:smooth;
-}
+        /* ===== BACKGROUND ===== */
+        .bg-fixed{
+            position:fixed;
+            inset:0;
+            z-index:-3;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,105,180,0.10), transparent 40%),
+                radial-gradient(circle at 80% 30%, rgba(255,211,105,0.08), transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(120,180,255,0.07), transparent 50%),
+                linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+            /* Combined animation into one */
+            animation: bgPulse 18s ease-in-out infinite alternate;
+        }
 
-/* ===== BACKGROUND ===== */
+        @keyframes bgPulse{
+            from{ transform:scale(1); filter: brightness(1); }
+            to{ transform:scale(1.08); filter: brightness(1.15); }
+        }
 
-.bg-fixed{
-    position:fixed;
-    inset:0;
-    z-index:-3;
+        /* ===== CURSOR GLOW ===== */
+        .cursor-glow{
+            position:fixed;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(255,105,180,0.8), transparent 70%);
+            pointer-events:none;
+            z-index:9999;
+            transform:translate(-50%,-50%);
+        }
 
-    background:
-    radial-gradient(circle at 20% 20%, rgba(255,105,180,0.10), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(255,211,105,0.08), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(120,180,255,0.07), transparent 50%),
-    linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+        /* ===== HERO SECTION ===== */
+        .intro-section{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:20px;
+        }
 
-    animation:bgPulse 18s ease-in-out infinite alternate;
-}
+        .hero-box{ max-width:850px; }
 
-@keyframes bgPulse{
-    from{ transform:scale(1); }
-    to{ transform:scale(1.08); }
-}
+        .top-badge{
+            font-size:14px;
+            letter-spacing:2px;
+            padding:12px 25px;
+            border-radius:50px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.12);
+            display:inline-block;
+            text-transform: uppercase;
+        }
 
-/* ===== CURSOR GLOW ===== */
+        .gold-title{
+            font-family:'Playfair Display', serif;
+            font-size:clamp(3rem,6vw,5.5rem);
+            font-weight:700;
+            color:#ffd369;
+            text-shadow: 0 0 25px rgba(255,211,105,0.4), 0 0 60px rgba(255,105,180,0.15);
+            margin-top:25px;
+        }
 
-.cursor-glow{
-    position:fixed;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,105,180,0.8), transparent 70%);
-    pointer-events:none;
-    z-index:9999;
-    transform:translate(-50%,-50%);
-}
+        .sub-poetry{
+            margin-top:20px;
+            font-size:1.6rem;
+            line-height:2.2;
+            color:rgba(255,255,255,0.85);
+        }
 
-/* ===== HERO SECTION ===== */
+        .ending-name{ 
+            font-family:'Dancing Script', cursive;
+            color:#ffd369;
+            text-shadow:0 0 40px rgba(255,211,105,0.4);
+            font-size:3.5rem; 
+            margin-top: 20px;
+            display: block;
+        }
 
-.intro-section{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
+        .scroll-btn{
+            display:inline-block;
+            margin-top:40px;
+            padding:16px 40px;
+            background:linear-gradient(135deg,#ff4d88,#ff7eb3,#ffd369);
+            color:black;
+            text-decoration:none;
+            font-weight:600;
+            border-radius:50px;
+            transition:0.4s;
+            box-shadow:0 10px 35px rgba(255,77,136,0.35);
+        }
 
-.hero-box{
-    max-width:850px;
-}
+        .scroll-btn:hover{ transform:scale(1.08); }
 
-/* badge */
-.top-badge{
-    font-family:'Poppins', sans-serif;
-    font-size:14px;
-    letter-spacing:2px;
+        /* Animation class logic */
+        .story-block{
+            opacity:1; /* Temporarily set to 1 so you can see it without JS */
+            transform:translateY(0);
+            transition:1.2s ease;
+            padding: 50px 20px;
+            text-align: center;
+        }
 
-    padding:12px 25px;
-    border-radius:50px;
+        @media(max-width:768px){
+            .sub-poetry{font-size:1.2rem;}
+            .ending-name{font-size:2.8rem;}
+        }
+    </style>
+</head>
+<body>
 
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.12);
+    <div class="bg-fixed"></div>
+    <div class="cursor-glow" id="cursor"></div>
 
-    display:inline-block;
-}
+    <section class="intro-section">
+        <div class="hero-box story-block">
+            <div class="top-badge">A Tale of Love</div>
+            <h1 class="gold-title">Timeless Romance</h1>
+            <p class="sub-poetry">
+                In the dance of stars and the whisper of the wind,<br>
+                I found a soul that matches mine.
+            </p>
+            <span class="ending-name">Forever Yours</span>
+            <a href="#" class="scroll-btn">Enter Our World</a>
+        </div>
+    </section>
 
-/* ===== MAIN TITLE (ROMANTIC LUXURY FONT) ===== */
-
-.gold-title{
-    font-family:'Playfair Display', serif;
-
-    font-size:clamp(3rem,6vw,5.5rem);
-    font-weight:700;
-
-    color:#ffd369;
-
-    text-shadow:
-    0 0 25px rgba(255,211,105,0.4),
-    0 0 60px rgba(255,105,180,0.15);
-
-    margin-top:25px;
-}
-
-/* ===== POETRY TEXT ===== */
-
-.sub-poetry,
-.quote-poetry,
-.ending-text{
-
-    font-family:'Poppins', sans-serif;
-
-    color:rgba(255,255,255,0.85);
-}
-
-/* intro poetry */
-.sub-poetry{
-    margin-top:20px;
-    font-size:1.6rem;
-    line-height:2.2;
-}
-
-/* story poetry */
-.quote-poetry{
-    margin-top:30px;
-    font-size:1.7rem;
-    line-height:2.3;
-}
-
-/* ===== LOVE NAME FONT (HANDWRITING STYLE) ===== */
-
-.ending-name,
-.footer-name{
-    font-family:'Dancing Script', cursive;
-
-    color:#ffd369;
-    text-shadow:0 0 40px rgba(255,211,105,0.4);
-}
-
-/* sizes */
-.ending-name{ font-size:3.5rem; }
-.footer-name{ font-size:3.8rem; }
-
-/* ===== BUTTONS ===== */
-
-.scroll-btn,
-.next-btn{
-    font-family:'Poppins', sans-serif;
-
-    text-decoration:none;
-    font-weight:600;
-
-    border-radius:50px;
-    transition:0.4s;
-}
-
-/* hero button */
-.scroll-btn{
-    display:inline-block;
-    margin-top:40px;
-
-    padding:16px 40px;
-
-    background:linear-gradient(135deg,#ff4d88,#ff7eb3,#ffd369);
-    color:black;
-
-    box-shadow:0 10px 35px rgba(255,77,136,0.35);
-}
-
-/* next button */
-.next-btn{
-    display:inline-block;
-    padding:18px 45px;
-
-    background:linear-gradient(135deg,#ffd369,#ff7eb3);
-    color:black;
-
-    box-shadow:0 20px 50px rgba(255,211,105,0.25);
-}
-
-/* hover */
-.scroll-btn:hover,
-.next-btn:hover{
-    transform:scale(1.08);
-}
-
-/* ===== IMAGE CARDS ===== */
-
-.picture-card{
-    border-radius:30px;
-    overflow:hidden;
-
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(14px);
-
-    padding:14px;
-
-    box-shadow:0 25px 70px rgba(0,0,0,0.75);
-
-    transition:0.5s;
-}
-
-.picture-card:hover{
-    transform:translateY(-10px) scale(1.02);
-}
-
-/* image */
-.picture-card img{
-    width:100%;
-    border-radius:22px;
-    display:block;
-}
-
-/* ===== ANIMATION ===== */
-
-.story-block{
-    opacity:0;
-    transform:translateY(80px);
-    transition:1.2s ease;
-}
-
-.story-block.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-@keyframes bgPulse{
-    from{filter:brightness(1);}
-    to{filter:brightness(1.15);}
-}
-
-/* ===== MOBILE ===== */
-
-@media(max-width:768px){
-    .sub-poetry{font-size:1.4rem;}
-    .quote-poetry{font-size:1.5rem;}
-    .ending-name{font-size:2.8rem;}
-    .footer-name{font-size:3rem;}
-}
-
-                        </style>
+    <script>
+        // Cursor Glow Follow Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>
