@@ -1,70 +1,352 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome | My Sweet Family</title>
+    <title>Noor Azeem | Private Love Portal</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            margin: 0; padding: 0;
-            /* Yahan bg.jpg ki jagah aap apni homebg.jpg bhi use kar sakte hain */
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('bg.png');
-            background-size: cover; background-position: center;
-            height: 100vh; display: flex; justify-content: center; align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
-        .login-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px); padding: 40px;
-            border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
-            text-align: center; width: 320px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            overflow:hidden;
+            font-family:'Poppins', sans-serif;
+            position:relative;
+            background:black;
         }
-        h2 { color: #D4AF37; margin-bottom: 20px; }
-        input {
-            width: 100%; padding: 12px; margin-bottom: 20px;
-            border-radius: 10px; border: none; outline: none;
-            background: rgba(255,255,255,0.9); text-align: center; font-size: 16px;
-            color: #333;
+
+        /* Background Image */
+        body::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+            linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.78)),
+            url('bg.png');
+            background-size:cover;
+            background-position:center;
+            filter:blur(1px);
+            transform:scale(1.05);
+            z-index:-2;
         }
-        button {
-            background: #D4AF37; color: black; border: none;
-            padding: 12px 30px; border-radius: 10px; cursor: pointer;
-            font-weight: bold; width: 100%; transition: 0.3s;
+
+        /* Glow Effect */
+        body::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:radial-gradient(circle at top, rgba(255,192,203,0.18), transparent 60%);
+            z-index:-1;
         }
-        button:hover { background: #b8962d; transform: scale(1.05); }
-        .error { color: #ff4d4d; font-size: 14px; margin-top: 15px; display: none; }
+
+        .login-box{
+            width:360px;
+            padding:45px 35px;
+            border-radius:28px;
+            text-align:center;
+
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter:blur(14px);
+            -webkit-backdrop-filter:blur(14px);
+
+            box-shadow:
+            0 10px 40px rgba(0,0,0,0.45),
+            0 0 30px rgba(255,182,193,0.12);
+
+            animation:fadeUp 1.2s ease;
+        }
+
+        .top-heart{
+            font-size:55px;
+            margin-bottom:10px;
+            animation:pulse 2s infinite;
+        }
+
+        h1{
+            font-size:32px;
+            font-weight:700;
+            color:#ffffff;
+            margin-bottom:8px;
+            letter-spacing:1px;
+        }
+
+        .gold{
+            color:#ffd369;
+        }
+
+        .subtitle{
+            color:#f3f3f3;
+            font-size:14px;
+            line-height:1.7;
+            margin-bottom:28px;
+            opacity:0.9;
+        }
+
+        .input-box{
+            position:relative;
+            margin-bottom:20px;
+        }
+
+        input{
+            width:100%;
+            padding:16px 18px;
+            border:none;
+            outline:none;
+            border-radius:16px;
+            font-size:15px;
+            text-align:center;
+
+            background:rgba(255,255,255,0.92);
+            color:#222;
+
+            transition:0.3s;
+        }
+
+        input:focus{
+            transform:scale(1.02);
+            box-shadow:0 0 18px rgba(255,255,255,0.25);
+        }
+
+        input::placeholder{
+            color:#777;
+        }
+
+        button{
+            width:100%;
+            border:none;
+            outline:none;
+            padding:15px;
+            border-radius:16px;
+
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+
+            color:white;
+
+            background:linear-gradient(135deg, #ff4d88, #ff7eb3);
+
+            transition:0.35s;
+            box-shadow:0 10px 25px rgba(255,77,136,0.35);
+        }
+
+        button:hover{
+            transform:translateY(-2px) scale(1.03);
+            box-shadow:0 15px 30px rgba(255,77,136,0.5);
+        }
+
+        .bottom-text{
+            margin-top:22px;
+            font-size:13px;
+            color:#eee;
+            opacity:0.85;
+            line-height:1.7;
+        }
+
+        .error{
+            color:#ff8c8c;
+            font-size:14px;
+            margin-top:15px;
+            display:none;
+            animation:shake 0.3s linear;
+        }
+
+        /* Floating Hearts */
+        .heart{
+            position:absolute;
+            color:rgba(255,255,255,0.25);
+            animation:float 10s linear infinite;
+            font-size:20px;
+        }
+
+        .heart:nth-child(1){
+            left:10%;
+            animation-delay:0s;
+        }
+
+        .heart:nth-child(2){
+            left:25%;
+            animation-delay:2s;
+        }
+
+        .heart:nth-child(3){
+            left:50%;
+            animation-delay:4s;
+        }
+
+        .heart:nth-child(4){
+            left:70%;
+            animation-delay:6s;
+        }
+
+        .heart:nth-child(5){
+            left:85%;
+            animation-delay:8s;
+        }
+
+        @keyframes float{
+            0%{
+                transform:translateY(100vh) scale(0);
+                opacity:0;
+            }
+
+            20%{
+                opacity:1;
+            }
+
+            100%{
+                transform:translateY(-10vh) scale(1.5);
+                opacity:0;
+            }
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(30px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @keyframes pulse{
+            0%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.08);
+            }
+
+            100%{
+                transform:scale(1);
+            }
+        }
+
+        @keyframes shake{
+            0%{ transform:translateX(0); }
+            25%{ transform:translateX(-4px); }
+            50%{ transform:translateX(4px); }
+            75%{ transform:translateX(-4px); }
+            100%{ transform:translateX(0); }
+        }
+
+        @media(max-width:450px){
+
+            .login-box{
+                width:90%;
+                padding:40px 25px;
+            }
+
+            h1{
+                font-size:27px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
+    <!-- Floating Hearts -->
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+
     <div class="login-box">
-        <h2>My Love Portal 🥰</h2>
-        <p style="margin-bottom: 20px;">Specially for my wifey 👰💍</p>
-        <input type="password" id="passwordInput" placeholder="Name of our daughter">
-        <button onclick="checkPassword()">Enter 🔑</button>
-        <p id="errorMsg" class="error">Who are you stranger? 😠</p>
+
+        <div class="top-heart">💖</div>
+
+        <h1>Noor <span class="gold">Azeem</span></h1>
+
+        <p class="subtitle">
+            A private little world made with love,<br>
+            memories, emotions & forever feelings ✨
+        </p>
+
+        <div class="input-box">
+            <input 
+                type="password"
+                id="passwordInput"
+                placeholder="Enter our daughter's name..."
+            >
+        </div>
+
+        <button onclick="checkPassword()">
+            Unlock Our Love 🔐
+        </button>
+
+        <p id="errorMsg" class="error">
+            Wrong password... Only my princess knows it 🥺
+        </p>
+
+        <div class="bottom-text">
+            Made with endless love ❤️<br>
+            Just for someone truly special.
+        </div>
+
     </div>
 
     <script>
+
         function checkPassword() {
-            const pass = document.getElementById('passwordInput').value.trim();
-            // Naya password: Ambar
-            if (pass.toLowerCase() === 'ambar') {
-                window.location.href = 'welcome.html';
-            } else {
-                document.getElementById('errorMsg').style.display = 'block';
-                // 3 second baad error hide karne ke liye
+
+            const pass = document
+            .getElementById('passwordInput')
+            .value
+            .trim();
+
+            // Password
+            if(pass.toLowerCase() === 'ambar'){
+
+                // Smooth transition effect
+                document.body.style.opacity = "0";
+
                 setTimeout(() => {
-                    document.getElementById('errorMsg').style.display = 'none';
+                    window.location.href = "welcome.html";
+                }, 700);
+
+            } else {
+
+                const error = document.getElementById('errorMsg');
+
+                error.style.display = 'block';
+
+                setTimeout(() => {
+                    error.style.display = 'none';
                 }, 3000);
             }
         }
 
         // Enter key support
-        document.getElementById('passwordInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { checkPassword(); }
+        document
+        .getElementById('passwordInput')
+        .addEventListener('keypress', function(e){
+
+            if(e.key === 'Enter'){
+                checkPassword();
+            }
+
         });
+
     </script>
+
 </body>
 </html>
