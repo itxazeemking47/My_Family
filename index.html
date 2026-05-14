@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Private Love Portal  |  Only for my Pagal Larkiiii😘</title>
 
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Great+Vibes&family=Quicksand:wght@400;600&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
@@ -26,14 +27,14 @@
             transition: opacity 0.7s;
         }
 
-        /* Background Image */
+        /* Background Image - Added back bg.PNG */
         body::before{
             content:"";
             position:absolute;
             inset:0;
             background:
             linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.78)),
-            url('bg.png');
+            url('bg.PNG'); /* Aapka wallpaper wapis add kar diya */
             background-size:cover;
             background-position:center;
             filter:blur(1px);
@@ -89,7 +90,6 @@
         }
 
         .subtitle{
-            /* Easy Reading Cute Font */
             font-family: 'Lexend', sans-serif;
             color:#f3f3f3;
             font-size:15px;
@@ -129,7 +129,7 @@
             outline:none;
             padding:15px;
             border-radius:16px;
-            font-family: 'Fredoka One', cursive; /* Cute button font */
+            font-family: 'Fredoka One', cursive;
             font-size:16px;
             font-weight:400;
             cursor:pointer;
@@ -145,7 +145,6 @@
         }
 
         .bottom-text{
-            /* Easy Reading Cute Font */
             font-family: 'Lexend', sans-serif;
             margin-top:22px;
             font-size:13px;
@@ -163,7 +162,6 @@
             animation:shake 0.3s linear;
         }
 
-        /* Falling Hearts Styling */
         .falling-heart {
             position: absolute;
             top: -10%;
@@ -177,7 +175,6 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Loading Overlay Styles (Updated with Love Letter style) */
         .loader-wrapper {
             position: fixed;
             inset: 0;
@@ -196,7 +193,6 @@
         }
 
         .congrats-text {
-            /* Bold Cute Font matching the image vibe */
             font-family: 'Fredoka One', cursive;
             color: #ffd369;
             font-size: 32px;
@@ -206,7 +202,6 @@
         }
 
         .loading-sub {
-            /* Simple cute subtitle */
             font-family: 'Lexend', sans-serif;
             color: #ffb6c1;
             font-size: 18px;
@@ -214,7 +209,6 @@
             font-weight: 400;
         }
 
-        /* Animations */
         @keyframes fadeUp{
             from{ opacity:0; transform:translateY(30px); }
             to{ opacity:1; transform:translateY(0); }
@@ -244,6 +238,7 @@
 </head>
 <body>
 
+    <!-- Loading Overlay -->
     <div id="loader" class="loader-wrapper">
         <div class="loader-content">
             <div class="congrats-heart">💖</div>
@@ -285,10 +280,9 @@
     </div>
 
     <script>
-        // Falling Hearts Generator
         function createHearts() {
             const container = document.body;
-            const hearts = ['❤️', '💖', '💝', '💗', '💕', '💜', '💙', '💛', '🧡','💚', '🧡', '💙', '😍', '😘', '🥰', '💕', '💜', '💙', '💛', '🧡','💚', '🧡'];
+            const hearts = ['❤️', '💖', '💝', '💗', '💕', '💜', '💙', '💛'];
             const heart = document.createElement('div');
             
             heart.classList.add('falling-heart');
@@ -306,7 +300,6 @@
 
         setInterval(createHearts, 300);
 
-        // Password & Loader Logic
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value.trim();
             const loader = document.getElementById('loader');
