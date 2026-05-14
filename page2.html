@@ -1,5 +1,467 @@
-   <!-- 9 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Noor & Azeem | Forever Memories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+    font-family:'Poppins', sans-serif;
+    scroll-behavior:smooth;
+}
+
+/* =========================
+   PREMIUM BACKGROUND
+========================= */
+
+.bg-fixed{
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.86)),
+    url('page2bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+    z-index:-3;
+
+    animation:bgZoom 25s linear infinite alternate;
+}
+
+@keyframes bgZoom{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.1);
+    }
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    padding:20px;
+}
+
+.hero-box{
+
+    max-width:850px;
+
+    padding:60px 35px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+
+    animation:fadeUp 1.5s ease;
+}
+
+.top-tag{
+
+    display:inline-block;
+
+    padding:12px 28px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,0.08);
+
+    margin-bottom:30px;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    letter-spacing:2px;
+
+    font-size:14px;
+}
+
+.hero-title{
+
+    font-size:clamp(3rem, 7vw, 6rem);
+
+    color:#ffd369;
+
+    text-shadow:
+    0 0 30px rgba(255,211,105,0.5),
+    0 0 70px rgba(255,211,105,0.2);
+
+    margin-bottom:25px;
+}
+
+.hero-sub{
+
+    font-size:2rem;
+
+    line-height:2;
+
+    color:rgba(255,255,255,0.85);
+}
+
+/* =========================
+   STORY SECTION
+========================= */
+
+.story-container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:80px 20px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:120px;
+}
+
+.story-block{
+
+    text-align:center;
+
+    opacity:0;
+
+    transform:translateY(80px);
+
+    transition:1.2s ease;
+}
+
+.story-block.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.picture-card{
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    padding:12px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transition:0.5s;
+}
+
+.picture-card:hover{
+
+    transform:translateY(-10px) scale(1.02);
+}
+
+.picture-card img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:22px;
+}
+
+.quote-poetry{
+
+    margin-top:30px;
+
+    font-size:2rem;
+
+    line-height:2.2;
+
+    color:rgba(255,255,255,0.92);
+}
+
+.gold-quote{
+
+    color:#ffd369;
+
+    font-size:2.3rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    padding:90px 20px;
+
+    background:rgba(0,0,0,0.75);
+
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.footer-text{
+
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,0.65);
+
+    font-size:14px;
+}
+
+.footer-name{
+
+    margin-top:18px;
+
+    font-size:4rem;
+
+    color:#ffd369;
+
+    text-shadow:
+    0 0 25px rgba(255,211,105,0.5),
+    0 0 55px rgba(255,211,105,0.25);
+
+    animation:glow 2s infinite alternate;
+}
+
+.footer-love{
+
+    margin-top:18px;
+
+    color:rgba(255,255,255,0.7);
+
+    font-size:1.2rem;
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart{
+
+    position:fixed;
+
+    color:rgba(255,105,180,0.7);
+
+    z-index:-1;
+
+    animation:floatUp 7s linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(100vh) scale(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-10vh) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* =========================
+   LOVE BUBBLES
+========================= */
+
+.love-bubble{
+
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    animation:bubble 2s linear forwards;
+}
+
+@keyframes bubble{
+
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(-50%,-220px) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes glow{
+
+    from{
+        text-shadow:0 0 20px rgba(255,211,105,0.4);
+    }
+
+    to{
+        text-shadow:
+        0 0 35px rgba(255,211,105,0.8),
+        0 0 60px rgba(255,211,105,0.35);
+    }
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .hero-sub{
+        font-size:1.5rem;
+    }
+
+    .quote-poetry{
+        font-size:1.7rem;
+    }
+
+    .footer-name{
+        font-size:2.8rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-fixed"></div>
+
+<!-- =========================
+   HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-box">
+
+        <div class="top-tag">
+            ✨ OUR FOREVER MEMORIES ✨
+        </div>
+
+        <h1 class="hero-title">
+            Noor ❤️ Azeem
+        </h1>
+
+        <p class="hero-sub">
+            Kuch tasveerein sirf tasveerein nahi hoti...<br>
+            woh poori zindagi ki feelings hoti hain 💖
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+   STORY SECTION
+========================= -->
+
+<div class="story-container">
+
+    <!-- NEW IMAGE 1 -->
     <div class="story-block">
+
+        <div class="picture-card">
+            <img src="1.png">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tum meri zindagi ka sabse khoobsurat hissa ho ✨
+            <span class="gold-quote">”</span>
+        </p>
+
+    </div>
+
+    <!-- SHIFTED FROM HOME -->
+    <div class="story-block">
+
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tere aane se meri duniya badal si gayi...<br>
+            har dua mein sirf tumhari kami thi ❤️
+            <span class="gold-quote">”</span>
+        </p>
+
+    </div>
+
+    <!-- NEW IMAGE 2 -->
+    <div class="story-block">
+
+        <div class="picture-card">
+            <img src="2.png">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Teri ek muskurahat meri poori duniya hai 💕
+            <span class="gold-quote">”</span>
+        </p>
+
+    </div>
+
+    <!-- SHIFTED -->
+    <div class="story-block">
+
         <div class="picture-card">
             <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (1).jpeg">
         </div>
@@ -9,10 +471,27 @@
             Wafa ka rang teri aankhon mein dikhta hai ✨
             <span class="gold-quote">”</span>
         </p>
+
     </div>
 
-    <!-- 10 -->
+    <!-- NEW IMAGE 3 -->
     <div class="story-block">
+
+        <div class="picture-card">
+            <img src="3.png">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Har janam mein bas tera hi saath chahiye 🌙
+            <span class="gold-quote">”</span>
+        </p>
+
+    </div>
+
+    <!-- SHIFTED -->
+    <div class="story-block">
+
         <div class="picture-card">
             <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg">
         </div>
@@ -23,4 +502,118 @@
             jo har sajde mein maangi thi ❤️
             <span class="gold-quote">”</span>
         </p>
+
     </div>
+
+    <!-- NEW IMAGE 4 -->
+    <div class="story-block">
+
+        <div class="picture-card">
+            <img src="4.png">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Noor aur Azeem... ek jaan do dil 💖
+            <span class="gold-quote">”</span>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- =========================
+   FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <p class="footer-text">
+        CREATED WITH LOVE BY
+    </p>
+
+    <h1 class="footer-name">
+        ✨ AZEEM ✨
+    </h1>
+
+    <p class="footer-love">
+        Forever Yours ❤️
+    </p>
+
+</footer>
+
+<script>
+
+/* Reveal Animation */
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+        }
+
+    });
+
+},{threshold:0.15});
+
+document.querySelectorAll('.story-block')
+.forEach(block=>observer.observe(block));
+
+/* Floating Hearts */
+
+setInterval(()=>{
+
+    const heart=document.createElement('div');
+
+    heart.classList.add('heart');
+
+    heart.innerHTML='❤';
+
+    heart.style.left=Math.random()*100+'vw';
+
+    heart.style.fontSize=
+    (Math.random()*20+10)+'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },7000);
+
+},500);
+
+/* LOVE BUBBLES */
+
+document.addEventListener('click',function(e){
+
+    for(let i=0;i<10;i++){
+
+        const bubble=document.createElement('span');
+
+        bubble.classList.add('love-bubble');
+
+        bubble.innerHTML=
+        ['💖','✨','❤️','💫'][Math.floor(Math.random()*4)];
+
+        bubble.style.left=e.clientX+'px';
+
+        bubble.style.top=e.clientY+'px';
+
+        bubble.style.fontSize=
+        (Math.random()*20+15)+'px';
+
+        document.body.appendChild(bubble);
+
+        setTimeout(()=>{
+            bubble.remove();
+        },2000);
+    }
+
+});
+
+</script>
+
+</body>
+</html>
