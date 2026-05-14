@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Love ❤️</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: 'Poppins', sans-serif;
+      height:100vh;
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      background:black;
+    }
+
+    /* Background Image */
+    body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url('bg.PNG') center center/cover no-repeat;
+      filter:brightness(0.35);
+      z-index:-2;
+    }
+
+    /* Dark Overlay */
+    body::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+      z-index:-1;
+    }
+
+    .container{
+      width:90%;
+      max-width:700px;
+      padding:40px 25px;
+      backdrop-filter: blur(6px);
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:25px;
+      animation:fadeIn 1.5s ease;
+      box-shadow:0 0 30px rgba(255,255,255,0.15);
+    }
+
+    h1{
+      font-size:42px;
+      margin-bottom:20px;
+      color:#ffd6e7;
+    }
+
+    .typing{
+      font-size:20px;
+      line-height:1.9;
+      color:#f5f5f5;
+      margin-bottom:35px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      text-decoration:none;
+      padding:14px 28px;
+      border-radius:40px;
+      font-size:16px;
+      transition:0.4s;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    .btn-love{
+      background:#ff4d88;
+      color:white;
+      box-shadow:0 0 20px rgba(255,77,136,0.5);
+    }
+
+    .btn-love:hover{
+      transform:scale(1.08);
+      background:#ff1f6a;
+    }
+
+    .btn-memory{
+      background:white;
+      color:#ff2e74;
+    }
+
+    .btn-memory:hover{
+      transform:scale(1.08);
+      background:#ffe3ee;
+    }
+
+    .heart{
+      position:absolute;
+      color:#ff5c93;
+      animation:float 6s linear infinite;
+      opacity:0.7;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) scale(0);
+      }
+      100%{
+        transform:translateY(-10vh) scale(1.5);
+      }
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:600px){
+      h1{
+        font-size:32px;
+      }
+
+      .typing{
+        font-size:17px;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="heart" style="left:10%; font-size:22px;">❤</div>
+  <div class="heart" style="left:25%; animation-delay:1s; font-size:18px;">❤</div>
+  <div class="heart" style="left:40%; animation-delay:2s;">❤</div>
+  <div class="heart" style="left:60%; animation-delay:3s; font-size:20px;">❤</div>
+  <div class="heart" style="left:75%; animation-delay:4s;">❤</div>
+  <div class="heart" style="left:90%; animation-delay:5s; font-size:24px;">❤</div>
+
+  <div class="container">
+
+    <h1>Welcome My Love ❤️</h1>
+
+    <div class="typing">
+      Tum meri zindagi ka sabse khoobsurat hissa ho... 🌸<br><br>
+
+      Jab bhi tum muskurati ho na, lagta hai duniya ruk si gayi ho... ✨<br><br>
+
+      Yeh website sirf ek page nahi,
+      meri feelings ka chhota sa world hai
+      jahan har cheez sirf tumhare liye bani hai. 💖
+    </div>
+
+    <div class="buttons">
+      
+      <!-- Yahan home.html tumhara main page hoga -->
+      <a href="home.html" class="btn btn-love">
+        Enter Our Love World 💕
+      </a>
+
+      <!-- Optional Second Button -->
+      <button class="btn btn-memory" onclick="showMessage()">
+        A Special Message 💌
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    function showMessage(){
+      alert("I Love You So Much ❤️\nTum meri sabse beautiful feeling ho.");
+    }
+  </script>
+
+</body>
+</html>
