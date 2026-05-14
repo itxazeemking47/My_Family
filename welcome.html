@@ -1,354 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Noor & Azeem | Luxury Love Portal</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Poppins', sans-serif;
-      height:100vh;
-      overflow:hidden;
-      position:relative;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-
-      background:black;
-      color:white;
-    }
-
-    /* =========================
-       LUXURY BACKGROUND
-    ========================= */
-
-    body::before{
-
-      content:"";
-
-      position:absolute;
-      inset:0;
-
-      background:
-      linear-gradient(rgba(0,0,0,0.76), rgba(0,0,0,0.82)),
-      url('bg.PNG');
-
-      background-size:cover;
-      background-position:center;
-
-      z-index:-3;
-
-      animation:bgZoom 20s linear infinite alternate;
-    }
-
-    body::after{
-
-      content:"";
-
-      position:absolute;
-      inset:0;
-
-      background:
-      radial-gradient(circle at top,
-      rgba(255,215,0,0.12),
-      transparent 60%);
-
-      z-index:-2;
-    }
-
-    @keyframes bgZoom{
-
-      from{
-        transform:scale(1);
-      }
-
-      to{
-        transform:scale(1.12);
-      }
-    }
-
-    /* =========================
-       MAIN CONTAINER
-    ========================= */
-
-    .container{
-
-      width:90%;
-      max-width:780px;
-
-      padding:55px 35px;
-
-      border-radius:35px;
-
-      background:rgba(255,255,255,0.07);
-
-      border:1px solid rgba(255,255,255,0.12);
-
-      backdrop-filter:blur(16px);
-
-      box-shadow:
-      0 20px 70px rgba(0,0,0,0.65),
-      0 0 50px rgba(255,215,0,0.08);
-
-      animation:fadeUp 1.5s ease;
-    }
-
-    /* =========================
-       TOP TAG
-    ========================= */
-
-    .top-tag{
-
-      display:inline-block;
-
-      padding:12px 28px;
-
-      border-radius:50px;
-
-      background:rgba(255,255,255,0.08);
-
-      border:1px solid rgba(255,255,255,0.12);
-
-      margin-bottom:28px;
-
-      letter-spacing:2px;
-
-      font-size:14px;
-
-      color:#f5d97b;
-    }
-
-    /* =========================
-       TITLE
-    ========================= */
-
-    h1{
-
-      font-family:'Cinzel', serif;
-
-      font-size:clamp(2.8rem, 6vw, 5rem);
-
-      margin-bottom:20px;
-
-      color:#ffd369;
-
-      text-shadow:
-      0 0 25px rgba(255,211,105,0.45),
-      0 0 60px rgba(255,211,105,0.2);
-    }
-
-    /* =========================
-       TEXT
-    ========================= */
-
-    .typing{
-
-      font-size:1.5rem;
-
-      line-height:2.1;
-
-      color:rgba(255,255,255,0.9);
-
-      margin-bottom:40px;
-    }
-
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .buttons{
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:18px;
-
-      align-items:center;
-    }
-
-    .btn{
-
-      width:100%;
-
-      max-width:420px;
-
-      text-decoration:none;
-
-      padding:18px 28px;
-
-      border-radius:60px;
-
-      font-size:17px;
-
-      font-weight:600;
-
-      transition:0.4s;
-
-      position:relative;
-
-      overflow:hidden;
-
-      border:none;
-
-      cursor:pointer;
-    }
-
-    .btn-love{
-
-      background:
-      linear-gradient(135deg,#ff4d88,#ff7eb3);
-
-      color:white;
-
-      box-shadow:
-      0 12px 35px rgba(255,77,136,0.35);
-    }
-
-    .btn-love:hover{
-
-      transform:translateY(-4px) scale(1.04);
-
-      box-shadow:
-      0 20px 40px rgba(255,77,136,0.5);
-    }
-
-    .btn-sad{
-
-      background:
-      linear-gradient(135deg,#ffd369,#ffb347);
-
-      color:black;
-
-      box-shadow:
-      0 12px 35px rgba(255,211,105,0.25);
-    }
-
-    .btn-sad:hover{
-
-      transform:translateY(-4px) scale(1.04);
-    }
-
-    .btn-music{
-
-      background:
-      linear-gradient(135deg,#6a5cff,#8b7dff);
-
-      color:white;
-
-      box-shadow:
-      0 12px 35px rgba(106,92,255,0.35);
-    }
-
-    .btn-music:hover{
-
-      transform:translateY(-4px) scale(1.04);
-    }
-
-    /* =========================
-       FLOATING HEARTS
-    ========================= */
-
-    .heart{
-
-      position:absolute;
-
-      color:rgba(255,105,180,0.7);
-
-      animation:float 7s linear infinite;
-
-      opacity:0.8;
-
-      z-index:-1;
-    }
-
-    @keyframes float{
-
-      0%{
-        transform:translateY(100vh) scale(0);
-      }
-
-      100%{
-        transform:translateY(-10vh) scale(1.7);
-      }
-    }
-
-    /* =========================
-       LOVE BUBBLES
-    ========================= */
-
-    .love-bubble{
-
-      position:fixed;
-
-      pointer-events:none;
-
-      z-index:9999;
-
-      animation:bubble 2s linear forwards;
-    }
-
-    @keyframes bubble{
-
-      0%{
-        transform:translate(-50%,-50%) scale(0);
-        opacity:1;
-      }
-
-      100%{
-        transform:translate(-50%,-220px) scale(1.8);
-        opacity:0;
-      }
-    }
-
-    /* =========================
-       ANIMATIONS
-    ========================= */
-
-    @keyframes fadeUp{
-
-      from{
-        opacity:0;
-        transform:translateY(50px);
-      }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media(max-width:600px){
-
-      .typing{
-        font-size:1.2rem;
-      }
-
-      .btn{
-        font-size:15px;
-      }
-    }
-
-  </style>
-</head>
+<!-- BODY ka purana code REMOVE karke ye laga do -->
 
 <body>
 
@@ -368,90 +18,46 @@
 
   <!-- MAIN BOX -->
 
-  <div class="container">
+  <div class="page-wrapper">
 
-    <div class="top-tag">
-      ✨ PRIVATE LOVE PORTAL ✨
-    </div>
+    <div class="container">
 
-    <h1>Noor ❤️ Azeem</h1>
+      <div class="top-tag">
+        ✨ PRIVATE LOVE PORTAL ✨
+      </div>
 
-    <div class="typing">
+      <h1>Noor ❤️ Azeem</h1>
 
-      Tum meri zindagi ka sabse khoobsurat ehsaas ho... 🌸
-      <br><br>
+      <div class="typing">
 
-      Jab bhi tum muskurati ho,
-      lagta hai poori duniya ruk si gayi ho ✨
-      <br><br>
+        Tum meri zindagi ka sabse khoobsurat ehsaas ho... 🌸
+        <br><br>
 
-      Yeh sirf ek website nahi...
-      meri mohabbat ka chhota sa luxury world hai 💖
+        Jab bhi tum muskurati ho,
+        lagta hai poori duniya ruk si gayi ho ✨
+        <br><br>
 
-    </div>
+        Yeh sirf ek website nahi...
+        meri mohabbat ka chhota sa luxury world hai 💖
 
-    <div class="buttons">
+      </div>
 
-      <!-- FUTURE PAGE -->
+      <div class="buttons">
 
-      <a href="home.html" class="btn btn-love">
+        <a href="home.html" class="btn btn-love">
+          Enter Our Future 💕
+        </a>
 
-        Enter Our Future 💕
+        <a href="if_you_are_sad.html" class="btn btn-sad">
+          Enter If You Are Sad 🤗
+        </a>
 
-      </a>
+        <a href="music_hub.html" class="btn btn-music">
+          Music Hub 😘🎼🎶
+        </a>
 
-      <!-- SAD PAGE -->
-
-      <a href="if_you_are_sad.html" class="btn btn-sad">
-
-        Enter If You Are Sad 🤗
-
-      </a>
-
-      <!-- MUSIC HUB -->
-
-      <a href="music_hub.html" class="btn btn-music">
-
-        Music Hub 😘🎼🎶
-
-      </a>
+      </div>
 
     </div>
 
   </div>
-
-  <script>
-
-    /* LOVE BUBBLES EFFECT */
-
-    document.addEventListener('click', function(e){
-
-      for(let i=0; i<12; i++){
-
-        const bubble=document.createElement('span');
-
-        bubble.classList.add('love-bubble');
-
-        bubble.innerHTML=
-        ['💖','✨','❤️','💫','💕'][Math.floor(Math.random()*5)];
-
-        bubble.style.left=e.clientX+'px';
-
-        bubble.style.top=e.clientY+'px';
-
-        bubble.style.fontSize=
-        (Math.random()*20+15)+'px';
-
-        document.body.appendChild(bubble);
-
-        setTimeout(()=>{
-          bubble.remove();
-        },2000);
-      }
-
-    });
-
-  </script>
-
-</body>
-</html>
