@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Royal Love Portal 💖</title>
 
-  <!-- Google Fonts hum ne wahi purane wale add kar diye hain -->
+  <!-- Security Check: Isko sab se upar rehna chahiye -->
+  <script>
+    if (sessionStorage.getItem("accessGranted") !== "true") {
+        window.location.replace("index.html");
+    }
+  </script>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
@@ -25,8 +32,10 @@
       color:white;
       background:#000;
       position:relative;
-      /* Easy reading font for general text */
       font-family: 'Lexend', sans-serif;
+      /* Extra protection for text */
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     /* Luxury Background */
@@ -62,7 +71,6 @@
     }
 
     h1{
-      /* Wahi Royal Heading Font */
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size:44px;
@@ -72,7 +80,6 @@
     }
 
     .typing{
-      /* Wahi Easy Reading Cute Font */
       font-family: 'Lexend', sans-serif;
       font-size:18px;
       font-weight: 300;
@@ -89,7 +96,6 @@
     }
 
     .btn{
-      /* Wahi Cute & Bold Button Font */
       font-family: 'Fredoka One', cursive;
       padding:14px 22px;
       border-radius:50px;
@@ -103,7 +109,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Gold Button */
     .btn-gold{
       background:linear-gradient(45deg,#ffd36b,#ff9f1c);
       color:#000;
@@ -114,7 +119,6 @@
       transform:scale(1.08);
     }
 
-    /* Sad Button */
     .btn-sad{
       background:rgba(255,255,255,0.9);
       color:#b30059;
@@ -125,7 +129,6 @@
       background:#ffe3ef;
     }
 
-    /* Music Button */
     .btn-music{
       background:#111;
       color:#ffd36b;
@@ -137,7 +140,6 @@
       background:#1a1a1a;
     }
 
-    /* Floating Hearts */
     .heart{
       position:absolute;
       color:#ff4d88;
@@ -156,7 +158,6 @@
       to{opacity:1; transform:translateY(0);}
     }
 
-    /* Touch Hearts */
     .touch-heart{
       position:absolute;
       color:#ff4d88;
@@ -178,7 +179,7 @@
   </style>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
 
 <!-- Floating Hearts Background -->
 <div class="heart" style="left:10%; font-size:22px;">❤</div>
@@ -188,34 +189,29 @@
 <div class="heart" style="left:85%; animation-delay:4s; font-size:24px;">❤</div>
 
 <div class="container">
-
   <h1>Royal Love Portal 💖</h1>
 
   <div class="typing">
     Yeh sirf ek website nahi... 👑<br>
-    yeh eik gift he jana  ✨<br> 😘.........speacially  for my favorite person<br><br>
+    yeh eik gift he jana  ✨<br> 😘.........specially  for my favorite person<br><br>
      💎.....Har portal main ne sirf aap k liye bnaya he
   </div>
 
   <div class="buttons">
-
-    <a href="home.html" class="btn btn-gold">
-      Our coupeles Pics 💙
-    </a>
-
-    <a href="if_you_are_sad.html" class="btn btn-sad">
-      Agar mod Kharab ho to 🤗
-    </a>
-
-    <a href="music_hub.html" class="btn btn-music">
-      Music Hub 😘🎼🎶
-    </a>
-
+    <a href="home.html" class="btn btn-gold">Our couples Pics 💙</a>
+    <a href="if_you_are_sad.html" class="btn btn-sad">Agar mood Kharab ho to 🤗</a>
+    <a href="music_hub.html" class="btn btn-music">Music Hub 😘🎼🎶</a>
   </div>
-
 </div>
 
 <script>
+  // Security: Block Inspect Element & Shortcuts
+  document.onkeydown = function(e) {
+      if(event.keyCode == 123) return false; 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+  }
+
   // Touch / click heart bubbles effect
   document.addEventListener("click", function(e){
     createHeart(e.pageX, e.pageY);
