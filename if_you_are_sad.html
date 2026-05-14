@@ -175,10 +175,6 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-
-        @media(max-width: 450px) {
-            .btn { width: 80vw; text-align: center; }
-        }
     </style>
 </head>
 <body>
@@ -192,18 +188,43 @@
         <div class="joke-card" style="animation-delay: 0.2s;">
             <span class="emoji-float">😂</span>
             <p class="urdu-text">
-                شوہر: آج میں نے تمھارے لیے ایک ایسی چیز خریدی ہے جسے پہن کر تم حور لگو گی۔<br>
-                بیوی: (خوشی سے) سچ میں؟ وہ کیا ہے؟<br>
-                شوہر: سفید کفن!
+                بیوی: شادی سے پہلے تو تم مجھے بڑے بڑے تحفے دیتے تھے، اب کیوں نہیں؟<br>
+                شوہر: بیگم! کیا تم نے کبھی کسی شکاری کو مچھلی پکڑنے کے بعد بھی اسے چارہ ڈالتے دیکھا ہے؟
             </p>
         </div>
 
-        <div class="joke-card" style="animation-delay: 0.5s;">
+        <div class="joke-card" style="animation-delay: 0.4s;">
             <span class="emoji-float">😝</span>
             <p class="urdu-text">
-                لڑکا: میرا دل تمہارے پاس ہے!<br>
-                لڑکی: تو میرے دل کا کیا ہو گا؟<br>
-                لڑکا: تم میرے چھوٹے بھائی کا دل لے لو، وہ بھی بالکل نیا ہے!
+                لڑکا: تمھاری آنکھیں بہت خوبصورت ہیں!<br>
+                لڑکی: چھوڑو جی، یہ تو پپو کے ابا بھی کہتے ہیں۔<br>
+                لڑکا: یہ پپو کا ابا کون ہے؟<br>
+                لڑکی: میرا شوہر!
+            </p>
+        </div>
+
+        <div class="joke-card" style="animation-delay: 0.6s;">
+            <span class="emoji-float">😜</span>
+            <p class="urdu-text">
+                پٹھان ڈاکٹر سے: "ڈاکٹر صاحب، میں جب بھی چائے پیتا ہوں تو میری دائیں آنکھ میں درد ہوتا ہے"۔<br>
+                ڈاکٹر: "اگلی بار چائے پیتے وقت چمچ پیالی سے باہر نکال لیا کرو"۔
+            </p>
+        </div>
+
+        <div class="joke-card" style="animation-delay: 0.8s;">
+            <span class="emoji-float">🤡</span>
+            <p class="urdu-text">
+                ٹیچر: "بتاؤ مچھر کے کتنے پاؤں ہوتے ہیں؟"<br>
+                شاگرد: "سر! مچھر کے پاؤں گننے کے چکر میں ہی تو ایک بار میں نے مچھر کو مار دیا تھا!"
+            </p>
+        </div>
+
+        <div class="joke-card" style="animation-delay: 1s;">
+            <span class="emoji-float">🤣</span>
+            <p class="urdu-text">
+                مریض: "ڈاکٹر صاحب، میں رات کو سوتا ہوں تو مجھے خواب میں گدھے فٹ بال کھیلتے نظر آتے ہیں"۔<br>
+                ڈاکٹر: "یہ گولیاں لیں اور آج رات سے ہی کھانا شروع کر دیں"۔<br>
+                مریض: "ڈاکٹر صاحب! کل سے کھاؤں گا، کیونکہ آج رات فائنل میچ ہے"۔
             </p>
         </div>
     </div>
@@ -219,7 +240,6 @@
     </div>
 
     <script>
-        // Floating Heart Particles for extra feel
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = '❤️';
@@ -231,11 +251,9 @@
             heart.style.zIndex = '-1';
             heart.style.transition = '20s linear';
             document.body.appendChild(heart);
-
             setTimeout(() => {
                 heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
             }, 100);
-
             setTimeout(() => heart.remove(), 20000);
         }
         setInterval(createHeart, 1000);
