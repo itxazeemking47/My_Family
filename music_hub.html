@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Symphony 🎼 | Our Love Tracks</title>
+
+    <!-- Consistent Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Lexend', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Luxury Royal Background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.88)), url('bg.PNG'); /* Fixed name with capital PNG */
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        /* Golden Soft Glow */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,211,107,0.1) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .header {
+            margin-top: 60px;
+            text-align: center;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 48px;
+            color: #ffd36b;
+            text-shadow: 0 0 25px rgba(255,211,107,0.4);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            color: #ffb6c1;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        /* Royal Playlist Container */
+        .playlist-container {
+            width: 90%;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 211, 107, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeRight 1s ease both;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .song-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 211, 107, 0.08);
+            border-color: rgba(255, 211, 107, 0.6);
+            box-shadow: 0 15px 40px rgba(255,211,107,0.15);
+        }
+
+        .thumbnail-wrapper {
+            position: relative;
+            width: 85px;
+            height: 85px;
+            flex-shrink: 0;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 211, 107, 0.3);
+        }
+
+        .song-info {
+            flex-grow: 1;
+        }
+
+        .song-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .song-artist {
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            color: #ffd36b;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* Luxury Audio Player Styling */
+        audio {
+            width: 100%;
+            height: 32px;
+            margin-top: 15px;
+            filter: invert(0.9) hue-rotate(15deg) brightness(1.2);
+            opacity: 0.9;
+        }
+
+        .next-page-btn {
+            font-family: 'Fredoka One', cursive;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #ffd36b, #ff9f1c);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 17px;
+            margin-top: 20px;
+            margin-bottom: 70px;
+            transition: 0.4s;
+            box-shadow: 0 10px 25px rgba(255,159,28,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .next-page-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(255,159,28,0.5);
+        }
+
+        /* Royal Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Aesthetic Floating Particles */
+        .particle {
+            position: fixed;
+            background: rgba(255, 211, 107, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatParticles 10s linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0% { transform: translateY(110vh) translateX(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Royal Symphony 🎼</h1>
+        <p class="subtitle">A Melody for My Queen</p>
+    </div>
+
+    <div class="playlist-container">
+        <!-- Song 1 -->
+        <div class="song-card" style="animation-delay: 0.3s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail1.png" alt="Track 1" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">Pure Love</p>
+                <p class="song-artist">Because you deserve the world</p>
+                <audio controls>
+                    <source src="1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="song-card" style="animation-delay: 0.5s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail2.png" alt="Track 2" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">Our Heartbeat</p>
+                <p class="song-artist">Listening to this feels like us</p>
+                <audio controls>
+                    <source src="2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <!-- Song 3 -->
+        <div class="song-card" style="animation-delay: 0.7s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail3.png" alt="Track 3" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">Forever Mine</p>
+                <p class="song-artist">Only for Noor's ears</p>
+                <audio controls>
+                    <source src="3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <a href="music_hub_page2.html" class="next-page-btn">More Memories ✨</a>
+
+    <script>
+        // Royal Gold Particles Effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 5 + 7) + 's';
+            particle.style.opacity = Math.random();
+            
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 10000);
+        }
+        setInterval(createParticle, 400);
+    </script>
+</body>
+</html>
