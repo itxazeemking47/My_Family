@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Royal Love Portal 💖</title>
 
-  <!-- Security Check: Isko sab se upar rehna chahiye -->
+  <!-- Security Check: Agar koi direct link khole to wapis bhej do -->
   <script>
     if (sessionStorage.getItem("accessGranted") !== "true") {
         window.location.replace("index.html");
@@ -33,7 +33,7 @@
       background:#000;
       position:relative;
       font-family: 'Lexend', sans-serif;
-      /* Extra protection for text */
+      /* Extra security: No text highlighting */
       user-select: none;
       -webkit-user-select: none;
     }
@@ -179,7 +179,7 @@
   </style>
 </head>
 
-<body oncontextmenu="return false;">
+<body oncontextmenu="return false;"> <!-- Right Click Blocked -->
 
 <!-- Floating Hearts Background -->
 <div class="heart" style="left:10%; font-size:22px;">❤</div>
@@ -193,23 +193,32 @@
 
   <div class="typing">
     Yeh sirf ek website nahi... 👑<br>
-    yeh eik gift he jana  ✨<br> 😘.........specially  for my favorite person<br><br>
+    yeh eik gift he jana  ✨<br> 😘.........specially for my favorite person<br><br>
      💎.....Har portal main ne sirf aap k liye bnaya he
   </div>
 
   <div class="buttons">
-    <a href="home.html" class="btn btn-gold">Our couples Pics 💙</a>
-    <a href="if_you_are_sad.html" class="btn btn-sad">Agar mood Kharab ho to 🤗</a>
-    <a href="music_hub.html" class="btn btn-music">Music Hub 😘🎼🎶</a>
+    <!-- Updated Link from home.html to password.html -->
+    <a href="password.html" class="btn btn-gold">
+      Our coupeles Pics 💙
+    </a>
+
+    <a href="if_you_are_sad.html" class="btn btn-sad">
+      Agar mod Kharab ho to 🤗
+    </a>
+
+    <a href="music_hub.html" class="btn btn-music">
+      Music Hub 😘🎼🎶
+    </a>
   </div>
 </div>
 
 <script>
-  // Security: Block Inspect Element & Shortcuts
+  // Security: Block Keys
   document.onkeydown = function(e) {
       if(event.keyCode == 123) return false; 
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
   }
 
   // Touch / click heart bubbles effect
@@ -229,7 +238,6 @@
     heart.style.left = x + "px";
     heart.style.top = y + "px";
     document.body.appendChild(heart);
-
     setTimeout(()=> heart.remove(), 1000);
   }
 </script>
