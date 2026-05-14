@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noor Azeem | Private Love Portal</title>
+    <title>Private Love Portal  |  Only for my Pagal Larkiiii😘</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Great+Vibes&family=Quicksand:wght@400;600&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
         *{
             margin:0;
@@ -21,9 +20,10 @@
             justify-content:center;
             align-items:center;
             overflow:hidden;
-            font-family:'Poppins', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             position:relative;
             background:black;
+            transition: opacity 0.7s;
         }
 
         /* Background Image */
@@ -46,7 +46,7 @@
             content:"";
             position:absolute;
             inset:0;
-            background:radial-gradient(circle at top, rgba(255,192,203,0.18), transparent 60%);
+            background:radial-gradient(circle at top, rgba(255,192,203,0.18), transparent 40%);
             z-index:-1;
         }
 
@@ -55,18 +55,16 @@
             padding:45px 35px;
             border-radius:28px;
             text-align:center;
-
             background:rgba(255,255,255,0.08);
             border:1px solid rgba(255,255,255,0.12);
-
             backdrop-filter:blur(14px);
             -webkit-backdrop-filter:blur(14px);
-
             box-shadow:
             0 10px 40px rgba(0,0,0,0.45),
             0 0 30px rgba(255,182,193,0.12);
-
             animation:fadeUp 1.2s ease;
+            position: relative;
+            z-index: 10;
         }
 
         .top-heart{
@@ -76,8 +74,10 @@
         }
 
         h1{
-            font-size:32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
             font-weight:700;
+            font-style: italic;
             color:#ffffff;
             margin-bottom:8px;
             letter-spacing:1px;
@@ -85,14 +85,18 @@
 
         .gold{
             color:#ffd369;
+            text-shadow: 0 0 10px rgba(255,211,105,0.3);
         }
 
         .subtitle{
+            /* Easy Reading Cute Font */
+            font-family: 'Lexend', sans-serif;
             color:#f3f3f3;
-            font-size:14px;
-            line-height:1.7;
+            font-size:15px;
+            font-weight: 300;
+            line-height:1.5;
             margin-bottom:28px;
-            opacity:0.9;
+            opacity:0.95;
         }
 
         .input-box{
@@ -106,12 +110,11 @@
             border:none;
             outline:none;
             border-radius:16px;
+            font-family: 'Lexend', sans-serif;
             font-size:15px;
             text-align:center;
-
             background:rgba(255,255,255,0.92);
             color:#222;
-
             transition:0.3s;
         }
 
@@ -120,25 +123,18 @@
             box-shadow:0 0 18px rgba(255,255,255,0.25);
         }
 
-        input::placeholder{
-            color:#777;
-        }
-
         button{
             width:100%;
             border:none;
             outline:none;
             padding:15px;
             border-radius:16px;
-
+            font-family: 'Fredoka One', cursive; /* Cute button font */
             font-size:16px;
-            font-weight:600;
+            font-weight:400;
             cursor:pointer;
-
             color:white;
-
             background:linear-gradient(135deg, #ff4d88, #ff7eb3);
-
             transition:0.35s;
             box-shadow:0 10px 25px rgba(255,77,136,0.35);
         }
@@ -149,14 +145,17 @@
         }
 
         .bottom-text{
+            /* Easy Reading Cute Font */
+            font-family: 'Lexend', sans-serif;
             margin-top:22px;
             font-size:13px;
             color:#eee;
             opacity:0.85;
-            line-height:1.7;
+            line-height:1.6;
         }
 
         .error{
+            font-family: 'Lexend', sans-serif;
             color:#ff8c8c;
             font-size:14px;
             margin-top:15px;
@@ -164,128 +163,110 @@
             animation:shake 0.3s linear;
         }
 
-        /* Floating Hearts */
-        .heart{
-            position:absolute;
-            color:rgba(255,255,255,0.25);
-            animation:float 10s linear infinite;
-            font-size:20px;
+        /* Falling Hearts Styling */
+        .falling-heart {
+            position: absolute;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            animation: moveHearts 5s linear infinite;
         }
 
-        .heart:nth-child(1){
-            left:10%;
-            animation-delay:0s;
+        @keyframes moveHearts {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        .heart:nth-child(2){
-            left:25%;
-            animation-delay:2s;
+        /* Loading Overlay Styles (Updated with Love Letter style) */
+        .loader-wrapper {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.96);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            text-align: center;
         }
 
-        .heart:nth-child(3){
-            left:50%;
-            animation-delay:4s;
+        .congrats-heart {
+            font-size: 85px;
+            animation: bigPulse 0.6s infinite alternate;
         }
 
-        .heart:nth-child(4){
-            left:70%;
-            animation-delay:6s;
+        .congrats-text {
+            /* Bold Cute Font matching the image vibe */
+            font-family: 'Fredoka One', cursive;
+            color: #ffd369;
+            font-size: 32px;
+            margin-top: 25px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .heart:nth-child(5){
-            left:85%;
-            animation-delay:8s;
+        .loading-sub {
+            /* Simple cute subtitle */
+            font-family: 'Lexend', sans-serif;
+            color: #ffb6c1;
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: 400;
         }
 
-        @keyframes float{
-            0%{
-                transform:translateY(100vh) scale(0);
-                opacity:0;
-            }
-
-            20%{
-                opacity:1;
-            }
-
-            100%{
-                transform:translateY(-10vh) scale(1.5);
-                opacity:0;
-            }
-        }
-
+        /* Animations */
         @keyframes fadeUp{
-            from{
-                opacity:0;
-                transform:translateY(30px);
-            }
-
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
+            from{ opacity:0; transform:translateY(30px); }
+            to{ opacity:1; transform:translateY(0); }
         }
 
         @keyframes pulse{
-            0%{
-                transform:scale(1);
-            }
+            0%, 100%{ transform:scale(1); }
+            50%{ transform:scale(1.08); }
+        }
 
-            50%{
-                transform:scale(1.08);
-            }
-
-            100%{
-                transform:scale(1);
-            }
+        @keyframes bigPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.3); }
         }
 
         @keyframes shake{
-            0%{ transform:translateX(0); }
-            25%{ transform:translateX(-4px); }
+            0%, 100%{ transform:translateX(0); }
+            25%, 75%{ transform:translateX(-4px); }
             50%{ transform:translateX(4px); }
-            75%{ transform:translateX(-4px); }
-            100%{ transform:translateX(0); }
         }
 
         @media(max-width:450px){
-
-            .login-box{
-                width:90%;
-                padding:40px 25px;
-            }
-
-            h1{
-                font-size:27px;
-            }
+            .login-box{ width:90%; padding:40px 25px; }
+            h1{ font-size:30px; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Floating Hearts -->
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
+    <div id="loader" class="loader-wrapper">
+        <div class="loader-content">
+            <div class="congrats-heart">💖</div>
+            <h2 class="congrats-text">CONGRATULATIONS PRINCESS!</h2>
+            <p class="loading-sub">Wait a second... My Love is Loading ❤️</p>
+        </div>
+    </div>
 
     <div class="login-box">
+        <div class="top-heart">💝</div>
 
-        <div class="top-heart">💖</div>
-
-        <h1>Noor <span class="gold">Azeem</span></h1>
+        <h1>For my <span class="gold">Pagal</span></h1>
 
         <p class="subtitle">
-            A private little world made with love,<br>
-            memories, emotions & forever feelings ✨
+            oh meri jaan ke tote,<br>
+            pareshan na huwa karo ✨<br> Main hu na
         </p>
 
         <div class="input-box">
             <input 
-                type="password"
-                id="passwordInput"
-                placeholder="Enter our daughter's name..."
+                type="password" 
+                id="passwordInput" 
+                placeholder="Hmari baeti ka name kiya he...?"
             >
         </div>
 
@@ -294,59 +275,68 @@
         </button>
 
         <p id="errorMsg" class="error">
-            Wrong password... Only my princess knows it 🥺
+            kon ho tum stranger😡
         </p>
 
         <div class="bottom-text">
-            Made with endless love ❤️<br>
-            Just for someone truly special.
+            muje pata he acha nahi bana ❤️<br>
+            par dill se bnaya he.
         </div>
-
     </div>
 
     <script>
+        // Falling Hearts Generator
+        function createHearts() {
+            const container = document.body;
+            const hearts = ['❤️', '💖', '💝', '💗', '💕', '💜', '💙', '💛', '🧡','💚', '🧡', '💙', '😍', '😘', '🥰', '💕', '💜', '💙', '💛', '🧡','💚', '🧡'];
+            const heart = document.createElement('div');
+            
+            heart.classList.add('falling-heart');
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
 
+        setInterval(createHearts, 300);
+
+        // Password & Loader Logic
         function checkPassword() {
+            const pass = document.getElementById('passwordInput').value.trim();
+            const loader = document.getElementById('loader');
+            const loginBox = document.querySelector('.login-box');
 
-            const pass = document
-            .getElementById('passwordInput')
-            .value
-            .trim();
-
-            // Password
             if(pass.toLowerCase() === 'ambar'){
-
-                // Smooth transition effect
-                document.body.style.opacity = "0";
+                loginBox.style.display = "none";
+                loader.style.display = "flex";
 
                 setTimeout(() => {
-                    window.location.href = "welcome.html";
-                }, 700);
+                    document.body.style.opacity = "0";
+                    setTimeout(() => {
+                        window.location.href = "welcome.html";
+                    }, 700);
+                }, 3000);
 
             } else {
-
                 const error = document.getElementById('errorMsg');
-
                 error.style.display = 'block';
-
                 setTimeout(() => {
                     error.style.display = 'none';
                 }, 3000);
             }
         }
 
-        // Enter key support
-        document
-        .getElementById('passwordInput')
-        .addEventListener('keypress', function(e){
-
+        document.getElementById('passwordInput').addEventListener('keypress', function(e){
             if(e.key === 'Enter'){
                 checkPassword();
             }
-
         });
-
     </script>
-
 </body>
 </html>
