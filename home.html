@@ -1,268 +1,693 @@
-<!DOCTYPE html>
-<html lang="ur" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Cinematic Love Story | My Sweet Family</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<!-- =========================
+ PREMIUM HOME.HTML UPGRADE
+========================== -->
 
-        body {
-            background-color: #080808;
-            color: #fff;
-            font-family: 'Noto Nastaliq Urdu', serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        .bg-fixed {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('home1.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-            animation: backgroundPan 30s linear infinite alternate;
-        }
-
-        @keyframes backgroundPan {
-            from { transform: scale(1); }
-            to { transform: scale(1.15); }
-        }
-
-        .intro-section {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .gold-title {
-            color: #D4AF37;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
-            margin-bottom: 20px;
-        }
-
-        .sub-poetry {
-            font-size: 1.8rem;
-            color: rgba(255,255,255,0.8);
-            line-height: 2.5;
-        }
-
-        .story-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 50px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 120px;
-        }
-
-        .story-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1.2s ease-out;
-        }
-
-        .story-block.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .picture-card {
-            width: 100%;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
-        }
-
-        .picture-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            display: block;
-        }
-
-        .quote-poetry {
-            font-size: 1.6rem;
-            line-height: 2.3;
-            max-width: 550px;
-        }
-
-        .gold-quote { color: #D4AF37; font-size: 2rem; }
-
-        .heart {
-            position: fixed;
-            color: rgba(212, 175, 55, 0.7);
-            z-index: -1;
-            animation: floatUp 7s linear forwards;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-    </style>
-</head>
+<!-- BODY ko ye classes aur attributes do -->
 <body>
 
-    <div class="bg-fixed"></div>
+<div class="cursor-glow"></div>
 
-    <section class="intro-section">
-        <div>
-            <h1 class="gold-title">ہماری پیاری سی دنیا</h1>
-            <p class="sub-poetry">ہمارے سفر کا ہر لمحہ، ہماری "Sweet Family" کے نام۔</p>
-            <div style="font-size: 40px; margin-top: 30px; color:#D4AF37;">↓</div>
-        </div>
-    </section>
+<div class="bg-fixed"></div>
 
-    <div class="story-container">
+<!-- Floating particles -->
+<div class="particles"></div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.01 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>خدا کرے کہ ہمارا ساتھ یوں ہی قائم رہے،<br>تمہاری ہنسی سے میرا گھر ہمیشہ روشن رہے۔<span class="gold-quote">"</span></p>
-        </div>
+<section class="intro-section">
+    <div class="hero-box">
+        <div class="top-badge">✨ Forever Together ✨</div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تیرے آنے سے زندگی میں بہار آ گئی،<br>ہر دعا میں بس تمہاری ہی پکار آ گئی۔<span class="gold-quote">"</span></p>
-        </div>
+        <h1 class="gold-title">
+            Noor ❤️ Azeem
+        </h1>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.57 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ہماری چھوٹی سی دنیا، ہمارا پیارا سا پھول،<br>مالک رکھے ہمیں ہر بری نظر سے دور۔ آمین۔<span class="gold-quote">"</span></p>
-        </div>
+        <p class="sub-poetry">
+            Har lamha... har dua...<br>
+            sirf tumhare naam meri jaan 🌙
+        </p>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.00 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ہاتھوں میں ہاتھ رہے، ساتھ تیرا مدام ہو،<br>میری ہر صبح تیرے نام، تیری ہر شام میرے نام ہو۔<span class="gold-quote">"</span></p>
-        </div>
+        <a href="#story-start" class="scroll-btn">
+            Start Our Story 💌
+        </a>
+    </div>
+</section>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.01 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تجھ سے شروع، تجھ پہ ختم ہر داستان ہے،<br>میری محبت کا بس اتنا سا نشان ہے۔<span class="gold-quote">"</span></p>
+<div class="story-container" id="story-start">
+
+    <!-- 1 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.18.01 PM.jpeg">
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.18.00 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تم سلامت رہو ہزار برس،<br>ہر برس کے دن ہوں پچاس ہزار۔<span class="gold-quote">"</span></p>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Khuda kare hamara saath yunhi hamesha rahe...<br>
+            tumhari muskurahat se mera ghar roshan rahe ✨
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 2 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg">
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.59 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>ساری دنیا کی خوشیاں ایک طرف،<br>تمہارے ساتھ گزارا ایک لمحہ ایک طرف۔<span class="gold-quote">"</span></p>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tere aane se meri duniya badal si gayi...<br>
+            har dua mein sirf tumhari kami thi ❤️
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 3 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.57 PM (1).jpeg">
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (2).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>سکونِ قلب ہے بس تیری دید میں،<br>ملے جو تو تو ہو جائے عید میرے۔<span class="gold-quote">"</span></p>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Hamari choti si duniya... hamara pyara sa phool 🌸<br>
+            Allah hamesha buri nazar se bachaye.
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 4 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.18.00 PM.jpeg">
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (1).jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>وفا کا رنگ تمہاری آنکھوں سے جھلکتا ہے،<br>میرا ہر خواب تمہاری راہوں میں ٹہلتا ہے۔<span class="gold-quote">"</span></p>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Hathon mein tera haath ho...<br>
+            aur zindagi bhar tera saath ho 🤍
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 5 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.18.01 PM (1).jpeg">
         </div>
 
-        <div class="story-block">
-            <div class="picture-card"><img src="WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg"></div>
-            <p class="quote-poetry"><span class="gold-quote">"</span>تم میرے وہ ہمدم ہو،<br>جسے پانے کی تمنا ہر دعا میں تھی۔<span class="gold-quote">"</span></p>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tujhse shuru... tujhpe khatam meri har kahani ✨
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 6 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.18.00 PM (1).jpeg">
         </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tum salamat raho hazaron saal...<br>
+            meri har khushi tumse hai 💖
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 7 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.59 PM (1).jpeg">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Duniya ki sari khushiyan ek taraf...<br>
+            tera saath ek taraf 🥺
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 8 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (2).jpeg">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Sukoon milta hai bas teri ek jhalak se 🌙
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 9 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM (1).jpeg">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Wafa ka rang teri aankhon mein dikhta hai ✨
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <!-- 10 -->
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg">
+        </div>
+
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tum meri wo dua ho...<br>
+            jo har sajde mein maangi thi ❤️
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- Ending Section -->
+<section class="ending-section">
+
+    <div class="ending-box">
+
+        <p class="ending-text">
+            Meri zindagi ko khoobsurat banane wali...
+        </p>
+
+        <h2 class="ending-name">
+            Ambar Ki Mama 💖
+        </h2>
 
     </div>
 
-    <section class="intro-section" style="background: rgba(0,0,0,0.6); height: 50vh;">
-        <h1 class="gold-title" style="font-size: 2.2rem;">میری زندگی کو زندگی بنانے والی...Ambar ki mama</h1>
-    </section>
+</section>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+<!-- NEXT PAGE BUTTON -->
+<div class="next-btn-wrap">
 
-        document.querySelectorAll('.story-block').forEach(block => observer.observe(block));
+    <a href="page2.html" class="next-btn">
+        Continue Our Journey →
+    </a>
 
-        setInterval(() => {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 7000);
-        }, 500);
-    </script>
-<footer style="
-    text-align: center; 
-    padding: 50px 20px; 
-    background: rgba(0,0,0,0.8); 
-    backdrop-filter: blur(10px); 
-    border-top: 1px solid rgba(212, 175, 55, 0.3);
-    margin-top: 50px;">
-    
-    <p style="
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        font-size: 1.2rem; 
-        letter-spacing: 2px; 
-        color: rgba(255,255,255,0.7);
-        margin: 0;">
-        CREATED BY YOUR HUBBY
+</div>
+
+<!-- FOOTER -->
+<footer class="premium-footer">
+
+    <p class="footer-text">
+        CREATED WITH ENDLESS LOVE BY
     </p>
-    
-    <h2 style="
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        font-size: 1.01rem; 
-        color: #D4AF37; 
-        text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        margin-top: 10px;
-        text-transform: uppercase;
-        animation: glow 3s ease-in-out infinite alternate;">
-        "AZEEM"
-    </h2>
+
+    <h1 class="footer-name">
+        ✨ AZEEM ✨
+    </h1>
+
+    <div class="footer-line"></div>
+
+    <p class="footer-love">
+        Forever Yours ❤️
+    </p>
+
 </footer>
 
+<script>
+
+    // Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+            }
+
+        });
+
+    }, { threshold:0.15 });
+
+    document.querySelectorAll('.story-block')
+    .forEach(block => observer.observe(block));
+
+    // Floating Hearts
+    setInterval(() => {
+
+        const heart = document.createElement('div');
+
+        heart.classList.add('heart');
+
+        heart.innerHTML = '❤';
+
+        heart.style.left = Math.random() * 100 + 'vw';
+
+        heart.style.fontSize =
+        (Math.random() * 20 + 10) + 'px';
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 7000);
+
+    }, 500);
+
+    // LOVE BUBBLE EFFECT
+    document.addEventListener('click', function(e){
+
+        for(let i=0; i<10; i++){
+
+            const bubble = document.createElement('span');
+
+            bubble.classList.add('love-bubble');
+
+            bubble.innerHTML = ['💖','✨','❤️','💫'][Math.floor(Math.random()*4)];
+
+            bubble.style.left = e.clientX + 'px';
+            bubble.style.top = e.clientY + 'px';
+
+            bubble.style.fontSize =
+            (Math.random() * 20 + 15) + 'px';
+
+            document.body.appendChild(bubble);
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 2000);
+        }
+
+    });
+
+</script>
+
 <style>
-@keyframes glow {
-    from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
-    to { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4); }
+
+/* ===== GENERAL ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-    <div style="text-align:center; padding:40px 20px;">
-    <a href="page2.html" style="
-        display:inline-block;
-        padding:15px 40px;
-        background: rgba(212, 175, 55, 0.12);
-        border:1px solid rgba(212, 175, 55, 0.4);
-        color:#D4AF37;
-        text-decoration:none;
-        font-size:1.3rem;
-        border-radius:50px;
-        backdrop-filter: blur(10px);
-        box-shadow:0 10px 30px rgba(0,0,0,0.5);
-        transition:0.4s;
-        font-family:'Poppins', sans-serif;
-    "
-    onmouseover="this.style.background='#D4AF37'; this.style.color='#000'; this.style.transform='scale(1.05)'"
-    onmouseout="this.style.background='rgba(212, 175, 55, 0.12)'; this.style.color='#D4AF37'; this.style.transform='scale(1)'">
-        Next Page →
-    </a>
-</div>
-</style>
-</body>
-    </html>
-        
+
+body{
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+    font-family:'Poppins', sans-serif;
+    scroll-behavior:smooth;
+}
+
+/* ===== PREMIUM BG ===== */
+
+.bg-fixed{
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.82)),
+    url('premium-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+    z-index:-3;
+
+    animation:bgZoom 25s linear infinite alternate;
+}
+
+@keyframes bgZoom{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.12);
+    }
+}
+
+/* ===== INTRO ===== */
+
+.intro-section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-box{
+    max-width:800px;
+    animation:fadeUp 1.5s ease;
+}
+
+.top-badge{
+    display:inline-block;
+    padding:12px 24px;
+    border-radius:50px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    margin-bottom:30px;
+    backdrop-filter:blur(10px);
+
+    font-size:15px;
+    letter-spacing:2px;
+}
+
+.gold-title{
+    font-size:clamp(3rem, 7vw, 6rem);
+    color:#ffd369;
+
+    text-shadow:
+    0 0 30px rgba(255,211,105,0.4),
+    0 0 60px rgba(255,211,105,0.2);
+
+    margin-bottom:20px;
+}
+
+.sub-poetry{
+    font-size:1.5rem;
+    line-height:2;
+    color:rgba(255,255,255,0.85);
+}
+
+.scroll-btn{
+    display:inline-block;
+    margin-top:40px;
+
+    padding:16px 35px;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff4d88,#ff7eb3);
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:600;
+
+    box-shadow:0 10px 30px rgba(255,77,136,0.35);
+
+    transition:0.4s;
+}
+
+.scroll-btn:hover{
+    transform:translateY(-3px) scale(1.05);
+}
+
+/* ===== STORY ===== */
+
+.story-container{
+    max-width:850px;
+    margin:auto;
+    padding:80px 20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:120px;
+}
+
+.story-block{
+    text-align:center;
+
+    opacity:0;
+    transform:translateY(80px);
+
+    transition:1.2s ease;
+}
+
+.story-block.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.picture-card{
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(10px);
+
+    padding:12px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transition:0.5s;
+}
+
+.picture-card:hover{
+    transform:translateY(-8px) scale(1.02);
+}
+
+.picture-card img{
+    width:100%;
+    border-radius:20px;
+    display:block;
+}
+
+.quote-poetry{
+    margin-top:30px;
+
+    font-size:1.5rem;
+    line-height:2;
+
+    color:rgba(255,255,255,0.9);
+}
+
+.gold-quote{
+    color:#ffd369;
+    font-size:2rem;
+}
+
+/* ===== ENDING ===== */
+
+.ending-section{
+    padding:120px 20px;
+    text-align:center;
+}
+
+.ending-box{
+    max-width:700px;
+    margin:auto;
+
+    padding:60px 30px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+}
+
+.ending-text{
+    font-size:1.4rem;
+    color:rgba(255,255,255,0.75);
+}
+
+.ending-name{
+    margin-top:20px;
+
+    font-size:3rem;
+
+    color:#ffd369;
+
+    text-shadow:0 0 30px rgba(255,211,105,0.4);
+}
+
+/* ===== NEXT BUTTON ===== */
+
+.next-btn-wrap{
+    text-align:center;
+    padding-bottom:100px;
+}
+
+.next-btn{
+    display:inline-block;
+
+    padding:18px 40px;
+
+    border-radius:60px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:linear-gradient(135deg,#ffd369,#ffb347);
+
+    color:black;
+
+    font-weight:700;
+
+    transition:0.4s;
+
+    box-shadow:0 15px 40px rgba(255,211,105,0.25);
+}
+
+.next-btn:hover{
+    transform:scale(1.07);
+}
+
+/* ===== FOOTER ===== */
+
+.premium-footer{
+    text-align:center;
+
+    padding:80px 20px;
+
+    background:rgba(0,0,0,0.75);
+
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.footer-text{
+    letter-spacing:4px;
+    color:rgba(255,255,255,0.6);
+}
+
+.footer-name{
+    margin-top:18px;
+
+    font-size:4rem;
+
+    color:#ffd369;
+
+    text-shadow:
+    0 0 25px rgba(255,211,105,0.5),
+    0 0 50px rgba(255,211,105,0.25);
+
+    animation:glow 2s infinite alternate;
+}
+
+.footer-line{
+    width:180px;
+    height:2px;
+
+    background:#ffd369;
+
+    margin:25px auto;
+}
+
+.footer-love{
+    color:rgba(255,255,255,0.7);
+}
+
+/* ===== HEARTS ===== */
+
+.heart{
+    position:fixed;
+    color:rgba(255,105,180,0.7);
+    z-index:-1;
+
+    animation:floatUp 7s linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(100vh) scale(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-10vh) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* ===== LOVE BUBBLES ===== */
+
+.love-bubble{
+    position:fixed;
+    pointer-events:none;
+
+    animation:bubble 2s linear forwards;
+
+    z-index:9999;
+}
+
+@keyframes bubble{
+
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(
+        calc(-50% + (var(--x, 0) * 1px)),
+        calc(-200px)
+        ) scale(1.8);
+
+        opacity:0;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes glow{
+
+    from{
+        text-shadow:0 0 20px rgba(255,211,105,0.4);
+    }
+
+    to{
+        text-shadow:
+        0 0 35px rgba(255,211,105,0.8),
+        0 0 60px rgba(255,211,105,0.35);
+    }
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+    .quote-poetry{
+        font-size:1.2rem;
+    }
+
+    .sub-poetry{
+        font-size:1.2rem;
+    }
+
+    .footer-name{
+        font-size:2.8rem;
+    }
+
+    .ending-name{
+        font-size:2.3rem;
+    }
+}
+
+    </style>
