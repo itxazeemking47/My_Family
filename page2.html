@@ -11,6 +11,13 @@
 <style>
 
 /* =========================
+   SECURITY: CSS-BASED PROTECTION
+========================= */
+body {
+    display: none; /* Session check hone tak screen blank rahegi */
+}
+
+/* =========================
    GENERAL
 ========================= */
 
@@ -378,7 +385,8 @@ body{
 </style>
 </head>
 
-<body>
+<!-- RIGHT CLICK SECURITY ACTIVE -->
+<body oncontextmenu="return false;">
 
 <div class="bg-fixed"></div>
 
@@ -515,6 +523,26 @@ body{
 
 <script>
 
+/* ========================================================
+   1. GATEWAY PROTECTION & INSPECT KEYBOARD DISABLE
+   ======================================================== */
+if (sessionStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "password.html";
+} else {
+    document.body.style.display = "block";
+}
+
+// Disable Inspect Element Key Shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+document.onkeydown = function(e) {
+    if (
+        e.keyCode == 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || 
+        (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
+    ) {
+        return false;
+    }
+}
+
 /* Reveal Animation */
 
 const observer = new IntersectionObserver((entries)=>{
@@ -587,4 +615,5 @@ document.addEventListener('click',function(e){
 </script>
 
 </body>
-</html>
+           </html>
+           
