@@ -11,6 +11,13 @@
 <style>
 
 /* =========================
+   SECURITY: CSS-BASED PROTECTION
+========================= */
+body {
+    display: none; /* Jab tak auth verify nahi hoga, screen bilkul blank rahegi */
+}
+
+/* =========================
    GENERAL
 ========================= */
 
@@ -723,7 +730,8 @@ body::before{
 
 <div class="next-btn-wrap">
 
-    <a href="password.html" class="next-btn">
+    <!-- NEXT PAGE ADDRESS FIXED HERE -->
+    <a href="page2.html" class="next-btn">
         Continue Our Journey →
     </a>
 
@@ -748,6 +756,17 @@ body::before{
 </footer>
 
 <script>
+
+/* ========================================================
+   1. GATEWAY PROTECTION (SAB SE UPAR)
+   ======================================================== */
+if (sessionStorage.getItem("isLoggedIn") !== "true") {
+    // Agar valid session nahi hai, to direct password screen par bounce karein
+    window.location.href = "password.html";
+} else {
+    // Agar already verified hai, to page display ho jaye
+    document.body.style.display = "block";
+}
 
 /* REVEAL ANIMATION */
 
@@ -821,4 +840,5 @@ document.addEventListener('click',function(e){
 </script>
 
 </body>
-</html>
+                                         </html>
+   
