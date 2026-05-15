@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Songs with Beautiful Memories 💗 | Our Love Tracks</title>
+    <title>Royal Symphony 🎼 | Our Love Tracks</title>
 
     <!-- Consistent Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -17,7 +17,7 @@
 
         body {
             min-height: 100vh;
-            background: #000;
+            background: #050505;
             font-family: 'Lexend', sans-serif;
             color: white;
             display: flex;
@@ -32,10 +32,11 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.88)), url('bg.PNG'); /* Fixed name with capital PNG */
+            /* Updated extension strictly to capital .PNG */
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.92)), url('bg.PNG'); 
             background-size: cover;
             background-position: center;
-            z-index: -2;
+            z-index: -3; /* Placed further back to remain behind emojis */
         }
 
         /* Golden Soft Glow */
@@ -46,9 +47,20 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,211,107,0.1) 0%, transparent 70%);
-            z-index: -1;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,211,107,0.12) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Cinematic Particles Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
             pointer-events: none;
         }
 
@@ -56,73 +68,103 @@
             margin-top: 60px;
             text-align: center;
             animation: fadeInDown 1.5s ease;
+            z-index: 2;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 48px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 42px;
             color: #ffd36b;
-            text-shadow: 0 0 25px rgba(255,211,107,0.4);
-            margin-bottom: 5px;
+            text-shadow: 0 0 30px rgba(255,211,107,0.4);
+            margin-bottom: 12px;
             letter-spacing: 2px;
         }
 
         .subtitle {
             font-family: 'Lexend', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             color: #ffb6c1;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             margin-bottom: 50px;
-            opacity: 0.8;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(255,182,193,0.3);
         }
 
         /* Royal Playlist Container */
         .playlist-container {
-            width: 90%;
-            max-width: 550px;
+            width: 95%;
+            max-width: 680px; /* Container width increased for larger thumbnails */
             display: flex;
             flex-direction: column;
             gap: 25px;
             margin-bottom: 50px;
+            z-index: 2; /* Elements stay strictly on top of emojis */
         }
 
         .song-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 211, 107, 0.2);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 20px;
+            background: rgba(15, 15, 15, 0.65);
+            border: 1px solid rgba(255, 211, 107, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 24px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            gap: 25px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             animation: fadeRight 1s ease both;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
 
         .song-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 211, 107, 0.08);
-            border-color: rgba(255, 211, 107, 0.6);
-            box-shadow: 0 15px 40px rgba(255,211,107,0.15);
+            transform: translateY(-5px);
+            background: rgba(255, 211, 107, 0.05);
+            border-color: rgba(255, 211, 107, 0.4);
+            box-shadow: 0 20px 40px rgba(255,211,107,0.15);
         }
 
+        /* Active Playing State */
+        .song-card.playing {
+            border-color: #ffd36b;
+            background: rgba(255, 211, 107, 0.08);
+            animation: pulseCard 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 20px rgba(255, 211, 107, 0.15); }
+            50% { box-shadow: 0 0 35px rgba(255, 211, 107, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(255, 211, 107, 0.15); }
+        }
+
+        /* Bigger Premium Thumbnail Wrapper */
         .thumbnail-wrapper {
             position: relative;
-            width: 85px;
-            height: 85px;
+            width: 170px; /* Increased from 140px for a bolder landscape look */
+            height: 115px; /* Proportional elegant scaling */
             flex-shrink: 0;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 211, 107, 0.25);
+            transition: border-color 0.4s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .song-card.playing .thumbnail-wrapper {
+            border-color: #ffd36b;
         }
 
         .thumbnail {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
             object-fit: cover;
-            border: 2px solid rgba(255, 211, 107, 0.3);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .song-card:hover .thumbnail {
+            transform: scale(1.08);
         }
 
         .song-info {
@@ -131,125 +173,195 @@
 
         .song-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 20px;
+            font-size: 22px;
             color: #ffffff;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .song-card.playing .song-title {
+            color: #ffd36b;
         }
 
         .song-artist {
             font-family: 'Lexend', sans-serif;
-            font-size: 13px;
-            color: #ffd36b;
-            opacity: 0.8;
+            font-size: 13.5px;
+            color: #ffb6c1;
+            opacity: 0.85;
             font-weight: 300;
+            margin-bottom: 12px;
         }
 
-        /* Luxury Audio Player Styling */
+        /* Custom Inverted Audio Styling */
         audio {
             width: 100%;
-            height: 32px;
-            margin-top: 15px;
-            filter: invert(0.9) hue-rotate(15deg) brightness(1.2);
-            opacity: 0.9;
+            height: 35px;
+            margin-top: 5px;
+            filter: invert(0.9) hue-rotate(15deg) brightness(1.3);
+            outline: none;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        audio:hover {
+            opacity: 1;
+        }
+
+        /* Luxury Audio Wave Equalizer Visual */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .song-card.playing .equalizer {
+            opacity: 1;
+        }
+
+        .bar {
+            width: 3px;
+            height: 5px;
+            background: #ffd36b;
+            border-radius: 3px;
+        }
+
+        .song-card.playing .bar:nth-child(1) { animation: bounce 0.6s ease-in-out infinite alternate; }
+        .song-card.playing .bar:nth-child(2) { animation: bounce 0.4s ease-in-out infinite alternate 0.1s; }
+        .song-card.playing .bar:nth-child(3) { animation: bounce 0.7s ease-in-out infinite alternate 0.2s; }
+        .song-card.playing .bar:nth-child(4) { animation: bounce 0.5s ease-in-out infinite alternate 0.15s; }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 22px; }
         }
 
         .next-page-btn {
             font-family: 'Fredoka One', cursive;
-            padding: 18px 45px;
+            padding: 16px 45px;
             background: linear-gradient(135deg, #ffd36b, #ff9f1c);
             color: #000;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 17px;
+            font-size: 16px;
             margin-top: 20px;
             margin-bottom: 70px;
-            transition: 0.4s;
-            box-shadow: 0 10px 25px rgba(255,159,28,0.3);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(255,159,28,0.35);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            z-index: 2;
         }
 
         .next-page-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 35px rgba(255,159,28,0.5);
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(255,159,28,0.6);
         }
 
-        /* Royal Animations */
+        /* Animations */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeRight {
-            from { opacity: 0; transform: translateX(-40px); }
+            from { opacity: 0; transform: translateX(-30px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Aesthetic Floating Particles */
-        .particle {
+        /* Falling Emojis Style Behind Content */
+        .emoji-particle {
             position: fixed;
-            background: rgba(255, 211, 107, 0.3);
-            border-radius: 50%;
+            top: -50px;
             pointer-events: none;
-            z-index: -1;
-            animation: floatParticles 10s linear infinite;
+            z-index: -1; /* Fixed: Emojis will now always pass strictly BEHIND text and tabs */
+            user-select: none;
+            animation: fall linear forwards;
         }
 
-        @keyframes floatParticles {
-            0% { transform: translateY(110vh) translateX(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Ambient Sparks Layer -->
+    <canvas id="particle-canvas"></canvas>
+
     <div class="header">
-        <h1>Songs with Loving Memories 💗</h1>
-        <p class="subtitle">A Melody for My Shahzadi 💝</p>
+        <h1>Music Memories</h1>
+        <p class="subtitle">Only for my Shahzadi 😘</p>
     </div>
 
     <div class="playlist-container">
-        <!-- Song 1 -->
-        <div class="song-card" style="animation-delay: 0.3s;">
+        <!-- Song 1 (Sahiba.mp3) -->
+       <div class="song-card" style="animation-delay: 0.2s;">
             <div class="thumbnail-wrapper">
-                <img src="thumbnail1.png" alt="Track 1" class="thumbnail">
+                <img src="Thumbnail1.gif" alt="Track 1" class="thumbnail">
             </div>
             <div class="song-info">
-                <p For my "Sahiba" </p>
-                <p class="song-artist">Because you deserve the world</p>
-                <audio controls>
-                    <source src="1.mp3" type="audio/mpeg">
+                <p class="song-title">You are my "Sahiba"</p>
+                <p class="song-artist">Na Tarsaya karo Jana🤭</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="Sahiba.mp3" type="audio/mpeg">
                 </audio>
+            </div>
+            <!-- Premium Mini Equalizer HUD -->
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
 
         <!-- Song 2 -->
-        <div class="song-card" style="animation-delay: 0.5s;">
+        <div class="song-card" style="animation-delay: 0.4s;">
             <div class="thumbnail-wrapper">
                 <img src="thumbnail2.png" alt="Track 2" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">Our Heartbeat</p>
                 <p class="song-artist">Listening to this feels like us</p>
-                <audio controls>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
                     <source src="2.mp3" type="audio/mpeg">
                 </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
 
         <!-- Song 3 -->
-        <div class="song-card" style="animation-delay: 0.7s;">
+        <div class="song-card" style="animation-delay: 0.6s;">
             <div class="thumbnail-wrapper">
                 <img src="thumbnail3.png" alt="Track 3" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">Forever Mine</p>
                 <p class="song-artist">Only for Noor's ears</p>
-                <audio controls>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
                     <source src="3.mp3" type="audio/mpeg">
                 </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
     </div>
@@ -257,23 +369,108 @@
     <a href="music_hub_page2.html" class="next-page-btn">More Memories ✨</a>
 
     <script>
-        // Royal Gold Particles Effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
+        // 1. Interactive Music Control (Pulse and Equalizer toggle)
+        function playTrack(audioElement) {
+            const audios = document.querySelectorAll('audio');
+            audios.forEach(audio => {
+                if (audio !== audioElement) {
+                    audio.pause();
+                }
+            });
             
-            const size = Math.random() * 4 + 2;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = (Math.random() * 5 + 7) + 's';
-            particle.style.opacity = Math.random();
-            
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 10000);
+            document.querySelectorAll('.song-card').forEach(card => card.classList.remove('playing'));
+            const currentCard = audioElement.closest('.song-card');
+            currentCard.classList.add('playing');
         }
-        setInterval(createParticle, 400);
+
+        function pauseTrack(audioElement) {
+            const currentCard = audioElement.closest('.song-card');
+            currentCard.classList.remove('playing');
+        }
+
+        // 2. Falling Love Emojis Feature (Behind Content Layers)
+        const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
+
+        function createFallingEmoji() {
+            const emojiEl = document.createElement('div');
+            emojiEl.classList.add('emoji-particle');
+            
+            const randomEmoji = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+            emojiEl.innerText = randomEmoji;
+
+            const startLeft = Math.random() * 100;
+            const size = Math.random() * 14 + 16; // Elegant size
+            const duration = Math.random() * 5 + 5; // Balanced slow fall
+            
+            emojiEl.style.left = startLeft + 'vw';
+            emojiEl.style.fontSize = size + 'px';
+            emojiEl.style.animationDuration = duration + 's';
+
+            document.body.appendChild(emojiEl);
+
+            setTimeout(() => {
+                emojiEl.remove();
+            }, duration * 1000);
+        }
+        setInterval(createFallingEmoji, 450);
+
+        // 3. Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 35;
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = Math.random() * 0.3 + 0.1;
+                this.speedX = Math.sin(Math.random()) * 0.15;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 211, 107, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
-</html>
+                    </html>
+    
