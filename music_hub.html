@@ -32,11 +32,10 @@
             content: "";
             position: fixed;
             inset: 0;
-            /* Updated extension strictly to capital .PNG */
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.92)), url('bg.PNG'); 
             background-size: cover;
             background-position: center;
-            z-index: -3; /* Placed further back to remain behind emojis */
+            z-index: -3;
         }
 
         /* Golden Soft Glow */
@@ -94,14 +93,15 @@
         /* Royal Playlist Container */
         .playlist-container {
             width: 95%;
-            max-width: 680px; /* Container width increased for larger thumbnails */
+            max-width: 500px; /* Adjusted to perfectly embrace portrait blocks */
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 35px;
             margin-bottom: 50px;
-            z-index: 2; /* Elements stay strictly on top of emojis */
+            z-index: 2;
         }
 
+        /* Modified to support block layout for portrait view */
         .song-card {
             background: rgba(15, 15, 15, 0.65);
             border: 1px solid rgba(255, 211, 107, 0.15);
@@ -110,13 +110,14 @@
             border-radius: 25px;
             padding: 24px;
             display: flex;
-            align-items: center;
-            gap: 25px;
+            flex-direction: column; /* Aligns elements vertically */
+            gap: 20px;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             animation: fadeRight 1s ease both;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .song-card:hover {
@@ -139,17 +140,16 @@
             100% { box-shadow: 0 0 20px rgba(255, 211, 107, 0.15); }
         }
 
-        /* Bigger Premium Thumbnail Wrapper */
+        /* Massive Portrait 9:16 Aspect Ratio Thumbnail Styling */
         .thumbnail-wrapper {
             position: relative;
-            width: 170px; /* Increased from 140px for a bolder landscape look */
-            height: 115px; /* Proportional elegant scaling */
-            flex-shrink: 0;
+            width: 100%; /* Spans full card width */
+            aspect-ratio: 9 / 16; /* Enforces absolute portrait scaling */
             overflow: hidden;
             border-radius: 18px;
             border: 2px solid rgba(255, 211, 107, 0.25);
             transition: border-color 0.4s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
 
         .song-card.playing .thumbnail-wrapper {
@@ -164,16 +164,17 @@
         }
 
         .song-card:hover .thumbnail {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
         .song-info {
-            flex-grow: 1;
+            width: 100%;
+            text-align: left;
         }
 
         .song-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 22px;
+            font-size: 24px; /* Increased font size */
             color: #ffffff;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
@@ -186,17 +187,17 @@
 
         .song-artist {
             font-family: 'Lexend', sans-serif;
-            font-size: 13.5px;
+            font-size: 14px;
             color: #ffb6c1;
             opacity: 0.85;
             font-weight: 300;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         /* Custom Inverted Audio Styling */
         audio {
             width: 100%;
-            height: 35px;
+            height: 40px;
             margin-top: 5px;
             filter: invert(0.9) hue-rotate(15deg) brightness(1.3);
             outline: none;
@@ -215,10 +216,13 @@
             gap: 3px;
             height: 20px;
             position: absolute;
-            top: 25px;
+            bottom: 85px; /* Repositioned elegantly above the tracking bar */
             right: 25px;
             opacity: 0;
             transition: opacity 0.4s;
+            background: rgba(0,0,0,0.6);
+            padding: 8px;
+            border-radius: 8px;
         }
 
         .song-card.playing .equalizer {
@@ -251,7 +255,7 @@
             border-radius: 50px;
             font-size: 16px;
             margin-top: 20px;
-            margin-bottom: 70px;
+            margin-bottom: 40px;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 25px rgba(255,159,28,0.35);
             text-transform: uppercase;
@@ -262,6 +266,25 @@
         .next-page-btn:hover {
             transform: scale(1.08);
             box-shadow: 0 15px 35px rgba(255,159,28,0.6);
+        }
+
+        /* Attractive Signature Branding Footer */
+        .branding-footer {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            z-index: 2;
+            text-align: center;
+            transition: color 0.3s;
+        }
+        
+        .branding-footer span {
+            color: #ffd36b;
+            text-shadow: 0 0 15px rgba(255,211,107,0.6);
+            font-weight: bold;
         }
 
         /* Animations */
@@ -275,21 +298,21 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Falling Emojis Style Behind Content */
+        /* Accelerated Falling Emojis Style Behind Content */
         .emoji-particle {
             position: fixed;
             top: -50px;
             pointer-events: none;
-            z-index: -1; /* Fixed: Emojis will now always pass strictly BEHIND text and tabs */
+            z-index: -1; 
             user-select: none;
             animation: fall linear forwards;
         }
 
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(105vh) rotate(360deg) scale(1); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1.1); opacity: 0; }
         }
     </style>
 </head>
@@ -307,7 +330,7 @@
         <!-- Song 1 (Sahiba.mp3) -->
        <div class="song-card" style="animation-delay: 0.2s;">
             <div class="thumbnail-wrapper">
-                <img src="Thumbnail1.gif" alt="Track 1" class="thumbnail">
+                <img src="thumbnail1.png" alt="Track 1" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">You are my "Sahiba"</p>
@@ -328,7 +351,7 @@
         <!-- Song 2 -->
         <div class="song-card" style="animation-delay: 0.4s;">
             <div class="thumbnail-wrapper">
-                <img src="thumbnail2.png" alt="Track 2" class="thumbnail">
+                <img src="thumbnail1.png" alt="Track 2" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">Our Heartbeat</p>
@@ -348,7 +371,7 @@
         <!-- Song 3 -->
         <div class="song-card" style="animation-delay: 0.6s;">
             <div class="thumbnail-wrapper">
-                <img src="thumbnail3.png" alt="Track 3" class="thumbnail">
+                <img src="thumbnail1.png" alt="Track 3" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">Forever Mine</p>
@@ -367,6 +390,11 @@
     </div>
 
     <a href="music_hub_page2.html" class="next-page-btn">More Memories ✨</a>
+
+    <!-- Attractive Premium Attribution Footer -->
+    <div class="branding-footer">
+        made by | <span>Azeem</span> |
+    </div>
 
     <script>
         // 1. Interactive Music Control (Pulse and Equalizer toggle)
@@ -388,7 +416,7 @@
             currentCard.classList.remove('playing');
         }
 
-        // 2. Falling Love Emojis Feature (Behind Content Layers)
+        // 2. Fast-Falling Love Emojis Feature (Behind Content Layers)
         const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
 
         function createFallingEmoji() {
@@ -399,8 +427,8 @@
             emojiEl.innerText = randomEmoji;
 
             const startLeft = Math.random() * 100;
-            const size = Math.random() * 14 + 16; // Elegant size
-            const duration = Math.random() * 5 + 5; // Balanced slow fall
+            const size = Math.random() * 16 + 18; // Slightly enhanced size for visual premium vibe
+            const duration = Math.random() * 2 + 1.5; // Significantly faster falling speed (1.5s to 3.5s)
             
             emojiEl.style.left = startLeft + 'vw';
             emojiEl.style.fontSize = size + 'px';
@@ -412,7 +440,8 @@
                 emojiEl.remove();
             }, duration * 1000);
         }
-        setInterval(createFallingEmoji, 450);
+        // Increased emission frequency for denser and faster appearance
+        setInterval(createFallingEmoji, 150);
 
         // 3. Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
         const canvas = document.getElementById('particle-canvas');
@@ -472,5 +501,5 @@
         animateParticles();
     </script>
 </body>
-                    </html>
+    </html>
     
