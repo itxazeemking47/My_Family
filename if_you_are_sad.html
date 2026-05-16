@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suno meri Pagli... Hasso Na! 🧸</title>
+    <title>Suno meri Pagli... Ek Kahani Suno! 🧸</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* موبائل پر بہترین اور اسموتھ اسکرولنگ کے لیے */
         }
 
         body {
@@ -24,9 +29,11 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
+            will-change: transform;
+            transform: translate3d(0, 0, 0); /* ہارڈ ویئر ایکسلریشن تاکہ پیج اٹکے نہیں */
         }
 
-        /* Luxury Background */
+        /* Luxury Background - اس کو آپٹمائز کیا ہے تاکہ اسکرول لیگ نہ ہو */
         body::before {
             content: "";
             position: fixed;
@@ -35,6 +42,7 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
+            will-change: transform;
         }
 
         .header {
@@ -54,14 +62,14 @@
         }
 
         .subtitle {
-            font-size: 15px;
+            font-size: 16px;
             color: #ffb6c1;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             margin-bottom: 40px;
         }
 
-        /* Joke Cards Styling */
-        .jokes-container {
+        /* Story Container */
+        .story-container {
             width: 90%;
             max-width: 650px;
             display: flex;
@@ -70,26 +78,34 @@
             margin-bottom: 40px;
         }
 
-        .joke-card {
+        /* Story Card Styling - Backdrop filter کو آپٹمائز کیا ہے تاکہ اسکرولنگ مکھن چلے */
+        .story-card {
             background: rgba(255, 255, 255, 0.06);
             border-right: 5px solid #ffd36b;
             border-radius: 20px;
             padding: 30px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: 0.4s;
+            transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
             animation: slideIn 1s ease both;
+            will-change: transform;
         }
 
-        .joke-card:hover {
+        .story-card:hover {
             transform: scale(1.02);
             background: rgba(255, 255, 255, 0.1);
             border-right-color: #ff4d88;
         }
 
+        /* نوٹ کارڈ کے لیے اسپیشل اسٹائل */
+        .story-card.note-card {
+            border-right: 5px solid #ff4d88;
+            background: rgba(255, 182, 193, 0.05);
+        }
+
         .urdu-text {
-            font-size: 20px;
+            font-size: 22px; /* پڑھنے میں آسانی کے لیے سائز تھوڑا بڑا کیا ہے */
             line-height: 1.8;
             color: #ffffff;
             text-align: justify;
@@ -119,6 +135,7 @@
             border-radius: 50px;
             transition: 0.3s;
             font-size: 16px;
+            display: inline-block;
         }
 
         .next-btn {
@@ -181,49 +198,61 @@
 
     <div class="header">
         <h1>Suno meri Pagal... 🧸</h1>
-        <p class="subtitle">Udaas ho? Chalo تھوڑا ہنس لو!</p>
+        <p class="subtitle">Udaas ho? Chalo ایک پیاری سی کہانی سنو! ✨</p>
     </div>
 
-    <div class="jokes-container">
-        <div class="joke-card" style="animation-delay: 0.2s;">
-            <span class="emoji-float">📺🌊</span>
+    <div class="story-container">
+        
+        <div class="story-card" style="animation-delay: 0.2s;">
+            <span class="emoji-float">📞🤫❤️</span>
             <p class="urdu-text">
-                ایک شخص اپنا رنگین ٹی وی اور وی سی آر اٹھائے سمندر کی طرف جا رہا تھا۔ راستے میں اس کا دوست ملا اور اس نے حیرانی سے پو چھا۔“ کیا ماجرا ہے؟“ وہ بولا۔”خو دکشی کرنے جا رہا ہوں اور ٹی وی، وی سی آر ساتھ لے کر ڈوبوں گا۔ میری بیوی مجھ پر نہ سہی ان چیزوں کی محرومی کا تو ماتم کرے گی۔“ 😂
+                خاوند نے اپنی ناراض بیوی کو میکے فون کیا اور کہا: "میں تمہارے بغیر نہیں رہ سکتا، جھگڑا ختم کرو تم مجھے معاف کر دو اور میں تمہیں معاف کرتا ہوں، گھر واپس آجاؤ۔" 
             </p>
         </div>
 
-        <div class="joke-card" style="animation-delay: 0.4s;">
-            <span class="emoji-float">🐒✈️</span>
+        <div class="story-card" style="animation-delay: 0.4s;">
+            <span class="emoji-float">🥛🧐👩</span>
             <p class="urdu-text">
-                جہاز کے حادثے میں سب مرگئے، بس ایک بندر بچا۔ تفتیشی بورڈ نے اشاروں کے ماہر سے بندر سے پوچھا: "حادثہ کب ہوا؟" بندر نے کلائی دکھائی اور 10 انگلیاں کھڑی کیں (رات 10 بجے)۔ پوچھا: "مسافر کیا کر رہے تھے؟" بندر نے سونے کا اشارہ کیا۔ پوچھا: "پائلٹ کیا کر رہا تھا؟" بندر نے پھر سونے کا اشارہ کیا۔ آخر میں پوچھا: "جب سب سو رہے تھے تو تم کیا کر رہے تھے؟" بندر نے ہاتھ گھماتے ہوئے اشارہ کیا: "میں جہاز چلا رہا تھا۔" 🤣
+                بیوی نے خاموشی سے سنا اور کہا: "ذرا جا کر کچن سے ایک گلاس تو اٹھا لاؤ....." <br>
+                مرد نے کہا: "ہر چند کہ اس بات کا میری التجا سے کوئی تعلق نہیں مگر پھر بھی میں تمہاری خوشی کیلئے گلاس لے کر آتا ہوں..... ایک منٹ رکو ابھی لایا۔"
             </p>
         </div>
 
-        <div class="joke-card" style="animation-delay: 0.6s;">
-            <span class="emoji-float">🏎️🧔</span>
+        <div class="story-card" style="animation-delay: 0.6s;">
+            <span class="emoji-float">🪟🏃‍♂️💨</span>
             <p class="urdu-text">
-                پرنام سنگھ کی کار پہلوان کی سائیکل سے ٹکرا گئی۔ پہلوان نے پرنام سنگھ کو خوب پیٹا اور پھر غصے میں کار توڑنے لگا۔ اس نے زمین پر لکیر کھینچی اور کہا: "جے توں لکیر ٹپی تے میں تینوں بھن دیاں گا۔" جب پہلوان نے کار کا بسکٹ بنا دیا تو دیکھا پرنام سنگھ ہنس رہا ہے۔ پہلوان نے پوچھا: "کیوں ہنس رہے ہو؟" پرنام سنگھ بولا: "پہلوان جی! جدوں تسی میری کار بھن رہے سو، میں ست واری لکیر ٹپی، تہانوں پتہ ای نئیں لگا۔" 😝
+                گلاس لا کر اس نے پوچھا: "اب اس گلاس کا کیا کروں......؟؟"<br>
+                بیوی نے کہا: "اسے کھڑکی سے باہر پھینک دو....." شوہر نے تعمیل کی.....
             </p>
         </div>
 
-        <div class="joke-card" style="animation-delay: 0.8s;">
-            <span class="emoji-float">😭📞</span>
+        <div class="story-card" style="animation-delay: 0.8s;">
+            <span class="emoji-float">🧩🤔🤨</span>
             <p class="urdu-text">
-                پرنام سنگھ رو رہا تھا، دوست نے پوچھا کیوں رو رہے ہو؟ بولا: "میری ماں مر گئی اے"۔ دو دن بعد پھر رو رہا تھا، دوست نے وجہ پوچھی تو بولا: "آج میرے وڈے بھرا دا فون آیا سی... اوہدی ماں وی مر گئی اے... آج اوہدے غم وچ رو رہا واں!" 🤡
+                پھر بیوی نے فلسفیانہ انداز میں کہا: "کیا تم اس گلاس کو دوبارہ سے ویسے بنا سکتے ہو جیسے اسے کچن سے اٹھا کر لائے تھے.....؟؟"
             </p>
         </div>
 
-        <div class="joke-card" style="animation-delay: 1s;">
-            <span class="emoji-float">👵👦</span>
+        <div class="story-card" style="animation-delay: 1s;">
+            <span class="emoji-float">🥤🤣💃✨</span>
             <p class="urdu-text">
-                بیٹا ماں سے: "بے بے! اساں سدا تن بندے ای رہنا اے"۔ ماں: "پتر تیری بیوی آوے گی تے اسیں چار ہوجاں گے"۔ بیٹا: "اوہنی دیر نوں بھین دی شادی ہو جائے گی، اسیں فیر تن دے تن"۔ ماں: "پتر فیر تیرے گھر پتر ہو جائے گا، اسیں فیر چار ہو جاں گے"۔ بیٹا: "بے بے... اوس ویلے تک توں مر جانا ایں... اسیں فیر تن دے تن!" 🤣
+                شوہر نے ہنستے ہوئے کہا: "مگر میں تو پلاسٹک کا ڈسپوزیبل گلاس لایا تھا اور جان! اسے کچھ بھی نہیں ہوا....!"<br>
+                بیوی نے شرماتے ہوئے کہا: "اچھا پھر جلدی کرو، لینے آ جاؤ تب تک میں تیار ہو جاؤں......" 🙈
             </p>
         </div>
+
+        <div class="story-card note-card" style="animation-delay: 1.2s;">
+            <span class="emoji-float">⚠️💡👵</span>
+            <p class="urdu-text" style="color: #ffb6c1; font-style: italic; font-size: 19px; text-align: center;">
+                <strong>نوٹ:</strong> کانچ کا گلاس گھر میں نہ رکھیں، خاص طور پر جب بیوی فلاسفر ہو اور روٹھ کر گئی ہو! 😂🎯
+            </p>
+        </div>
+        
     </div>
 
     <div class="nav-buttons">
         <a href="portal.html" class="btn back-btn">Go Back</a>
-        <a href="jokes_page2.html" class="btn next-btn">More Jokes ✨</a>
+        <a href="jokes_page2.html" class="btn next-btn">More Stories ✨</a>
     </div>
 
     <div class="creator-footer">
