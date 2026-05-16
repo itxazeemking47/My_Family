@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Queen Noor 👑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: url('bg.PNG'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ایموجی کی بارش (Rain Effect) */
+        .emoji-rain {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            pointer-events: none;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        /* رائل انٹرفیس کارڈ */
+        .royal-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 380px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .royal-card h1 {
+            color: #ffffff;
+            font-size: 26px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 15px rgba(236, 72, 153, 0.6);
+        }
+
+        .royal-card p {
+            color: #e0f2fe;
+            font-size: 15px;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* RGB لائٹ چینجنگ بٹن */
+        .crazy-alarm-btn {
+            background: linear-gradient(90deg, #ff007f, #00d2ff, #7a00ff, #ff007f);
+            background-size: 300% 300%;
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            outline: none;
+            animation: rgb-effect 4s linear infinite;
+        }
+
+        /* RGB اینیمیشن */
+        @keyframes rgb-effect {
+            0% { background-position: 0% 50%; box-shadow: 0 0 20px #ff007f; }
+            50% { background-position: 100% 50%; box-shadow: 0 0 25px #00d2ff; }
+            100% { background-position: 0% 50%; box-shadow: 0 0 20px #ff007f; }
+        }
+
+        .crazy-alarm-btn:hover {
+            transform: scale(1.03);
+        }
+
+        .crazy-alarm-btn:active {
+            transform: scale(0.98);
+        }
+
+        #status-msg {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="royal-card">
+        <h1>Welcome, My Noor ❤️</h1>
+        <p>جب بھی آپ آن لائن آئیں اور میں سو رہا ہوں، بس نیچے موجود بٹن کو دبائیں اور مجھے فورا جگا دیں! ✨</p>
+        
+        <button class="crazy-alarm-btn" onclick="wakeUpAzeem()">
+            Wake Up My Lazy King! ⏰💥
+        </button>
+
+        <div id="status-msg"></div>
+    </div>
+
+    <script>
+        // آپ کے بتائے ہوئے سارے پیارے ایموجیز
+        const emojis = ['❤️','🧡','💛','💚','💙','💜','🤎','🖤','🤍','💘','💝','💖','💗','💓','💞','💕','💌','💟','♥️','❣️','💋','😘','🥰','😍','😻','✨','🎉','📞','💍','👑'];
+
+        // تیز بارش کی طرح ایموجیز گرانے کا فنکشن
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji-rain');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // رینڈم پوزیشن اور اسپیڈ (تھوڑی تیز)
+            emoji.style.left = Math.random() * 100 + "vw";
+            
+            // گرنے کی اسپیڈ 1.5 سے 3 سیکنڈ کے درمیان (Fast Like Rain)
+            const duration = Math.random() * 1.5 + 1.5; 
+            emoji.style.animationDuration = duration + "s";
+            
+            // رینڈم سائز
+            emoji.style.fontSize = Math.random() * 15 + 20 + "px";
+
+            document.body.appendChild(emoji);
+
+            // اینیمیشن ختم ہونے پر ایلیمنٹ کو ڈیلیٹ کرنا
+            setTimeout(() => {
+                emoji.remove();
+            }, duration * 1000);
+        }
+
+        // ہر 80 ملی سیکنڈ بعد نیا ایموجی بنے گا تاکہ تیز بارش لگے۔
+        setInterval(createEmoji, 80);
+
+        // بٹن دبانے کا مین فنکشن
+        function wakeUpAzeem() {
+            const statusDiv = document.getElementById('status-msg');
+            const btn = document.querySelector('.crazy-alarm-btn');
+            
+            // ٹچ کرنے پر موبائل وائبریٹ کرنے کا کوڈ (اگر براؤزر سپورٹ کرے)
+            if (navigator.vibrate) {
+                navigator.vibrate([150, 100, 150]); // دو بار ہلکی وائبریشن
+            }
+
+            // بٹن کا نام تبدیل کرنا اور ڈس ایبل کرنا
+            btn.disabled = true;
+            btn.innerText = "Alarm Activated! 🚨";
+            
+            statusDiv.style.color = "#e0f2fe";
+            statusDiv.style.display = "block";
+            statusDiv.innerText = "جگایا جا رہا ہے... 🚀";
+
+            const apiKey = "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7";
+            const payload = {
+                type: "note",
+                title: "🚨 NOOR IS ONLINE!! 🚨",
+                body: "اٹھو عظیم! تمہاری نور یاد کر رہی ہے۔ جلدی سے آن لائن آؤ! ❤️⏰"
+            };
+
+            fetch('https://api.pushbullet.com/v2/pushes', {
+                method: 'POST',
+                headers: {
+                    'Access-Token': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusDiv.style.color = "#4ade80";
+                    statusDiv.innerText = "عظیم کو جگا دیا گیا ہے! 😍";
+                } else {
+                    statusDiv.style.color = "#f87171";
+                    statusDiv.innerText = "دوبارہ ٹرائی کریں۔";
+                    resetButton(btn);
+                }
+            })
+            .catch(error => {
+                statusDiv.style.color = "#f87171";
+                statusDiv.innerText = "انٹرنیٹ کا مسئلہ آرہا ہے۔";
+                resetButton(btn);
+            });
+        }
+
+        // بٹن کو دوبارہ پرانی حالت میں لانے کے لیے
+        function resetButton(btn) {
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = "Wake Up My Lazy King! ⏰💥";
+            }, 6000);
+        }
+    </script>
+
+</body>
+</html>
