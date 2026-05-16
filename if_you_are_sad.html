@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suno meri Pagli... Ek Kahani Suno! 🧸</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&family=Noto+Nastaliq+Urdu:wght@400&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -16,12 +16,12 @@
 
         html {
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* موبائل پر بہترین اور اسموتھ اسکرولنگ کے لیے */
+            -webkit-overflow-scrolling: touch; /* Forces ultra-smooth momentum scrolling on iOS/Mobile */
         }
 
         body {
             min-height: 100vh;
-            background: #000;
+            background: #050505;
             font-family: 'Lexend', sans-serif;
             color: white;
             display: flex;
@@ -29,27 +29,53 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            will-change: transform;
-            transform: translate3d(0, 0, 0); /* ہارڈ ویئر ایکسلریشن تاکہ پیج اٹکے نہیں */
+            /* Hardware acceleration to prevent stutter */
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
-        /* Luxury Background - اس کو آپٹمائز کیا ہے تاکہ اسکرول لیگ نہ ہو */
+        /* Luxury Background Layer - Fixed to prevent redraw lag while scrolling */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.88)), url('bg.PNG');
+            background: linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.94)), url('bg.PNG');
             background-size: cover;
             background-position: center;
+            z-index: -3;
+        }
+
+        /* Ambient Glow Effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255,211,107,0.1) 0%, transparent 70%);
             z-index: -2;
-            will-change: transform;
+            pointer-events: none;
+        }
+
+        /* Cinematic Particles Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
         }
 
         .header {
             margin-top: 50px;
             text-align: center;
             padding: 20px;
-            animation: fadeInDown 1.5s ease;
+            animation: fadeInDown 1.2s ease-out;
+            z-index: 2;
         }
 
         h1 {
@@ -57,7 +83,7 @@
             font-style: italic;
             font-size: 38px;
             color: #ffd36b;
-            text-shadow: 0 0 20px rgba(255,211,107,0.4);
+            text-shadow: 0 0 20px rgba(255,211,107,0.3);
             margin-bottom: 10px;
         }
 
@@ -76,37 +102,41 @@
             flex-direction: column;
             gap: 25px;
             margin-bottom: 40px;
+            z-index: 2;
         }
 
-        /* Story Card Styling - Backdrop filter کو آپٹمائز کیا ہے تاکہ اسکرولنگ مکھن چلے */
+        /* Story Card Styling - Removed backdrop-filter to guarantee 60fps lag-free scrolling */
         .story-card {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(18, 18, 18, 0.92); 
             border-right: 5px solid #ffd36b;
+            border-left: 1px solid rgba(255, 211, 107, 0.08);
+            border-top: 1px solid rgba(255, 211, 107, 0.08);
+            border-bottom: 1px solid rgba(255, 211, 107, 0.08);
             border-radius: 20px;
             padding: 30px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-            animation: slideIn 1s ease both;
-            will-change: transform;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, background 0.3s;
+            animation: slideIn 0.8s ease-out both;
+            will-change: transform; /* Prepares GPU for fast hover animations */
         }
 
         .story-card:hover {
-            transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            background: rgba(255, 211, 107, 0.02);
             border-right-color: #ff4d88;
         }
 
-        /* نوٹ کارڈ کے لیے اسپیشل اسٹائل */
+        /* Special Note Card styling */
         .story-card.note-card {
             border-right: 5px solid #ff4d88;
-            background: rgba(255, 182, 193, 0.05);
+            background: rgba(23, 18, 20, 0.95);
         }
 
+        /* Professional Urdu Font - Unbolded and Clean */
         .urdu-text {
-            font-size: 22px; /* پڑھنے میں آسانی کے لیے سائز تھوڑا بڑا کیا ہے */
-            line-height: 1.8;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 20px; 
+            line-height: 2.2; 
             color: #ffffff;
             text-align: justify;
             font-weight: 400;
@@ -116,7 +146,7 @@
             font-size: 35px;
             display: block;
             margin-bottom: 15px;
-            animation: bounce 2s infinite;
+            animation: bounce 2s infinite ease-in-out;
         }
 
         /* Navigation Buttons */
@@ -126,6 +156,7 @@
             margin-bottom: 50px;
             flex-wrap: wrap;
             justify-content: center;
+            z-index: 2;
         }
 
         .btn {
@@ -133,33 +164,35 @@
             padding: 15px 35px;
             text-decoration: none;
             border-radius: 50px;
-            transition: 0.3s;
+            transition: transform 0.2s, filter 0.2s;
             font-size: 16px;
             display: inline-block;
+            will-change: transform;
         }
 
         .next-btn {
             background: linear-gradient(135deg, #ffd36b, #ff9f1c);
             color: #000;
-            box-shadow: 0 10px 20px rgba(255,211,107,0.2);
+            box-shadow: 0 10px 20px rgba(255,211,107,0.15);
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             filter: brightness(1.1);
         }
 
-        /* Creator Footer */
+        /* Creator Footer Styling */
         .creator-footer {
             margin-bottom: 40px;
             text-align: center;
             opacity: 0.8;
+            z-index: 2;
         }
 
         .creator-text {
@@ -175,26 +208,63 @@
             font-size: 18px;
             display: block;
             margin-top: 5px;
+            text-shadow: 0 0 15px rgba(255,211,107,0.3);
+        }
+
+        /* Interactive Click/Touch Heart Bubbles Style */
+        .click-heart {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            animation: floatUpAndFade 0.8s ease-out forwards;
+            z-index: 9999;
+            user-select: none;
+            will-change: transform, opacity;
+        }
+
+        /* Falling Emojis Style Behind Content - Optimized */
+        .emoji-particle {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: -1; 
+            user-select: none;
+            will-change: transform;
+            animation: fall linear forwards;
         }
 
         /* Animations */
+        @keyframes floatUpAndFade {
+            0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+            100% { transform: translate(-50%, -120px) scale(1.2); opacity: 0; }
+        }
+
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(50px); }
+            from { opacity: 0; transform: translateX(30px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
+
+    <canvas id="particle-canvas"></canvas>
 
     <div class="header">
         <h1>Suno meri Pagal... 🧸</h1>
@@ -203,14 +273,14 @@
 
     <div class="story-container">
         
-        <div class="story-card" style="animation-delay: 0.2s;">
+        <div class="story-card" style="animation-delay: 0.1s;">
             <span class="emoji-float">📞🤫❤️</span>
             <p class="urdu-text">
                 خاوند نے اپنی ناراض بیوی کو میکے فون کیا اور کہا: "میں تمہارے بغیر نہیں رہ سکتا، جھگڑا ختم کرو تم مجھے معاف کر دو اور میں تمہیں معاف کرتا ہوں، گھر واپس آجاؤ۔" 
             </p>
         </div>
 
-        <div class="story-card" style="animation-delay: 0.4s;">
+        <div class="story-card" style="animation-delay: 0.2s;">
             <span class="emoji-float">🥛🧐👩</span>
             <p class="urdu-text">
                 بیوی نے خاموشی سے سنا اور کہا: "ذرا جا کر کچن سے ایک گلاس تو اٹھا لاؤ....." <br>
@@ -218,7 +288,7 @@
             </p>
         </div>
 
-        <div class="story-card" style="animation-delay: 0.6s;">
+        <div class="story-card" style="animation-delay: 0.3s;">
             <span class="emoji-float">🪟🏃‍♂️💨</span>
             <p class="urdu-text">
                 گلاس لا کر اس نے پوچھا: "اب اس گلاس کا کیا کروں......؟؟"<br>
@@ -226,14 +296,14 @@
             </p>
         </div>
 
-        <div class="story-card" style="animation-delay: 0.8s;">
+        <div class="story-card" style="animation-delay: 0.4s;">
             <span class="emoji-float">🧩🤔🤨</span>
             <p class="urdu-text">
                 پھر بیوی نے فلسفیانہ انداز میں کہا: "کیا تم اس گلاس کو دوبارہ سے ویسے بنا سکتے ہو جیسے اسے کچن سے اٹھا کر لائے تھے.....؟؟"
             </p>
         </div>
 
-        <div class="story-card" style="animation-delay: 1s;">
+        <div class="story-card" style="animation-delay: 0.5s;">
             <span class="emoji-float">🥤🤣💃✨</span>
             <p class="urdu-text">
                 شوہر نے ہنستے ہوئے کہا: "مگر میں تو پلاسٹک کا ڈسپوزیبل گلاس لایا تھا اور جان! اسے کچھ بھی نہیں ہوا....!"<br>
@@ -241,7 +311,7 @@
             </p>
         </div>
 
-        <div class="story-card note-card" style="animation-delay: 1.2s;">
+        <div class="story-card note-card" style="animation-delay: 0.6s;">
             <span class="emoji-float">⚠️💡👵</span>
             <p class="urdu-text" style="color: #ffb6c1; font-style: italic; font-size: 19px; text-align: center;">
                 <strong>نوٹ:</strong> کانچ کا گلاس گھر میں نہ رکھیں، خاص طور پر جب بیوی فلاسفر ہو اور روٹھ کر گئی ہو! 😂🎯
@@ -260,5 +330,111 @@
         <span class="creator-name">AZEEM</span>
     </div>
 
+    <script>
+        // 1. Optimized & Performance-Throttled Falling Love Emojis
+        const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
+
+        function createFallingEmoji() {
+            // Lowered max particle limit to keep scroll smooth on low-end smartphones
+            if (document.querySelectorAll('.emoji-particle').length > 15) return;
+
+            const emojiEl = document.createElement('div');
+            emojiEl.classList.add('emoji-particle');
+            
+            const randomEmoji = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+            emojiEl.innerText = randomEmoji;
+
+            const startLeft = Math.random() * 100;
+            const size = Math.random() * 12 + 15; 
+            const duration = Math.random() * 2 + 2.5; 
+            
+            emojiEl.style.left = startLeft + 'vw';
+            emojiEl.style.fontSize = size + 'px';
+            emojiEl.style.animationDuration = duration + 's';
+
+            document.body.appendChild(emojiEl);
+
+            setTimeout(() => {
+                emojiEl.remove();
+            }, duration * 1000);
+        }
+        // Increased interval to 350ms to drastically improve render frame rates
+        setInterval(createFallingEmoji, 350);
+
+        // 2. Interactive Click / Touch Heart Bubble Effect
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn')) return;
+
+            const heart = document.createElement('div');
+            heart.classList.add('click-heart');
+            heart.innerText = '💖';
+            
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 800);
+        });
+
+        // 3. Ultra-Lightweight Ambient Floating Particles (HTML5 Canvas)
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 15; // Kept low for perfect performance
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = Math.random() * 0.2 + 0.1;
+                this.speedX = Math.sin(Math.random()) * 0.1;
+                this.opacity = Math.random() * 0.3 + 0.1;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 211, 107, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
 </body>
 </html>
