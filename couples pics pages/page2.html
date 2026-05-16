@@ -385,47 +385,14 @@ body{
 </style>
 </head>
 
-<!-- RIGHT CLICK SECURITY ACTIVE -->
 <body oncontextmenu="return false;">
 
 <div class="bg-fixed"></div>
 
-<!-- =========================
-   HERO
-========================= -->
-
-<section class="hero">
-
-    <div class="hero-box">
-
-        <div class="top-tag">
-            ✨ OUR FOREVER MEMORIES ✨
-        </div>
-
-        <h1 class="hero-title">
-            Noor ❤️ Azeem
-        </h1>
-
-        <p class="hero-sub">
-            Kuch tasveerein sirf tasveerein nahi hoti...<br>
-            woh poori zindagi ki feelings hoti hain 💖
-        </p>
-
-    </div>
-
-</section>
-
-<!-- =========================
-   STORY SECTION
-========================= -->
-
-<div class="story-container">
-
-    <!-- NEW IMAGE 1 -->
-    <div class="story-block">
+<div class="story-block">
 
         <div class="picture-card">
-            <img src="1.png">
+            <img src="couples pics/1.png">
         </div>
 
         <p class="quote-poetry">
@@ -436,11 +403,10 @@ body{
 
     </div>
 
-    <!-- SHIFTED FROM HOME -->
     <div class="story-block">
 
         <div class="picture-card">
-            <img src="WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg">
         </div>
 
         <p class="quote-poetry">
@@ -452,12 +418,11 @@ body{
 
     </div>
 
-  
-    <!-- NEW IMAGE 3 -->
+   
     <div class="story-block">
 
         <div class="picture-card">
-            <img src="3.png">
+            <img src="couples pics/3.png">
         </div>
 
         <p class="quote-poetry">
@@ -468,11 +433,10 @@ body{
 
     </div>
 
-    <!-- SHIFTED -->
     <div class="story-block">
 
         <div class="picture-card">
-            <img src="WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg">
         </div>
 
         <p class="quote-poetry">
@@ -484,11 +448,10 @@ body{
 
     </div>
 
-    <!-- NEW IMAGE 4 -->
     <div class="story-block">
 
         <div class="picture-card">
-            <img src="4.png">
+            <img src="couples pics/4.png">
         </div>
 
         <p class="quote-poetry">
@@ -500,120 +463,3 @@ body{
     </div>
 
 </div>
-
-<!-- =========================
-   FOOTER
-========================= -->
-
-<footer class="footer">
-
-    <p class="footer-text">
-        CREATED WITH LOVE BY
-    </p>
-
-    <h1 class="footer-name">
-        ✨ AZEEM ✨
-    </h1>
-
-    <p class="footer-love">
-        Forever Yours ❤️
-    </p>
-
-</footer>
-
-<script>
-
-/* ========================================================
-   1. GATEWAY PROTECTION & INSPECT KEYBOARD DISABLE
-   ======================================================== */
-if (sessionStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "password.html";
-} else {
-    document.body.style.display = "block";
-}
-
-// Disable Inspect Element Key Shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
-document.onkeydown = function(e) {
-    if (
-        e.keyCode == 123 || 
-        (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || 
-        (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
-    ) {
-        return false;
-    }
-}
-
-/* Reveal Animation */
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-            entry.target.classList.add('active');
-        }
-
-    });
-
-},{threshold:0.15});
-
-document.querySelectorAll('.story-block')
-.forEach(block=>observer.observe(block));
-
-/* Floating Hearts */
-
-setInterval(()=>{
-
-    const heart=document.createElement('div');
-
-    heart.classList.add('heart');
-
-    heart.innerHTML='❤';
-
-    heart.style.left=Math.random()*100+'vw';
-
-    heart.style.fontSize=
-    (Math.random()*20+10)+'px';
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },7000);
-
-},500);
-
-/* LOVE BUBBLES */
-
-document.addEventListener('click',function(e){
-
-    for(let i=0;i<10;i++){
-
-        const bubble=document.createElement('span');
-
-        bubble.classList.add('love-bubble');
-
-        bubble.innerHTML=
-        ['💖','✨','❤️','💫'][Math.floor(Math.random()*4)];
-
-        bubble.style.left=e.clientX+'px';
-
-        bubble.style.top=e.clientY+'px';
-
-        bubble.style.fontSize=
-        (Math.random()*20+15)+'px';
-
-        document.body.appendChild(bubble);
-
-        setTimeout(()=>{
-            bubble.remove();
-        },2000);
-    }
-
-});
-
-</script>
-
-</body>
-           </html>
-           
