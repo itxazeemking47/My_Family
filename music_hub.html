@@ -15,6 +15,11 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* For ultra-smooth mobile scrolling */
+        }
+
         body {
             min-height: 100vh;
             background: #050505;
@@ -25,9 +30,12 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
+            /* Hardware acceleration to prevent text/element stutter while scrolling */
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
         }
 
-        /* Luxury Royal Background */
+        /* Luxury Royal Background - Optimized to prevent scroll lag */
         body::before {
             content: "";
             position: fixed;
@@ -36,6 +44,7 @@
             background-size: cover;
             background-position: center;
             z-index: -3;
+            will-change: transform;
         }
 
         /* Golden Soft Glow */
@@ -93,7 +102,7 @@
         /* Royal Playlist Container */
         .playlist-container {
             width: 95%;
-            max-width: 500px; /* Adjusted to perfectly embrace portrait blocks */
+            max-width: 500px; 
             display: flex;
             flex-direction: column;
             gap: 35px;
@@ -101,23 +110,24 @@
             z-index: 2;
         }
 
-        /* Modified to support block layout for portrait view */
+        /* Song Card - Optimized backdrop blur and added will-change */
         .song-card {
-            background: rgba(15, 15, 15, 0.65);
+            background: rgba(15, 15, 15, 0.75);
             border: 1px solid rgba(255, 211, 107, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px); /* Reduced from 20px to fix GPU lagging while scrolling */
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 25px;
             padding: 24px;
             display: flex;
-            flex-direction: column; /* Aligns elements vertically */
+            flex-direction: column; 
             gap: 20px;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s, box-shadow 0.4s, background 0.4s;
             animation: fadeRight 1s ease both;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
             width: 100%;
+            will-change: transform, border-color;
         }
 
         .song-card:hover {
@@ -143,8 +153,8 @@
         /* Massive Portrait 9:16 Aspect Ratio Thumbnail Styling */
         .thumbnail-wrapper {
             position: relative;
-            width: 100%; /* Spans full card width */
-            aspect-ratio: 9 / 16; /* Enforces absolute portrait scaling */
+            width: 100%; 
+            aspect-ratio: 9 / 16; 
             overflow: hidden;
             border-radius: 18px;
             border: 2px solid rgba(255, 211, 107, 0.25);
@@ -174,7 +184,7 @@
 
         .song-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 24px; /* Increased font size */
+            font-size: 24px; 
             color: #ffffff;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
@@ -216,7 +226,7 @@
             gap: 3px;
             height: 20px;
             position: absolute;
-            bottom: 85px; /* Repositioned elegantly above the tracking bar */
+            bottom: 85px; 
             right: 25px;
             opacity: 0;
             transition: opacity 0.4s;
@@ -261,6 +271,8 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             z-index: 2;
+            display: inline-block;
+            text-align: center;
         }
 
         .next-page-btn:hover {
@@ -305,6 +317,7 @@
             pointer-events: none;
             z-index: -1; 
             user-select: none;
+            will-change: transform; /* Boosts animation performance on mobile */
             animation: fall linear forwards;
         }
 
@@ -328,7 +341,7 @@
 
     <div class="playlist-container">
         <!-- Song 1 (Sahiba.mp3) -->
-       <div class="song-card" style="animation-delay: 0.2s;">
+        <div class="song-card" style="animation-delay: 0.2s;">
             <div class="thumbnail-wrapper">
                 <img src="thumbnail1.png" alt="Track 1" class="thumbnail">
             </div>
@@ -407,11 +420,11 @@
                 <div class="bar"></div>
             </div>
         </div>
-    </div>
 
-      <div class="song-card" style="animation-delay: 0.8s;">
+        <!-- Song 5 (Fixed structural closure here) -->
+        <div class="song-card" style="animation-delay: 1.0s;">
             <div class="thumbnail-wrapper">
-                <img src="thumbnail4.png" alt="Track 4" class="thumbnail">
+                <img src="thumbnail4.png" alt="Track 5" class="thumbnail">
             </div>
             <div class="song-info">
                 <p class="song-title">East Side Flow🖤</p>
@@ -428,6 +441,7 @@
             </div>
         </div>
     </div>
+
     <a href="music_hub_page2.html" class="next-page-btn">More Memories ✨</a>
 
     <!-- Attractive Premium Attribution Footer -->
@@ -455,10 +469,13 @@
             currentCard.classList.remove('playing');
         }
 
-        // 2. Fast-Falling Love Emojis Feature (Behind Content Layers)
+        // 2. Optimized Falling Love Emojis Feature
         const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
 
         function createFallingEmoji() {
+            // Screen size aur scroll load ko dekhte hue background particles limit kiye hain
+            if (document.querySelectorAll('.emoji-particle').length > 25) return;
+
             const emojiEl = document.createElement('div');
             emojiEl.classList.add('emoji-particle');
             
@@ -466,8 +483,8 @@
             emojiEl.innerText = randomEmoji;
 
             const startLeft = Math.random() * 100;
-            const size = Math.random() * 16 + 18; // Slightly enhanced size for visual premium vibe
-            const duration = Math.random() * 2 + 1.5; // Significantly faster falling speed (1.5s to 3.5s)
+            const size = Math.random() * 14 + 16; 
+            const duration = Math.random() * 2.5 + 2; // Smooth out speed to lower frame gaps
             
             emojiEl.style.left = startLeft + 'vw';
             emojiEl.style.fontSize = size + 'px';
@@ -479,15 +496,15 @@
                 emojiEl.remove();
             }, duration * 1000);
         }
-        // Increased emission frequency for denser and faster appearance
-        setInterval(createFallingEmoji, 150);
+        // Interval increased slightly to 200ms to preserve frame-rates during active scroll
+        setInterval(createFallingEmoji, 200);
 
         // 3. Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
 
         let particlesArray = [];
-        const numberOfParticles = 35;
+        const numberOfParticles = 25; // Adjusted down slightly for top tier layout fluidness
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
@@ -540,5 +557,4 @@
         animateParticles();
     </script>
 </body>
-                </html>
-                    
+</html>
