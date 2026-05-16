@@ -328,7 +328,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <canvas id="particle-canvas"></canvas>
 
@@ -441,7 +441,31 @@
     </div>
 
     <script>
-        // 1. Interactive Music Control (Pulse and Equalizer toggle)
+        // --- STRICT PRIVACY & SECURITY LOCKS ---
+        
+        // 1. Direct Link Access Check
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            window.location.replace("password.html");
+        }
+
+        // 2. Tab Change / Minimize Lock (Auto Log Out)
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                sessionStorage.removeItem("isLoggedIn"); // Session clear kiya
+                window.location.replace("password.html"); // Wapas login screen par bheja
+            }
+        });
+
+        // 3. Disable F12, Inspect Element & Shortcuts
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) || (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))) {
+                return false;
+            }
+        };
+
+        // --- ORIGINAL MUSIC & ANIMATION LOGIC ---
+
+        // Interactive Music Control (Pulse and Equalizer toggle)
         function playTrack(audioElement) {
             const audios = document.querySelectorAll('audio');
             audios.forEach(audio => {
@@ -460,11 +484,10 @@
             currentCard.classList.remove('playing');
         }
 
-        // 2. Optimized Falling Love Emojis Feature
+        // Optimized Falling Love Emojis Feature
         const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
 
         function createFallingEmoji() {
-            // Screen size aur scroll load ko dekhte hue background particles limit kiye hain
             if (document.querySelectorAll('.emoji-particle').length > 25) return;
 
             const emojiEl = document.createElement('div');
@@ -475,7 +498,7 @@
 
             const startLeft = Math.random() * 100;
             const size = Math.random() * 14 + 16; 
-            const duration = Math.random() * 2.5 + 2; // Smooth out speed to lower frame gaps
+            const duration = Math.random() * 2.5 + 2; 
             
             emojiEl.style.left = startLeft + 'vw';
             emojiEl.style.fontSize = size + 'px';
@@ -487,15 +510,14 @@
                 emojiEl.remove();
             }, duration * 1000);
         }
-        // Interval increased slightly to 200ms to preserve frame-rates during active scroll
         setInterval(createFallingEmoji, 200);
 
-        // 3. Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
+        // Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
 
         let particlesArray = [];
-        const numberOfParticles = 25; // Adjusted down slightly for top tier layout fluidness
+        const numberOfParticles = 25; 
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
@@ -548,5 +570,5 @@
         animateParticles();
     </script>
 </body>
-    </html>
+                </html>
     
