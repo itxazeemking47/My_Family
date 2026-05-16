@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Royal Love Portal 💖</title>
 
-  <!-- Security Check: Agar koi direct link khole to wapis bhej do -->
   <script>
     if (sessionStorage.getItem("accessGranted") !== "true") {
         window.location.replace("index.html");
     }
   </script>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
@@ -140,6 +138,18 @@
       background:#1a1a1a;
     }
 
+    /* نیا بنائی گئی خصوصی تھیم والا بٹن */
+    .btn-hubby {
+      background: linear-gradient(45deg, #ff4d88, #ec4899);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+    }
+
+    .btn-hubby:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);
+    }
+
     .heart{
       position:absolute;
       color:#ff4d88;
@@ -179,10 +189,7 @@
   </style>
 </head>
 
-<body oncontextmenu="return false;"> <!-- Right Click Blocked -->
-
-<!-- Floating Hearts Background -->
-<div class="heart" style="left:10%; font-size:22px;">❤</div>
+<body oncontextmenu="return false;"> <div class="heart" style="left:10%; font-size:22px;">❤</div>
 <div class="heart" style="left:30%; animation-delay:2s;">❤</div>
 <div class="heart" style="left:50%; animation-delay:1s; font-size:20px;">❤</div>
 <div class="heart" style="left:70%; animation-delay:3s;">❤</div>
@@ -198,17 +205,20 @@
   </div>
 
   <div class="buttons">
-    <!-- Updated Link from home.html to password.html -->
     <a href="couples pics pages/password.html" class="btn btn-gold">
       Our coupeles Pics 💙
     </a>
 
    <a href="jokes pages/if_you_are_sad.html" class="btn btn-sad">
-  Agar mod Kharab ho to 🤗
-</a>
+      Agar mod Kharab ho to 🤗
+    </a>
 
     <a href="music hub/password.html" class="btn btn-music">
       Music Hub 😘🎼🎶
+    </a>
+
+    <a href="bell.html" class="btn btn-hubby">
+      wake your hubby🥰
     </a>
   </div>
 </div>
