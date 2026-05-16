@@ -33,7 +33,6 @@
             backface-visibility: hidden;
         }
 
-        /* Luxury Background Layer - Lag Free */
         body::before {
             content: "";
             position: fixed;
@@ -44,7 +43,6 @@
             z-index: -3;
         }
 
-        /* Ambient Glow Effect */
         body::after {
             content: "";
             position: fixed;
@@ -58,7 +56,6 @@
             pointer-events: none;
         }
 
-        /* Cinematic Particles Canvas */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -93,7 +90,6 @@
             margin-bottom: 40px;
         }
 
-        /* Story Container */
         .story-container {
             width: 90%;
             max-width: 650px;
@@ -104,7 +100,6 @@
             z-index: 2;
         }
 
-        /* Story Card Styling - Optimized for Smooth Scrolling */
         .story-card {
             background: rgba(18, 18, 18, 0.92); 
             border-right: 5px solid #ffb6c1;
@@ -125,7 +120,6 @@
             border-right-color: #ffd36b;
         }
 
-        /* Urdu Font & Text Styling */
         .urdu-text {
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 20px; 
@@ -142,7 +136,7 @@
             animation: bounce 2s infinite ease-in-out;
         }
 
-        /* Navigation Buttons */
+        /* --- Unified Navigation Buttons --- */
         .nav-buttons {
             display: flex;
             gap: 15px;
@@ -164,9 +158,9 @@
         }
 
         .next-btn {
-            background: linear-gradient(135deg, #ffb6c1, #ff4d88);
-            color: #fff;
-            box-shadow: 0 10px 20px rgba(255,77,136,0.15);
+            background: linear-gradient(135deg, #ffd36b, #ff9f1c);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255,211,107,0.15);
         }
 
         .back-btn {
@@ -180,7 +174,6 @@
             filter: brightness(1.1);
         }
 
-        /* Creator Footer Styling */
         .creator-footer {
             margin-bottom: 40px;
             text-align: center;
@@ -204,7 +197,6 @@
             text-shadow: 0 0 15px rgba(255,211,107,0.3);
         }
 
-        /* Interactive Click Effects */
         .click-heart {
             position: absolute;
             pointer-events: none;
@@ -225,7 +217,6 @@
             animation: fall linear forwards;
         }
 
-        /* Animations */
         @keyframes floatUpAndFade {
             0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
             100% { transform: translate(-50%, -120px) scale(1.2); opacity: 0; }
@@ -324,8 +315,8 @@
         
     </div>
 
-   <div class="nav-buttons">
-        <a href="if_uoy_are_sad.html" class="btn back-btn">Previous Page</a>
+    <div class="nav-buttons">
+        <a href="if_you_are_sad.html" class="btn back-btn">Previous Page</a>
         <a href="jokes_page3.html" class="btn next-btn">Next Page 🧸✨</a>
     </div>
 
@@ -335,7 +326,6 @@
     </div>
 
     <script>
-        // Performance-Throttled Falling Emojis
         const loveEmojis = ['✨','🎈','🎓','💖','💗','🌸','💫','⭐','😂','🔥'];
 
         function createFallingEmoji() {
@@ -363,7 +353,6 @@
         }
         setInterval(createFallingEmoji, 400);
 
-        // Click Heart Effect
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn')) return;
 
@@ -381,7 +370,6 @@
             }, 800);
         });
 
-        // Light Canvas Particles
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -439,4 +427,5 @@
         animateParticles();
     </script>
 </body>
-</html>
+                </html>
+    
