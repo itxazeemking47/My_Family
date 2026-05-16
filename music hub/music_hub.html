@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Symphony 🎼 | Our Love Tracks</title>
+
+    <!-- Consistent Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* For ultra-smooth mobile scrolling */
+        }
+
+        body {
+            min-height: 100vh;
+            background: #050505;
+            font-family: 'Lexend', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            /* Hardware acceleration to prevent text/element stutter while scrolling */
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+        }
+
+        /* Luxury Royal Background - Optimized to prevent scroll lag */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.92)), url('bg.PNG'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+            will-change: transform;
+        }
+
+        /* Golden Soft Glow */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,211,107,0.12) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Cinematic Particles Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .header {
+            margin-top: 60px;
+            text-align: center;
+            animation: fadeInDown 1.5s ease;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 42px;
+            color: #ffd36b;
+            text-shadow: 0 0 30px rgba(255,211,107,0.4);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            color: #ffb6c1;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(255,182,193,0.3);
+        }
+
+        /* Royal Playlist Container */
+        .playlist-container {
+            width: 95%;
+            max-width: 500px; 
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-bottom: 50px;
+            z-index: 2;
+        }
+
+        /* Song Card - Optimized backdrop blur and added will-change */
+        .song-card {
+            background: rgba(15, 15, 15, 0.75);
+            border: 1px solid rgba(255, 211, 107, 0.15);
+            backdrop-filter: blur(8px); /* Reduced from 20px to fix GPU lagging while scrolling */
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 25px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column; 
+            gap: 20px;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s, box-shadow 0.4s, background 0.4s;
+            animation: fadeRight 1s ease both;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            will-change: transform, border-color;
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 211, 107, 0.05);
+            border-color: rgba(255, 211, 107, 0.4);
+            box-shadow: 0 20px 40px rgba(255,211,107,0.15);
+        }
+
+        /* Active Playing State */
+        .song-card.playing {
+            border-color: #ffd36b;
+            background: rgba(255, 211, 107, 0.08);
+            animation: pulseCard 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 20px rgba(255, 211, 107, 0.15); }
+            50% { box-shadow: 0 0 35px rgba(255, 211, 107, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(255, 211, 107, 0.15); }
+        }
+
+        /* Massive Portrait 9:16 Aspect Ratio Thumbnail Styling */
+        .thumbnail-wrapper {
+            position: relative;
+            width: 100%; 
+            aspect-ratio: 9 / 16; 
+            overflow: hidden;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 211, 107, 0.25);
+            transition: border-color 0.4s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+        }
+
+        .song-card.playing .thumbnail-wrapper {
+            border-color: #ffd36b;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .song-card:hover .thumbnail {
+            transform: scale(1.05);
+        }
+
+        .song-info {
+            width: 100%;
+            text-align: left;
+        }
+
+        .song-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 24px; 
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .song-card.playing .song-title {
+            color: #ffd36b;
+        }
+
+        .song-artist {
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            color: #ffb6c1;
+            opacity: 0.85;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        /* Custom Inverted Audio Styling */
+        audio {
+            width: 100%;
+            height: 40px;
+            margin-top: 5px;
+            filter: invert(0.9) hue-rotate(15deg) brightness(1.3);
+            outline: none;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        audio:hover {
+            opacity: 1;
+        }
+
+        /* Luxury Audio Wave Equalizer Visual */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+            position: absolute;
+            bottom: 85px; 
+            right: 25px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            background: rgba(0,0,0,0.6);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .song-card.playing .equalizer {
+            opacity: 1;
+        }
+
+        .bar {
+            width: 3px;
+            height: 5px;
+            background: #ffd36b;
+            border-radius: 3px;
+        }
+
+        .song-card.playing .bar:nth-child(1) { animation: bounce 0.6s ease-in-out infinite alternate; }
+        .song-card.playing .bar:nth-child(2) { animation: bounce 0.4s ease-in-out infinite alternate 0.1s; }
+        .song-card.playing .bar:nth-child(3) { animation: bounce 0.7s ease-in-out infinite alternate 0.2s; }
+        .song-card.playing .bar:nth-child(4) { animation: bounce 0.5s ease-in-out infinite alternate 0.15s; }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 22px; }
+        }
+
+        .next-page-btn {
+            font-family: 'Fredoka One', cursive;
+            padding: 16px 45px;
+            background: linear-gradient(135deg, #ffd36b, #ff9f1c);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(255,159,28,0.35);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            z-index: 2;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .next-page-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(255,159,28,0.6);
+        }
+
+        /* Attractive Signature Branding Footer */
+        .branding-footer {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            z-index: 2;
+            text-align: center;
+            transition: color 0.3s;
+        }
+        
+        .branding-footer span {
+            color: #ffd36b;
+            text-shadow: 0 0 15px rgba(255,211,107,0.6);
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Accelerated Falling Emojis Style Behind Content */
+        .emoji-particle {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: -1; 
+            user-select: none;
+            will-change: transform; /* Boosts animation performance on mobile */
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1.1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Sparks Layer -->
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="header">
+        <h1>Music Memories</h1>
+        <p class="subtitle">Only for my Shahzadi 😘</p>
+    </div>
+
+    <div class="playlist-container">
+        <!-- Song 1 (Sahiba.mp3) -->
+        <div class="song-card" style="animation-delay: 0.2s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail1.png" alt="Track 1" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">You are my "Sahiba"💖</p>
+                <p class="song-artist">Na Tarsaya karo Jana🤭</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="Sahiba.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <!-- Premium Mini Equalizer HUD -->
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="song-card" style="animation-delay: 0.4s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail 2.png" alt="Track 2" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">My Beauty Queen 💙</p>
+                <p class="song-artist">Mere liye ap duniya ke sab se haseen larki ho 🥰</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="Haseen.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- Song 3 -->
+        <div class="song-card" style="animation-delay: 0.6s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail3.png" alt="Track 3" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">Hmari Jori💚</p>
+                <p class="song-artist">hamesha salamt rahe hmari jori</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="Sohne Lagde (Official Video) Sidhu Moose Wala ft The PropheC _ Latest Punjabi Songs 2019(MP3_160K).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- Song 4 -->
+        <div class="song-card" style="animation-delay: 0.8s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail5.png" alt="Track 4" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">Hamara Safar 🧡</p>
+                <p class="song-artist">Hamari Manzil insha'llah "Qabul hey"😚</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="Safar.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- Song 5 (Fixed structural closure here) -->
+        <div class="song-card" style="animation-delay: 1.0s;">
+            <div class="thumbnail-wrapper">
+                <img src="thumbnail4.png" alt="Track 5" class="thumbnail">
+            </div>
+            <div class="song-info">
+                <p class="song-title">East Side Flow🖤</p>
+                <p class="song-artist">1 song for my motivation</p>
+                <audio controls onplay="playTrack(this)" onpause="pauseTrack(this)">
+                    <source src="East_Side_Flow.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <a href="music_hub_page2.html" class="next-page-btn">More Memories ✨</a>
+
+    <!-- Attractive Premium Attribution Footer -->
+    <div class="branding-footer">
+        made by | <span>Azeem</span> |
+    </div>
+
+    <script>
+        // 1. Interactive Music Control (Pulse and Equalizer toggle)
+        function playTrack(audioElement) {
+            const audios = document.querySelectorAll('audio');
+            audios.forEach(audio => {
+                if (audio !== audioElement) {
+                    audio.pause();
+                }
+            });
+            
+            document.querySelectorAll('.song-card').forEach(card => card.classList.remove('playing'));
+            const currentCard = audioElement.closest('.song-card');
+            currentCard.classList.add('playing');
+        }
+
+        function pauseTrack(audioElement) {
+            const currentCard = audioElement.closest('.song-card');
+            currentCard.classList.remove('playing');
+        }
+
+        // 2. Optimized Falling Love Emojis Feature
+        const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
+
+        function createFallingEmoji() {
+            // Screen size aur scroll load ko dekhte hue background particles limit kiye hain
+            if (document.querySelectorAll('.emoji-particle').length > 25) return;
+
+            const emojiEl = document.createElement('div');
+            emojiEl.classList.add('emoji-particle');
+            
+            const randomEmoji = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+            emojiEl.innerText = randomEmoji;
+
+            const startLeft = Math.random() * 100;
+            const size = Math.random() * 14 + 16; 
+            const duration = Math.random() * 2.5 + 2; // Smooth out speed to lower frame gaps
+            
+            emojiEl.style.left = startLeft + 'vw';
+            emojiEl.style.fontSize = size + 'px';
+            emojiEl.style.animationDuration = duration + 's';
+
+            document.body.appendChild(emojiEl);
+
+            setTimeout(() => {
+                emojiEl.remove();
+            }, duration * 1000);
+        }
+        // Interval increased slightly to 200ms to preserve frame-rates during active scroll
+        setInterval(createFallingEmoji, 200);
+
+        // 3. Luxury Ambient Floating Particles Overlay (HTML5 Canvas)
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 25; // Adjusted down slightly for top tier layout fluidness
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = Math.random() * 0.3 + 0.1;
+                this.speedX = Math.sin(Math.random()) * 0.15;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 211, 107, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
