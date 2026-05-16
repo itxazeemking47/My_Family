@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaan Meri... Ek Aur Baat Suno! 🧸</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&family=Noto+Nastaliq+Urdu:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #050505;
+            font-family: 'Lexend', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* Luxury Background Layer - Lag Free */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.90), rgba(0,0,0,0.95)), url('bg.PNG');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+        }
+
+        /* Ambient Glow Effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255,211,107,0.08) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Cinematic Particles Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .header {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInDown 1.2s ease-out;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 36px;
+            color: #ffd36b;
+            text-shadow: 0 0 20px rgba(255,211,107,0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #ffb6c1;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        /* Story Container */
+        .story-container {
+            width: 90%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+            z-index: 2;
+        }
+
+        /* Story Card Styling - Optimized for Smooth Scrolling */
+        .story-card {
+            background: rgba(18, 18, 18, 0.92); 
+            border-right: 5px solid #ffd36b;
+            border-left: 1px solid rgba(255, 211, 107, 0.08);
+            border-top: 1px solid rgba(255, 211, 107, 0.08);
+            border-bottom: 1px solid rgba(255, 211, 107, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s;
+            animation: slideIn 0.8s ease-out both;
+            will-change: transform;
+        }
+
+        .story-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 211, 107, 0.02);
+            border-right-color: #ff4d88;
+        }
+
+        /* Urdu Font & Text Styling */
+        .urdu-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 20px; 
+            line-height: 2.3; 
+            color: #ffffff;
+            text-align: justify;
+            font-weight: 400;
+        }
+
+        .emoji-float {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        /* Image Styling - Premium Look Set at the Bottom */
+        .story-image-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 211, 107, 0.15);
+            animation: slideIn 0.8s ease-out both;
+            margin: 5px 0;
+            will-change: transform;
+        }
+
+        .story-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .story-image-container:hover .story-image {
+            transform: scale(1.03);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .btn {
+            font-family: 'Fredoka One', cursive;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.2s, filter 0.2s;
+            font-size: 16px;
+            display: inline-block;
+            will-change: transform;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #ffd36b, #ff9f1c);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255,211,107,0.15);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+
+        /* Creator Footer Styling */
+        .creator-footer {
+            margin-bottom: 40px;
+            text-align: center;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .creator-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #ffb6c1;
+            letter-spacing: 2px;
+        }
+
+        .creator-name {
+            font-family: 'Fredoka One', cursive;
+            color: #ffd36b;
+            font-size: 18px;
+            display: block;
+            margin-top: 5px;
+            text-shadow: 0 0 15px rgba(255,211,107,0.3);
+        }
+
+        /* Interactive Click Effects */
+        .click-heart {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            animation: floatUpAndFade 0.8s ease-out forwards;
+            z-index: 9999;
+            user-select: none;
+            will-change: transform, opacity;
+        }
+
+        .emoji-particle {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: -1; 
+            user-select: none;
+            will-change: transform;
+            animation: fall linear forwards;
+        }
+
+        /* Animations */
+        @keyframes floatUpAndFade {
+            0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+            100% { transform: translate(-50%, -120px) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="header">
+        <h1>تاریخ کی ایک گہری بات... 📜🧐</h1>
+        <p class="subtitle">Jaan Meri! ایک اور سچی بات سنو... ✨</p>
+    </div>
+
+    <div class="story-container">
+        
+        <div class="story-card" style="animation-delay: 0.1s;">
+            <span class="emoji-float">🗺️🤔👑</span>
+            <p class="urdu-text">
+                آزادی یعنی 1947 سے پہلے، ہمارے اس پورے برِصغیر (پاک و ہند) میں تین باتیں یا تین سوچیں بہت زیادہ مشہور تھیں اور عروج پر تھیں۔ <br>
+                ایک سوچ **قائدِ اعظم محمد علی جناح** کی تھی، دوسری سوچ **مولانا ابوالکلام آزاد** کی تھی، اور تیسری سوچ **انگریزوں** کی تھی!
+            </p>
+        </div>
+
+        <div class="story-card" style="animation-delay: 0.2s;">
+            <span class="emoji-float">🇵🇦🕌🤝</span>
+            <p class="urdu-text">
+                **قائدِ اعظم محمد علی جناح** کہتے تھے کہ تمام مسلمانوں کو الگ ملک (پاکستان) کی مانگ کا ساتھ دینا چاہیے۔ ان کا ماننا تھا کہ چونکہ انڈیا ایک ہندو اکثریت والا ملک بن جائے گا، تو وہاں مسلمانوں کا تو ذکر ہی کیا، سکھوں کو بھی اپنے حقوق بچانے کے لیے ہر وقت جھک کر رہنا پڑے گا۔ ان کا ایک بہت مشہور جملہ ہے:<br>
+                <span style="color: #ffd36b; font-style: italic; display: block; text-align: center; margin-top: 10px;">"جو مسلمان اور سکھ آج کانگریس کا ساتھ دے رہے ہیں، یہ ہمیشہ انڈیا میں اپنی وفاداری ہی ثابت کرتے رہیں گے۔"</span>
+            </p>
+        </div>
+
+        <div class="story-card" style="animation-delay: 0.3s;">
+            <span class="emoji-float">📚📉💔</span>
+            <p class="urdu-text">
+                دوسری طرف **مولانا ابوالکلام آزاد** کا کہنا تھا کہ جناح صاحب مذہب کے نام پر جو ملک بنانا چاہ رہے ہیں، وہاں نہ تو جمہوریت (Democracy) بچے گی اور نہ ہی معیشت (Economy)۔ جب شروع شروع کا مذہبی جوش ٹھنڈا ہو جائے گا، تو طاقتور لوگ اپنی بات ڈنڈے کے زور پر منوائیں گے۔ پاکستان میں مسلمان تو بچ جائیں گے لیکن islam نہیں بچے گا۔ انہوں نے یہ بھی پیشگوئی کی تھی کہ مشرقی پاکستان (بنگلا دیش) الگ ہو جائے گا اور اقلیتوں کے حقوق پامال ہوں گے۔
+            </p>
+        </div>
+
+        <div class="story-card" style="animation-delay: 0.4s;">
+            <span class="emoji-float">🎩🇬🇧🦁</span>
+            <p class="urdu-text">
+                اور تیسری طرف **انگریز** تھے! وہ کہتے تھے کہ برِصغیر کے لوگوں کو ابھی تمیز نہیں ہے اور یہ خود اپنی حکومت چلانے کے لائق نہیں ہیں۔ یہ آزادی کے بعد ہمیشہ آپس میں ہی لڑتے جھگڑتے رہیں گے۔ اس لیے انہیں ہمارے خلاف لڑنا بند کر دینا چاہیے، کیونکہ ہم (انگریز) انہیں ان کی اپنی حکومت سے کہیں زیادہ بہتر اور پرسکون زندگی دے سکتے ہیں!
+            </p>
+        </div>
+
+        <!-- Pic Now Successfully Placed Here at the Very Last Part -->
+        <div class="story-image-container" style="animation-delay: 0.5s;">
+            <img class="story-image" src="https://scontent.fskt5-1.fna.fbcdn.net/v/t39.30808-6/591911130_1208648934697401_4734951440481770247_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFEsIx2Yt5TOraISJQGp9yREtcgFuoQcroS1yAW6hByugtrl1X9CfK9EL7vhTebR0P3NhQYzqBBdGlmg_UUrV8T&_nc_ohc=nyWSetj_JmAQ7kNvwGDB5-7&_nc_oc=AdrZ8t-5VNNcfrsAPT1ts2LBZwYO7rQg-x1tBU0HEBV6GZ_c627Y8OJlTIiOyzQxoVo&_nc_zt=23&_nc_ht=scontent.fskt5-1.fna&_nc_gid=EeDuFJ3lz6f3kK6Sb7d1Ag&_nc_ss=7b2a8&oh=00_Af7hGxhd2PIkF73M1W0WgziOFDyUh7vCNtNxzuDIlRVz5w&oe=6A0E13C3" alt="History Image">
+        </div>
+
+        <div class="story-card" style="animation-delay: 0.6s; border-right-color: #ff4d88; background: rgba(25, 18, 20, 0.95);">
+            <span class="emoji-float">🎯👀🤯🔥</span>
+            <p class="urdu-text" style="text-align: center;">
+                اب آج کے حالات دیکھ کر بندہ سوچتا ہے کہ:<br><br>
+                اگر **انڈیا** کے حالات دیکھیں... تو لگتا ہے **جناح ٹھیک کہہ رہے تھے!** 🇮🇳<br>
+                اگر **پاکستان** کے حالات دیکھیں... تو لگتا ہے **مولانا آزاد ٹھیک کہہ رہے تھے!** 🇵🇰<br>
+                اور اگر **دونوں ملکوں** کو اکٹھا دیکھیں... تو سچ میں لگتا ہے کہ **انگریز ہی ٹھیک کہہ رہے تھے!** 🇬🇧😭🎒
+            </p>
+        </div>
+        
+    </div>
+
+    <div class="nav-buttons">
+        <a href="jokes_page2.html" class="btn back-btn">Previous Page</a>
+        <a href="portal.html" class="btn next-btn">Back to Portal ✨</a>
+    </div>
+
+    <div class="creator-footer">
+        <p class="creator-text">DESIGNED WITH LOVE BY</p>
+        <span class="creator-name">AZEEM</span>
+    </div>
+
+    <script>
+        // Performance-Throttled Falling Emojis
+        const loveEmojis = ['✨','📜','🇵🇦','🦁','👑','💫','⭐','🤔','💭'];
+
+        function createFallingEmoji() {
+            if (document.querySelectorAll('.emoji-particle').length > 12) return;
+
+            const emojiEl = document.createElement('div');
+            emojiEl.classList.add('emoji-particle');
+            
+            const randomEmoji = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+            emojiEl.innerText = randomEmoji;
+
+            const startLeft = Math.random() * 100;
+            const size = Math.random() * 10 + 15; 
+            const duration = Math.random() * 2 + 3; 
+            
+            emojiEl.style.left = startLeft + 'vw';
+            emojiEl.style.fontSize = size + 'px';
+            emojiEl.style.animationDuration = duration + 's';
+
+            document.body.appendChild(emojiEl);
+
+            setTimeout(() => {
+                emojiEl.remove();
+            }, duration * 1000);
+        }
+        setInterval(createFallingEmoji, 450);
+
+        // Click Effect
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn')) return;
+
+            const heart = document.createElement('div');
+            heart.classList.add('click-heart');
+            heart.innerText = '✨';
+            
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 800);
+        });
+
+        // Light Canvas Particles
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 12;
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.2 + 0.5;
+                this.speedY = Math.random() * 0.15 + 0.05;
+                this.speedX = Math.sin(Math.random()) * 0.1;
+                this.opacity = Math.random() * 0.2 + 0.1;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 211, 107, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
