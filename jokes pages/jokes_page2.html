@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaan Meri... Ek Aur Kahani Suno! 🧸</title>
+    <title>Jaan Meri... Ek Aur Baat Suno! 🧸</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&family=Noto+Nastaliq+Urdu:wght@400&display=swap" rel="stylesheet">
     
@@ -51,7 +51,7 @@
             transform: translateX(-50%);
             width: 100%;
             height: 350px;
-            background: radial-gradient(circle, rgba(255,182,193,0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,211,107,0.08) 0%, transparent 70%);
             z-index: -2;
             pointer-events: none;
         }
@@ -78,14 +78,14 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 36px;
-            color: #ffb6c1;
-            text-shadow: 0 0 20px rgba(255,182,193,0.3);
+            color: #ffd36b;
+            text-shadow: 0 0 20px rgba(255,211,107,0.3);
             margin-bottom: 10px;
         }
 
         .subtitle {
             font-size: 16px;
-            color: #ffd36b;
+            color: #ffb6c1;
             letter-spacing: 1px;
             margin-bottom: 40px;
         }
@@ -102,10 +102,10 @@
 
         .story-card {
             background: rgba(18, 18, 18, 0.92); 
-            border-right: 5px solid #ffb6c1;
-            border-left: 1px solid rgba(255, 182, 193, 0.08);
-            border-top: 1px solid rgba(255, 182, 193, 0.08);
-            border-bottom: 1px solid rgba(255, 182, 193, 0.08);
+            border-right: 5px solid #ffd36b;
+            border-left: 1px solid rgba(255, 211, 107, 0.08);
+            border-top: 1px solid rgba(255, 211, 107, 0.08);
+            border-bottom: 1px solid rgba(255, 211, 107, 0.08);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -116,8 +116,8 @@
 
         .story-card:hover {
             transform: translateY(-3px);
-            background: rgba(255, 182, 193, 0.02);
-            border-right-color: #ffd36b;
+            background: rgba(255, 211, 107, 0.02);
+            border-right-color: #ff4d88;
         }
 
         .urdu-text {
@@ -134,6 +134,28 @@
             display: block;
             margin-bottom: 15px;
             animation: bounce 2s infinite ease-in-out;
+        }
+
+        .story-image-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 211, 107, 0.15);
+            animation: slideIn 0.8s ease-out both;
+            margin: 5px 0;
+            will-change: transform;
+        }
+
+        .story-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .story-image-container:hover .story-image {
+            transform: scale(1.03);
         }
 
         /* --- Unified Navigation Buttons --- */
@@ -250,74 +272,61 @@
     <canvas id="particle-canvas"></canvas>
 
     <div class="header">
-        <h1>کالج کے دن بھی کیا دن تھے... 🎓</h1>
-        <p class="subtitle">Jaan Meri! ایک مجھے اپنی کہانی یاد آ گئی... 😉✨</p>
+        <h1>تاریخ کی ایک گہری بات... 📜🧐</h1>
+        <p class="subtitle">Jaan Meri! ایک اور سچی بات سنو... ✨</p>
     </div>
 
     <div class="story-container">
         
         <div class="story-card" style="animation-delay: 0.1s;">
-            <span class="emoji-float">👩‍🏫⚡😎</span>
+            <span class="emoji-float">🗺️🤔👑</span>
             <p class="urdu-text">
-                کالج لائف کا ایک سچا واقعہ ہے جس کا کلائمیکس ابھی کچھ دن پہلے ہی ہوا۔ ہمارے کالج میں <strong>"عارفہ"</strong> نام کی ایک لڑکی تھی، جو بہت زیادہ بولڈ، بے باک اور ماڈرن تھی۔ 
+                آزادی یعنی 1947 سے پہلے، ہمارے اس پورے برِصغیر (پاک و ہند) میں تین باتیں یا تین سوچیں بہت زیادہ مشہور تھیں اور عروج پر تھیں۔ <br>
+                ایک سوچ **قائدِ اعظم محمد علی جناح** کی تھی، دوسری سوچ **مولانا ابوالکلام آزاد** کی تھی، اور تیسری سوچ **انگریزوں** کی تھی!
             </p>
         </div>
 
         <div class="story-card" style="animation-delay: 0.2s;">
-            <span class="emoji-float">👨‍👦‍👦🥊💔</span>
+            <span class="emoji-float">🇵🇦🕌🤝</span>
             <p class="urdu-text">
-                کالج کا ہر دوسرا لڑکا اس کی محبت کا دم بھرتا تھا، بلکہ یوں سمجھو کہ ہر پانچویں لڑکے کی وہ آفیشل گرل فرینڈ بنی ہوئی تھی۔ سب کو اس کے چکروں کا پتہ بھی تھا اور لڑکے آپس میں لڑتے بھی تھے، لیکن وہ زبان کی اتنی تیز اور چالاک تھی کہ ایک ہی وقت میں سب کو یقین دلایا ہوا تھا کہ "تم ہی میری سچی محبت ہو!" 😂
+                **قائدِ اعظم محمد علی جناح** کہتے تھے کہ تمام مسلمانوں کو الگ ملک (پاکستان) کی مانگ کا ساتھ دینا چاہیے۔ ان کا ماننا تھا کہ چونکہ انڈیا ایک ہندو اکثریت والا ملک بن جائے گا، تو وہاں مسلمانوں کا تو ذکر ہی کیا، سکھوں کو بھی اپنے حقوق بچانے کے لیے ہر وقت جھک کر رہنا پڑے گا۔ ان کا ایک بہت مشہور جملہ hai:<br>
+                <span style="color: #ffd36b; font-style: italic; display: block; text-align: center; margin-top: 10px;">"جو مسلمان اور سکھ آج کانگریس کا ساتھ دے رہے ہیں، یہ ہمیشہ انڈیا میں اپنی وفاداری ہی ثابت کرتے رہیں گے۔"</span>
             </p>
         </div>
 
         <div class="story-card" style="animation-delay: 0.3s;">
-            <span class="emoji-float">📚🥇🤫</span>
+            <span class="emoji-float">📚📉💔</span>
             <p class="urdu-text">
-                اب باری آتی ہے میری! میں کلاس کا **ٹاپپر (Topper)** تھا، لیکن طبیعت کا ذرا صوفیانہ اور علامہ اقبال ٹائپ بندہ تھا۔ ہر وقت اپنی ہی کسی سوچ میں ڈوبا ہوا، سب سے آخری ڈیسک پر دنیا جہاں سے بے خبر چپ چاپ بیٹھا رہتا تھا۔ 😇📝
+                دوسری طرف **مولانا ابوالکلام آزاد** کا کہنا تھا کہ جناح صاحب مذہب کے نام پر جو ملک بنانا چاہ رہے ہیں، وہاں نہ تو جمہوریت (Democracy) بچے گی اور نہ ہی معیشت (Economy)۔ جب شروع شروع کا مذہبی جوش ٹھنڈا ہو جائے گا، تو طاقتور لوگ اپنی بات ڈنڈے کے زور پر منوائیں گے۔ پاکستان میں مسلمان تو بچ جائیں گے لیکن islam نہیں بچے گا۔ انہوں نے یہ بھی پیشگوئی کی تھی کہ مشرقی پاکستان (بنگلا دیش) الگ ہو جائے گا اور اقلیتوں کے حقوق پامال ہوں گے۔
             </p>
         </div>
 
         <div class="story-card" style="animation-delay: 0.4s;">
-            <span class="emoji-float">💵🩴🎤</span>
+            <span class="emoji-float">🎩🇬🇧🦁</span>
             <p class="urdu-text">
-                ایک دن وہ اچانک میرے پاس آئی اور مجھ سے تھوڑی باتیں کرنے لگی۔ اصل میں اسے کالج کے ایک تقریری مقابلے (Speech Competition) میں حصہ لینا تھا اور اس کے لیے اسے میری مدد چاہیے تھی۔ میں نے پہلے تو نخرے دکھائے، لیکن پھر ابا جی کی چپل کا خیال دل میں لاتے ہوئے، اس کے حسن سے متاثر ہوئے بغیر، پورے۔۔۔ دو سو روپے (200) میں اس کو تقریر لکھ کر دینے کا سودا پکا کر لیا! 🤑😂
+                اور تیسری طرف **انگریز** تھے! وہ کہتے تھے کہ برِصغیر کے لوگوں کو ابھی تمیز نہیں ہے اور یہ خود اپنی حکومت چلانے کے لائق نہیں ہیں۔ یہ آزادی کے بعد ہمیشہ آپس میں ہی لڑتے جھگڑتے رہیں گے۔ اس لیے انہیں ہمارے خلاف لڑنا بند کر دینا چاہیے، کیونکہ ہم (انگریز) انہیں ان کی اپنی حکومت سے کہیں زیادہ بہتر اور پرسکون زندگی دے سکتے ہیں!
             </p>
         </div>
 
-        <div class="story-card" style="animation-delay: 0.5s;">
-            <span class="emoji-float">🏆💰🎁</span>
-            <p class="urdu-text">
-                تقریر زبردست رہی اور اسے پہلا انعام (First Prize) مل گیا۔ وہ خوشی سے پھولی نہیں سما رہی تھی، بھاگتی ہوئی میرے پاس آئی۔ اس نے خوش ہو کر پچاس روپے مزید انعام کا وعدہ کیا اور میرے دو سو روپے مجھے دے دیے۔
-            </p>
+        <div class="story-image-container" style="animation-delay: 0.5s;">
+            <img class="story-image" src="https://scontent.fskt5-1.fna.fbcdn.net/v/t39.30808-6/591911130_1208648934697401_4734951440481770247_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFEsIx2Yt5TOraISJQGp9yREtcgFuoQcroS1yAW6hByugtrl1X9CfK9EL7vhTebR0P3NhQYzqBBdGlmg_UUrV8T&_nc_ohc=nyWSetj_JmAQ7kNvwGDB5-7&_nc_oc=AdrZ8t-5VNNcfrsAPT1ts2LBZwYO7rQg-x1tBU0HEBV6GZ_c627Y8OJlTIiOyzQxoVo&_nc_zt=23&_nc_ht=scontent.fskt5-1.fna&_nc_gid=EeDuFJ3lz6f3kK6Sb7d1Ag&_nc_ss=7b2a8&oh=00_Af7hGxhd2PIkF73M1W0WgziOFDyUh7vCNtNxzuDIlRVz5w&oe=6A0E13C3" alt="History Image">
         </div>
 
-        <div class="story-card" style="animation-delay: 0.6s;">
-            <span class="emoji-float">✊🤨🦖</span>
-            <p class="urdu-text">
-                پیسے دیتے ہی اس نے اپنے اسی لاپرواہ اور بولڈ انداز میں مجھے اچانک "آئی لو یو" کہہ دیا! میں تو بالکل خاموش رہا اور کوئی جواب نہیں دیا۔ میری خاموشی دیکھ کر اس نے چالاکی کی اور ہاتھ میں پکڑے ہوئے پیسے واپس کھینچ لیے! اور مجھے آرڈر دیا: "پہلے بولو آئی لو یو ٹو۔۔۔ ورنہ پیسے نہیں ملیں گے!" 😮
-            </p>
-        </div>
-
-        <div class="story-card" style="animation-delay: 0.7s;">
-            <span class="emoji-float">🤭❤️🌹</span>
-            <p class="urdu-text">
-                میں بھی اس کے اس ضدی مزاج کو اچھی طرح جانتا تھا۔ میں نے دل میں تپ کر، مگر اوپر سے ایک پیاری سی مسکراہٹ سجا کر کہہ دیا: <strong>"آئی لو یو ٹو۔۔۔ جانِ جہاں!"</strong> یہ سن کر وہ نخرے سے مسکرائی اور خوش ہو کر چلی گئی۔
-            </p>
-        </div>
-
-        <div class="story-card" style="animation-delay: 0.8s; border-right-color: #ff4d88; background: rgba(25, 18, 20, 0.95);">
-            <span class="emoji-float">🤝💥🤣</span>
-            <p class="urdu-text">
-                پھر کالج ختم ہو گیا اور ہم اپنی اپنی زندگی میں مصروف ہو گئے۔ اب طویل عرصے کے بعد، کچھ دن پہلے اچانک **اس سے میری ملاقات ہوئی**۔ میں نے جیسے ہی مروتاً "وعلیکم السلام" کہا، وہ زور سے ہنسی اور ہنستے ہوئے کہنے لگی: <br><br>
-                <span style="color: #ffd36b; font-size: 21px; display: block; text-align: center; font-style: italic;">"آپ سے زیادہ چالاک اور کمینہ انسان میں نے زندگی میں نہیں دیکھا! مجھے تو 'جانِ جہاں' کا اصل مطلب (دنیا کی جان یعنی سب کی گرل فرینڈ) آج جا کر معلوم ہوا ہے!" 🎯😭😭</span>
+        <div class="story-card" style="animation-delay: 0.6s; border-right-color: #ff4d88; background: rgba(25, 18, 20, 0.95);">
+            <span class="emoji-float">🎯👀🤯🔥</span>
+            <p class="urdu-text" style="text-align: center;">
+                اب آج کے حالات دیکھ کر بندہ سوچتا ہے کہ:<br><br>
+                اگر **انڈیا** کے حالات دیکھیں... تو لگتا ہے **جناح ٹھیک کہہ رہے تھے!** 🇮🇳<br>
+                اگر **پاکستان** کے حالات دیکھیں... تو لگتا ہے **مولانا آزاد ٹھیک کہہ رہے تھے!** 🇵🇰<br>
+                اور اگر **دونوں ملکوں** کو اکٹھا دیکھیں... تو سچ میں لگتا ہے کہ **انگریز ہی ٹھیک کہہ رہے تھے!** 🇬🇧😭🎒
             </p>
         </div>
         
     </div>
 
     <div class="nav-buttons">
-        <a href="if_you_are_sad.html" class="btn back-btn">Previous Page</a>
-        <a href="jokes_page3.html" class="btn next-btn">Next Page 🧸✨</a>
+        <a href="jokes_page2.html" class="btn back-btn">Previous Page</a>
+        <a href="portal.html" class="btn next-btn">Back to Portal ✨</a>
     </div>
 
     <div class="creator-footer">
@@ -326,7 +335,7 @@
     </div>
 
     <script>
-        const loveEmojis = ['✨','🎈','🎓','💖','💗','🌸','💫','⭐','😂','🔥'];
+        const loveEmojis = ['✨','📜','🇵🇦','🦁','👑','💫','⭐','🤔','💭'];
 
         function createFallingEmoji() {
             if (document.querySelectorAll('.emoji-particle').length > 12) return;
@@ -351,7 +360,7 @@
                 emojiEl.remove();
             }, duration * 1000);
         }
-        setInterval(createFallingEmoji, 400);
+        setInterval(createFallingEmoji, 450);
 
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn')) return;
@@ -401,7 +410,7 @@
                 }
             }
             draw() {
-                ctx.fillStyle = `rgba(255, 182, 193, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255, 211, 107, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -427,5 +436,4 @@
         animateParticles();
     </script>
 </body>
-                </html>
-    
+</html>
