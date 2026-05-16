@@ -16,7 +16,7 @@
 
         html {
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Forces ultra-smooth momentum scrolling on iOS/Mobile */
+            -webkit-overflow-scrolling: touch; 
         }
 
         body {
@@ -29,12 +29,10 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            /* Hardware acceleration to prevent stutter */
             transform: translateZ(0);
             backface-visibility: hidden;
         }
 
-        /* Luxury Background Layer - Fixed to prevent redraw lag while scrolling */
         body::before {
             content: "";
             position: fixed;
@@ -45,7 +43,6 @@
             z-index: -3;
         }
 
-        /* Ambient Glow Effect */
         body::after {
             content: "";
             position: fixed;
@@ -59,7 +56,6 @@
             pointer-events: none;
         }
 
-        /* Cinematic Particles Canvas */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -94,7 +90,6 @@
             margin-bottom: 40px;
         }
 
-        /* Story Container */
         .story-container {
             width: 90%;
             max-width: 650px;
@@ -105,7 +100,6 @@
             z-index: 2;
         }
 
-        /* Story Card Styling - Removed backdrop-filter to guarantee 60fps lag-free scrolling */
         .story-card {
             background: rgba(18, 18, 18, 0.92); 
             border-right: 5px solid #ffd36b;
@@ -117,7 +111,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, background 0.3s;
             animation: slideIn 0.8s ease-out both;
-            will-change: transform; /* Prepares GPU for fast hover animations */
+            will-change: transform; 
         }
 
         .story-card:hover {
@@ -126,13 +120,11 @@
             border-right-color: #ff4d88;
         }
 
-        /* Special Note Card styling */
         .story-card.note-card {
             border-right: 5px solid #ff4d88;
             background: rgba(23, 18, 20, 0.95);
         }
 
-        /* Professional Urdu Font - Unbolded and Clean */
         .urdu-text {
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 20px; 
@@ -149,7 +141,7 @@
             animation: bounce 2s infinite ease-in-out;
         }
 
-        /* Navigation Buttons */
+        /* --- Unified Navigation Buttons --- */
         .nav-buttons {
             display: flex;
             gap: 15px;
@@ -187,7 +179,6 @@
             filter: brightness(1.1);
         }
 
-        /* Creator Footer Styling */
         .creator-footer {
             margin-bottom: 40px;
             text-align: center;
@@ -211,7 +202,6 @@
             text-shadow: 0 0 15px rgba(255,211,107,0.3);
         }
 
-        /* Interactive Click/Touch Heart Bubbles Style */
         .click-heart {
             position: absolute;
             pointer-events: none;
@@ -222,7 +212,6 @@
             will-change: transform, opacity;
         }
 
-        /* Falling Emojis Style Behind Content - Optimized */
         .emoji-particle {
             position: fixed;
             top: -50px;
@@ -233,7 +222,6 @@
             animation: fall linear forwards;
         }
 
-        /* Animations */
         @keyframes floatUpAndFade {
             0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
             100% { transform: translate(-50%, -120px) scale(1.2); opacity: 0; }
@@ -331,11 +319,9 @@
     </div>
 
     <script>
-        // 1. Optimized & Performance-Throttled Falling Love Emojis
         const loveEmojis = ['🧡','💛','💚','💙','💜','💖','💗','💓','💞','💕','😘','🥰','♥️','✨'];
 
         function createFallingEmoji() {
-            // Lowered max particle limit to keep scroll smooth on low-end smartphones
             if (document.querySelectorAll('.emoji-particle').length > 15) return;
 
             const emojiEl = document.createElement('div');
@@ -358,10 +344,8 @@
                 emojiEl.remove();
             }, duration * 1000);
         }
-        // Increased interval to 350ms to drastically improve render frame rates
         setInterval(createFallingEmoji, 350);
 
-        // 2. Interactive Click / Touch Heart Bubble Effect
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn')) return;
 
@@ -379,12 +363,11 @@
             }, 800);
         });
 
-        // 3. Ultra-Lightweight Ambient Floating Particles (HTML5 Canvas)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
 
         let particlesArray = [];
-        const numberOfParticles = 15; // Kept low for perfect performance
+        const numberOfParticles = 15;
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
