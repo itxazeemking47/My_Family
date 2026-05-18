@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noor AI Companion</title>
+  <style>
+    :root{
+      --bg1:#0f1020;
+      --bg2:#1b1235;
+      --card:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.14);
+      --text:#f6f2ff;
+      --muted:#cbbde6;
+      --accent:#ff7ad9;
+      --accent2:#7cf3ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #40215f 0%, transparent 30%),
+        radial-gradient(circle at top right, #123a5b 0%, transparent 25%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      overflow:hidden;
+    }
+    .wrap{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      height:100vh;
+      gap:18px;
+      padding:18px;
+    }
+    .scene, .chat{
+      background:var(--card);
+      border:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .scene{
+      position:relative;
+      min-height:300px;
+    }
+    #canvas3d{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+    .hero{
+      position:absolute;
+      left:20px;
+      bottom:20px;
+      right:20px;
+      background:rgba(10,10,20,.35);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+    }
+    .hero h1{
+      margin:0 0 6px;
+      font-size:clamp(24px, 3vw, 40px);
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .chat{
+      display:flex;
+      flex-direction:column;
+    }
+    .chat-head{
+      padding:18px 18px 14px;
+      border-bottom:1px solid var(--line);
+    }
+    .chat-head h2{margin:0 0 6px}
+    .chat-head span{color:var(--muted); font-size:14px}
+    .messages{
+      flex:1;
+      padding:18px;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .msg{
+      max-width:85%;
+      padding:12px 14px;
+      border-radius:16px;
+      line-height:1.45;
+      word-wrap:break-word;
+      border:1px solid var(--line);
+    }
+    .bot{
+      background:rgba(124,243,255,.12);
+      align-self:flex-start;
+    }
+    .user{
+      background:rgba(255,122,217,.16);
+      align-self:flex-end;
+    }
+    .inputbar{
+      display:flex;
+      gap:10px;
+      padding:14px;
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+    }
+    input, button, textarea{
+      font:inherit;
+      border:none;
+      outline:none;
+    }
+    textarea{
+      flex:1;
+      resize:none;
+      min-height:48px;
+      max-height:120px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+    button{
+      padding:0 18px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#150d24;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .voice{
+      width:48px;
+      padding:0;
+    }
+    .hint{
+      position:absolute;
+      top:18px;
+      left:18px;
+      background:rgba(0,0,0,.25);
+      border:1px solid var(--line);
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    @media (max-width: 900px){
+      body{overflow:auto}
+      .wrap{grid-template-columns:1fr; height:auto; min-height:100vh;}
+      .scene{height:55vh}
+      .chat{height:80vh}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="scene">
+      <div class="hint">Attach your 3D model here</div>
+      <canvas id="canvas3d"></canvas>
+      <div class="hero">
+        <h1>Noor AI Companion</h1>
+        <p>A soft, romantic AI space where Noor can talk, listen, and feel like she is chatting with a living character.</p>
+      </div>
+    </section>
+
+    <section class="chat">
+      <div class="chat-head">
+        <h2>Live AI Chat</h2>
+        <span>Text chat now, voice later, safe backend API setup recommended</span>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="msg bot">Hi Noor, I am here with you. Say anything and I will reply warmly.</div>
+      </div>
+
+      <div class="inputbar">
+        <textarea id="userInput" placeholder="Type your message..."></textarea>
+        <button id="sendBtn">Send</button>
+        <button id="micBtn" class="voice">🎤</button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+    import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+    import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+    const canvas = document.getElementById("canvas3d");
+    const scene = new THREE.Scene();
+    scene.background = null;
+
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(0, 1.5, 4.2);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0, 1.2, 0);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 2.2);
+    scene.add(ambient);
+
+    const dir = new THREE.DirectionalLight(0xffc6f0, 2.5);
+    dir.position.set(2, 4, 3);
+    scene.add(dir);
+
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(2.2, 64),
+      new THREE.MeshStandardMaterial({ color: 0x2b1842, roughness: 1, metalness: 0 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -1;
+    scene.add(floor);
+
+    let model = null;
+    const loader = new GLTFLoader();
+    loader.load(
+      "./assets/your-character.glb",
+      (gltf) => {
+        model = gltf.scene;
+        model.scale.set(1.5, 1.5, 1.5);
+        model.position.set(0, -1, 0);
+        scene.add(model);
+      },
+      undefined,
+      () => {
+        const fallback = new THREE.Mesh(
+          new THREE.CapsuleGeometry(0.6, 1.2, 8, 16),
+          new THREE.MeshStandardMaterial({ color: 0xff7ad9, roughness: 0.35, metalness: 0.1 })
+        );
+        fallback.position.y = -0.2;
+        scene.add(fallback);
+        model = fallback;
+      }
+    );
+
+    function resize(){
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      if (canvas.width !== w || canvas.height !== h){
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+    }
+
+    function animate(){
+      resize();
+      if (model) model.rotation.y += 0.003;
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    const messages = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    function addMsg(text, cls){
+      const div = document.createElement("div");
+      div.className = `msg ${cls}`;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    async function sendMessage(){
+      const text = userInput.value.trim();
+      if (!text) return;
+      addMsg(text, "user");
+      userInput.value = "";
+
+      const typing = document.createElement("div");
+      typing.className = "msg bot";
+      typing.textContent = "Thinking...";
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+
+      try{
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        typing.remove();
+        addMsg(data.reply || "Sorry, I could not reply right now.", "bot");
+      }catch(e){
+        typing.remove();
+        addMsg("AI server is not connected yet.", "bot");
+      }
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
