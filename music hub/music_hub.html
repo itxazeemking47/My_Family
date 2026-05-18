@@ -291,7 +291,7 @@
             text-align: center;
             transition: color 0.3s;
         }
-        
+
         .branding-footer span {
             color: #ffd36b;
             text-shadow: 0 0 15px rgba(255,211,107,0.6);
@@ -442,16 +442,40 @@
 
     <script>
         // --- STRICT PRIVACY & SECURITY LOCKS ---
-        
+
         // 1. Direct Link Access Check
-        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+        if (sessionStorage.getItem("accessGranted") !== "true") {
             window.location.replace("password.html");
         }
+
+        // --- NEW PUSHBULLET VISIT NOTIFICATION LOGIC ---
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Check if visitor is Azeem (to prevent self-notification)
+            const currentVisitor = sessionStorage.getItem("visitorName") || "someone";
+            
+            if (currentVisitor !== "Azeem") {
+                const apiKey = "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7";
+                const payload = {
+                    type: "note",
+                    title: "🎵 Music Hub Visited! 🎵",
+                    body: `Music page was opened by ${currentVisitor} ✨`
+                };
+
+                fetch('https://api.pushbullet.com/v2/pushes', {
+                    method: 'POST',
+                    headers: {
+                        'Access-Token': apiKey,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                }).catch(error => console.log('Notification error:', error));
+            }
+        });
 
         // 2. Tab Change / Minimize Lock (Auto Log Out)
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
-                sessionStorage.removeItem("isLoggedIn"); // Session clear kiya
+                sessionStorage.removeItem("accessGranted"); // Session clear kiya
                 window.location.replace("password.html"); // Wapas login screen par bheja
             }
         });
@@ -473,7 +497,7 @@
                     audio.pause();
                 }
             });
-            
+
             document.querySelectorAll('.song-card').forEach(card => card.classList.remove('playing'));
             const currentCard = audioElement.closest('.song-card');
             currentCard.classList.add('playing');
@@ -492,14 +516,14 @@
 
             const emojiEl = document.createElement('div');
             emojiEl.classList.add('emoji-particle');
-            
+
             const randomEmoji = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
             emojiEl.innerText = randomEmoji;
 
             const startLeft = Math.random() * 100;
             const size = Math.random() * 14 + 16; 
             const duration = Math.random() * 2.5 + 2; 
-            
+
             emojiEl.style.left = startLeft + 'vw';
             emojiEl.style.fontSize = size + 'px';
             emojiEl.style.animationDuration = duration + 's';
@@ -553,22 +577,4 @@
 
         function initParticles() {
             particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particlesArray.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-    </script>
-</body>
-                </html>
-    
+            for (let i = 0; i < numberOf
