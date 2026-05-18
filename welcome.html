@@ -7,165 +7,191 @@
 
   <script>
     if (sessionStorage.getItem("accessGranted") !== "true") {
-        window.location.replace("index.html");
+      window.location.replace("index.html");
     }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    :root{
+      --gold:#ffd36b;
+      --gold-2:#ffb347;
+      --pink:#ff4d88;
+      --pink-2:#ec4899;
+      --text:#fffafc;
+      --muted:rgba(255,255,255,.78);
+      --card:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.18);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
     }
 
+    html, body{
+      width:100%;
+      min-height:100%;
+    }
+
     body{
-      height:100vh;
+      min-height:100vh;
       overflow:hidden;
       display:flex;
       justify-content:center;
       align-items:center;
       text-align:center;
-      color:white;
-      background:#000;
+      color:var(--text);
+      background:#060608;
       position:relative;
-      font-family: 'Lexend', sans-serif;
-      /* Extra security: No text highlighting */
-      user-select: none;
-      -webkit-user-select: none;
+      font-family:'Lexend', sans-serif;
+      user-select:none;
+      -webkit-user-select:none;
     }
 
-    /* Luxury Background */
     body::before{
       content:"";
       position:absolute;
       inset:0;
-      background:url('bg.PNG') center/cover no-repeat;
-      filter:brightness(0.25) saturate(1.3);
+      background:
+        linear-gradient(180deg, rgba(6,6,8,.35), rgba(6,6,8,.72)),
+        url('bg.PNG') center/cover no-repeat;
+      filter:saturate(1.15) contrast(1.02);
       z-index:-2;
+      transform:scale(1.02);
     }
 
-    /* Gold Royal Overlay */
     body::after{
       content:"";
       position:absolute;
       inset:0;
-      background:radial-gradient(circle at top, rgba(255,215,0,0.15), transparent 60%),
-                 linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4));
+      background:
+        radial-gradient(circle at top, rgba(255,211,107,0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(255,77,136,0.14), transparent 25%),
+        radial-gradient(circle at 80% 75%, rgba(236,72,153,0.10), transparent 28%),
+        linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35));
       z-index:-1;
     }
 
     .container{
-      width:90%;
-      max-width:750px;
-      padding:45px 30px;
-      border-radius:28px;
-      backdrop-filter: blur(10px);
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,215,0,0.25);
-      box-shadow:0 0 40px rgba(255,215,0,0.15);
-      animation:fadeIn 1.5s ease;
+      width:min(92%, 860px);
+      padding:42px 28px 30px;
+      border-radius:30px;
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      animation:fadeIn 1.2s ease;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      font-size:13px;
+      letter-spacing:.5px;
+      color:#fff4c8;
+      background:rgba(255,211,107,.12);
+      border:1px solid rgba(255,211,107,.25);
+      margin-bottom:18px;
     }
 
     h1{
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size:44px;
-      color:#ffd36b;
-      text-shadow:0 0 15px rgba(255,211,107,0.4);
-      margin-bottom:15px;
+      font-family:'Playfair Display', serif;
+      font-style:italic;
+      font-size:clamp(34px, 5vw, 54px);
+      color:var(--gold);
+      text-shadow:0 0 18px rgba(255,211,107,0.35);
+      margin-bottom:14px;
+      line-height:1.1;
     }
 
     .typing{
-      font-family: 'Lexend', sans-serif;
-      font-size:18px;
-      font-weight: 300;
-      line-height:1.9;
-      color:#f5f5f5;
-      margin-bottom:30px;
+      font-size:clamp(15px, 2.2vw, 18px);
+      font-weight:300;
+      line-height:2;
+      color:var(--muted);
+      margin:0 auto 28px;
+      max-width:650px;
     }
 
     .buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:15px;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
       justify-content:center;
+      margin-top:8px;
     }
 
     .btn{
-      font-family: 'Fredoka One', cursive;
-      padding:14px 22px;
-      border-radius:50px;
+      font-family:'Fredoka One', cursive;
+      padding:15px 18px;
+      border-radius:18px;
       text-decoration:none;
       font-weight:400;
-      font-size:16px;
-      transition:0.3s;
-      border:none;
+      font-size:15px;
+      transition:0.28s ease;
+      border:1px solid transparent;
       cursor:pointer;
-      display:inline-block;
-      letter-spacing: 0.5px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:56px;
+      letter-spacing:.3px;
+      box-shadow:0 10px 26px rgba(0,0,0,.18);
+    }
+
+    .btn:hover{
+      transform:translateY(-3px) scale(1.01);
     }
 
     .btn-gold{
-      background:linear-gradient(45deg,#ffd36b,#ff9f1c);
-      color:#000;
-      box-shadow:0 0 20px rgba(255,211,107,0.4);
-    }
-
-    .btn-gold:hover{
-      transform:scale(1.08);
+      background:linear-gradient(135deg, #ffe08a, #ffb347);
+      color:#1b1200;
+      box-shadow:0 0 24px rgba(255,211,107,0.28);
     }
 
     .btn-sad{
-      background:rgba(255,255,255,0.9);
+      background:rgba(255,255,255,0.92);
       color:#b30059;
-    }
-
-    .btn-sad:hover{
-      transform:scale(1.08);
-      background:#ffe3ef;
+      border-color:rgba(255,255,255,.25);
     }
 
     .btn-music{
-      background:#111;
-      color:#ffd36b;
-      border:1px solid #ffd36b;
+      background:rgba(17,17,17,.82);
+      color:#ffe08a;
+      border-color:rgba(255,211,107,.35);
     }
 
-    .btn-music:hover{
-      transform:scale(1.08);
-      background:#1a1a1a;
+    .btn-hubby{
+      background:linear-gradient(135deg, #ff4d88, #ec4899);
+      color:#fff;
+      box-shadow:0 0 24px rgba(236,72,153,0.28);
     }
 
-    /* نیا بنائی گئی خصوصی تھیم والا بٹن */
-    .btn-hubby {
-      background: linear-gradient(45deg, #ff4d88, #ec4899);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+    .btn-ai{
+      background:linear-gradient(135deg, #6d5efc, #8b5cf6);
+      color:#fff;
+      box-shadow:0 0 24px rgba(109,94,252,0.28);
     }
 
-    .btn-hubby:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);
+    .footer-note{
+      margin-top:18px;
+      font-size:13px;
+      color:rgba(255,255,255,.6);
     }
 
     .heart{
       position:absolute;
-      color:#ff4d88;
-      animation:floatUp 6s linear infinite;
-      opacity:0.7;
+      color:#ff5b94;
+      animation:floatUp 7s linear infinite;
+      opacity:0.65;
       pointer-events:none;
-    }
-
-    @keyframes floatUp{
-      0%{transform:translateY(100vh) scale(0);}
-      100%{transform:translateY(-10vh) scale(1.5);}
-    }
-
-    @keyframes fadeIn{
-      from{opacity:0; transform:translateY(30px);}
-      to{opacity:1; transform:translateY(0);}
+      text-shadow:0 0 16px rgba(255,91,148,.45);
     }
 
     .touch-heart{
@@ -174,6 +200,13 @@
       font-size:18px;
       animation:pop 1s ease-out forwards;
       pointer-events:none;
+      text-shadow:0 0 10px rgba(255,77,136,.35);
+    }
+
+    @keyframes floatUp{
+      0%{transform:translateY(110vh) scale(0.4) rotate(0deg); opacity:0;}
+      15%{opacity:.7;}
+      100%{transform:translateY(-15vh) scale(1.6) rotate(20deg); opacity:0;}
     }
 
     @keyframes pop{
@@ -181,76 +214,100 @@
       100%{transform:scale(2.5) translateY(-50px); opacity:0;}
     }
 
-    @media(max-width:600px){
-      h1{font-size:32px;}
-      .typing{font-size:16px;}
-      .btn{width:100%;}
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(24px) scale(.98);}
+      to{opacity:1; transform:translateY(0) scale(1);}
+    }
+
+    @media (max-width: 720px){
+      .container{
+        padding:30px 18px 22px;
+        border-radius:24px;
+      }
+      .buttons{
+        grid-template-columns:1fr;
+      }
+      .btn{
+        width:100%;
+      }
     }
   </style>
 </head>
 
-<body oncontextmenu="return false;"> <div class="heart" style="left:10%; font-size:22px;">❤</div>
-<div class="heart" style="left:30%; animation-delay:2s;">❤</div>
-<div class="heart" style="left:50%; animation-delay:1s; font-size:20px;">❤</div>
-<div class="heart" style="left:70%; animation-delay:3s;">❤</div>
-<div class="heart" style="left:85%; animation-delay:4s; font-size:24px;">❤</div>
+<body oncontextmenu="return false;">
 
-<div class="container">
-  <h1>Royal Love Portal 💖</h1>
+  <div class="heart" style="left:8%; font-size:20px; animation-delay:0s;">❤</div>
+  <div class="heart" style="left:20%; font-size:14px; animation-delay:1.6s;">❤</div>
+  <div class="heart" style="left:34%; font-size:22px; animation-delay:3s;">❤</div>
+  <div class="heart" style="left:52%; font-size:16px; animation-delay:2.2s;">❤</div>
+  <div class="heart" style="left:68%; font-size:24px; animation-delay:4.2s;">❤</div>
+  <div class="heart" style="left:82%; font-size:18px; animation-delay:1.1s;">❤</div>
+  <div class="heart" style="left:92%; font-size:15px; animation-delay:5s;">❤</div>
 
-  <div class="typing">
-    Yeh sirf ek website nahi... 👑<br>
-    yeh eik gift he jana  ✨<br> 😘.........specially for my favorite person<br><br>
-     💎.....Har portal main ne sirf aap k liye bnaya he
+  <div class="container">
+    <div class="badge">A little place made with love</div>
+
+    <h1>Royal Love Portal 💖</h1>
+
+    <div class="typing">
+      Yeh sirf ek website nahi... 👑<br>
+      yeh ek beautiful gift hai, specially for my favorite person ✨<br><br>
+      Har page, har button aur har line sirf aap ke liye banayi gayi hai 💎
+    </div>
+
+    <div class="buttons">
+      <a href="couples pics pages/password.html" class="btn btn-gold">
+        Our Couples Pics 💙
+      </a>
+
+      <a href="jokes pages/if_you_are_sad.html" class="btn btn-sad">
+        Agar Mood Kharab Ho To 🤗
+      </a>
+
+      <a href="music hub/password.html" class="btn btn-music">
+        Music Hub 🎼🎶
+      </a>
+
+      <a href="password.html" class="btn btn-hubby">
+        Wake Your Hubby 🥰
+      </a>
+
+      <a href="Ai assistant/ai.html" class="btn btn-ai">
+        Fun with Ambar ✨
+      </a>
+    </div>
+
+    <div class="footer-note">
+      Made with softness, style, and a little bit of magic.
+    </div>
   </div>
 
-  <div class="buttons">
-    <a href="couples pics pages/password.html" class="btn btn-gold">
-      Our coupeles Pics 💙
-    </a>
+  <script>
+    document.onkeydown = function(e) {
+      if (e.keyCode == 123) return false;
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+      if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    };
 
-   <a href="jokes pages/if_you_are_sad.html" class="btn btn-sad">
-      Agar mod Kharab ho to 🤗
-    </a>
+    document.addEventListener("click", function(e){
+      createHeart(e.pageX, e.pageY);
+    });
 
-    <a href="music hub/password.html" class="btn btn-music">
-      Music Hub 😘🎼🎶
-    </a>
+    document.addEventListener("touchstart", function(e){
+      let touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    });
 
-    <a href="password.html" class="btn btn-hubby">
-      wake your hubby🥰
-    </a>
-  </div>
-</div>
-
-<script>
-  // Security: Block Keys
-  document.onkeydown = function(e) {
-      if(event.keyCode == 123) return false; 
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
-  }
-
-  // Touch / click heart bubbles effect
-  document.addEventListener("click", function(e){
-    createHeart(e.pageX, e.pageY);
-  });
-
-  document.addEventListener("touchstart", function(e){
-    let touch = e.touches[0];
-    createHeart(touch.pageX, touch.pageY);
-  });
-
-  function createHeart(x, y){
-    const heart = document.createElement("div");
-    heart.className = "touch-heart";
-    heart.innerHTML = "❤";
-    heart.style.left = x + "px";
-    heart.style.top = y + "px";
-    document.body.appendChild(heart);
-    setTimeout(()=> heart.remove(), 1000);
-  }
-</script>
+    function createHeart(x, y){
+      const heart = document.createElement("div");
+      heart.className = "touch-heart";
+      heart.innerHTML = "❤";
+      heart.style.left = x + "px";
+      heart.style.top = y + "px";
+      document.body.appendChild(heart);
+      setTimeout(()=> heart.remove(), 1000);
+    }
+  </script>
 
 </body>
 </html>
