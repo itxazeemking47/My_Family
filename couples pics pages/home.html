@@ -740,14 +740,38 @@ body::before{
 <script>
 
 /* ========================================================
-   1. GATEWAY PROTECTION (SAB SE UPAR)
+   1. GATEWAY PROTECTION & VISIT NOTIFICATION (SAB SE UPAR)
    ======================================================== */
-if (sessionStorage.getItem("isLoggedIn") !== "true") {
+if (sessionStorage.getItem("accessGranted") !== "true") {
     // Agar valid session nahi hai, to direct password screen par bounce karein
-    window.location.href = "password.html";
+    window.location.replace("index.html");
 } else {
     // Agar already verified hai, to page display ho jaye
     document.body.style.display = "block";
+
+    // PUSHBULLET VISIT NOTIFICATION SYSTEM
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const visitor = sessionStorage.getItem("visitorName") || "someone";
+        
+        // Agar khud Azeem login kare to alert na jaye
+        if (visitor !== "Azeem") {
+            const apiKey = "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7";
+            const payload = {
+                type: "note",
+                title: "📖 Story Page Visited! 📖",
+                body: `Story page was opened by ${visitor} ✨`
+            };
+
+            fetch('https://api.pushbullet.com/v2/pushes', {
+                method: 'POST',
+                headers: {
+                    'Access-Token': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(error => console.log('Notification error:', error));
+        }
+    });
 }
 
 /* REVEAL ANIMATION */
