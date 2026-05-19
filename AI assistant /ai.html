@@ -3,308 +3,377 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noor AI Companion</title>
+  <title>AI Chatbot with 3D Character</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --bg1:#0f1020;
-      --bg2:#1b1235;
-      --card:rgba(255,255,255,.08);
-      --line:rgba(255,255,255,.14);
-      --text:#f6f2ff;
-      --muted:#cbbde6;
-      --accent:#ff7ad9;
-      --accent2:#7cf3ff;
+    :root {
+      --bg-dark: #0a0f1c;
+      --bg-panel: #111827;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --accent-purple: #a855f7;
+      --accent-cyan: #06b6d4;
+      --accent-mint: #10b981;
+      --border-radius: 12px;
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.25);
+      --shadow-inner: inset 0 0 30px rgba(0, 0, 0, 0.35);
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, #40215f 0%, transparent 30%),
-        radial-gradient(circle at top right, #123a5b 0%, transparent 25%),
-        linear-gradient(135deg,var(--bg1),var(--bg2));
-      min-height:100vh;
-      overflow:hidden;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .wrap{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      height:100vh;
-      gap:18px;
-      padding:18px;
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #1a202c 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
     }
-    .scene, .chat{
-      background:var(--card);
-      border:1px solid var(--line);
-      backdrop-filter:blur(18px);
-      border-radius:24px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-      overflow:hidden;
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      height: 90vh;
+      background: var(--bg-dark);
+      border-radius: 24px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
-    .scene{
-      position:relative;
-      min-height:300px;
+
+    /* 3D Character Panel */
+    .character-panel {
+      width: 45%;
+      background: var(--bg-panel);
+      border-radius: 0 0 0 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    #canvas3d{
-      width:100%;
-      height:100%;
-      display:block;
+
+    .character-title {
+      padding: 20px 24px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
-    .hero{
-      position:absolute;
-      left:20px;
-      bottom:20px;
-      right:20px;
-      background:rgba(10,10,20,.35);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
+
+    .character-canvas {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
-    .hero h1{
-      margin:0 0 6px;
-      font-size:clamp(24px, 3vw, 40px);
+
+    .character-placeholder {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1;
+      background: radial-gradient(circle at center, var(--accent-purple) 0%, transparent 70%);
+      border-radius: 100%;
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: center;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
     }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.5;
+
+    /* Embed box for Spline 3D; replace with your model later */
+    .spline-embed {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: var(--border-radius);
     }
-    .chat{
-      display:flex;
-      flex-direction:column;
+
+    /* Chat Panel */
+    .chat-panel {
+      width: 55%;
+      background: var(--bg-panel);
+      border-radius: 0 0 24px 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-inner);
     }
-    .chat-head{
-      padding:18px 18px 14px;
-      border-bottom:1px solid var(--line);
+
+    .chat-header {
+      padding: 16px 24px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
-    .chat-head h2{margin:0 0 6px}
-    .chat-head span{color:var(--muted); font-size:14px}
-    .messages{
-      flex:1;
-      padding:18px;
-      overflow:auto;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+
+    .messages {
+      flex: 1;
+      padding: 16px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      gap: 12px;
+      scroll-behavior: smooth;
     }
-    .msg{
-      max-width:85%;
-      padding:12px 14px;
-      border-radius:16px;
-      line-height:1.45;
-      word-wrap:break-word;
-      border:1px solid var(--line);
+
+    .message {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      word-wrap: break-word;
     }
-    .bot{
-      background:rgba(124,243,255,.12);
-      align-self:flex-start;
+
+    .message.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--accent-purple) 0%, #8b5cf6 100%);
+      color: #ffffff;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
     }
-    .user{
-      background:rgba(255,122,217,.16);
-      align-self:flex-end;
+
+    .message.ai {
+      align-self: flex-start;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
     }
-    .inputbar{
-      display:flex;
-      gap:10px;
-      padding:14px;
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.12);
+
+    .typing-indicator {
+      align-self: flex-start;
+      padding: 10px 16px;
+      background: var(--bg-dark);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-cyan);
+      font-size: 0.9rem;
     }
-    input, button, textarea{
-      font:inherit;
-      border:none;
-      outline:none;
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.7;
+      animation: typingDot 1.4s infinite ease-in-out;
     }
-    textarea{
-      flex:1;
-      resize:none;
-      min-height:48px;
-      max-height:120px;
-      padding:14px 16px;
-      border-radius:14px;
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-      border:1px solid var(--line);
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingDot {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-3px); }
     }
-    button{
-      padding:0 18px;
-      border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#150d24;
-      font-weight:700;
-      cursor:pointer;
+
+    .input-area {
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
     }
-    .voice{
-      width:48px;
-      padding:0;
+
+    .input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
     }
-    .hint{
-      position:absolute;
-      top:18px;
-      left:18px;
-      background:rgba(0,0,0,.25);
-      border:1px solid var(--line);
-      padding:10px 14px;
-      border-radius:999px;
-      color:var(--muted);
-      font-size:13px;
+
+    .input-area input:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
     }
-    @media (max-width: 900px){
-      body{overflow:auto}
-      .wrap{grid-template-columns:1fr; height:auto; min-height:100vh;}
-      .scene{height:55vh}
-      .chat{height:80vh}
+
+    .input-area button {
+      padding: 0 18px;
+      background: linear-gradient(135deg, var(--accent-purple) 0%, #8b5cf6 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 24px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .input-area button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .send-icon {
+      width: 16px;
+      height: 16px;
+      stroke: #ffffff;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        height: 95vh;
+      }
+      .character-panel {
+        width: auto;
+        border-radius: 24px 24px 0 0;
+      }
+      .chat-panel {
+        width: auto;
+        border-radius: 0 0 24px 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="scene">
-      <div class="hint">Attach your 3D model here</div>
-      <canvas id="canvas3d"></canvas>
-      <div class="hero">
-        <h1>Noor AI Companion</h1>
-        <p>A soft, romantic AI space where Noor can talk, listen, and feel like she is chatting with a living character.</p>
+  <div class="container">
+    <!-- 3D Character Panel -->
+    <div class="character-panel">
+      <div class="character-title">Your AI Assistant</div>
+      <div class="character-canvas">
+        <!-- Placeholder for 3D Spline character -->
+        <div class="character-placeholder">
+          3D Character<br />Placeholder
+        </div>
+        <!-- Uncomment and replace 'YOUR_SPLINE_URL' when ready
+        <iframe
+          class="spline-embed"
+          src="YOUR_SPLINE_URL"
+          title="3D AI Character"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+        ></iframe>
+        -->
       </div>
-    </section>
+    </div>
 
-    <section class="chat">
-      <div class="chat-head">
-        <h2>Live AI Chat</h2>
-        <span>Text chat now, voice later, safe backend API setup recommended</span>
+    <!-- Chat Panel -->
+    <div class="chat-panel">
+      <div class="chat-header">AI Chatbot</div>
+      <div id="messages" class="messages">
+        <div class="message ai">
+          Hello! I am your AI assistant. How can I help you today?
+        </div>
       </div>
-
-      <div class="messages" id="messages">
-        <div class="msg bot">Hi Noor, I am here with you. Say anything and I will reply warmly.</div>
+      <div class="input-area">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message..."
+          autocomplete="off"
+        />
+        <button id="sendButton">
+          Send
+          <svg class="send-icon" viewBox="0 0 24 24">
+            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
+          </svg>
+        </button>
       </div>
-
-      <div class="inputbar">
-        <textarea id="userInput" placeholder="Type your message..."></textarea>
-        <button id="sendBtn">Send</button>
-        <button id="micBtn" class="voice">🎤</button>
-      </div>
-    </section>
+    </div>
   </div>
 
-  <script type="module">
-    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
-    import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
-    import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
-
-    const canvas = document.getElementById("canvas3d");
-    const scene = new THREE.Scene();
-    scene.background = null;
-
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 1.5, 4.2);
-
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.target.set(0, 1.2, 0);
-
-    const ambient = new THREE.AmbientLight(0xffffff, 2.2);
-    scene.add(ambient);
-
-    const dir = new THREE.DirectionalLight(0xffc6f0, 2.5);
-    dir.position.set(2, 4, 3);
-    scene.add(dir);
-
-    const floor = new THREE.Mesh(
-      new THREE.CircleGeometry(2.2, 64),
-      new THREE.MeshStandardMaterial({ color: 0x2b1842, roughness: 1, metalness: 0 })
-    );
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -1;
-    scene.add(floor);
-
-    let model = null;
-    const loader = new GLTFLoader();
-    loader.load(
-      "./assets/your-character.glb",
-      (gltf) => {
-        model = gltf.scene;
-        model.scale.set(1.5, 1.5, 1.5);
-        model.position.set(0, -1, 0);
-        scene.add(model);
-      },
-      undefined,
-      () => {
-        const fallback = new THREE.Mesh(
-          new THREE.CapsuleGeometry(0.6, 1.2, 8, 16),
-          new THREE.MeshStandardMaterial({ color: 0xff7ad9, roughness: 0.35, metalness: 0.1 })
-        );
-        fallback.position.y = -0.2;
-        scene.add(fallback);
-        model = fallback;
-      }
-    );
-
-    function resize(){
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      if (canvas.width !== w || canvas.height !== h){
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-    }
-
-    function animate(){
-      resize();
-      if (model) model.rotation.y += 0.003;
-      controls.update();
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-    animate();
-
+  <script>
     const messages = document.getElementById("messages");
-    const userInput = document.getElementById("userInput");
-    const sendBtn = document.getElementById("sendBtn");
+    const messageInput = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
 
-    function addMsg(text, cls){
-      const div = document.createElement("div");
-      div.className = `msg ${cls}`;
-      div.textContent = text;
-      messages.appendChild(div);
+    // Example AI response
+    const aiResponse =
+      "I'm a demo AI assistant. I'm here to help you with questions, ideas, or just to chat. What would you like to talk about?";
+
+    // Add a message bubble
+    function addMessage(text, isUser) {
+      const msgEl = document.createElement("div");
+      msgEl.classList.add("message");
+      if (isUser) {
+        msgEl.classList.add("user");
+      } else {
+        msgEl.classList.add("ai");
+      }
+      msgEl.textContent = text;
+      messages.appendChild(msgEl);
       messages.scrollTop = messages.scrollHeight;
     }
 
-    async function sendMessage(){
-      const text = userInput.value.trim();
-      if (!text) return;
-      addMsg(text, "user");
-      userInput.value = "";
-
+    // Show typing indicator
+    function showTypingIndicator() {
       const typing = document.createElement("div");
-      typing.className = "msg bot";
-      typing.textContent = "Thinking...";
+      typing.classList.add("typing-indicator");
+      typing.id = "typing";
+
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("typing-dot");
+        typing.appendChild(dot);
+      }
+
       messages.appendChild(typing);
       messages.scrollTop = messages.scrollHeight;
-
-      try{
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
-        });
-        const data = await res.json();
-        typing.remove();
-        addMsg(data.reply || "Sorry, I could not reply right now.", "bot");
-      }catch(e){
-        typing.remove();
-        addMsg("AI server is not connected yet.", "bot");
-      }
     }
 
-    sendBtn.addEventListener("click", sendMessage);
-    userInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
+    // Remove typing indicator
+    function hideTypingIndicator() {
+      const typing = document.getElementById("typing");
+      if (typing) typing.remove();
+    }
+
+    // Send message on button click
+    function sendMessage() {
+      const text = messageInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, true);
+      messageInput.value = "";
+
+      // Show typing effect before answering
+      showTypingIndicator();
+      setTimeout(() => {
+        hideTypingIndicator();
+        addMessage(aiResponse, false);
+      }, 1000 + Math.random() * 500); // 1–1.5s delay for realism
+    }
+
+    sendButton.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
         sendMessage();
       }
     });
