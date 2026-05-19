@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chatbot with 3D Character</title>
-  <!-- Google Fonts -->
+  <title>AI Chatbot with Live 2D Character</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
   <style>
     :root {
       --bg-dark: #0a0f1c;
@@ -48,11 +50,11 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* 3D Character Panel */
+    /* 2D Character Panel */
     .character-panel {
       width: 45%;
       background: var(--bg-panel);
-      border-radius: 0 0 0 24px;
+      border-radius: 24px 0 0 24px;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -76,42 +78,14 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-    }
-
-    .character-placeholder {
-      width: 100%;
-      max-width: 400px;
-      aspect-ratio: 1;
-      background: radial-gradient(circle at center, var(--accent-purple) 0%, transparent 70%);
-      border-radius: 100%;
-      box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      text-align: center;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-image: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-      text-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
-    }
-
-    /* Embed box for Spline 3D; replace with your model later */
-    .spline-embed {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: var(--border-radius);
+      background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
     }
 
     /* Chat Panel */
     .chat-panel {
       width: 55%;
       background: var(--bg-panel);
-      border-radius: 0 0 24px 0;
+      border-radius: 0 24px 24px 0;
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow-inner);
@@ -266,26 +240,22 @@
 </head>
 <body>
   <div class="container">
-    <!-- 3D Character Panel -->
     <div class="character-panel">
       <div class="character-title">Your AI Assistant</div>
       <div class="character-canvas">
-        <!-- Placeholder for 3D Spline character -->
-        <div class="character-placeholder">
-          3D Character<br />Placeholder
-        </div>
-        <!-- Uncomment and replace 'YOUR_SPLINE_URL' when ready
-        <iframe
-          class="spline-embed"
-          src="YOUR_SPLINE_URL"
-          title="3D AI Character"
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-        ></iframe>
-        -->
+        
+        <dotlottie-player 
+          src="https://lottie.host/929a743e-0159-4596-8393-9d75631c6841/nZUkhQX1ad.lottie" 
+          background="transparent" 
+          speed="1" 
+          style="width: 100%; height: 100%; max-width: 420px;" 
+          loop 
+          autoplay>
+        </dotlottie-player>
+
       </div>
     </div>
 
-    <!-- Chat Panel -->
     <div class="chat-panel">
       <div class="chat-header">AI Chatbot</div>
       <div id="messages" class="messages">
@@ -315,11 +285,9 @@
     const messageInput = document.getElementById("messageInput");
     const sendButton = document.getElementById("sendButton");
 
-    // Example AI response
     const aiResponse =
       "I'm a demo AI assistant. I'm here to help you with questions, ideas, or just to chat. What would you like to talk about?";
 
-    // Add a message bubble
     function addMessage(text, isUser) {
       const msgEl = document.createElement("div");
       msgEl.classList.add("message");
@@ -333,7 +301,6 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
-    // Show typing indicator
     function showTypingIndicator() {
       const typing = document.createElement("div");
       typing.classList.add("typing-indicator");
@@ -349,13 +316,11 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
-    // Remove typing indicator
     function hideTypingIndicator() {
       const typing = document.getElementById("typing");
       if (typing) typing.remove();
     }
 
-    // Send message on button click
     function sendMessage() {
       const text = messageInput.value.trim();
       if (!text) return;
@@ -363,12 +328,11 @@
       addMessage(text, true);
       messageInput.value = "";
 
-      // Show typing effect before answering
       showTypingIndicator();
       setTimeout(() => {
         hideTypingIndicator();
         addMessage(aiResponse, false);
-      }, 1000 + Math.random() * 500); // 1–1.5s delay for realism
+      }, 1000 + Math.random() * 500);
     }
 
     sendButton.addEventListener("click", sendMessage);
