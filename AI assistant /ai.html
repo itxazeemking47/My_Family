@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>My Love Portal</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -10,36 +10,28 @@
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,body{
     width:100%;
     height:100%;
-    overflow-x:hidden;
+    overflow:hidden; /* Taki mobile screen se bahar scroll na ho */
 }
 
 body{
     font-family:'Poppins',sans-serif;
-
     /* LIGHT + SMOOTH BACKGROUND */
     background:linear-gradient(135deg,#ff9eb5,#ffb7c5,#ffd5dd);
-
-    min-height:100vh;
-
+    height: 100dvh;
     display:flex;
     justify-content:center;
     align-items:center;
-
     padding:10px;
-
-    overflow-y:auto;
-
-    -webkit-overflow-scrolling:touch;
 }
 
 /* Soft Glow */
@@ -47,332 +39,221 @@ body::before{
     content:'';
     position:fixed;
     inset:0;
-
     background:
     radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 35%),
     radial-gradient(circle at bottom right, rgba(255,192,203,0.25), transparent 35%);
-
     pointer-events:none;
 }
 
 /* Main Mobile Love Card */
 .container{
-
     width:100%;
     max-width:430px;
-
-    min-height:100dvh;
-
+    height:100%;
+    max-height: 850px; /* Desktop standard height */
     background:rgba(255,255,255,0.15);
-
     backdrop-filter:blur(16px);
-
+    -webkit-backdrop-filter: blur(16px);
     border-radius:35px;
-
     overflow:hidden;
-
     border:1px solid rgba(255,255,255,0.2);
-
     box-shadow:0 10px 35px rgba(0,0,0,0.18);
-
     position:relative;
-
     display:flex;
     flex-direction:column;
 }
 
 /* Romantic Header */
 .top-area{
-    padding:20px 20px 10px;
+    padding:15px 20px 10px;
     text-align:center;
     position:relative;
+    flex-shrink: 0;
 }
 
 .top-area h1{
     color:white;
-    font-size:1.6rem;
+    font-size:1.5rem;
     font-weight:600;
-    margin-bottom:5px;
+    margin-bottom:3px;
 }
 
 .top-area p{
     color:rgba(255,255,255,0.9);
-    font-size:0.9rem;
+    font-size:0.85rem;
 }
 
-/* AI Character */
+/* AI Character Box (Matched with Anime White Background) */
 .character-box{
     width:100%;
-    height:260px;
-
+    height:240px;
     display:flex;
     justify-content:center;
     align-items:center;
-
     position:relative;
-
     flex-shrink:0;
+    background: #ffffff; /* Character tab pure white with anime background match */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .character-box::before{
     content:'';
-
-    width:220px;
-    height:220px;
-
-    background:
-    radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
-
+    width:200px;
+    height:200px;
+    background: radial-gradient(circle, rgba(255,158,181,0.15), transparent 70%);
     position:absolute;
-
     border-radius:50%;
-
     animation:pulse 3s infinite;
+    pointer-events: none;
 }
 
 @keyframes pulse{
-
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.08);
-    }
-
-    100%{
-        transform:scale(1);
-    }
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
+    100%{ transform:scale(1); }
 }
 
 /* Chat Area */
 .chat-panel{
-
     flex:1;
-
     background:rgba(255,255,255,0.08);
-
     border-top:1px solid rgba(255,255,255,0.15);
-
     display:flex;
     flex-direction:column;
-
     overflow:hidden;
-
     backdrop-filter:blur(10px);
-
+    -webkit-backdrop-filter: blur(10px);
     min-height:0;
 }
 
-/* Messages */
+/* Messages with Anti-Stuck Configuration */
 .messages{
-
     flex:1;
-
     overflow-y:auto;
-
-    padding:18px;
-
+    padding:15px;
     display:flex;
     flex-direction:column;
-
     gap:12px;
-
     scroll-behavior:smooth;
-
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling:touch; /* Smooth ios bounce */
+    overscroll-behavior-y: contain; /* Prevents whole page background drag/freeze */
 }
 
 .message{
-
     max-width:80%;
-
-    padding:12px 16px;
-
+    padding:11px 15px;
     border-radius:20px;
-
     font-size:0.92rem;
-
-    line-height:1.5;
-
-    animation:fadeIn 0.3s ease;
-
+    line-height:1.45;
+    animation:fadeIn 0.25s ease;
     word-wrap:break-word;
 }
 
 @keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 
 .message.ai{
-
     align-self:flex-start;
-
-    background:rgba(255,255,255,0.18);
-
-    color:white;
-
+    background:rgba(255,255,255,0.25);
+    color:#5c1d32; /* Slightly dark pink-brown for clear text contrast on light background */
+    font-weight: 500;
     border-bottom-left-radius:6px;
-
-    backdrop-filter:blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
 }
 
 .message.user{
-
     align-self:flex-end;
-
     background:linear-gradient(135deg,#ff4f8b,#ff7eb3);
-
     color:white;
-
     border-bottom-right-radius:6px;
-
-    box-shadow:0 5px 18px rgba(255,105,180,0.25);
+    box-shadow:0 4px 15px rgba(255,105,180,0.25);
 }
 
 /* Typing */
 .typing-indicator{
-
     align-self:flex-start;
-
-    background:rgba(255,255,255,0.15);
-
-    padding:12px 15px;
-
+    background:rgba(255,255,255,0.25);
+    padding:11px 15px;
     border-radius:18px;
-
     display:flex;
-
     gap:5px;
 }
 
 .typing-dot{
-
     width:7px;
     height:7px;
-
-    background:white;
-
+    background:#ff4f8b;
     border-radius:50%;
-
     animation:typing 1.2s infinite;
 }
 
-.typing-dot:nth-child(2){
-    animation-delay:0.2s;
-}
-
-.typing-dot:nth-child(3){
-    animation-delay:0.4s;
-}
+.typing-dot:nth-child(2){ animation-delay: 0.2s; }
+.typing-dot:nth-child(3){ animation-delay: 0.4s; }
 
 @keyframes typing{
-
-    0%,100%{
-        transform:translateY(0);
-        opacity:0.5;
-    }
-
-    50%{
-        transform:translateY(-4px);
-        opacity:1;
-    }
-}
+    0%,100%{ transform:translateY(0); opacity:0.5; }
+    50%{ transform:translateY(-4px); opacity:1; }
+} Birthday
 
 /* Input Area */
 .input-area{
-
-    padding:15px;
-
+    padding:12px 15px;
     display:flex;
-
     gap:10px;
-
-    background:rgba(255,255,255,0.08);
-
+    background:rgba(255,255,255,0.12);
+    border-top: 1px solid rgba(255,255,255,0.1);
     flex-shrink:0;
 }
 
 .input-area input{
-
     flex:1;
-
     border:none;
     outline:none;
-
-    padding:14px 16px;
-
+    padding:12px 16px;
     border-radius:30px;
-
-    background:rgba(255,255,255,0.15);
-
-    color:white;
-
+    background:rgba(255,255,255,0.6);
+    color:#333;
     font-size:0.95rem;
-
-    backdrop-filter:blur(10px);
 }
 
 .input-area input::placeholder{
-    color:rgba(255,255,255,0.8);
+    color:rgba(80,80,80,0.7);
 }
 
 .input-area button{
-
     border:none;
-
-    padding:0 22px;
-
+    padding:0 20px;
     border-radius:30px;
-
     background:linear-gradient(135deg,#ff4f8b,#ff7eb3);
-
     color:white;
-
     font-weight:500;
-
     cursor:pointer;
-
-    transition:0.25s;
-
+    transition: 0.1s ease;
     flex-shrink:0;
 }
 
 .input-area button:active{
-    transform:scale(0.96);
+    transform:scale(0.95);
 }
 
-/* Mobile Optimization */
+/* Perfect Edge-to-Edge Phone Display Configuration */
 @media(max-width:480px){
-
     body{
         padding:0;
     }
-
     .container{
-
         max-width:100%;
-
-        min-height:100dvh;
-
+        height: 100dvh;
+        max-height: 100dvh;
         border-radius:0;
+        border: none;
     }
-
     .character-box{
-        height:220px;
+        height:210px;
     }
-
 }
-
 </style>
 </head>
 
@@ -380,160 +261,112 @@ body::before{
 
 <div class="container">
 
-    <!-- Romantic Header -->
     <div class="top-area">
-
         <h1>❤️ My Love Portal</h1>
-
         <p>Only for you, my forever person</p>
-
     </div>
 
-    <!-- AI Character -->
     <div class="character-box">
-
         <dotlottie-player
-        src="https://lottie.host/f2214b10-75d0-4164-a5b5-e45356c7b179/3frPS3VzV3.lottie"
+        src="https://lottie.host/929a743e-0159-4596-8393-9d75631c6841/nZUkhQX1ad.lottie"
         background="transparent"
         speed="1"
-        style="width:100%; height:100%; max-width:280px;"
+        style="width:100%; height:100%; max-width:240px;"
         loop
         autoplay>
         </dotlottie-player>
-
     </div>
 
-    <!-- Chat Panel -->
     <div class="chat-panel">
-
         <div id="messages" class="messages">
-
             <div class="message ai">
                 Hey my love ❤️<br>
                 I’m always here to talk with you.
             </div>
-
         </div>
 
-        <!-- Input -->
         <div class="input-area">
-
             <input
             type="text"
             id="messageInput"
             placeholder="Send a lovely message..."
             autocomplete="off">
-
-            <button id="sendButton">
-                Send
-            </button>
-
+            <button id="sendButton">Send</button>
         </div>
-
     </div>
 
 </div>
 
 <script>
-
 const messages = document.getElementById("messages");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
 
 const aiReplies = [
-
-"You're the cutest part of my day ❤️",
-"I miss you already 🥺",
-"Come here and give me a hug 🤍",
-"You always make my heart smile 💕",
-"I love talking to you forever ✨"
-
+    "You're the cutest part of my day ❤️",
+    "I miss you already 🥺",
+    "Come here and give me a hug 🤍",
+    "You always make my heart smile 💕",
+    "I love talking to you forever ✨"
 ];
 
 function addMessage(text,isUser){
-
     const msg = document.createElement("div");
-
     msg.classList.add("message");
-
     if(isUser){
         msg.classList.add("user");
-    }
-    else{
+    } else {
         msg.classList.add("ai");
     }
-
     msg.innerHTML = text;
-
     messages.appendChild(msg);
-
-    messages.scrollTop = messages.scrollHeight;
+    
+    // Smooth scroll handling without blocking thread
+    setTimeout(() => {
+        messages.scrollTop = messages.scrollHeight;
+    }, 50);
 }
 
 function showTyping(){
-
     const typing = document.createElement("div");
-
     typing.classList.add("typing-indicator");
-
     typing.id = "typing";
 
     for(let i=0;i<3;i++){
-
         const dot = document.createElement("div");
-
         dot.classList.add("typing-dot");
-
         typing.appendChild(dot);
     }
-
     messages.appendChild(typing);
-
     messages.scrollTop = messages.scrollHeight;
 }
 
 function hideTyping(){
-
     const typing = document.getElementById("typing");
-
-    if(typing){
-        typing.remove();
-    }
+    if(typing){ typing.remove(); }
 }
 
 function sendMessage(){
-
     const text = messageInput.value.trim();
-
     if(!text) return;
 
     addMessage(text,true);
-
     messageInput.value = "";
-
     showTyping();
 
     setTimeout(()=>{
-
         hideTyping();
-
-        const randomReply =
-        aiReplies[Math.floor(Math.random()*aiReplies.length)];
-
+        const randomReply = aiReplies[Math.floor(Math.random()*aiReplies.length)];
         addMessage(randomReply,false);
-
     },1200);
 }
 
 sendButton.addEventListener("click",sendMessage);
-
 messageInput.addEventListener("keypress",(e)=>{
-
     if(e.key==="Enter"){
         sendMessage();
     }
 });
-
 </script>
 
 </body>
