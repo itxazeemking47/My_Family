@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Portal - Share with Me</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #0f0c1b;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .upload-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h2 {
+            color: #ff4b72;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        p {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .file-box {
+            border: 2px dashed #ff4b72;
+            padding: 30px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            background: rgba(255, 75, 114, 0.02);
+        }
+        .file-box:hover {
+            background: rgba(255, 75, 114, 0.08);
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-label {
+            cursor: pointer;
+            display: block;
+            color: #ddd;
+        }
+        .file-label span {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #888;
+        }
+        .btn-submit {
+            background: linear-gradient(45deg, #ff4b72, #ff758c);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 43, 114, 0.4);
+            transition: 0.3s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 43, 114, 0.6);
+        }
+        .btn-submit:disabled {
+            background: #444;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        #statusMessage {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .loading-spinner {
+            display: none;
+            margin: 15px auto 0;
+            border: 4px solid rgba(255,255,255,0.1);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border-left-color: #ff4b72;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="upload-container">
+    <h2>Share Your Moments</h2>
+    <p>Apni pics ya videos upload karein, yeh seedha mere paas pohnch jayengi.</p>
+    
+    <form id="uploadForm">
+        <div class="file-box" onclick="document.getElementById('fileInput').click()">
+            <label class="file-label">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4b72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <div id="fileInfo" style="margin-top: 10px; font-weight: 500;">Choose File</div>
+                <span>Images or Videos (.mp4, .png, .jpg)</span>
+            </label>
+            <input type="file" id="fileInput" required>
+        </div>
+        
+        <button type="submit" class="btn-submit" id="submitBtn">Upload to Portal</button>
+    </form>
+    
+    <div class="loading-spinner" id="spinner"></div>
+    <div id="statusMessage"></div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const form = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+    const spinner = document.getElementById('spinner');
+
+    // یہاں اپنا Google Apps Script والا کاپی کیا ہوا لنک پیسٹ کریں
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwITq2T8in5kl1b8xWpAnZIzUie7ZRmVXQR2yP1E31F9mAqquEIRqUU65yy3lkjmv4dig/exec";
+
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            fileInfo.textContent = fileInput.files[0].name;
+            fileInfo.style.color = "#ff4b72";
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        // فائل سائز چیک کرنے کے لیے (گوگل اسکرپٹ کی ایک لمٹ ہوتی ہے، بہتر ہے فائل 25-30 MB سے بڑی نہ ہو)
+        if (file.size > 35 * 1024 * 1024) {
+            statusMessage.textContent = "File bohat bari hai! Please 35MB se choti file select karein.";
+            statusMessage.style.color = "#ff4b4b";
+            return;
+        }
+
+        submitBtn.disabled = true;
+        spinner.style.display = "block";
+        statusMessage.textContent = "Uploading... Please wait.";
+        statusMessage.style.color = "#aaa";
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        
+        reader.onload = function() {
+            const base64Data = reader.result.split(',')[1];
+            
+            const payload = {
+                base64: base64Data,
+                type: file.type,
+                name: file.name
+            };
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                spinner.style.display = "none";
+                submitBtn.disabled = false;
+                
+                if (data.status === "success") {
+                    statusMessage.textContent = "Success! File mere paas pohnch gayi hai. ❤️";
+                    statusMessage.style.color = "#4bb543";
+                    form.reset();
+                    fileInfo.textContent = "Choose File";
+                    fileInfo.style.color = "#ddd";
+                } else {
+                    statusMessage.textContent = "Error: " + data.message;
+                    statusMessage.style.color = "#ff4b4b";
+                }
+            })
+            .catch(err => {
+                spinner.style.display = "none";
+                submitBtn.disabled = false;
+                statusMessage.textContent = "Upload kamyab nahi ho saka. Connection check karein.";
+                statusMessage.style.color = "#ff4b4b";
+                console.error(err);
+            });
+        };
+    });
+</script>
+
+</body>
+</html>
