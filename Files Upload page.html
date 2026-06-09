@@ -3,213 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Portal - Share with Me</title>
+    <title>Love Portal - Our Gallery</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background: #0f0c1b;
+            background-color: #141414; /* Netflix background */
             color: #fff;
+            padding-bottom: 50px;
+            overflow-x: hidden;
+        }
+        /* پریمیم ہیڈر اسٹائل */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            justify-content: space-between;
+            padding: 0 4%;
+            z-index: 1000;
+            transition: background-color 0.5s;
         }
-        .upload-container {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
+        .header.scrolled {
+            background-color: #141414;
         }
-        h2 {
-            color: #ff4b72;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-        p {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-        .file-box {
-            border: 2px dashed #ff4b72;
-            padding: 30px 20px;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            background: rgba(255, 75, 114, 0.02);
-        }
-        .file-box:hover {
-            background: rgba(255, 75, 114, 0.08);
-        }
-        input[type="file"] {
-            display: none;
-        }
-        .file-label {
-            cursor: pointer;
-            display: block;
-            color: #ddd;
-        }
-        .file-label span {
-            display: block;
-            margin-top: 10px;
-            font-size: 13px;
-            color: #888;
-        }
-        .btn-submit {
-            background: linear-gradient(45deg, #ff4b72, #ff758c);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 16px;
+        .logo {
+            color: #E50914; /* Netflix red */
+            font-size: 28px;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .main-title {
+            margin-top: 100px;
+            padding: 0 4%;
+            margin-bottom: 20px;
+        }
+        .main-title h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .main-title p {
+            font-size: 16px;
+            color: #aaa;
+            font-weight: 400;
+        }
+        /* نیٹ فلکس اسٹائل گیلری گرڈ */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 4%;
+            margin-top: 20px;
+        }
+        .media-card {
+            background-color: #181818;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .media-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+        }
+        .media-card img, .media-card video {
             width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 43, 114, 0.4);
-            transition: 0.3s;
+            height: 180px; /* کیمرے کی طرح لینڈ سکیپ ریشو */
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s ease;
         }
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 43, 114, 0.6);
+        .media-card:hover img, .media-card:hover video {
+            opacity: 0.8;
         }
-        .btn-submit:disabled {
-            background: #444;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-        #statusMessage {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .loading-spinner {
-            display: none;
-            margin: 15px auto 0;
-            border: 4px solid rgba(255,255,255,0.1);
-            width: 30px;
-            height: 30px;
+        /* ویڈیو پلے آئیکن اوورلے */
+        .video-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.5);
             border-radius: 50%;
-            border-left-color: #ff4b72;
+            padding: 15px;
+            display: none;
+            z-index: 2;
+        }
+        .media-card.is-video .video-overlay {
+            display: block;
+        }
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid #fff;
+            margin-left: 5px;
+        }
+        /* کارڈ کی معلومات */
+        .media-info {
+            padding: 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: none;
+        }
+        .media-card:hover .media-info {
+            display: block;
+        }
+        .media-info h3 {
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .media-info p {
+            font-size: 12px;
+            color: #ccc;
+        }
+        /* لوڈنگ اسپنر */
+        .loading {
+            text-align: center;
+            grid-column: 1 / -1;
+            margin-top: 80px;
+            color: #E50914;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: #E50914;
             animation: spin 1s linear infinite;
+            margin-bottom: 15px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* فل سکرین میڈیا پلیئر (ماڈل) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+        .modal-content img, .modal-content video {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            display: block;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: #E50914;
+        }
+        /* موبائل رسپانس */
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .main-title h1 {
+                font-size: 28px;
+            }
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            }
+            .media-card img, .media-card video {
+                height: 200px;
+            }
+            .media-info {
+                display: block;
+                background: rgba(0, 0, 0, 0.7);
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="upload-container">
-    <h2>Share Your Moments</h2>
-    <p>Apni pics ya videos upload karein, yeh seedha mere paas pohnch jayengi.</p>
-    
-    <form id="uploadForm">
-        <div class="file-box" onclick="document.getElementById('fileInput').click()">
-            <label class="file-label">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4b72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <div id="fileInfo" style="margin-top: 10px; font-weight: 500;">Choose File</div>
-                <span>Images or Videos (.mp4, .png, .jpg)</span>
-            </label>
-            <input type="file" id="fileInput" required>
+<header class="header" id="header">
+    <div class="logo">Love Portal</div>
+</header>
+
+<div class="main-title">
+    <h1>ہماری یادیں ❤️</h1>
+    <p>آپ کی اپلوڈ کردہ تمام تصاویر اور ویڈیوز یہاں ایک پریمیم گیلری میں محفوظ ہیں۔</p>
+</div>
+
+<div class="gallery-container" id="gallery">
+    <div class="loading" id="loader">
+        <div class="spinner"></div>
+        لوڈ ہو رہا ہے...
+    </div>
+</div>
+
+<div class="modal" id="mediaModal">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <div class="modal-content" id="modalContent">
         </div>
-        
-        <button type="submit" class="btn-submit" id="submitBtn">Upload to Portal</button>
-    </form>
-    
-    <div class="loading-spinner" id="spinner"></div>
-    <div id="statusMessage"></div>
 </div>
 
 <script>
-    const fileInput = document.getElementById('fileInput');
-    const fileInfo = document.getElementById('fileInfo');
-    const form = document.getElementById('uploadForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMessage = document.getElementById('statusMessage');
-    const spinner = document.getElementById('spinner');
-
     // یہاں اپنا Google Apps Script والا کاپی کیا ہوا لنک پیسٹ کریں
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwITq2T8in5kl1b8xWpAnZIzUie7ZRmVXQR2yP1E31F9mAqquEIRqUU65yy3lkjmv4dig/exec";
+    // آپ کا لنک: https://script.google.com/macros/s/AKfycbwOvx4JrLUMeYtSAiB-488Vh9cAbMKAOy2K9N8IwSCV-TKYlhsrTbx3FZ7UbJKGoQJgUQ/exec
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOvx4JrLUMeYtSAiB-488Vh9cAbMKAOy2K9N8IwSCV-TKYlhsrTbx3FZ7UbJKGoQJgUQ/exec";
 
-    fileInput.addEventListener('change', function() {
-        if (fileInput.files.length > 0) {
-            fileInfo.textContent = fileInput.files[0].name;
-            fileInfo.style.color = "#ff4b72";
+    const gallery = document.getElementById('gallery');
+    const loader = document.getElementById('loader');
+    const header = document.getElementById('header');
+    const modal = document.getElementById('mediaModal');
+    const modalContent = document.getElementById('modalContent');
+    const closeModal = document.getElementById('closeModal');
+
+    // ہیڈر کا اسکرول ایفیکٹ
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
     });
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const file = fileInput.files[0];
-        if (!file) return;
-
-        // فائل سائز چیک کرنے کے لیے (گوگل اسکرپٹ کی ایک لمٹ ہوتی ہے، بہتر ہے فائل 25-30 MB سے بڑی نہ ہو)
-        if (file.size > 35 * 1024 * 1024) {
-            statusMessage.textContent = "File bohat bari hai! Please 35MB se choti file select karein.";
-            statusMessage.style.color = "#ff4b4b";
-            return;
-        }
-
-        submitBtn.disabled = true;
-        spinner.style.display = "block";
-        statusMessage.textContent = "Uploading... Please wait.";
-        statusMessage.style.color = "#aaa";
-
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        
-        reader.onload = function() {
-            const base64Data = reader.result.split(',')[1];
+    // گوگل ڈرائیو سے ڈیٹا منگوانا
+    fetch(WEB_APP_URL)
+        .then(res => res.json())
+        .then(data => {
+            loader.style.display = 'none';
             
-            const payload = {
-                base64: base64Data,
-                type: file.type,
-                name: file.name
-            };
+            if (data.status === "success" && data.files.length > 0) {
+                data.files.forEach(file => {
+                    const card = document.createElement('div');
+                    card.className = 'media-card';
 
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                spinner.style.display = "none";
-                submitBtn.disabled = false;
-                
-                if (data.status === "success") {
-                    statusMessage.textContent = "Success! File mere paas pohnch gayi hai. ❤️";
-                    statusMessage.style.color = "#4bb543";
-                    form.reset();
-                    fileInfo.textContent = "Choose File";
-                    fileInfo.style.color = "#ddd";
-                } else {
-                    statusMessage.textContent = "Error: " + data.message;
-                    statusMessage.style.color = "#ff4b4b";
-                }
-            })
-            .catch(err => {
-                spinner.style.display = "none";
-                submitBtn.disabled = false;
-                statusMessage.textContent = "Upload kamyab nahi ho saka. Connection check karein.";
-                statusMessage.style.color = "#ff4b4b";
-                console.error(err);
-            });
-        };
+                    // گوگل ڈرائیو کی فائل کا ڈائریکٹ ویو لنک
+                    const directLink = `https://docs.google.com/uc?export=view&id=${file.id}`;
+
+                    if (file.type.includes('image')) {
+                        // اگر تصویر ہے
+                        card.innerHTML = `
+                            <img src="${directLink}" alt="Memory" loading="lazy">
+                            <div class="media-info">
+                                <h3>${file.name}</h3>
+                                <p>تصویر</p>
+                            </div>
+                        `;
+                        // کلک کرنے پر فل سکرین دکھانا
+                        card.addEventListener('click', () => openModal('image', directLink));
+                    } else if (file.type.includes('video')) {
+                        // اگر ویڈیو ہے
+                        card.classList.add('is-video');
+                        card.innerHTML = `
+                            <video src="${directLink}" preload="metadata"></video>
+                            <div class="video-overlay"><div class="play-icon"></div></div>
+                            <div class="media-info">
+                                <h3>${file.name}</h3>
+                                <p>ویڈیو</p>
+                            </div>
+                        `;
+                        // کلک کرنے پر فل سکرین چلانا
+                        card.addEventListener('click', () => openModal('video', directLink));
+                    } else {
+                        return; // کوئی اور فائل ہے تو چھوڑ دیں
+                    }
+
+                    gallery.appendChild(card);
+                });
+            } else {
+                gallery.innerHTML = '<div class="loading" style="color: #aaa;">Abhi tak koi media upload nahi kiya gaya. 😊</div>';
+            }
+        })
+        .catch(err => {
+            loader.style.display = 'none';
+            gallery.innerHTML = '<div class="loading" style="color: #ff4b4b;">Media load nahi ho saka. Connection check karein!</div>';
+            console.error(err);
+        });
+
+    // ماڈل اوپن کرنے کا فنکشن
+    function openModal(type, src) {
+        modalContent.innerHTML = ''; // پرانا میڈیا صاف کریں
+        if (type === 'image') {
+            const img = document.createElement('img');
+            img.src = src;
+            modalContent.appendChild(img);
+        } else if (type === 'video') {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.autoplay = true;
+            modalContent.appendChild(video);
+        }
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden'; // بیک گراؤنڈ اسکرول بند کریں
+    }
+
+    // ماڈل بند کرنے کا فنکشن
+    function closeMediaModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = ''; // بیک گراؤنڈ اسکرول دوبارہ کھولیں
+        // اگر ویڈیو چل رہی ہو تو اسے بند کریں
+        const video = modalContent.querySelector('video');
+        if (video) video.pause();
+    }
+
+    closeModal.addEventListener('click', closeMediaModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeMediaModal(); // اگر بیک گراؤنڈ پر کلک ہو تو بند کریں
     });
+    // Escape کی Key سے بند کرنا
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeMediaModal();
+    });
+
 </script>
 
 </body>
