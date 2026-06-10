@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Royal Love Portal 👑</title>
+  <title>Royal Love Portal 💖</title>
 
-  <!-- Session Guard -->
   <script>
     if (sessionStorage.getItem("accessGranted") !== "true") {
       window.location.replace("index.html");
     }
   </script>
 
-  <!-- Premium Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,500;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --royal-black: #09090d;
-      --gold-primary: #ffd700;
-      --gold-glow: #d4af37;
-      --gold-dark: #aa8416;
-      --love-pink: #ff2a74;
-      --love-glow: rgba(255, 42, 116, 0.35);
-      --glass-bg: rgba(15, 15, 25, 0.55);
-      --glass-border: rgba(212, 175, 55, 0.18);
-      --text-main: #fcfbfa;
-      --text-muted: #c3c1be;
+      --gold: #f0c27f;
+      --gold-bright: #ffd700;
+      --gold-dark: #c5963a;
+      --rose: #e91e63;
+      --rose-light: #ff6f91;
+      --purple: #7b2ff7;
+      --purple-light: #c471ed;
+      --bg-dark: #05050a;
+      --bg-card: rgba(15, 12, 25, 0.75);
+      --text: #f5f0ff;
+      --muted: rgba(245, 240, 255, 0.7);
     }
 
     * {
@@ -35,275 +34,607 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     html, body {
       width: 100%;
-      min-height: 100dvh;
-      background-color: var(--royal-black);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--text-main);
+      min-height: 100%;
       overflow-x: hidden;
-      overflow-y: auto;
+    }
+
+    body {
+      min-height: 100dvh;
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
       user-select: none;
       -webkit-user-select: none;
-    }
-
-    /* Ambient Rising Shine & Animated Mesh Background */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       position: relative;
-      padding: 40px 16px;
     }
 
-    body::before {
-      content: "";
+    /* ══════════ CANVAS BACKGROUND ══════════ */
+    #bgCanvas {
       position: fixed;
-      inset: 0;
-      z-index: -2;
-      background: linear-gradient(135deg, #09090d 0%, #161124 50%, #0d1611 100%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    body::after {
-      content: "";
+    /* ══════════ RISING SHINY TEXT WALL ══════════ */
+    .shiny-text-wall {
       position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15), transparent 45%),
-        radial-gradient(circle at 10% 30%, rgba(255, 42, 116, 0.08), transparent 35%),
-        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.08), transparent 40%);
-      filter: blur(40px);
-      animation: ambientShine 12s ease-in-out infinite alternate;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    @keyframes ambientShine {
-      0% { opacity: 0.8; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.05); }
-    }
-
-    /* Premium Container Card with Glassmorphism */
-    .container {
-      width: min(100%, 780px);
-      padding: 45px 35px;
-      border-radius: 28px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 
-        0 30px 70px rgba(0, 0, 0, 0.8),
-        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 40px rgba(212, 175, 55, 0.05);
-      animation: royalFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes royalFadeIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.97); filter: blur(5px); }
-      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    }
-
-    /* Royal Badge */
-    .badge {
-      display: inline-block;
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--gold-primary);
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      margin-bottom: 24px;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-    }
-
-    /* Cinematic Royal Typography */
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(32px, 4.5vw, 48px);
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(180deg, #ffffff 0%, #ffe999 60%, #d4af37 100%);
+    .shiny-line {
+      position: absolute;
+      white-space: nowrap;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(16px, 2.5vw, 26px);
+      color: transparent;
+      background: linear-gradient(90deg, transparent, rgba(240, 194, 127, 0.12), rgba(255, 215, 0, 0.18), rgba(240, 194, 127, 0.12), transparent);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-      margin-bottom: 20px;
-      line-height: 1.2;
+      background-clip: text;
+      animation: riseText linear infinite;
+      opacity: 0;
+      filter: blur(0.3px);
+      letter-spacing: 1px;
     }
 
-    /* Luxury Quote Block */
-    .quote-box {
-      font-family: 'Cinzel', serif;
-      font-style: italic;
-      font-size: 16px;
-      color: var(--gold-primary);
-      opacity: 0.9;
+    @keyframes riseText {
+      0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      85% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(30px);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════ AMBIENT GLOWS ══════════ */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 1;
+      pointer-events: none;
+      animation: glowPulse 6s ease-in-out infinite alternate;
+    }
+
+    .glow-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(240, 194, 127, 0.08);
+      top: -10%;
+      right: -5%;
+    }
+
+    .glow-2 {
+      width: 350px;
+      height: 350px;
+      background: rgba(233, 30, 99, 0.07);
+      bottom: 5%;
+      left: -8%;
+      animation-delay: 2s;
+    }
+
+    .glow-3 {
+      width: 300px;
+      height: 300px;
+      background: rgba(123, 47, 247, 0.06);
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 4s;
+    }
+
+    @keyframes glowPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.25); }
+    }
+
+    /* ══════════ MAIN WRAPPER ══════════ */
+    .main-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 30px 16px;
+    }
+
+    /* ══════════ CROWN ICON ══════════ */
+    .crown-icon {
+      font-size: 52px;
+      animation: crownFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+      margin-bottom: 10px;
+    }
+
+    @keyframes crownFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    /* ══════════ ROYAL BADGE ══════════ */
+    .royal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.1), rgba(255, 215, 0, 0.06));
+      border: 1px solid rgba(240, 194, 127, 0.2);
       margin-bottom: 20px;
+      animation: badgeGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.05); }
+      100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.15); }
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
+
+    /* ══════════ MAIN TITLE ══════════ */
+    .main-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-dark), var(--gold-bright));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmerGold 4s ease-in-out infinite;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.25));
+    }
+
+    @keyframes shimmerGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .title-heart {
+      display: inline-block;
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+    }
+
+    /* ══════════ SUBTITLE ══════════ */
+    .subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(20px, 3.5vw, 32px);
+      color: var(--rose-light);
+      margin-bottom: 24px;
+      opacity: 0.85;
+    }
+
+    /* ══════════ QUOTE CONTAINER ══════════ */
+    .quote-container {
+      max-width: 620px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .quote-container::before,
+    .quote-container::after {
+      content: '"';
+      font-family: 'Great Vibes', cursive;
+      font-size: 50px;
+      color: rgba(240, 194, 127, 0.25);
+      position: absolute;
+      line-height: 1;
+    }
+
+    .quote-container::before {
+      top: -15px;
+      right: -5px;
+    }
+
+    .quote-container::after {
+      bottom: -30px;
+      left: -5px;
+    }
+
+    .quote-text {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 300;
+      font-size: clamp(14px, 2vw, 17px);
+      line-height: 2;
+      color: var(--muted);
+      padding: 0 20px;
+    }
+
+    .quote-highlight {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ══════════ DIVIDER ══════════ */
+    .royal-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 28px auto;
+      max-width: 300px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240, 194, 127, 0.3), transparent);
+    }
+
+    .divider-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    }
+
+    /* ══════════ SCROLLING QUOTES TICKER ══════════ */
+    .quote-ticker {
+      width: 100%;
+      max-width: 680px;
+      overflow: hidden;
+      margin: 0 auto 30px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(240, 194, 127, 0.1);
+      border-bottom: 1px solid rgba(240, 194, 127, 0.1);
+      position: relative;
+    }
+
+    .ticker-track {
+      display: flex;
+      animation: tickerScroll 25s linear infinite;
+      width: max-content;
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      padding: 0 30px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(240, 194, 127, 0.45);
       letter-spacing: 0.5px;
     }
 
-    .quote-box::before, .quote-box::after {
-      content: " ✧ ";
-      color: var(--love-pink);
+    .ticker-item .sep {
+      margin: 0 8px;
+      color: var(--rose);
+      opacity: 0.5;
     }
 
-    .description-text {
-      font-size: clamp(14px, 2vw, 16.5px);
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--text-muted);
-      margin: 0 auto 35px;
-      max-width: 600px;
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .description-text span {
-      color: var(--text-main);
-      font-weight: 400;
-    }
-
-    /* Premium Modern Buttons Grid */
-    .grid-layout {
+    /* ══════════ BUTTONS ══════════ */
+    .buttons-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 10px;
+      gap: 14px;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
     }
 
-    .btn-royal {
+    .royal-btn {
       position: relative;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 500;
-      font-size: 14.5px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      padding: 18px 24px;
-      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 62px;
+      gap: 8px;
+      padding: 16px 14px;
+      border-radius: 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      text-decoration: none;
       cursor: pointer;
+      min-height: 58px;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--text-main);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid transparent;
     }
 
-    /* Individual Button Themes with Custom Filters/Glows */
-    
-    /* 1. Couples Pics: Subtle Gold Aura */
-    .btn-couples {
-      border-color: rgba(212, 175, 55, 0.25);
-      background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(0,0,0,0));
-    }
-    .btn-couples:hover {
-      background: rgba(212, 175, 55, 0.12);
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
-      color: var(--gold-primary);
+    .royal-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
 
-    /* 2. Mood Booster: Clean Elegant Frost White */
-    .btn-mood {
+    .royal-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .royal-btn:hover::before {
+      opacity: 1;
+    }
+
+    .royal-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg) translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .royal-btn:hover::after {
+      transform: rotate(45deg) translateX(100%);
+    }
+
+    /* Gold Button */
+    .btn-royal-gold {
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.15), rgba(255, 215, 0, 0.08));
+      border-color: rgba(240, 194, 127, 0.3);
+      color: var(--gold);
+      box-shadow: 0 4px 20px rgba(240, 194, 127, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-gold:hover {
+      box-shadow: 0 8px 35px rgba(240, 194, 127, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(240, 194, 127, 0.5);
+    }
+    .btn-royal-gold::before {
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.2), rgba(255, 215, 0, 0.12));
+    }
+
+    /* Sad Button */
+    .btn-royal-sad {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
       border-color: rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.04);
+      color: #ffd6e0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
-    .btn-mood:hover {
-      background: rgba(255, 255, 255, 0.95);
-      color: #0d0d11;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    .btn-royal-sad:hover {
+      box-shadow: 0 8px 35px rgba(255, 111, 145, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 111, 145, 0.4);
     }
-
-    /* 3. Music Hub: Soft Velvet Dark Ambient */
-    .btn-music {
-      border-color: rgba(147, 51, 234, 0.25);
-      background: linear-gradient(135deg, rgba(147,51,234,0.05), rgba(0,0,0,0));
-    }
-    .btn-music:hover {
-      background: rgba(147, 51, 234, 0.15);
-      border-color: #a855f7;
-      box-shadow: 0 0 25px rgba(147, 51, 234, 0.3);
-      color: #dfc5ff;
+    .btn-royal-sad::before {
+      background: linear-gradient(135deg, rgba(255, 111, 145, 0.1), rgba(255, 255, 255, 0.05));
     }
 
-    /* 4. Wake Hubby: Royal Liquid Love Red/Pink */
-    .btn-hubby {
-      border-color: rgba(255, 42, 116, 0.3);
-      background: linear-gradient(135deg, rgba(255, 42, 116, 0.1), rgba(0,0,0,0));
+    /* Music Button */
+    .btn-royal-music {
+      background: linear-gradient(135deg, rgba(16, 14, 28, 0.9), rgba(20, 18, 35, 0.85));
+      border-color: rgba(196, 113, 237, 0.25);
+      color: var(--purple-light);
+      box-shadow: 0 4px 20px rgba(123, 47, 247, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
-    .btn-hubby:hover {
-      background: linear-gradient(135deg, #ff2a74, #ff5e97);
-      border-color: transparent;
-      box-shadow: 0 0 30px var(--love-glow);
-      color: #fff;
+    .btn-royal-music:hover {
+      box-shadow: 0 8px 35px rgba(123, 47, 247, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border-color: rgba(196, 113, 237, 0.45);
     }
-
-    /* 5. Upload Zone: Deep Space Blue/Gold Combo spanning full-width on desk too */
-    .btn-upload {
-      grid-column: span 2;
-      border-color: rgba(212, 175, 55, 0.2);
-      background: linear-gradient(90deg, rgba(212,175,55,0.05) 0%, rgba(255,42,116,0.05) 100%);
-    }
-    .btn-upload:hover {
-      background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(255,42,116,0.15) 100%);
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+    .btn-royal-music::before {
+      background: linear-gradient(135deg, rgba(123, 47, 247, 0.15), rgba(196, 113, 237, 0.08));
     }
 
-    .btn-royal:hover {
-      transform: translateY(-4px);
+    /* Hubby Button */
+    .btn-royal-hubby {
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.18), rgba(233, 30, 99, 0.06));
+      border-color: rgba(233, 30, 99, 0.3);
+      color: var(--rose-light);
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-hubby:hover {
+      box-shadow: 0 8px 35px rgba(233, 30, 99, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(233, 30, 99, 0.5);
+    }
+    .btn-royal-hubby::before {
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.2), rgba(255, 111, 145, 0.1));
     }
 
-    .btn-royal:active {
-      transform: translateY(-1px);
+    /* AI Button */
+    .btn-royal-ai {
+      background: linear-gradient(135deg, rgba(109, 94, 252, 0.18), rgba(139, 92, 246, 0.06));
+      border-color: rgba(109, 94, 252, 0.3);
+      color: #c4b5fd;
+      box-shadow: 0 4px 20px rgba(109, 94, 252, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-ai:hover {
+      box-shadow: 0 8px 35px rgba(109, 94, 252, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(109, 94, 252, 0.5);
+    }
+    .btn-royal-ai::before {
+      background: linear-gradient(135deg, rgba(109, 94, 252, 0.2), rgba(139, 92, 246, 0.1));
     }
 
-    /* Footer Aesthetics */
-    .footer-note {
-      margin-top: 35px;
+    .btn-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ══════════ FOOTER ══════════ */
+    .footer-section {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(240, 194, 127, 0.08);
+    }
+
+    .footer-text {
+      font-family: 'Quicksand', sans-serif;
       font-size: 12px;
       font-weight: 300;
-      color: var(--text-muted);
-      opacity: 0.6;
-      letter-spacing: 0.8px;
+      color: rgba(240, 194, 127, 0.35);
+      letter-spacing: 1px;
     }
 
-    /* Optimized Smooth Interactive Sparks/Hearts */
-    .touch-heart {
-      position: absolute;
-      color: var(--love-pink);
-      font-size: 20px;
+    .footer-hearts {
+      margin-top: 6px;
+      font-size: 10px;
+      color: rgba(233, 30, 99, 0.4);
+      letter-spacing: 4px;
+    }
+
+    /* ══════════ FLOATING HEARTS ══════════ */
+    .floating-heart {
+      position: fixed;
       pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 8px var(--love-pink));
-      animation: dynamicPop 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-      will-change: transform, opacity;
+      z-index: 2;
+      animation: floatHeart linear infinite;
+      opacity: 0;
     }
 
-    @keyframes dynamicPop {
-      0% { transform: scale(0) translate3d(0,0,0); opacity: 1; }
-      100% { transform: scale(2) translate3d(0, -60px, 0); opacity: 0; }
-    }
-
-    /* Responsive Grid Adjustments */
-    @media (max-width: 680px) {
-      .container {
-        padding: 35px 20px 25px;
-        border-radius: 24px;
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+        opacity: 0;
       }
-      .grid-layout {
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════ CLICK HEART ══════════ */
+    .click-heart {
+      position: absolute;
+      pointer-events: none;
+      z-index: 999;
+      color: var(--rose-light);
+      font-size: 18px;
+      animation: clickPop 0.8s ease-out forwards;
+    }
+
+    @keyframes clickPop {
+      0% {
+        transform: scale(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5) translateY(-60px);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════ SPARKLE CURSOR TRAIL ══════════ */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      animation: sparkleFade 0.6s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 6px var(--gold-bright);
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+        box-shadow: 0 0 0px var(--gold-bright);
+      }
+    }
+
+    /* ══════════ SCROLL REVEAL ══════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealUp 0.8s ease forwards;
+    }
+
+    .reveal-d1 { animation-delay: 0.1s; }
+    .reveal-d2 { animation-delay: 0.25s; }
+    .reveal-d3 { animation-delay: 0.4s; }
+    .reveal-d4 { animation-delay: 0.55s; }
+    .reveal-d5 { animation-delay: 0.7s; }
+    .reveal-d6 { animation-delay: 0.85s; }
+    .reveal-d7 { animation-delay: 1.0s; }
+
+    @keyframes revealUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 640px) {
+      .buttons-grid {
         grid-template-columns: 1fr;
+        max-width: 340px;
       }
-      .btn-upload {
-        grid-column: span 1;
+      .royal-btn {
+        width: 100%;
       }
-      h1 {
-        font-size: 28px;
+      .shiny-line {
+        font-size: 14px;
       }
     }
   </style>
@@ -311,80 +642,283 @@
 
 <body oncontextmenu="return false;">
 
-  <div class="container">
-    <div class="badge">Designed Exclusively For Royalty</div>
+  <!-- Background Canvas for particles -->
+  <canvas id="bgCanvas"></canvas>
 
-    <h1>Royal Love Portal 👑</h1>
-    
-    <div class="quote-box">Tu maza hai meri har hansi ka, tu sukoon hai meri har khamoshi ka...</div>
+  <!-- Rising Shiny Text Wall -->
+  <div class="shiny-text-wall" id="shinyWall"></div>
 
-    <div class="description-text">
-      Yeh sirf ek aam website nahi hai... Yeh ek digital haseen tohfa hai jo <span>Sirf Aur Sirf Aapke Liye</span> dhyan se tarasha gaya hai. Har ek page, har ek corner aur iska har ek ehsaas sirf aapse shuru hota hai. ✨
+  <!-- Ambient Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Main Content -->
+  <div class="main-wrapper">
+
+    <!-- Crown -->
+    <div class="crown-icon reveal reveal-d1">👑</div>
+
+    <!-- Badge -->
+    <div class="royal-badge reveal reveal-d2">
+      <span class="badge-dot"></span>
+      A Little Place Made With Love
+      <span class="badge-dot"></span>
     </div>
 
-    <div class="grid-layout">
-      <a href="couples pics pages/password.html" class="btn btn-royal btn-couples">
-        Our Couples Pics 💙
+    <!-- Title -->
+    <h1 class="main-title reveal reveal-d3">
+      Royal Love Portal <span class="title-heart">💖</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="subtitle reveal reveal-d3">~ For My Most Special Person ~</p>
+
+    <!-- Quote -->
+    <div class="quote-container reveal reveal-d4">
+      <p class="quote-text">
+        Yeh sirf ek website nahi... yeh ek <span class="quote-highlight">beautiful gift</span> hai,
+        specially for my <span class="quote-highlight">favorite person</span> ✨<br><br>
+        Har page, har button aur har line sirf <span class="quote-highlight">aap ke liye</span> banayi gayi hai 💎
+      </p>
+    </div>
+
+    <!-- Scrolling Quote Ticker -->
+    <div class="quote-ticker reveal reveal-d5">
+      <div class="ticker-track" id="tickerTrack">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="royal-divider reveal reveal-d5">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons-grid">
+      <a href="couples pics pages/password.html" class="royal-btn btn-royal-gold reveal reveal-d5">
+        <span class="btn-icon">💙</span> Our Couples Pics
       </a>
 
-      <a href="jokes pages/if_you_are_sad.html" class="btn btn-royal btn-mood">
-        Agar Mood Kharab Ho To 🤗
+      <a href="jokes pages/if_you_are_sad.html" class="royal-btn btn-royal-sad reveal reveal-d5">
+        <span class="btn-icon">🤗</span> Agar Mood Kharab Ho To
       </a>
 
-      <a href="music hub/password.html" class="btn btn-royal btn-music">
-        Music Hub 🎼🎶
+      <a href="music hub/password.html" class="royal-btn btn-royal-music reveal reveal-d6">
+        <span class="btn-icon">🎶</span> Music Hub
       </a>
 
-      <a href="password.html" class="btn btn-royal btn-hubby">
-        Wake Your Hubby 🥰
+      <a href="password.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
+        <span class="btn-icon">🥰</span> Wake Your Hubby
       </a>
 
-      <a href="https://drive.proton.me/urls/RT95CCJCRG#FxdN81SjW0eS" class="btn btn-royal btn-upload">
-        Upload Zone 🖼️📸✨
+      <a href="https://drive.proton.me/urls/RT95CCJCRG#FxdN81SjW0eS" class="royal-btn btn-royal-ai reveal reveal-d7">
+        <span class="btn-icon">📸</span> Upload Zone ✨
       </a>
     </div>
 
-    <div class="footer-note">
-      Crafted with ultimate precision, custom filters, and endless magic.
+    <!-- Footer -->
+    <div class="footer-section reveal reveal-d7">
+      <p class="footer-text">Made with softness, style & a little bit of magic</p>
+      <p class="footer-hearts">♥ ♥ ♥ ♥ ♥</p>
     </div>
+
   </div>
 
-  <!-- Security and Heart Animation Scripts -->
   <script>
-    // Disable DevTools shortcuts
+    // ══════════ SECURITY ══════════
     document.onkeydown = function(e) {
-      if (e.keyCode == 123) return false;
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-      if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+      if (e.keyCode === 123) return false;
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) return false;
+      if (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) return false;
     };
 
-    // Smooth Click/Touch Spawning Effect
-    document.addEventListener("click", function(e){
-      if(!e.target.classList.contains('btn-royal')) {
-        createHeart(e.pageX, e.pageY);
-      }
-    });
+    // ══════════ PARTICLE CANVAS ══════════
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
 
-    document.addEventListener("touchstart", function(e){
-      if(!e.target.classList.contains('btn-royal')) {
-        let touch = e.touches[0];
-        createHeart(touch.pageX, touch.pageY);
-      }
-    });
-
-    function createHeart(x, y){
-      const heart = document.createElement("div");
-      heart.className = "touch-heart";
-      heart.innerHTML = "❤";
-      // Offset values to spawn exactly at cursor center
-      heart.style.left = (x - 10) + "px";
-      heart.style.top = (y - 10) + "px";
-      document.body.appendChild(heart);
-      
-      setTimeout(() => {
-        heart.remove();
-      }, 800);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedY = -(Math.random() * 0.3 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+        const colors = [
+          '240, 194, 127',
+          '255, 215, 0',
+          '233, 30, 99',
+          '196, 113, 237',
+          '255, 111, 145'
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.pulse += this.pulseSpeed;
+        if (this.y < -10) this.reset();
+        if (this.y < -10) this.y = canvas.height + 10;
+      }
+      draw() {
+        const glow = Math.sin(this.pulse) * 0.3 + 0.7;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * glow, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * glow})`;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * glow * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * glow * 0.15})`;
+        ctx.fill();
+      }
+    }
+
+    const particles = Array.from({ length: 80 }, () => new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ══════════ RISING SHINY TEXTS ══════════
+    const urduQuotes = [
+      "Mohabbat mein har lamha priceless hota hai 💕",
+      "Tum meri duniya ka sabse khoobsurat hissa ho ✨",
+      "Dil ke jagah dil se baat karni chahiye 💖",
+      "Tumse milna jaise Chand raat ka dina hota hai 🌙",
+      "Mohabbat ka dusra naam TUM ho 💎",
+      "Har dua mein tera naam shamil hai 🤲",
+      "Zindagi tumse hai, khushi tumse hai 🌸",
+      "Tumhari smile sabse pyari hai 💫",
+      "Ishq mein hum ne sirf tumhe chuna ♥",
+      "Safar mein tum saath ho to manzil bhi khoobsurat hai 🏰",
+      "Tum meri favourite boring story bhi ho 😂💕",
+      "Har raat sirf tumhare baare mein sochta hoon 🌌",
+      "Meri duniya mein sirf ek raj KumarI hai 👑",
+      "Tumhe kho na paana, sabse badi jeet hai 🏆",
+      "Aaj bhi tumse zyada koi nahi chahta mujhe 💗",
+      "Tum meri calm ho, meri peace ho 🕊️",
+      "Ek nazar mein hi dil chura liya tumne 🥀",
+      "Tumhe pana sab se badi blessing hai 🌟",
+    ];
+
+    const shinyWall = document.getElementById('shinyWall');
+
+    function createShinyLine() {
+      const line = document.createElement('div');
+      line.className = 'shiny-line';
+      const quote = urduQuotes[Math.floor(Math.random() * urduQuotes.length)];
+      line.textContent = quote;
+      const left = Math.random() * 90 + 5;
+      line.style.left = left + '%';
+      const duration = Math.random() * 15 + 20;
+      line.style.animationDuration = duration + 's';
+      line.style.animationDelay = Math.random() * 2 + 's';
+      line.style.fontSize = (Math.random() * 8 + 14) + 'px';
+      shinyWall.appendChild(line);
+      setTimeout(() => line.remove(), (duration + 3) * 1000);
+    }
+
+    // Spawn initial batch
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => createShinyLine(), i * 800);
+    }
+    // Keep spawning
+    setInterval(createShinyLine, 3000);
+
+    // ══════════ SCROLLING QUOTE TICKER ══════════
+    const tickerQuotes = [
+      "Mohabbat ka dusra naam TUM ho",
+      "Har lamha tumhare saath guzarna chahta hoon",
+      "Tum meri duniya ka sabse khoobsurat hissa ho",
+      "Dil ke jagah dil se baat karni chahiye",
+      "Zindagi tumse hai, khushi tumse hai",
+      "Tumhari smile sabse pyari hai",
+      "Tum meri calm ho, meri peace ho",
+      "Tumhe pana sab se badi blessing hai",
+    ];
+
+    const tickerTrack = document.getElementById('tickerTrack');
+    let tickerHTML = '';
+    for (let j = 0; j < 2; j++) {
+      tickerQuotes.forEach(q => {
+        tickerHTML += `<span class="ticker-item">${q} <span class="sep">✦</span></span>`;
+      });
+    }
+    tickerTrack.innerHTML = tickerHTML;
+
+    // ══════════ FLOATING HEARTS ══════════
+    function spawnFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      const hearts = ['♥', '♡', '❤', '💕', '💗'];
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.fontSize = (Math.random() * 14 + 10) + 'px';
+      const dur = Math.random() * 8 + 10;
+      heart.style.animationDuration = dur + 's';
+      heart.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+      heart.style.color = `hsl(${Math.random() * 30 + 330}, 80%, 70%)`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), dur * 1000);
+    }
+
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => spawnFloatingHeart(), i * 1500);
+    }
+    setInterval(spawnFloatingHeart, 2500);
+
+    // ══════════ CLICK / TOUCH HEARTS ══════════
+    function createClickHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      const emojis = ['❤', '💕', '💖', '✨', '💗'];
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = x + 'px';
+      heart.style.top = y + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 900);
+    }
+
+    document.addEventListener('click', e => createClickHeart(e.pageX, e.pageY));
+    document.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      createClickHeart(t.pageX, t.pageY);
+    });
+
+    // ══════════ SPARKLE CURSOR TRAIL ══════════
+    let sparkleThrottle = 0;
+    document.addEventListener('mousemove', e => {
+      sparkleThrottle++;
+      if (sparkleThrottle % 3 !== 0) return;
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 600);
+    });
   </script>
 
 </body>
