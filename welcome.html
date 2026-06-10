@@ -3,244 +3,307 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Royal Love Portal 💖</title>
+  <title>Royal Love Portal 👑</title>
 
+  <!-- Session Guard -->
   <script>
     if (sessionStorage.getItem("accessGranted") !== "true") {
       window.location.replace("index.html");
     }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Fredoka+One&family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Premium Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,500;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --gold:#ffd36b;
-      --gold-2:#ffb347;
-      --pink:#ff4d88;
-      --pink-2:#ec4899;
-      --text:#fffafc;
-      --muted:rgba(255,255,255,.78);
-      --card:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.16);
-      --shadow:0 20px 60px rgba(0,0,0,.35);
+    :root {
+      --royal-black: #09090d;
+      --gold-primary: #ffd700;
+      --gold-glow: #d4af37;
+      --gold-dark: #aa8416;
+      --love-pink: #ff2a74;
+      --love-glow: rgba(255, 42, 116, 0.35);
+      --glass-bg: rgba(15, 15, 25, 0.55);
+      --glass-border: rgba(212, 175, 55, 0.18);
+      --text-main: #fcfbfa;
+      --text-muted: #c3c1be;
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    html, body{
-      width:100%;
-      min-height:100%;
+    html, body {
+      width: 100%;
+      min-height: 100dvh;
+      background-color: var(--royal-black);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      overflow-x: hidden;
+      overflow-y: auto;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-   body{
-  min-height:100dvh;
-  overflow-x:hidden;
-  overflow-y:auto;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:var(--text);
-  background:#060608;
-  position:relative;
-  font-family:'Lexend', sans-serif;
-  user-select:none;
-  -webkit-user-select:none;
-
-  padding:20px 12px;
-}
-
-    body::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(6,6,8,.35), rgba(6,6,8,.72)),
-        url('bg.PNG') center/cover no-repeat;
-      filter:saturate(1.15) contrast(1.02);
-      z-index:-2;
-      transform:scale(1.02);
+    /* Ambient Rising Shine & Animated Mesh Background */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 40px 16px;
     }
 
-    body::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at top, rgba(255,211,107,0.18), transparent 35%),
-        radial-gradient(circle at 20% 20%, rgba(255,77,136,0.14), transparent 25%),
-        radial-gradient(circle at 80% 75%, rgba(236,72,153,0.10), transparent 28%),
-        linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35));
-      z-index:-1;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(135deg, #09090d 0%, #161124 50%, #0d1611 100%);
     }
 
-    .container{
-  width:min(100%, 860px);
-  padding:32px 20px 24px;
-  border-radius:24px;
-
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.12);
-
-  box-shadow:0 12px 35px rgba(0,0,0,.25);
-
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-
-  animation:fadeIn .8s ease;
-}
-
-    .badge{
-      display:inline-block;
-      padding:10px 18px;
-      border-radius:999px;
-      font-size:13px;
-      letter-spacing:.5px;
-      color:#fff4c8;
-      background:rgba(255,211,107,.12);
-      border:1px solid rgba(255,211,107,.25);
-      margin-bottom:18px;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15), transparent 45%),
+        radial-gradient(circle at 10% 30%, rgba(255, 42, 116, 0.08), transparent 35%),
+        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.08), transparent 40%);
+      filter: blur(40px);
+      animation: ambientShine 12s ease-in-out infinite alternate;
     }
 
-    h1{
-      font-family:'Playfair Display', serif;
-      font-style:italic;
-      font-size:clamp(34px, 5vw, 54px);
-      color:var(--gold);
-      text-shadow:0 0 18px rgba(255,211,107,0.35);
-      margin-bottom:14px;
-      line-height:1.1;
+    @keyframes ambientShine {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
     }
 
-    .typing{
-      font-size:clamp(15px, 2.2vw, 18px);
-      font-weight:300;
-      line-height:2;
-      color:var(--muted);
-      margin:0 auto 28px;
-      max-width:650px;
+    /* Premium Container Card with Glassmorphism */
+    .container {
+      width: min(100%, 780px);
+      padding: 45px 35px;
+      border-radius: 28px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.8),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.05);
+      animation: royalFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .buttons{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:14px;
-      justify-content:center;
-      margin-top:8px;
+    @keyframes royalFadeIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); filter: blur(5px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
 
-    .btn{
-      font-family:'Fredoka One', cursive;
-      padding:15px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      font-weight:400;
-      font-size:15px;
-      transition:0.28s ease;
-      border:1px solid transparent;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:56px;
-      letter-spacing:.3px;
-      box-shadow:0 10px 26px rgba(0,0,0,.18);
+    /* Royal Badge */
+    .badge {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
     }
 
-    .btn:hover{
-      transform:translateY(-3px) scale(1.01);
+    /* Cinematic Royal Typography */
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(180deg, #ffffff 0%, #ffe999 60%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+      margin-bottom: 20px;
+      line-height: 1.2;
     }
 
-    .btn-gold{
-      background:linear-gradient(135deg, #ffe08a, #ffb347);
-      color:#1b1200;
-      box-shadow:0 0 24px rgba(255,211,107,0.28);
+    /* Luxury Quote Block */
+    .quote-box {
+      font-family: 'Cinzel', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--gold-primary);
+      opacity: 0.9;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
     }
 
-    .btn-sad{
-      background:rgba(255,255,255,0.92);
-      color:#b30059;
-      border-color:rgba(255,255,255,.25);
+    .quote-box::before, .quote-box::after {
+      content: " ✧ ";
+      color: var(--love-pink);
     }
 
-    .btn-music{
-      background:rgba(17,17,17,.82);
-      color:#ffe08a;
-      border-color:rgba(255,211,107,.35);
+    .description-text {
+      font-size: clamp(14px, 2vw, 16.5px);
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin: 0 auto 35px;
+      max-width: 600px;
     }
 
-    .btn-hubby{
-      background:linear-gradient(135deg, #ff4d88, #ec4899);
-      color:#fff;
-      box-shadow:0 0 24px rgba(236,72,153,0.28);
+    .description-text span {
+      color: var(--text-main);
+      font-weight: 400;
     }
 
-    .btn-ai{
-      background:linear-gradient(135deg, #6d5efc, #8b5cf6);
-      color:#fff;
-      box-shadow:0 0 24px rgba(109,94,252,0.28);
+    /* Premium Modern Buttons Grid */
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 10px;
     }
 
-    /* گیلری کا سرخ نیٹ فلکس اسٹائل بٹن */
-    .btn-netflix {
-      background: linear-gradient(135deg, #E50914, #b20710);
+    .btn-royal {
+      position: relative;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14.5px;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      padding: 18px 24px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 62px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Individual Button Themes with Custom Filters/Glows */
+    
+    /* 1. Couples Pics: Subtle Gold Aura */
+    .btn-couples {
+      border-color: rgba(212, 175, 55, 0.25);
+      background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(0,0,0,0));
+    }
+    .btn-couples:hover {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+      color: var(--gold-primary);
+    }
+
+    /* 2. Mood Booster: Clean Elegant Frost White */
+    .btn-mood {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .btn-mood:hover {
+      background: rgba(255, 255, 255, 0.95);
+      color: #0d0d11;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    /* 3. Music Hub: Soft Velvet Dark Ambient */
+    .btn-music {
+      border-color: rgba(147, 51, 234, 0.25);
+      background: linear-gradient(135deg, rgba(147,51,234,0.05), rgba(0,0,0,0));
+    }
+    .btn-music:hover {
+      background: rgba(147, 51, 234, 0.15);
+      border-color: #a855f7;
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.3);
+      color: #dfc5ff;
+    }
+
+    /* 4. Wake Hubby: Royal Liquid Love Red/Pink */
+    .btn-hubby {
+      border-color: rgba(255, 42, 116, 0.3);
+      background: linear-gradient(135deg, rgba(255, 42, 116, 0.1), rgba(0,0,0,0));
+    }
+    .btn-hubby:hover {
+      background: linear-gradient(135deg, #ff2a74, #ff5e97);
+      border-color: transparent;
+      box-shadow: 0 0 30px var(--love-glow);
       color: #fff;
-      box-shadow: 0 0 24px rgba(229, 9, 20, 0.35);
     }
 
-    .footer-note{
-      margin-top:18px;
-      font-size:13px;
-      color:rgba(255,255,255,.6);
+    /* 5. Upload Zone: Deep Space Blue/Gold Combo spanning full-width on desk too */
+    .btn-upload {
+      grid-column: span 2;
+      border-color: rgba(212, 175, 55, 0.2);
+      background: linear-gradient(90deg, rgba(212,175,55,0.05) 0%, rgba(255,42,116,0.05) 100%);
+    }
+    .btn-upload:hover {
+      background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(255,42,116,0.15) 100%);
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
     }
 
-.heart{
-  will-change:transform;
-}
-
-   .touch-heart{
-  position:absolute;
-  color:#ff4d88;
-  font-size:16px;
-  pointer-events:none;
-  animation:pop .7s ease-out forwards;
-}
-    @keyframes floatUp{
-  from{
-    transform:translateY(100vh);
-    opacity:0;
-  }
-
-  to{
-    transform:translateY(-120px);
-    opacity:0;
-  }
-}
-    @keyframes pop{
-      0%{transform:scale(0); opacity:1;}
-      100%{transform:scale(2.5) translateY(-50px); opacity:0;}
+    .btn-royal:hover {
+      transform: translateY(-4px);
     }
 
-    @keyframes fadeIn{
-      from{opacity:0; transform:translateY(24px) scale(.98);}
-      to{opacity:1; transform:translateY(0) scale(1);}
+    .btn-royal:active {
+      transform: translateY(-1px);
     }
 
-    @media (max-width: 720px){
-      .container{
-        padding:30px 18px 22px;
-        border-radius:24px;
+    /* Footer Aesthetics */
+    .footer-note {
+      margin-top: 35px;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      opacity: 0.6;
+      letter-spacing: 0.8px;
+    }
+
+    /* Optimized Smooth Interactive Sparks/Hearts */
+    .touch-heart {
+      position: absolute;
+      color: var(--love-pink);
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 8px var(--love-pink));
+      animation: dynamicPop 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes dynamicPop {
+      0% { transform: scale(0) translate3d(0,0,0); opacity: 1; }
+      100% { transform: scale(2) translate3d(0, -60px, 0); opacity: 0; }
+    }
+
+    /* Responsive Grid Adjustments */
+    @media (max-width: 680px) {
+      .container {
+        padding: 35px 20px 25px;
+        border-radius: 24px;
       }
-      .buttons{
-        grid-template-columns:1fr;
+      .grid-layout {
+        grid-template-columns: 1fr;
       }
-      .btn{
-        width:100%;
+      .btn-upload {
+        grid-column: span 1;
+      }
+      h1 {
+        font-size: 28px;
       }
     }
   </style>
@@ -248,69 +311,79 @@
 
 <body oncontextmenu="return false;">
 
-
   <div class="container">
-    <div class="badge">A little place made with love</div>
+    <div class="badge">Designed Exclusively For Royalty</div>
 
-    <h1>Royal Love Portal 💖</h1>
+    <h1>Royal Love Portal 👑</h1>
+    
+    <div class="quote-box">Tu maza hai meri har hansi ka, tu sukoon hai meri har khamoshi ka...</div>
 
-    <div class="typing">
-      Yeh sirf ek website nahi... 👑<br>
-      yeh ek beautiful gift hai, specially for my favorite person ✨<br><br>
-      Har page, har button aur har line sirf aap ke liye banayi gayi hai 💎
+    <div class="description-text">
+      Yeh sirf ek aam website nahi hai... Yeh ek digital haseen tohfa hai jo <span>Sirf Aur Sirf Aapke Liye</span> dhyan se tarasha gaya hai. Har ek page, har ek corner aur iska har ek ehsaas sirf aapse shuru hota hai. ✨
     </div>
 
-    <div class="buttons">
-      <a href="couples pics pages/password.html" class="btn btn-gold">
+    <div class="grid-layout">
+      <a href="couples pics pages/password.html" class="btn btn-royal btn-couples">
         Our Couples Pics 💙
       </a>
 
-      <a href="jokes pages/if_you_are_sad.html" class="btn btn-sad">
+      <a href="jokes pages/if_you_are_sad.html" class="btn btn-royal btn-mood">
         Agar Mood Kharab Ho To 🤗
       </a>
 
-      <a href="music hub/password.html" class="btn btn-music">
+      <a href="music hub/password.html" class="btn btn-royal btn-music">
         Music Hub 🎼🎶
       </a>
 
-      <a href="password.html" class="btn btn-hubby">
+      <a href="password.html" class="btn btn-royal btn-hubby">
         Wake Your Hubby 🥰
       </a>
 
-      <a href="https://drive.proton.me/urls/RT95CCJCRG#FxdN81SjW0eS" class="btn btn-ai">Upload Zone 🖼️📸✨</a>
-
-      
+      <a href="https://drive.proton.me/urls/RT95CCJCRG#FxdN81SjW0eS" class="btn btn-royal btn-upload">
+        Upload Zone 🖼️📸✨
+      </a>
     </div>
 
     <div class="footer-note">
-      Made with softness, style, and a little bit of magic.
+      Crafted with ultimate precision, custom filters, and endless magic.
     </div>
   </div>
 
+  <!-- Security and Heart Animation Scripts -->
   <script>
+    // Disable DevTools shortcuts
     document.onkeydown = function(e) {
       if (e.keyCode == 123) return false;
       if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
       if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
     };
 
+    // Smooth Click/Touch Spawning Effect
     document.addEventListener("click", function(e){
-      createHeart(e.pageX, e.pageY);
+      if(!e.target.classList.contains('btn-royal')) {
+        createHeart(e.pageX, e.pageY);
+      }
     });
 
     document.addEventListener("touchstart", function(e){
-      let touch = e.touches[0];
-      createHeart(touch.pageX, touch.pageY);
+      if(!e.target.classList.contains('btn-royal')) {
+        let touch = e.touches[0];
+        createHeart(touch.pageX, touch.pageY);
+      }
     });
 
     function createHeart(x, y){
       const heart = document.createElement("div");
       heart.className = "touch-heart";
       heart.innerHTML = "❤";
-      heart.style.left = x + "px";
-      heart.style.top = y + "px";
+      // Offset values to spawn exactly at cursor center
+      heart.style.left = (x - 10) + "px";
+      heart.style.top = (y - 10) + "px";
       document.body.appendChild(heart);
-      setTimeout(()=> heart.remove(), 1000);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 800);
     }
   </script>
 
