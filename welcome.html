@@ -1,823 +1,925 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Shahi Dehleez 👑 — Password Access</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Royal Love Portal 💖</title>
 
-        :root {
-            --gold: #d4a843;
-            --gold-light: #f0d27a;
-            --rose: #e84393;
-            --rose-light: #fd79a8;
-            --violet: #a855f7;
-            --violet-light: #c084fc;
-            --crimson: #ff2d55;
-            --bg-dark: #05050a;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(212, 168, 67, 0.15);
-        }
+  <script>
+    if (sessionStorage.getItem("accessGranted") !== "true") {
+      window.location.replace("index.html");
+    }
+  </script>
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Poppins', 'Quicksand', sans-serif;
-            background: var(--bg-dark);
-            color: #fff;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* ── Ambient Background Glows ── */
-        .ambient-glow {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .glow-gold {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-            top: -10%; left: -5%;
-            animation: floatGlow1 12s ease-in-out infinite;
-        }
-        .glow-rose {
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
-            bottom: -10%; right: -5%;
-            animation: floatGlow2 14s ease-in-out infinite;
-        }
-        .glow-violet {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--violet) 0%, transparent 70%);
-            top: 40%; left: 50%;
-            transform: translate(-50%, -50%);
-            animation: floatGlow3 16s ease-in-out infinite;
-        }
-        .glow-gold-2 {
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
-            bottom: 10%; left: 15%;
-            animation: floatGlow4 10s ease-in-out infinite;
-            opacity: 0.12;
-        }
+  <style>
+    :root {
+      --gold: #f0c27f;
+      --gold-bright: #ffd700;
+      --gold-dark: #c5963a;
+      --rose: #e91e63;
+      --rose-light: #ff6f91;
+      --purple: #7b2ff7;
+      --purple-light: #c471ed;
+      --bg-dark: #05050a;
+      --bg-card: rgba(15, 12, 25, 0.75);
+      --text: #f5f0ff;
+      --muted: rgba(245, 240, 255, 0.7);
+    }
 
-        @keyframes floatGlow1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(60px, 40px) scale(1.15); }
-            66% { transform: translate(-30px, 70px) scale(0.9); }
-        }
-        @keyframes floatGlow2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-50px, -60px) scale(1.1); }
-            66% { transform: translate(40px, -30px) scale(0.95); }
-        }
-        @keyframes floatGlow3 {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-40%, -60%) scale(1.2); }
-        }
-        @keyframes floatGlow4 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -40px) scale(1.15); }
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* ── Particle Canvas ── */
-        #particleCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* ── Sparkle Trail Container ── */
-        .sparkle-trail {
-            position: fixed;
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999;
-            animation: sparkleFade 0.8s ease-out forwards;
-        }
-        @keyframes sparkleFade {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.1) translateY(-20px); }
-        }
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
 
-        /* ── Floating Hearts ── */
-        .floating-heart {
-            position: fixed;
-            pointer-events: none;
-            z-index: 2;
-            animation: heartFloat linear forwards;
-            opacity: 0;
-        }
-        @keyframes heartFloat {
-            0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.6; }
-            100% { opacity: 0; transform: translateY(-100vh) scale(1.2) rotate(45deg); }
-        }
+    body {
+      min-height: 100dvh;
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+    }
 
-        /* ── Click Pop Emoji ── */
-        .click-emoji {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1000;
-            font-size: 24px;
-            animation: emojiPop 1s ease-out forwards;
-        }
-        @keyframes emojiPop {
-            0% { opacity: 1; transform: scale(0.3) translateY(0); }
-            50% { opacity: 1; transform: scale(1.2) translateY(-30px); }
-            100% { opacity: 0; transform: scale(0.5) translateY(-80px); }
-        }
+    /* ══════════ CANVAS BACKGROUND ══════════ */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-        /* ── Main Centered Layout ── */
-        .page-center {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    /* ══════════ RISING SHINY TEXT WALL ══════════ */
+    .shiny-text-wall {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-        /* ── Glass Card ── */
-        .glass-card {
-            position: relative;
-            width: 100%;
-            max-width: 460px;
-            padding: 50px 40px 45px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px) saturate(1.4);
-            -webkit-backdrop-filter: blur(24px) saturate(1.4);
-            border-radius: 28px;
-            border: 1px solid var(--glass-border);
-            box-shadow:
-                0 0 60px rgba(212, 168, 67, 0.06),
-                0 0 120px rgba(232, 67, 147, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05),
-                inset 0 0 40px rgba(212, 168, 67, 0.03);
-            animation: cardAppear 1s ease-out;
-        }
-        @keyframes cardAppear {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
+    .shiny-line {
+      position: absolute;
+      white-space: nowrap;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(16px, 2.5vw, 26px);
+      color: transparent;
+      background: linear-gradient(90deg, transparent, rgba(240, 194, 127, 0.12), rgba(255, 215, 0, 0.18), rgba(240, 194, 127, 0.12), transparent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: riseText linear infinite;
+      opacity: 0;
+      filter: blur(0.3px);
+      letter-spacing: 1px;
+    }
 
-        /* Shifting Gold Border Overlay */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: -1px;
-            right: -1px; bottom: -1px;
-            border-radius: 29px;
-            background: linear-gradient(
-                var(--border-angle, 0deg),
-                transparent 30%,
-                var(--gold) 50%,
-                transparent 70%
-            );
-            z-index: -1;
-            opacity: 0.3;
-            animation: rotateBorder 6s linear infinite;
-        }
-        @keyframes rotateBorder {
-            0% { --border-angle: 0deg; }
-            100% { --border-angle: 360deg; }
-        }
-        @property --border-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
+    @keyframes riseText {
+      0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      85% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(30px);
+        opacity: 0;
+      }
+    }
 
-        /* Inner soft glow pulse */
-        .glass-card::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 80%; height: 80%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 168, 67, 0.04) 0%, transparent 70%);
-            animation: innerGlow 4s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        @keyframes innerGlow {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-        }
+    /* ══════════ AMBIENT GLOWS ══════════ */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 1;
+      pointer-events: none;
+      animation: glowPulse 6s ease-in-out infinite alternate;
+    }
 
-        .glass-card > * {
-            position: relative;
-            z-index: 1;
-        }
+    .glow-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(240, 194, 127, 0.08);
+      top: -10%;
+      right: -5%;
+    }
 
-        /* ── Crown ── */
-        .crown {
-            text-align: center;
-            font-size: 52px;
-            margin-bottom: 10px;
-            animation: crownFloat 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(212, 168, 67, 0.5));
-        }
-        @keyframes crownFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+    .glow-2 {
+      width: 350px;
+      height: 350px;
+      background: rgba(233, 30, 99, 0.07);
+      bottom: 5%;
+      left: -8%;
+      animation-delay: 2s;
+    }
 
-        /* ── Headings ── */
-        .card-heading {
-            text-align: center;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), #c49322, var(--gold-light));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerText 4s ease-in-out infinite;
-            margin-bottom: 6px;
-            letter-spacing: 1px;
-        }
-        @keyframes shimmerText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+    .glow-3 {
+      width: 300px;
+      height: 300px;
+      background: rgba(123, 47, 247, 0.06);
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 4s;
+    }
 
-        .card-subheading {
-            text-align: center;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.35rem;
-            color: var(--rose-light);
-            margin-bottom: 8px;
-            opacity: 0.9;
-            text-shadow: 0 0 20px rgba(232, 67, 147, 0.3);
-        }
+    @keyframes glowPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.25); }
+    }
 
-        .card-description {
-            text-align: center;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.55);
-            line-height: 1.7;
-            margin-bottom: 30px;
-            padding: 0 5px;
-        }
+    /* ══════════ MAIN WRAPPER ══════════ */
+    .main-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 30px 16px;
+    }
 
-        /* ── Input Container ── */
-        .input-wrapper {
-            position: relative;
-            width: 100%;
-            margin-bottom: 18px;
-        }
+    /* ══════════ CROWN ICON ══════════ */
+    .crown-icon {
+      font-size: 52px;
+      animation: crownFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+      margin-bottom: 10px;
+    }
 
-        .password-input {
-            width: 100%;
-            padding: 16px 52px 16px 20px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1.5px solid rgba(212, 168, 67, 0.15);
-            border-radius: 14px;
-            outline: none;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            -webkit-appearance: none;
-        }
-        .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.25);
-            letter-spacing: 0.5px;
-            font-size: 0.85rem;
-        }
-        .password-input:focus {
-            border-color: var(--gold);
-            box-shadow:
-                0 0 20px rgba(212, 168, 67, 0.15),
-                0 0 40px rgba(212, 168, 67, 0.05),
-                inset 0 0 20px rgba(212, 168, 67, 0.03);
-            background: rgba(255, 255, 255, 0.06);
-        }
-        .password-input:focus-visible {
-            outline: none;
-        }
+    @keyframes crownFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
 
-        /* Eye Toggle */
-        .eye-toggle {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 18px;
-            cursor: pointer;
-            padding: 4px;
-            transition: all 0.3s ease;
-            line-height: 1;
-        }
-        .eye-toggle:hover {
-            color: var(--gold);
-            transform: translateY(-50%) scale(1.1);
-        }
+    /* ══════════ ROYAL BADGE ══════════ */
+    .royal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.1), rgba(255, 215, 0, 0.06));
+      border: 1px solid rgba(240, 194, 127, 0.2);
+      margin-bottom: 20px;
+      animation: badgeGlow 3s ease-in-out infinite alternate;
+    }
 
-        /* ── Error Message ── */
-        .error-message {
-            text-align: center;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--crimson);
-            margin-bottom: 14px;
-            min-height: 0;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            text-shadow: 0 0 15px rgba(255, 45, 85, 0.4);
-            line-height: 1.5;
-        }
-        .error-message.show {
-            min-height: 20px;
-            max-height: 60px;
-            opacity: 1;
-            margin-bottom: 14px;
-            padding: 4px 0;
-        }
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.05); }
+      100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.15); }
+    }
 
-        /* ── Submit Button ── */
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 15px 30px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #0a0a0f;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), #c49322);
-            background-size: 200% 200%;
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow:
-                0 4px 20px rgba(212, 168, 67, 0.25),
-                0 0 40px rgba(212, 168, 67, 0.08);
-        }
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                0 8px 30px rgba(212, 168, 67, 0.35),
-                0 0 60px rgba(212, 168, 67, 0.12);
-            background-position: 100% 50%;
-        }
-        .submit-btn:active {
-            transform: translateY(-1px) scale(0.98);
-        }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
 
-        /* Micro-shimmer on button */
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 40%;
-            height: 200%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            transform: skewX(-20deg);
-            animation: btnShimmer 3.5s ease-in-out infinite;
-        }
-        @keyframes btnShimmer {
-            0%, 100% { left: -60%; }
-            50% { left: 120%; }
-        }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
 
-        /* ── Footer tagline ── */
-        .footer-line {
-            text-align: center;
-            margin-top: 24px;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.2);
-            letter-spacing: 0.5px;
-        }
+    /* ══════════ MAIN TITLE ══════════ */
+    .main-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-dark), var(--gold-bright));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmerGold 4s ease-in-out infinite;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.25));
+    }
 
-        /* ── Success overlay ── */
-        .success-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: var(--bg-dark);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
-        }
-        .success-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        .success-overlay .success-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            animation: successPulse 1s ease-in-out infinite;
-        }
-        @keyframes successPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-        .success-overlay .success-text {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.6rem;
-            color: var(--gold-light);
-            text-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
-        }
+    @keyframes shimmerGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        /* ── Responsive ── */
-        @media (max-width: 520px) {
-            .glass-card {
-                padding: 40px 24px 35px;
-                border-radius: 22px;
-            }
-            .card-heading { font-size: 1.4rem; }
-            .card-subheading { font-size: 1.15rem; }
-            .crown { font-size: 42px; }
-            .password-input { padding: 14px 48px 14px 16px; font-size: 0.9rem; }
-            .submit-btn { padding: 14px 24px; font-size: 0.85rem; }
-        }
+    .title-heart {
+      display: inline-block;
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
 
-        /* Shake animation for wrong password */
-        @keyframes shakeCard {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        .shake {
-            animation: shakeCard 0.6s ease-in-out;
-        }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+    }
 
-        /* Loading dots for submit */
-        .loading-dots span {
-            animation: loadDot 1.4s infinite;
-            opacity: 0;
-        }
-        .loading-dots span:nth-child(1) { animation-delay: 0s; }
-        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes loadDot {
-            0%, 80%, 100% { opacity: 0; }
-            40% { opacity: 1; }
-        }
-    </style>
+    /* ══════════ SUBTITLE ══════════ */
+    .subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(20px, 3.5vw, 32px);
+      color: var(--rose-light);
+      margin-bottom: 24px;
+      opacity: 0.85;
+    }
+
+    /* ══════════ QUOTE CONTAINER ══════════ */
+    .quote-container {
+      max-width: 620px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .quote-container::before,
+    .quote-container::after {
+      content: '"';
+      font-family: 'Great Vibes', cursive;
+      font-size: 50px;
+      color: rgba(240, 194, 127, 0.25);
+      position: absolute;
+      line-height: 1;
+    }
+
+    .quote-container::before {
+      top: -15px;
+      right: -5px;
+    }
+
+    .quote-container::after {
+      bottom: -30px;
+      left: -5px;
+    }
+
+    .quote-text {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 300;
+      font-size: clamp(14px, 2vw, 17px);
+      line-height: 2;
+      color: var(--muted);
+      padding: 0 20px;
+    }
+
+    .quote-highlight {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ══════════ DIVIDER ══════════ */
+    .royal-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 28px auto;
+      max-width: 300px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240, 194, 127, 0.3), transparent);
+    }
+
+    .divider-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    }
+
+    /* ══════════ SCROLLING QUOTES TICKER ══════════ */
+    .quote-ticker {
+      width: 100%;
+      max-width: 680px;
+      overflow: hidden;
+      margin: 0 auto 30px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(240, 194, 127, 0.1);
+      border-bottom: 1px solid rgba(240, 194, 127, 0.1);
+      position: relative;
+    }
+
+    .ticker-track {
+      display: flex;
+      animation: tickerScroll 25s linear infinite;
+      width: max-content;
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      padding: 0 30px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(240, 194, 127, 0.45);
+      letter-spacing: 0.5px;
+    }
+
+    .ticker-item .sep {
+      margin: 0 8px;
+      color: var(--rose);
+      opacity: 0.5;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ══════════ BUTTONS ══════════ */
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .royal-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 14px;
+      border-radius: 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      cursor: pointer;
+      min-height: 58px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid transparent;
+    }
+
+    .royal-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .royal-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .royal-btn:hover::before {
+      opacity: 1;
+    }
+
+    .royal-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg) translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .royal-btn:hover::after {
+      transform: rotate(45deg) translateX(100%);
+    }
+
+    /* Gold Button */
+    .btn-royal-gold {
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.15), rgba(255, 215, 0, 0.08));
+      border-color: rgba(240, 194, 127, 0.3);
+      color: var(--gold);
+      box-shadow: 0 4px 20px rgba(240, 194, 127, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-gold:hover {
+      box-shadow: 0 8px 35px rgba(240, 194, 127, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(240, 194, 127, 0.5);
+    }
+    .btn-royal-gold::before {
+      background: linear-gradient(135deg, rgba(240, 194, 127, 0.2), rgba(255, 215, 0, 0.12));
+    }
+
+    /* Sad Button */
+    .btn-royal-sad {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #ffd6e0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-sad:hover {
+      box-shadow: 0 8px 35px rgba(255, 111, 145, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 111, 145, 0.4);
+    }
+    .btn-royal-sad::before {
+      background: linear-gradient(135deg, rgba(255, 111, 145, 0.1), rgba(255, 255, 255, 0.05));
+    }
+
+    /* Music Button */
+    .btn-royal-music {
+      background: linear-gradient(135deg, rgba(16, 14, 28, 0.9), rgba(20, 18, 35, 0.85));
+      border-color: rgba(196, 113, 237, 0.25);
+      color: var(--purple-light);
+      box-shadow: 0 4px 20px rgba(123, 47, 247, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+    .btn-royal-music:hover {
+      box-shadow: 0 8px 35px rgba(123, 47, 247, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border-color: rgba(196, 113, 237, 0.45);
+    }
+    .btn-royal-music::before {
+      background: linear-gradient(135deg, rgba(123, 47, 247, 0.15), rgba(196, 113, 237, 0.08));
+    }
+
+    /* Hubby Button */
+    .btn-royal-hubby {
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.18), rgba(233, 30, 99, 0.06));
+      border-color: rgba(233, 30, 99, 0.3);
+      color: var(--rose-light);
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-hubby:hover {
+      box-shadow: 0 8px 35px rgba(233, 30, 99, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(233, 30, 99, 0.5);
+    }
+    .btn-royal-hubby::before {
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.2), rgba(255, 111, 145, 0.1));
+    }
+
+    /* AI Button */
+    .btn-royal-ai {
+      background: linear-gradient(135deg, rgba(109, 94, 252, 0.18), rgba(139, 92, 246, 0.06));
+      border-color: rgba(109, 94, 252, 0.3);
+      color: #c4b5fd;
+      box-shadow: 0 4px 20px rgba(109, 94, 252, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-royal-ai:hover {
+      box-shadow: 0 8px 35px rgba(109, 94, 252, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(109, 94, 252, 0.5);
+    }
+    .btn-royal-ai::before {
+      background: linear-gradient(135deg, rgba(109, 94, 252, 0.2), rgba(139, 92, 246, 0.1));
+    }
+
+    .btn-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ══════════ FOOTER ══════════ */
+    .footer-section {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(240, 194, 127, 0.08);
+    }
+
+    .footer-text {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(240, 194, 127, 0.35);
+      letter-spacing: 1px;
+    }
+
+    .footer-hearts {
+      margin-top: 6px;
+      font-size: 10px;
+      color: rgba(233, 30, 99, 0.4);
+      letter-spacing: 4px;
+    }
+
+    /* ══════════ FLOATING HEARTS ══════════ */
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      animation: floatHeart linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════ CLICK HEART ══════════ */
+    .click-heart {
+      position: absolute;
+      pointer-events: none;
+      z-index: 999;
+      color: var(--rose-light);
+      font-size: 18px;
+      animation: clickPop 0.8s ease-out forwards;
+    }
+
+    @keyframes clickPop {
+      0% {
+        transform: scale(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5) translateY(-60px);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════ SPARKLE CURSOR TRAIL ══════════ */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      animation: sparkleFade 0.6s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 6px var(--gold-bright);
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+        box-shadow: 0 0 0px var(--gold-bright);
+      }
+    }
+
+    /* ══════════ SCROLL REVEAL ══════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealUp 0.8s ease forwards;
+    }
+
+    .reveal-d1 { animation-delay: 0.1s; }
+    .reveal-d2 { animation-delay: 0.25s; }
+    .reveal-d3 { animation-delay: 0.4s; }
+    .reveal-d4 { animation-delay: 0.55s; }
+    .reveal-d5 { animation-delay: 0.7s; }
+    .reveal-d6 { animation-delay: 0.85s; }
+    .reveal-d7 { animation-delay: 1.0s; }
+
+    @keyframes revealUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 640px) {
+      .buttons-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+      }
+      .royal-btn {
+        width: 100%;
+      }
+      .shiny-line {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
+
 <body oncontextmenu="return false;">
 
-    <!-- Ambient Glows -->
-    <div class="ambient-glow glow-gold"></div>
-    <div class="ambient-glow glow-rose"></div>
-    <div class="ambient-glow glow-violet"></div>
-    <div class="ambient-glow glow-gold-2"></div>
+  <!-- Background Canvas for particles -->
+  <canvas id="bgCanvas"></canvas>
 
-    <!-- Particle Canvas -->
-    <canvas id="particleCanvas"></canvas>
+  <!-- Rising Shiny Text Wall -->
+  <div class="shiny-text-wall" id="shinyWall"></div>
 
-    <!-- Success Overlay -->
-    <div class="success-overlay" id="successOverlay">
-        <div class="success-icon">💖</div>
-        <div class="success-text">Khush Aamdeed... 🌹</div>
+  <!-- Ambient Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Main Content -->
+  <div class="main-wrapper">
+
+    <!-- Crown -->
+    <div class="crown-icon reveal reveal-d1">👑</div>
+
+    <!-- Badge -->
+    <div class="royal-badge reveal reveal-d2">
+      <span class="badge-dot"></span>
+      A Little Place Made With Love
+      <span class="badge-dot"></span>
     </div>
 
-    <!-- Main Content -->
-    <div class="page-center">
-        <div class="glass-card" id="glassCard">
-            <div class="crown">👑</div>
-            <h1 class="card-heading">Shahi Dehleez</h1>
-            <p class="card-subheading">Kon ho ap...?</p>
-            <p class="card-description">
-                Yeh raaz ka darwaza hai — sirf ek khaas chehra pehle se muqarrar hai.<br>
-                Apna raaz daakhil karein, aur is gehrai mein dakhil hon... ✨
-            </p>
+    <!-- Title -->
+    <h1 class="main-title reveal reveal-d3">
+      Royal Love Portal <span class="title-heart">💖</span>
+    </h1>
 
-            <div class="input-wrapper">
-                <input
-                    type="password"
-                    id="passwordInput"
-                    class="password-input"
-                    placeholder="Raaz likhein..."
-                    autocomplete="off"
-                    spellcheck="false"
-                />
-                <button type="button" class="eye-toggle" id="eyeToggle" aria-label="Toggle password visibility">
-                    <span id="eyeIcon">👁️</span>
-                </button>
-            </div>
+    <!-- Subtitle -->
+    <p class="subtitle reveal reveal-d3">~ For My Most Special Person ~</p>
 
-            <div class="error-message" id="errorMessage">
-                Galat Password! Sirf humari favourite person ko hi ijazat hai... 💔
-            </div>
-
-            <button type="button" class="submit-btn" id="submitBtn" onclick="validatePassword()">
-                Dakhil Hon
-            </button>
-
-            <p class="footer-line">— Mehboob ki duniya ka darwaza —</p>
-        </div>
+    <!-- Quote -->
+    <div class="quote-container reveal reveal-d4">
+      <p class="quote-text">
+        Yeh sirf ek website nahi... yeh ek <span class="quote-highlight">beautiful gift</span> hai,
+        specially for my <span class="quote-highlight">favorite person</span> ✨<br><br>
+        Har page, har button aur har line sirf <span class="quote-highlight">aap ke liye</span> banayi gayi hai 💎
+      </p>
     </div>
 
-    <script>
-        /* ══════════════════════════════════════════════
-           Security: Disable DevTools shortcuts & Right-click
-        ══════════════════════════════════════════════ */
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) ||
-                (e.ctrlKey && (e.key === 'U' || e.key === 'u')) ||
-                (e.ctrlKey && (e.key === 'S' || e.key === 's'))) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        });
+    <!-- Scrolling Quote Ticker -->
+    <div class="quote-ticker reveal reveal-d5">
+      <div class="ticker-track" id="tickerTrack">
+        <!-- Filled by JS -->
+      </div>
+    </div>
 
-        /* ══════════════════════════════════════════════
-           Password Authorization Logic
-        ══════════════════════════════════════════════ */
-        const CORRECT_PASSWORD = "azeemkinoor";
+    <!-- Divider -->
+    <div class="royal-divider reveal reveal-d5">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
 
-        function validatePassword() {
-            const input = document.getElementById('passwordInput');
-            const errorMsg = document.getElementById('errorMessage');
-            const card = document.getElementById('glassCard');
-            const btn = document.getElementById('submitBtn');
-            const value = input.value.trim();
+    <!-- Buttons -->
+    <div class="buttons-grid">
+      <a href="couples pics pages/password.html" class="royal-btn btn-royal-gold reveal reveal-d5">
+        <span class="btn-icon">💙</span> Our Couples Pics
+      </a>
 
-            if (!value) {
-                errorMsg.innerHTML = 'Pehle raaz toh likhein... ✍️';
-                errorMsg.classList.add('show');
-                shakeTheCard();
-                return;
-            }
+      <a href="jokes pages/if_you_are_sad.html" class="royal-btn btn-royal-sad reveal reveal-d5">
+        <span class="btn-icon">🤗</span> Agar Mood Kharab Ho To
+      </a>
 
-            if (value === CORRECT_PASSWORD) {
-                // Success
-                errorMsg.classList.remove('show');
-                btn.innerHTML = '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
-                btn.style.pointerEvents = 'none';
+      <a href="music hub/password.html" class="royal-btn btn-royal-music reveal reveal-d6">
+        <span class="btn-icon">🎶</span> Music Hub
+      </a>
 
-                sessionStorage.setItem("accessGranted", "true");
+      <a href="password.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
+        <span class="btn-icon">🥰</span> Wake Your Hubby
+      </a>
 
-                setTimeout(function() {
-                    document.getElementById('successOverlay').classList.add('active');
-                }, 500);
+      <a href="https://drive.proton.me/urls/RT95CCJCRG#FxdN81SjW0eS" class="royal-btn btn-royal-ai reveal reveal-d7">
+        <span class="btn-icon">📸</span> Upload Zone ✨
+      </a>
+    </div>
 
-                setTimeout(function() {
-                    window.location.replace("welcome.html");
-                }, 2200);
-            } else {
-                // Failure
-                errorMsg.innerHTML = 'Galat Password! Sirf humari favourite person ko hi ijazat hai... 💔';
-                errorMsg.classList.add('show');
-                shakeTheCard();
-                input.value = '';
-                input.focus();
-            }
-        }
+    <!-- Footer -->
+    <div class="footer-section reveal reveal-d7">
+      <p class="footer-text">Made with softness, style & a little bit of magic</p>
+      <p class="footer-hearts">♥ ♥ ♥ ♥ ♥</p>
+    </div>
 
-        function shakeTheCard() {
-            const card = document.getElementById('glassCard');
-            card.classList.add('shake');
-            setTimeout(() => card.classList.remove('shake'), 700);
-        }
+  </div>
 
-        // Enter key to submit
-        document.getElementById('passwordInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                validatePassword();
-            }
-        });
+  <script>
+    // ══════════ SECURITY ══════════
+    document.onkeydown = function(e) {
+      if (e.keyCode === 123) return false;
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) return false;
+      if (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) return false;
+    };
 
-        // Eye toggle
-        const eyeToggle = document.getElementById('eyeToggle');
-        const passwordInput = document.getElementById('passwordInput');
-        const eyeIcon = document.getElementById('eyeIcon');
-        let eyeOpen = false;
+    // ══════════ PARTICLE CANVAS ══════════
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
 
-        eyeToggle.addEventListener('click', function() {
-            eyeOpen = !eyeOpen;
-            passwordInput.type = eyeOpen ? 'text' : 'password';
-            eyeIcon.textContent = eyeOpen ? '🙈' : '👁️';
-        });
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-        /* ══════════════════════════════════════════════
-           Particle System — Gold, Rose, Violet
-        ══════════════════════════════════════════════ */
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const PARTICLE_COUNT = 80;
-        const particleColors = [
-            'rgba(212, 168, 67, ',
-            'rgba(240, 210, 122, ',
-            'rgba(232, 67, 147, ',
-            'rgba(253, 121, 168, ',
-            'rgba(168, 85, 247, ',
-            'rgba(192, 132, 252, '
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedY = -(Math.random() * 0.3 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+        const colors = [
+          '240, 194, 127',
+          '255, 215, 0',
+          '233, 30, 99',
+          '196, 113, 237',
+          '255, 111, 145'
         ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.pulse += this.pulseSpeed;
+        if (this.y < -10) this.reset();
+        if (this.y < -10) this.y = canvas.height + 10;
+      }
+      draw() {
+        const glow = Math.sin(this.pulse) * 0.3 + 0.7;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * glow, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * glow})`;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * glow * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * glow * 0.15})`;
+        ctx.fill();
+      }
+    }
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+    const particles = Array.from({ length: 80 }, () => new Particle());
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.colorBase = particleColors[Math.floor(Math.random() * particleColors.length)];
-                this.opacity = Math.random() * 0.5 + 0.15;
-                this.opacityDir = Math.random() > 0.5 ? 1 : -1;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.opacity += this.opacityDir * 0.002;
-                if (this.opacity >= 0.7) this.opacityDir = -1;
-                if (this.opacity <= 0.1) this.opacityDir = 1;
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
 
-                if (this.x < -10 || this.x > canvas.width + 10 ||
-                    this.y < -10 || this.y > canvas.height + 10) {
-                    this.reset();
-                }
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.colorBase + this.opacity + ')';
-                ctx.fill();
+    // ══════════ RISING SHINY TEXTS ══════════
+    const urduQuotes = [
+      "Mohabbat mein har lamha priceless hota hai 💕",
+      "Tum meri duniya ka sabse khoobsurat hissa ho ✨",
+      "Dil ke jagah dil se baat karni chahiye 💖",
+      "Tumse milna jaise Chand raat ka dina hota hai 🌙",
+      "Mohabbat ka dusra naam TUM ho 💎",
+      "Har dua mein tera naam shamil hai 🤲",
+      "Zindagi tumse hai, khushi tumse hai 🌸",
+      "Tumhari smile sabse pyari hai 💫",
+      "Ishq mein hum ne sirf tumhe chuna ♥",
+      "Safar mein tum saath ho to manzil bhi khoobsurat hai 🏰",
+      "Tum meri favourite boring story bhi ho 😂💕",
+      "Har raat sirf tumhare baare mein sochta hoon 🌌",
+      "Meri duniya mein sirf ek raj KumarI hai 👑",
+      "Tumhe kho na paana, sabse badi jeet hai 🏆",
+      "Aaj bhi tumse zyada koi nahi chahta mujhe 💗",
+      "Tum meri calm ho, meri peace ho 🕊️",
+      "Ek nazar mein hi dil chura liya tumne 🥀",
+      "Tumhe pana sab se badi blessing hai 🌟",
+    ];
 
-                // Subtle glow
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-                ctx.fillStyle = this.colorBase + (this.opacity * 0.15) + ')';
-                ctx.fill();
-            }
-        }
+    const shinyWall = document.getElementById('shinyWall');
 
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push(new Particle());
-        }
+    function createShinyLine() {
+      const line = document.createElement('div');
+      line.className = 'shiny-line';
+      const quote = urduQuotes[Math.floor(Math.random() * urduQuotes.length)];
+      line.textContent = quote;
+      const left = Math.random() * 90 + 5;
+      line.style.left = left + '%';
+      const duration = Math.random() * 15 + 20;
+      line.style.animationDuration = duration + 's';
+      line.style.animationDelay = Math.random() * 2 + 's';
+      line.style.fontSize = (Math.random() * 8 + 14) + 'px';
+      shinyWall.appendChild(line);
+      setTimeout(() => line.remove(), (duration + 3) * 1000);
+    }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
+    // Spawn initial batch
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => createShinyLine(), i * 800);
+    }
+    // Keep spawning
+    setInterval(createShinyLine, 3000);
 
-        /* ══════════════════════════════════════════════
-           Sparkle Cursor Trail
-        ══════════════════════════════════════════════ */
-        const sparkleColors = ['#d4a843', '#f0d27a', '#e84393', '#fd79a8', '#a855f7', '#c084fc', '#fff'];
-        let sparkleThrottle = 0;
+    // ══════════ SCROLLING QUOTE TICKER ══════════
+    const tickerQuotes = [
+      "Mohabbat ka dusra naam TUM ho",
+      "Har lamha tumhare saath guzarna chahta hoon",
+      "Tum meri duniya ka sabse khoobsurat hissa ho",
+      "Dil ke jagah dil se baat karni chahiye",
+      "Zindagi tumse hai, khushi tumse hai",
+      "Tumhari smile sabse pyari hai",
+      "Tum meri calm ho, meri peace ho",
+      "Tumhe pana sab se badi blessing hai",
+    ];
 
-        document.addEventListener('mousemove', function(e) {
-            sparkleThrottle++;
-            if (sparkleThrottle % 3 !== 0) return;
+    const tickerTrack = document.getElementById('tickerTrack');
+    let tickerHTML = '';
+    for (let j = 0; j < 2; j++) {
+      tickerQuotes.forEach(q => {
+        tickerHTML += `<span class="ticker-item">${q} <span class="sep">✦</span></span>`;
+      });
+    }
+    tickerTrack.innerHTML = tickerHTML;
 
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle-trail');
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            sparkle.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-            sparkle.style.boxShadow = '0 0 6px ' + sparkle.style.background;
-            const size = Math.random() * 5 + 3;
-            sparkle.style.width = size + 'px';
-            sparkle.style.height = size + 'px';
-            document.body.appendChild(sparkle);
+    // ══════════ FLOATING HEARTS ══════════
+    function spawnFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      const hearts = ['♥', '♡', '❤', '💕', '💗'];
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.fontSize = (Math.random() * 14 + 10) + 'px';
+      const dur = Math.random() * 8 + 10;
+      heart.style.animationDuration = dur + 's';
+      heart.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+      heart.style.color = `hsl(${Math.random() * 30 + 330}, 80%, 70%)`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), dur * 1000);
+    }
 
-            setTimeout(() => sparkle.remove(), 800);
-        });
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => spawnFloatingHeart(), i * 1500);
+    }
+    setInterval(spawnFloatingHeart, 2500);
 
-        /* ══════════════════════════════════════════════
-           Click / Touch Emoji Pop
-        ══════════════════════════════════════════════ */
-        const popEmojis = ['💖', '✨', '🌹', '💫', '🦋', '💗', '👑', '🔥', '💜', '🌺', '💕', '⭐'];
+    // ══════════ CLICK / TOUCH HEARTS ══════════
+    function createClickHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      const emojis = ['❤', '💕', '💖', '✨', '💗'];
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = x + 'px';
+      heart.style.top = y + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 900);
+    }
 
-        document.addEventListener('click', function(e) {
-            // Don't pop if clicking interactive elements
-            if (e.target.closest('.submit-btn') || e.target.closest('.eye-toggle') || e.target.closest('.password-input')) return;
+    document.addEventListener('click', e => createClickHeart(e.pageX, e.pageY));
+    document.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      createClickHeart(t.pageX, t.pageY);
+    });
 
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    const emoji = document.createElement('div');
-                    emoji.classList.add('click-emoji');
-                    emoji.textContent = popEmojis[Math.floor(Math.random() * popEmojis.length)];
-                    emoji.style.left = (e.clientX + (Math.random() - 0.5) * 40) + 'px';
-                    emoji.style.top = (e.clientY + (Math.random() - 0.5) * 20) + 'px';
-                    document.body.appendChild(emoji);
-                    setTimeout(() => emoji.remove(), 1000);
-                }, i * 100);
-            }
-        });
+    // ══════════ SPARKLE CURSOR TRAIL ══════════
+    let sparkleThrottle = 0;
+    document.addEventListener('mousemove', e => {
+      sparkleThrottle++;
+      if (sparkleThrottle % 3 !== 0) return;
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 600);
+    });
+  </script>
 
-        document.addEventListener('touchstart', function(e) {
-            const touch = e.touches[0];
-            if (e.target.closest('.submit-btn') || e.target.closest('.eye-toggle') || e.target.closest('.password-input')) return;
-
-            for (let i = 0; i < 2; i++) {
-                setTimeout(() => {
-                    const emoji = document.createElement('div');
-                    emoji.classList.add('click-emoji');
-                    emoji.textContent = popEmojis[Math.floor(Math.random() * popEmojis.length)];
-                    emoji.style.left = (touch.clientX + (Math.random() - 0.5) * 30) + 'px';
-                    emoji.style.top = (touch.clientY + (Math.random() - 0.5) * 15) + 'px';
-                    document.body.appendChild(emoji);
-                    setTimeout(() => emoji.remove(), 1000);
-                }, i * 80);
-            }
-        }, { passive: true });
-
-        /* ══════════════════════════════════════════════
-           Floating Hearts Generator
-        ══════════════════════════════════════════════ */
-        const heartChars = ['♥', '♡', '❤', '💕', '💖'];
-        const heartColors = ['#d4a843', '#e84393', '#fd79a8', '#a855f7', '#c084fc', '#ff6b81'];
-
-        function spawnFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.bottom = '-30px';
-            heart.style.fontSize = (Math.random() * 18 + 12) + 'px';
-            heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
-            heart.style.textShadow = '0 0 10px currentColor';
-            const duration = Math.random() * 8 + 8;
-            heart.style.animationDuration = duration + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), duration * 1000);
-        }
-
-        // Spawn hearts periodically
-        setInterval(spawnFloatingHeart, 2000);
-        // Initial burst
-        setTimeout(spawnFloatingHeart, 500);
-        setTimeout(spawnFloatingHeart, 1000);
-        setTimeout(spawnFloatingHeart, 1500);
-
-        /* ══════════════════════════════════════════════
-           Auto-focus the password input
-        ══════════════════════════════════════════════ */
-        window.addEventListener('load', function() {
-            setTimeout(() => document.getElementById('passwordInput').focus(), 300);
-        });
-    </script>
 </body>
 </html>
