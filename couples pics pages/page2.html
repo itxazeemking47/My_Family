@@ -4,13 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Noor & Azeem | Forever Memories</title>
+<title>Noor & Azeem | Our Love Story</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Elegant Google Fonts: Playfair Display for Romantic Serif & Poppins for modern Sans-serif -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* CSS SECURITY: Jab tak auth verify nahi hoga, screen bilkul blank rahegi */
+body {
+    display: none;
+}
 
-/* GENERAL */
+/* CSS VARIABLES FOR MATCHING PREMIUM THEME */
+:root {
+    --bg-color: #0b0609; /* Deep romantic velvet dark plum */
+    --accent-gold: #ffd369;
+    --accent-rose: #ff5e84;
+    --text-white: #f8f9fa;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Poppins', sans-serif;
+}
+
+/* GENERAL RESET */
 *{
     margin:0;
     padding:0;
@@ -18,78 +35,126 @@
 }
 
 body{
-    background:#050505;
-    color:white;
+    background: var(--bg-color);
+    color: var(--text-white);
     overflow-x:hidden;
-    font-family:'Poppins', sans-serif;
+    font-family: var(--font-sans);
     scroll-behavior:smooth;
+    position:relative;
 }
 
-/* PREMIUM BACKGROUND */
+/* PREMIUM BACKGROUND WITH DYNAMIC ZOOM & IMAGE OVERLAY */
 .bg-fixed{
     position:fixed;
     inset:0;
-    background: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.86));
+    background: 
+        linear-gradient(rgba(11,6,9,0.85), rgba(11,6,9,0.92)),
+        url('bg.PNG');
     background-size:cover;
     background-position:center;
-    z-index:-3;
+    z-index:-4;
     animation:bgZoom 25s linear infinite alternate;
 }
 
 @keyframes bgZoom{
     from{ transform:scale(1); }
-    to{ transform:scale(1.1); }
+    to{ transform:scale(1.08); }
 }
 
-/* HERO SECTION */
-.hero{
+/* SOFT GOLD LIGHT GLOW SYSTEM */
+body::before{
+    content:"";
+    position:fixed;
+    top:-20%;
+    left:-20%;
+    width:500px;
+    height:500px;
+    background: radial-gradient(circle, rgba(255,94,132,0.08), transparent 70%);
+    z-index:-3;
+    animation:lightMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes lightMove{
+    from{ transform:translate(0,0); }
+    to{ transform:translate(150px,100px); }
+}
+
+/* HERO / INTRO SECTION */
+.intro-section{
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:20px;
+    padding:24px;
 }
 
 .hero-box{
     max-width:850px;
-    padding:60px 35px;
-    border-radius:35px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(14px);
-    animation:fadeUp 1.5s ease;
+    padding:60px 40px;
+    border-radius:24px;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+    animation:fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.top-tag{
+.top-badge{
     display:inline-block;
-    padding:12px 28px;
+    padding:8px 24px;
     border-radius:50px;
-    background:rgba(255,255,255,0.08);
+    background: rgba(255, 94, 132, 0.1);
+    color: var(--accent-rose);
+    border:1px solid rgba(255, 94, 132, 0.2);
     margin-bottom:30px;
-    border:1px solid rgba(255,255,255,0.08);
-    letter-spacing:2px;
-    font-size:14px;
+    letter-spacing:3px;
+    font-size:12px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-.hero-title{
-    font-size:clamp(3rem, 7vw, 6rem);
-    color:#ffd369;
-    text-shadow: 0 0 30px rgba(255,211,105,0.5), 0 0 70px rgba(255,211,105,0.2);
+.gold-title{
+    font-family: var(--font-serif);
+    font-size:clamp(3rem, 8vw, 5.5rem);
+    color: var(--text-white);
     margin-bottom:25px;
+    letter-spacing: -1px;
 }
 
-.hero-sub{
-    font-size:2rem;
-    line-height:2;
+.sub-poetry{
+    font-size:1.3rem;
+    line-height:1.8;
     color:rgba(255,255,255,0.85);
+    font-weight: 300;
 }
 
-/* STORY SECTION */
+.scroll-btn{
+    display:inline-block;
+    margin-top:40px;
+    padding:14px 35px;
+    border-radius:50px;
+    background: linear-gradient(135deg, #ff5e84, #e05275);
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(255, 94, 132, 0.3);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+}
+
+.scroll-btn:hover{
+    transform:translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 94, 132, 0.5);
+}
+
+/* STORY CONTAINER */
 .story-container{
-    max-width:900px;
+    max-width:800px;
     margin:auto;
-    padding:80px 20px;
+    padding:100px 24px;
     display:flex;
     flex-direction:column;
     gap:120px;
@@ -98,8 +163,8 @@ body{
 .story-block{
     text-align:center;
     opacity:0;
-    transform:translateY(80px);
-    transition:1.2s ease;
+    transform:translateY(60px);
+    transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .story-block.active{
@@ -108,204 +173,344 @@ body{
 }
 
 .picture-card{
+    position:relative;
     overflow:hidden;
-    border-radius:30px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    padding:12px;
+    border-radius:24px;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    padding:14px;
     backdrop-filter:blur(12px);
-    box-shadow:0 20px 60px rgba(0,0,0,0.7);
-    transition:0.5s;
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:0 30px 60px rgba(0,0,0,0.6);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
 }
 
 .picture-card:hover{
-    transform:translateY(-10px) scale(1.02);
+    transform:translateY(-8px);
+    box-shadow: 0 40px 80px rgba(255, 94, 132, 0.15);
+    border-color: rgba(255, 94, 132, 0.3);
+}
+
+.picture-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 40%);
+    z-index:1;
+    pointer-events:none;
 }
 
 .picture-card img{
     width:100%;
     display:block;
-    border-radius:22px;
+    border-radius:16px;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.picture-card:hover img {
+    transform: scale(1.03);
 }
 
 .quote-poetry{
-    margin-top:30px;
-    font-size:2rem;
-    line-height:2.2;
-    color:rgba(255,255,255,0.92);
+    margin-top:35px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size:1.6rem;
+    line-height:2;
+    color:rgba(255,255,255,0.9);
 }
 
 .gold-quote{
-    color:#ffd369;
-    font-size:2.3rem;
+    color: var(--accent-rose);
+    font-size:2.2rem;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 0;
+    margin: 0 5px;
+}
+
+/* ENDING BOX */
+.ending-section{
+    padding:100px 24px 60px 24px;
+    text-align:center;
+}
+
+.ending-box{
+    max-width:700px;
+    margin:auto;
+    padding:50px 30px;
+    border-radius:24px;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.ending-text{
+    font-size:1.4rem;
+    color:rgba(255,255,255,0.85);
+    font-family: var(--font-serif);
+    font-style: italic;
+}
+
+.ending-name{
+    margin-top:20px;
+    font-size:2.8rem;
+    color: var(--accent-gold);
+    font-family: var(--font-serif);
+}
+
+/* NEXT BUTTON */
+.next-btn-wrap{
+    text-align:center;
+    padding-bottom:120px;
+}
+
+.next-btn{
+    display:inline-block;
+    padding:16px 45px;
+    border-radius:60px;
+    text-decoration:none;
+    background: linear-gradient(135deg, var(--accent-gold), #ffa931);
+    color: #12020a;
+    font-weight:700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    box-shadow:0 15px 35px rgba(255,211,105,0.25);
+}
+
+.next-btn:hover{
+    transform: scale(1.06);
+    box-shadow: 0 20px 45px rgba(255,211,105,0.4);
 }
 
 /* FOOTER */
-.footer{
+.premium-footer{
     text-align:center;
-    padding:90px 20px;
-    background:rgba(0,0,0,0.75);
-    border-top:1px solid rgba(255,255,255,0.08);
+    padding:100px 24px;
+    background: linear-gradient(to top, rgba(11,6,9,1) 70%, transparent);
+    border-top:1px solid var(--glass-border);
 }
 
 .footer-text{
     letter-spacing:4px;
-    color:rgba(255,255,255,0.65);
-    font-size:14px;
+    color:rgba(255,255,255,0.5);
+    font-size:12px;
+    font-weight: 600;
 }
 
 .footer-name{
-    margin-top:18px;
-    font-size:4rem;
-    color:#ffd369;
-    text-shadow: 0 0 25px rgba(255,211,105,0.5), 0 0 55px rgba(255,211,105,0.25);
-    animation:glow 2s infinite alternate;
+    margin-top:20px;
+    font-family: var(--font-serif);
+    font-size:3.5rem;
+    color: var(--accent-gold);
+    letter-spacing: 2px;
 }
 
 .footer-love{
     margin-top:18px;
-    color:rgba(255,255,255,0.7);
-    font-size:1.2rem;
+    color:rgba(255,255,255,0.6);
+    font-size:1.1rem;
+    font-weight: 300;
 }
 
-/* FLOATING HEARTS */
+/* FLOATING HEARTS & BUBBLES */
 .heart{
     position:fixed;
-    color:rgba(255,105,180,0.7);
+    color: rgba(255, 94, 132, 0.4);
     z-index:-1;
-    animation:floatUp 7s linear forwards;
+    pointer-events: none;
+    animation:floatUp 8s linear forwards;
 }
 
 @keyframes floatUp{
-    0%{ transform:translateY(100vh) scale(0); opacity:0; }
+    0%{ transform:translateY(100vh) scale(0) rotate(0deg); opacity:0; }
     20%{ opacity:1; }
-    100%{ transform:translateY(-10vh) scale(1.8); opacity:0; }
+    100%{ transform:translateY(-10vh) scale(1.5) rotate(360deg); opacity:0; }
 }
 
-/* LOVE BUBBLES */
 .love-bubble{
     position:fixed;
     pointer-events:none;
     z-index:9999;
-    animation:bubble 2s linear forwards;
+    animation:bubble 2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
 @keyframes bubble{
     0%{ transform:translate(-50%,-50%) scale(0); opacity:1; }
-    100%{ transform:translate(-50%,-220px) scale(1.8); opacity:0; }
-}
-
-@keyframes glow{
-    from{ text-shadow:0 0 20px rgba(255,211,105,0.4); }
-    to{ text-shadow: 0 0 35px rgba(255,211,105,0.8), 0 0 60px rgba(255,211,105,0.35); }
+    100%{ transform:translate(-50%,-180px) scale(1.5); opacity:0; }
 }
 
 @keyframes fadeUp{
-    from{ opacity:0; transform:translateY(50px); }
+    from{ opacity:0; transform:translateY(40px); }
     to{ opacity:1; transform:translateY(0); }
 }
 
 /* MOBILE RESPONSIVE */
 @media(max-width:768px){
-    .hero-sub{ font-size:1.5rem; }
-    .quote-poetry{ font-size:1.7rem; }
-    .footer-name{ font-size:2.8rem; }
+    .hero-box { padding: 40px 20px; }
+    .sub-poetry{ font-size:1.1rem; }
+    .quote-poetry{ font-size:1.3rem; }
+    .footer-name{ font-size:2.5rem; }
+    .ending-name{ font-size:2.1rem; }
 }
-
 </style>
 </head>
 
-<body oncontextmenu="return false;">
+<body>
 
 <div class="bg-fixed"></div>
 
-<section class="hero">
+<section class="intro-section">
     <div class="hero-box">
-        <div class="top-tag">✨ OUR FOREVER MEMORIES ✨</div>
-        <h1 class="hero-title">Noor ❤️ Azeem</h1>
-        <p class="hero-sub">
-            Kuch tasveerein sirf tasveerein nahi hoti...<br>
-            woh poori zindagi ki feelings hoti hain 💖
+        <div class="top-badge">✨ Forever Together ✨</div>
+        <h1 class="gold-title">Noor ❤️ Azeem</h1>
+        <p class="sub-poetry">
+            Har lamha... har dua...<br>
+            sirf tumhare naam meri jaan 🌙
         </p>
+        <a href="#story-start" class="scroll-btn">Start Our Story 💌</a>
     </div>
 </section>
 
-<div class="story-container">
+<div class="story-container" id="story-start">
 
     <div class="story-block">
         <div class="picture-card">
-            <img src="couples pics/1.png">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.18.01 PM.jpeg" alt="Story Pic 1">
         </div>
         <p class="quote-poetry">
             <span class="gold-quote">“</span>
-            Tum meri zindagi ka sabse khoobsurat hissa ho ✨
+            Khuda kare hamara saath yunhi hamesha rahe...<br>
+            tumhari muskurahat se mera ghar roshan rahe ✨
             <span class="gold-quote">”</span>
         </p>
     </div>
 
     <div class="story-block">
         <div class="picture-card">
-            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.59 PM.jpeg">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.57 PM (1).jpeg" alt="Story Pic 2">
         </div>
         <p class="quote-poetry">
             <span class="gold-quote">“</span>
-            Tere aane se meri duniya badal si gayi...<br>
-            har dua mein sirf tumhari kami thi ❤️
-            <span class="gold-quote">”</span>
-        </p>
-    </div>
-   
-    <div class="story-block">
-        <div class="picture-card">
-            <img src="couples pics/3.png">
-        </div>
-        <p class="quote-poetry">
-            <span class="gold-quote">“</span>
-            Har janam mein bas tera hi saath chahiye 🌙
+            Hamari choti si duniya... hamara pyara sa phool 🌸<br>
+            Allah hamesha buri nazar se bachaye.
             <span class="gold-quote">”</span>
         </p>
     </div>
 
     <div class="story-block">
         <div class="picture-card">
-            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.58 PM.jpeg">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.18.00 PM.jpeg" alt="Story Pic 3">
         </div>
         <p class="quote-poetry">
             <span class="gold-quote">“</span>
-            Tum meri wo dua ho...<br>
-            jo har sajde mein maangi thi ❤️
+            Hathon mein tera haath ho...<br>
+            aur zindagi bhar tera saath ho 🤍
             <span class="gold-quote">”</span>
         </p>
     </div>
 
     <div class="story-block">
         <div class="picture-card">
-            <img src="couples pics/4.png">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.18.01 PM (1).jpeg" alt="Story Pic 4">
         </div>
         <p class="quote-poetry">
             <span class="gold-quote">“</span>
-            Noor aur Azeem... ek jaan do dil 💖
+            Tujhse shuru... tujhpe khatam meri har kahani ✨
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.18.00 PM (1).jpeg" alt="Story Pic 5">
+        </div>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Tum salamat raho hazaron saal...<br>
+            meri har khushi tumse hai 💖
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.59 PM (1).jpeg" alt="Story Pic 6">
+        </div>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Duniya ki sari khushiyan ek taraf...<br>
+            tera saath ek taraf 🥺
+            <span class="gold-quote">”</span>
+        </p>
+    </div>
+
+    <div class="story-block">
+        <div class="picture-card">
+            <img src="couples pics/WhatsApp Image 2026-05-11 at 5.17.58 PM (2).jpeg" alt="Story Pic 7">
+        </div>
+        <p class="quote-poetry">
+            <span class="gold-quote">“</span>
+            Sukoon milta hai bas teri ek jhalak se 🌙
             <span class="gold-quote">”</span>
         </p>
     </div>
 
 </div>
 
-<footer class="footer">
-    <p class="footer-text">CREATED WITH LOVE BY</p>
-    <h1 class="footer-name">✨ AZEEM ✨</h1>
+<section class="ending-section">
+    <div class="ending-box">
+        <p class="ending-text">Meri zindagi ko khoobsurat banane wali...</p>
+        <h2 class="ending-name">Ambar Ki Mama 💖</h2>
+    </div>
+</section>
+
+<div class="next-btn-wrap">
+    <a href="page2.html" class="next-btn">Continue Our Journey →</a>
+</div>
+
+<footer class="premium-footer">
+    <p class="footer-text">CREATED WITH ENDLESS LOVE BY</p>
+    <h1 class="footer-name">AZEEM</h1>
     <p class="footer-love">Forever Yours ❤️</p>
 </footer>
 
 <script>
-// Key shortcuts block karne ke liye (Inspect Element Disable)
-document.onkeydown = function(e) {
-    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-        return false;
-    }
+/* ========================================================
+   1. GATEWAY PROTECTION & VISIT NOTIFICATION (UNTOUCHED)
+   ======================================================== */
+if (sessionStorage.getItem("accessGranted") !== "true") {
+    window.location.replace("index.html");
+} else {
+    document.body.style.display = "block";
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const visitor = sessionStorage.getItem("visitorName") || "someone";
+        
+        if (visitor !== "Azeem") {
+            const apiKey = "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7";
+            const payload = {
+                type: "note",
+                title: "Galary Page Visited! 🖼️",
+                body: `Galary page was opened by ${visitor} ✨`
+            };
+
+            fetch('https://api.pushbullet.com/v2/pushes', {
+                method: 'POST',
+                headers: {
+                    'Access-Token': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(error => console.log('Notification error:', error));
+        }
+    });
 }
 
-/* Scroll Reveal Animation */
+/* REVEAL ANIMATION */
 const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -316,28 +521,28 @@ const observer = new IntersectionObserver((entries)=>{
 
 document.querySelectorAll('.story-block').forEach(block=>observer.observe(block));
 
-/* Floating Hearts */
+/* FLOATING HEARTS */
 setInterval(()=>{
     const heart=document.createElement('div');
     heart.classList.add('heart');
-    heart.innerHTML='❤';
+    heart.innerHTML=['❤', '💖', '💕'][Math.floor(Math.random()*3)];
     heart.style.left=Math.random()*100+'vw';
-    heart.style.fontSize=(Math.random()*20+10)+'px';
+    heart.style.fontSize=(Math.random()*15 + 12)+'px';
     document.body.appendChild(heart);
-    setTimeout(()=>{ heart.remove(); },7000);
-},500);
+    setTimeout(()=>{ heart.remove(); },8000);
+},600);
 
-/* Click Love Bubbles */
+/* LOVE BUBBLES */
 document.addEventListener('click',function(e){
-    for(let i=0;i<10;i++){
+    for(let i=0;i<8;i++){
         const bubble=document.createElement('span');
         bubble.classList.add('love-bubble');
         bubble.innerHTML=['💖','✨','❤️','💫'][Math.floor(Math.random()*4)];
         bubble.style.left=e.clientX+'px';
         bubble.style.top=e.clientY+'px';
-        bubble.style.fontSize=(Math.random()*20+15)+'px';
+        bubble.style.fontSize=(Math.random()*15+12)+'px';
         document.body.appendChild(bubble);
-        setTimeout(()=>{ bubble.remove(); },2000);
+        setTimeout(()=>{ bubble.remove(); },1800);
     }
 });
 </script>
