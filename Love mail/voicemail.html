@@ -459,10 +459,16 @@ body{
         0 12px 28px rgba(190,105,130,.25);
 
     transition:.3s;
+
+    -webkit-tap-highlight-color:transparent;
 }
 
 .mic-button:hover{
     transform:scale(1.06);
+}
+
+.mic-button:active{
+    transform:scale(.96);
 }
 
 .mic-button.recording{
@@ -514,10 +520,17 @@ body{
 
     cursor:pointer;
     transition:.25s;
+
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
 }
 
 .btn:hover{
     transform:translateY(-2px);
+}
+
+.btn:active{
+    transform:translateY(0);
 }
 
 .btn:disabled{
@@ -579,6 +592,10 @@ body{
     margin-bottom:8px;
 }
 
+.preview audio{
+    width:100%;
+}
+
 /* =========================
    FILE UPLOAD
 ========================= */
@@ -621,6 +638,8 @@ body{
 
     font-weight:700;
     font-size:.82rem;
+
+    -webkit-tap-highlight-color:transparent;
 }
 
 #audioFile{
@@ -634,6 +653,12 @@ body{
     word-break:break-word;
 }
 
+.upload-limit{
+    margin-top:7px;
+    color:#b0959c;
+    font-size:.68rem;
+}
+
 /* =========================
    STATUS
 ========================= */
@@ -644,6 +669,8 @@ body{
     text-align:center;
     font-size:.78rem;
     color:#a1888e;
+    line-height:1.5;
+    word-break:break-word;
 }
 
 .status.success{
@@ -900,6 +927,8 @@ footer .bow{
     opacity:0;
     pointer-events:none;
 
+    width:min(90%,430px);
+
     padding:12px 20px;
 
     border-radius:30px;
@@ -917,6 +946,7 @@ footer .bow{
         rgba(130,80,100,.18);
 
     font-size:.78rem;
+    text-align:center;
 
     transition:.35s;
 }
@@ -955,6 +985,10 @@ footer .bow{
         font-size:45px;
     }
 
+    .hero p{
+        font-size:.84rem;
+    }
+
     .diary{
         padding:20px 15px;
         border-radius:22px;
@@ -970,6 +1004,7 @@ footer .bow{
 
     .controls .btn{
         width:100%;
+        min-height:46px;
     }
 
     .messages{
@@ -978,6 +1013,28 @@ footer .bow{
 
     .voice-letter{
         padding:19px;
+    }
+
+    .letter-top{
+        align-items:center;
+    }
+
+    .time{
+        max-width:110px;
+    }
+
+    .mic-wrap{
+        width:140px;
+        height:140px;
+    }
+
+    .mic-button{
+        width:94px;
+        height:94px;
+    }
+
+    .upload-section{
+        margin-top:24px;
     }
 }
 
@@ -1001,7 +1058,9 @@ footer .bow{
 
 <body>
 
-<!-- BACKGROUND -->
+<!-- =========================
+     BACKGROUND
+========================= -->
 
 <div class="garden-bg">
 
@@ -1018,7 +1077,9 @@ footer .bow{
 <div id="petals"></div>
 
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="page">
 
@@ -1067,7 +1128,9 @@ footer .bow{
     </div>
 
 
-    <!-- DIARY -->
+    <!-- =========================
+         DIARY
+    ========================= -->
 
     <section class="diary">
 
@@ -1152,6 +1215,7 @@ footer .bow{
                 <audio
                     id="recordedAudio"
                     controls
+                    playsinline
                 ></audio>
 
                 <div class="controls">
@@ -1188,7 +1252,7 @@ footer .bow{
                 <input
                     id="audioFile"
                     type="file"
-                    accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/mp4,audio/x-m4a"
+                    accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.webm"
                 >
 
                 <div
@@ -1196,6 +1260,10 @@ footer .bow{
                     class="file-name"
                 >
                     No audio selected
+                </div>
+
+                <div class="upload-limit">
+                    Short audio only · maximum 700 KB
                 </div>
 
                 <div class="controls">
@@ -1224,7 +1292,9 @@ footer .bow{
     </section>
 
 
-    <!-- FEED -->
+    <!-- =========================
+         FEED
+    ========================= -->
 
     <section class="section-heading">
 
@@ -1274,7 +1344,9 @@ footer .bow{
 </main>
 
 
-<!-- TOAST -->
+<!-- =========================
+     TOAST
+========================= -->
 
 <div
     id="toast"
@@ -1284,26 +1356,20 @@ footer .bow{
 
 <!-- =========================================================
      FIREBASE + APPLICATION
+     NO FIREBASE STORAGE
+     NO PUSHBULLET
 ========================================================= -->
 
 <script type="module">
 
 /* =========================================================
-   FIREBASE IMPORTS
+   FIREBASE IMPORT
 ========================================================= */
 
 import {
     initializeApp
 }
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-
-import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
 import {
     getFirestore,
@@ -1318,7 +1384,7 @@ from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 
 /* =========================================================
-   YOUR FIREBASE CONFIG
+   FIREBASE CONFIG
 ========================================================= */
 
 const firebaseConfig = {
@@ -1347,20 +1413,11 @@ const firebaseConfig = {
 
 
 /* =========================================================
-   PUSHBULLET TOKEN
-========================================================= */
-
-const PUSHBULLET_ACCESS_TOKEN =
-    "YOUR_PUSHBULLET_TOKEN_HERE";
-
-
-/* =========================================================
    FIREBASE INITIALIZATION
 ========================================================= */
 
-let app;
-let storage;
-let db;
+let app = null;
+let db = null;
 let firebaseReady = false;
 
 try{
@@ -1370,19 +1427,19 @@ try{
             firebaseConfig
         );
 
-    storage =
-        getStorage(app);
-
     db =
-        getFirestore(app);
+        getFirestore(
+            app
+        );
 
     firebaseReady = true;
 
     console.log(
-        "Firebase initialized successfully."
+        "Firebase Firestore initialized successfully."
     );
 
-}catch(error){
+}
+catch(error){
 
     console.error(
         "Firebase initialization failed:",
@@ -1514,6 +1571,23 @@ currentUserElement.textContent =
 
 
 /* =========================================================
+   CONSTANTS
+========================================================= */
+
+/*
+   Firestore document limit is approximately 1 MiB.
+
+   Base64 increases file size by roughly 33%.
+
+   We keep the source audio below 700 KB so the
+   Firestore document remains safely below the limit.
+*/
+
+const MAX_AUDIO_BYTES =
+    700 * 1024;
+
+
+/* =========================================================
    TOAST
 ========================================================= */
 
@@ -1532,7 +1606,7 @@ function showToast(text){
                 "show"
             );
         },
-        3000
+        3500
     );
 }
 
@@ -1563,6 +1637,8 @@ let mediaRecorder = null;
 let audioChunks = [];
 
 let recordedBlob = null;
+
+let recordedStream = null;
 
 let seconds = 0;
 
@@ -1597,9 +1673,75 @@ function resetTimer(){
         timerInterval
     );
 
+    timerInterval = null;
+
     seconds = 0;
 
     updateTimer();
+}
+
+
+/* =========================================================
+   FIND MOBILE-SAFE MIME TYPE
+========================================================= */
+
+function getSupportedMimeType(){
+
+    const types = [
+
+        "audio/mp4",
+
+        "audio/webm;codecs=opus",
+
+        "audio/webm",
+
+        "audio/ogg;codecs=opus"
+
+    ];
+
+
+    if(
+        typeof MediaRecorder ===
+        "undefined"
+    ){
+
+        return "";
+
+    }
+
+
+    for(
+        const type of types
+    ){
+
+        try{
+
+            if(
+                MediaRecorder.isTypeSupported(
+                    type
+                )
+            ){
+
+                return type;
+
+            }
+
+        }
+        catch(error){
+
+            console.warn(
+                "MIME check failed:",
+                type,
+                error
+            );
+
+        }
+
+    }
+
+
+    return "";
+
 }
 
 
@@ -1609,12 +1751,28 @@ function resetTimer(){
 
 async function beginRecording(){
 
+    if(
+        mediaRecorder &&
+        mediaRecorder.state ===
+        "recording"
+    ){
+
+        return;
+
+    }
+
+
     try{
 
         if(
             !navigator.mediaDevices ||
             !navigator.mediaDevices.getUserMedia
         ){
+
+            setStatus(
+                "Your browser does not support microphone recording. Please use Chrome or Safari.",
+                "error"
+            );
 
             showToast(
                 "Microphone recording is not supported."
@@ -1624,48 +1782,61 @@ async function beginRecording(){
         }
 
 
-        const stream =
+        if(
+            typeof MediaRecorder ===
+            "undefined"
+        ){
+
+            setStatus(
+                "MediaRecorder is not supported by this browser.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+           Ask for microphone only after
+           the user presses the button.
+        */
+
+        recordedStream =
             await navigator.mediaDevices.getUserMedia({
-                audio:true
+                audio:{
+                    echoCancellation:true,
+                    noiseSuppression:true,
+                    autoGainControl:true
+                }
             });
 
 
         audioChunks = [];
 
 
-        let mimeType = "";
+        const mimeType =
+            getSupportedMimeType();
 
 
-        if(
-            MediaRecorder.isTypeSupported(
-                "audio/webm;codecs=opus"
-            )
-        ){
+        if(mimeType){
 
-            mimeType =
-                "audio/webm;codecs=opus";
-
-        }
-        else if(
-            MediaRecorder.isTypeSupported(
-                "audio/mp4"
-            )
-        ){
-
-            mimeType =
-                "audio/mp4";
-        }
-
-
-        mediaRecorder =
-            mimeType
-                ? new MediaRecorder(
-                    stream,
-                    {mimeType}
-                )
-                : new MediaRecorder(
-                    stream
+            mediaRecorder =
+                new MediaRecorder(
+                    recordedStream,
+                    {
+                        mimeType:mimeType
+                    }
                 );
+
+        }
+        else{
+
+            mediaRecorder =
+                new MediaRecorder(
+                    recordedStream
+                );
+
+        }
 
 
         mediaRecorder.ondataavailable =
@@ -1673,7 +1844,7 @@ async function beginRecording(){
 
                 if(
                     event.data &&
-                    event.data.size
+                    event.data.size > 0
                 ){
 
                     audioChunks.push(
@@ -1685,11 +1856,37 @@ async function beginRecording(){
             };
 
 
+        mediaRecorder.onerror =
+            event => {
+
+                console.error(
+                    "MediaRecorder error:",
+                    event
+                );
+
+                setStatus(
+                    "Recording error. Please try again.",
+                    "error"
+                );
+
+                stopMediaStream();
+
+            };
+
+
         mediaRecorder.onstop =
             ()=>{
 
-                const type =
+                clearInterval(
+                    timerInterval
+                );
+
+                timerInterval = null;
+
+
+                const finalType =
                     mediaRecorder.mimeType ||
+                    mimeType ||
                     "audio/webm";
 
 
@@ -1697,15 +1894,66 @@ async function beginRecording(){
                     new Blob(
                         audioChunks,
                         {
-                            type:type
+                            type:finalType
                         }
                     );
+
+
+                stopMediaStream();
+
+
+                if(
+                    recordedBlob.size === 0
+                ){
+
+                    setStatus(
+                        "No audio was recorded. Please try again.",
+                        "error"
+                    );
+
+                    uploadRecording.disabled =
+                        true;
+
+                    return;
+
+                }
+
+
+                if(
+                    recordedBlob.size >
+                    MAX_AUDIO_BYTES
+                ){
+
+                    recordedBlob = null;
+
+                    preview.classList.remove(
+                        "visible"
+                    );
+
+                    uploadRecording.disabled =
+                        true;
+
+                    setStatus(
+                        "This recording is too large for Firestore. Please record a shorter voice note.",
+                        "error"
+                    );
+
+                    showToast(
+                        "Please keep the voice note shorter."
+                    );
+
+                    return;
+
+                }
 
 
                 recordedAudio.src =
                     URL.createObjectURL(
                         recordedBlob
                     );
+
+
+                recordedAudio.load();
 
 
                 preview.classList.add(
@@ -1717,17 +1965,16 @@ async function beginRecording(){
                     false;
 
 
-                stream
-                    .getTracks()
-                    .forEach(
-                        track =>
-                            track.stop()
-                    );
+                setStatus(
+                    "Your little voice letter is ready ♡"
+                );
 
             };
 
 
-        mediaRecorder.start();
+        mediaRecorder.start(
+            250
+        );
 
 
         startRecord.disabled =
@@ -1756,6 +2003,24 @@ async function beginRecording(){
                 ()=>{
                     seconds++;
                     updateTimer();
+
+                    /*
+                       Stop automatically before the
+                       Firestore-safe size becomes risky.
+                    */
+
+                    if(
+                        seconds >= 50
+                    ){
+
+                        endRecording();
+
+                        showToast(
+                            "Recording stopped — short voice letters work best. 💗"
+                        );
+
+                    }
+
                 },
                 1000
             );
@@ -1765,19 +2030,100 @@ async function beginRecording(){
             "Recording... speak from your heart 🎀"
         );
 
-
     }
     catch(error){
 
         console.error(
+            "Microphone error:",
             error
         );
 
-        showToast(
-            "Microphone permission is required."
+
+        stopMediaStream();
+
+
+        startRecord.disabled =
+            false;
+
+        stopRecord.disabled =
+            true;
+
+
+        micButton.classList.remove(
+            "recording"
         );
 
+
+        if(
+            error.name ===
+            "NotAllowedError"
+        ){
+
+            setStatus(
+                "Microphone permission was denied. Please allow microphone access in your browser settings.",
+                "error"
+            );
+
+            showToast(
+                "Please allow microphone access."
+            );
+
+        }
+        else if(
+            error.name ===
+            "NotFoundError"
+        ){
+
+            setStatus(
+                "No microphone was found on this device.",
+                "error"
+            );
+
+        }
+        else{
+
+            setStatus(
+                "Could not start recording: " +
+                (
+                    error.message ||
+                    "Unknown error"
+                ),
+                "error"
+            );
+
+        }
+
     }
+
+}
+
+
+/* =========================================================
+   STOP MEDIA STREAM
+========================================================= */
+
+function stopMediaStream(){
+
+    if(
+        recordedStream
+    ){
+
+        recordedStream
+            .getTracks()
+            .forEach(
+                track => {
+                    try{
+                        track.stop();
+                    }
+                    catch(error){}
+                }
+            );
+
+        recordedStream =
+            null;
+
+    }
+
 }
 
 
@@ -1789,10 +2135,30 @@ function endRecording(){
 
     if(
         mediaRecorder &&
-        mediaRecorder.state !== "inactive"
+        mediaRecorder.state !==
+        "inactive"
     ){
 
-        mediaRecorder.stop();
+        try{
+
+            mediaRecorder.stop();
+
+        }
+        catch(error){
+
+            console.error(
+                "Stop recording error:",
+                error
+            );
+
+            stopMediaStream();
+
+        }
+
+    }
+    else{
+
+        stopMediaStream();
 
     }
 
@@ -1813,10 +2179,21 @@ function endRecording(){
         timerInterval
     );
 
+    timerInterval = null;
 
-    setStatus(
-        "Your little voice letter is ready ♡"
-    );
+
+    if(
+        mediaRecorder &&
+        mediaRecorder.state ===
+        "inactive"
+    ){
+
+        setStatus(
+            "Processing your little voice letter... 🎀"
+        );
+
+    }
+
 }
 
 
@@ -1832,7 +2209,8 @@ micButton.addEventListener(
 
         if(
             mediaRecorder &&
-            mediaRecorder.state === "recording"
+            mediaRecorder.state ===
+            "recording"
         ){
 
             endRecording();
@@ -1879,18 +2257,47 @@ audioFile.addEventListener(
 
 
         if(
-            file.size >
-            50 * 1024 * 1024
+            !file.type.startsWith(
+                "audio/"
+            )
         ){
 
             fileName.textContent =
-                "File is larger than 50 MB.";
+                "Please choose an audio file.";
 
             uploadFile.disabled =
                 true;
 
             audioFile.value =
                 "";
+
+            setStatus(
+                "Only audio files are supported.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(
+            file.size >
+            MAX_AUDIO_BYTES
+        ){
+
+            fileName.textContent =
+                "File is larger than 700 KB.";
+
+            uploadFile.disabled =
+                true;
+
+            audioFile.value =
+                "";
+
+            setStatus(
+                "Please choose a shorter/smaller audio file.",
+                "error"
+            );
 
             return;
         }
@@ -1914,7 +2321,7 @@ audioFile.addEventListener(
 
 
 /* =========================================================
-   UPLOAD RECORDED AUDIO
+   RECORDED AUDIO UPLOAD
 ========================================================= */
 
 uploadRecording.addEventListener(
@@ -1931,23 +2338,23 @@ uploadRecording.addEventListener(
         }
 
 
-        const extension =
-            recordedBlob.type.includes(
-                "mp4"
-            )
-                ? "m4a"
-                : "webm";
+        if(
+            recordedBlob.size >
+            MAX_AUDIO_BYTES
+        ){
+
+            setStatus(
+                "This recording is too large for Firestore.",
+                "error"
+            );
+
+            return;
+
+        }
 
 
-        await uploadAudio(
-            recordedBlob,
-
-            "voice_" +
-            Date.now() +
-            "." +
-            extension,
-
-            recordedBlob.type
+        await saveAudioToFirestore(
+            recordedBlob
         );
 
     }
@@ -1955,7 +2362,7 @@ uploadRecording.addEventListener(
 
 
 /* =========================================================
-   UPLOAD SELECTED FILE
+   SELECTED FILE UPLOAD
 ========================================================= */
 
 uploadFile.addEventListener(
@@ -1976,13 +2383,23 @@ uploadFile.addEventListener(
         }
 
 
-        await uploadAudio(
-            file,
+        if(
+            file.size >
+            MAX_AUDIO_BYTES
+        ){
 
-            file.name,
+            setStatus(
+                "This audio file is too large. Maximum 700 KB.",
+                "error"
+            );
 
-            file.type ||
-            "audio/mpeg"
+            return;
+
+        }
+
+
+        await saveAudioToFirestore(
+            file
         );
 
     }
@@ -1990,19 +2407,95 @@ uploadFile.addEventListener(
 
 
 /* =========================================================
-   MAIN FIREBASE UPLOAD
+   FILE/BLOB → BASE64
 ========================================================= */
 
-async function uploadAudio(
-    audioData,
-    originalName,
-    contentType
+function audioToBase64(
+    audioData
+){
+
+    return new Promise(
+        (
+            resolve,
+            reject
+        ) => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(){
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+
+            reader.onerror =
+                function(){
+
+                    reject(
+                        new Error(
+                            "Could not convert audio to Base64."
+                        )
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                audioData
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MAIN FIRESTORE SAVE
+========================================================= */
+
+async function saveAudioToFirestore(
+    audioData
 ){
 
     if(!firebaseReady){
 
         setStatus(
-            "Firebase configuration is missing.",
+            "Firebase could not be initialized.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(
+        !audioData ||
+        !audioData.size
+    ){
+
+        setStatus(
+            "No audio data was found.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(
+        audioData.size >
+        MAX_AUDIO_BYTES
+    ){
+
+        setStatus(
+            "Audio is too large. Maximum 700 KB.",
             "error"
         );
 
@@ -2013,61 +2506,69 @@ async function uploadAudio(
     try{
 
         setStatus(
-            "Saving your little voice letter... 💗"
+            "Preparing your voice letter... 💗"
         );
 
 
-        uploadRecording.disabled =
-            true;
-
-        uploadFile.disabled =
-            true;
-
-
-        const cleanName =
-            originalName.replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
-            );
-
-
-        const path =
-            "voice-mails/" +
-            currentUser.toLowerCase() +
-            "/" +
-            Date.now() +
-            "_" +
-            cleanName;
-
-
-        const storageRef =
-            ref(
-                storage,
-                path
-            );
-
-
-        /* Upload to Firebase Storage */
-
-        await uploadBytes(
-            storageRef,
-            audioData,
-            {
-                contentType:
-                    contentType
-            }
+        setUploadButtons(
+            true
         );
 
 
-        /* Get public download URL */
+        /*
+           Convert audio directly into
+           a Base64 data URL.
+        */
 
-        const url =
-            await getDownloadURL(
-                storageRef
+        const base64Audio =
+            await audioToBase64(
+                audioData
             );
 
 
-        /* Save metadata in Firestore */
+        if(
+            !base64Audio ||
+            !base64Audio.startsWith(
+                "data:audio/"
+            )
+        ){
+
+            throw new Error(
+                "Audio conversion failed."
+            );
+
+        }
+
+
+        /*
+           Safety check against Firestore
+           document size limitations.
+        */
+
+        if(
+            base64Audio.length >
+            900000
+        ){
+
+            throw new Error(
+                "Converted audio is too large for Firestore."
+            );
+
+        }
+
+
+        setStatus(
+            "Saving your little voice letter... 🌷"
+        );
+
+
+        /*
+           ONLY THREE REQUESTED DATA FIELDS:
+
+           sender
+           audioURL
+           createdAt
+        */
 
         await addDoc(
             collection(
@@ -2079,23 +2580,8 @@ async function uploadAudio(
                 sender:
                     currentUser,
 
-                senderUsername:
-                    sessionStorage.getItem(
-                        "loggedInUser"
-                    ) ||
-                    currentUser.toLowerCase(),
-
                 audioURL:
-                    url,
-
-                fileName:
-                    cleanName,
-
-                storagePath:
-                    path,
-
-                contentType:
-                    contentType,
+                    base64Audio,
 
                 createdAt:
                     serverTimestamp()
@@ -2104,15 +2590,8 @@ async function uploadAudio(
         );
 
 
-        /* Pushbullet notification */
-
-        await sendPushbullet(
-            currentUser
-        );
-
-
         setStatus(
-            "Saved in our little diary. 💗",
+            "Saved safely in our little diary. 💗",
             "success"
         );
 
@@ -2128,20 +2607,83 @@ async function uploadAudio(
     catch(error){
 
         console.error(
-            "Upload error:",
+            "Firestore audio save error:",
             error
         );
 
 
+        let message =
+            error.message ||
+            "Please try again.";
+
+
+        if(
+            error.code ===
+            "permission-denied"
+        ){
+
+            message =
+                "Firestore permission denied. Please check your Firestore Rules.";
+
+        }
+
+
+        if(
+            error.code ===
+            "resource-exhausted"
+        ){
+
+            message =
+                "Firestore limit reached. Please use a shorter voice note.";
+
+        }
+
+
         setStatus(
-            "Upload failed: " +
-            (
-                error.message ||
-                "Please try again."
-            ),
+            "Save failed: " +
+            message,
             "error"
         );
 
+
+        showToast(
+            "Voice letter could not be saved."
+        );
+
+
+        setUploadButtons(
+            false
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BUTTON STATE
+========================================================= */
+
+function setUploadButtons(
+    busy
+){
+
+    if(busy){
+
+        uploadRecording.disabled =
+            true;
+
+        uploadFile.disabled =
+            true;
+
+        startRecord.disabled =
+            true;
+
+        stopRecord.disabled =
+            true;
+
+    }
+    else{
 
         uploadRecording.disabled =
             !recordedBlob;
@@ -2149,7 +2691,11 @@ async function uploadAudio(
         uploadFile.disabled =
             !audioFile.files.length;
 
+        startRecord.disabled =
+            false;
+
     }
+
 }
 
 
@@ -2168,9 +2714,28 @@ function resetAfterUpload(){
     );
 
 
+    if(
+        recordedAudio.src
+    ){
+
+        try{
+
+            URL.revokeObjectURL(
+                recordedAudio.src
+            );
+
+        }
+        catch(error){}
+
+    }
+
+
     recordedAudio.removeAttribute(
         "src"
     );
+
+
+    recordedAudio.load();
 
 
     audioFile.value =
@@ -2188,93 +2753,19 @@ function resetAfterUpload(){
         true;
 
 
+    startRecord.disabled =
+        false;
+
+    stopRecord.disabled =
+        true;
+
+
+    mediaRecorder =
+        null;
+
+
     resetTimer();
-}
 
-
-/* =========================================================
-   PUSHBULLET
-========================================================= */
-
-async function sendPushbullet(
-    senderName
-){
-
-    if(
-        !PUSHBULLET_ACCESS_TOKEN ||
-        PUSHBULLET_ACCESS_TOKEN ===
-        "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7"
-    ){
-
-        console.warn(
-            "Pushbullet token not configured."
-        );
-
-        return;
-    }
-
-
-    try{
-
-        const response =
-            await fetch(
-                "https://api.pushbullet.com/v2/pushes",
-                {
-
-                    method:
-                        "POST",
-
-                    headers:{
-                        "Access-Token":
-                            PUSHBULLET_ACCESS_TOKEN,
-
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            type:
-                                "note",
-
-                            title:
-                                "New Voice Mail Received! 🎙️",
-
-                            body:
-                                senderName +
-                                " has uploaded a new voice note."
-
-                        })
-
-                }
-            );
-
-
-        if(!response.ok){
-
-            console.error(
-                "Pushbullet error:",
-                response.status
-            );
-
-            return;
-        }
-
-
-        console.log(
-            "Pushbullet notification sent."
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Pushbullet request failed:",
-            error
-        );
-
-    }
 }
 
 
@@ -2384,7 +2875,7 @@ function loadVoiceLetters(){
         error => {
 
             console.error(
-                "Firestore error:",
+                "Firestore feed error:",
                 error
             );
 
@@ -2402,7 +2893,7 @@ function loadVoiceLetters(){
                     </h3>
 
                     <p>
-                        Please check your Firestore rules.
+                        Please check your Firestore Rules.
                     </p>
 
                 </div>
@@ -2482,9 +2973,7 @@ function createVoiceCard(
         <audio
             controls
             preload="metadata"
-            src="${escapeAttribute(
-                data.audioURL || ""
-            )}"
+            playsinline
         ></audio>
 
 
@@ -2493,6 +2982,34 @@ function createVoiceCard(
         </div>
 
     `;
+
+
+    /*
+       IMPORTANT:
+
+       Do not put the Base64 string into
+       innerHTML. Assign it directly to
+       the audio element.
+    */
+
+    const audio =
+        card.querySelector(
+            "audio"
+        );
+
+
+    if(
+        data.audioURL &&
+        typeof data.audioURL ===
+        "string"
+    ){
+
+        audio.src =
+            data.audioURL;
+
+        audio.load();
+
+    }
 
 
     return card;
@@ -2509,25 +3026,36 @@ function formatDate(
 
     if(
         !timestamp ||
-        !timestamp.toDate
+        typeof timestamp.toDate !==
+        "function"
     ){
 
         return "Just now";
     }
 
 
-    return timestamp
-        .toDate()
-        .toLocaleString(
-            "en-PK",
-            {
-                dateStyle:
-                    "medium",
+    try{
 
-                timeStyle:
-                    "short"
-            }
-        );
+        return timestamp
+            .toDate()
+            .toLocaleString(
+                "en-PK",
+                {
+                    dateStyle:
+                        "medium",
+
+                    timeStyle:
+                        "short"
+                }
+            );
+
+    }
+    catch(error){
+
+        return "Just now";
+
+    }
+
 }
 
 
@@ -2560,30 +3088,7 @@ function escapeHTML(
             /'/g,
             "&#039;"
         );
-}
 
-
-function escapeAttribute(
-    value
-){
-
-    return String(value)
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        );
 }
 
 
@@ -2592,6 +3097,37 @@ function escapeAttribute(
 ========================================================= */
 
 loadVoiceLetters();
+
+
+/* =========================================================
+   PAGE CLEANUP
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    ()=>{
+        stopMediaStream();
+
+        if(
+            recordedAudio.src &&
+            recordedAudio.src.startsWith(
+                "blob:"
+            )
+        ){
+
+            try{
+
+                URL.revokeObjectURL(
+                    recordedAudio.src
+                );
+
+            }
+            catch(error){}
+
+        }
+
+    }
+);
 
 </script>
 
@@ -2678,6 +3214,7 @@ function createPetal(){
         },
         18000
     );
+
 }
 
 
