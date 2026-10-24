@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +13,6 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   NOOR'S SECRET GARDEN
-   Completely new feminine / coquette design
-========================================================= */
 
 :root{
     --cream:#fffaf5;
@@ -36,8 +31,6 @@
     --shadow:0 18px 50px rgba(157,103,123,.15);
 }
 
-/* RESET */
-
 *{
     margin:0;
     padding:0;
@@ -51,9 +44,7 @@ html{
 body{
     min-height:100vh;
     overflow-x:hidden;
-
     font-family:"Quicksand",sans-serif;
-
     color:var(--text);
 
     background:
@@ -75,9 +66,9 @@ body{
         );
 }
 
-/* =========================================================
-   DECORATIVE BACKGROUND
-========================================================= */
+/* =========================
+   BACKGROUND
+========================= */
 
 .garden-bg{
     position:fixed;
@@ -138,20 +129,17 @@ body{
     transform:rotate(-15deg);
 }
 
-/* =========================================================
-   PETALS
-========================================================= */
+/* =========================
+   FALLING PETALS
+========================= */
 
 .petal{
     position:fixed;
     top:-30px;
     pointer-events:none;
     z-index:2;
-
     opacity:.65;
-
-    animation:
-        fall linear infinite;
+    animation:fall linear infinite;
 }
 
 @keyframes fall{
@@ -184,29 +172,26 @@ body{
     }
 }
 
-/* =========================================================
+/* =========================
    MAIN
-========================================================= */
+========================= */
 
 .page{
     position:relative;
     z-index:5;
-
     width:min(1050px,92%);
     margin:auto;
-
     padding:25px 0 60px;
 }
 
-/* =========================================================
-   TOP NAV
-========================================================= */
+/* =========================
+   TOP
+========================= */
 
 .top{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     margin-bottom:20px;
 }
 
@@ -214,7 +199,6 @@ body{
     display:flex;
     align-items:center;
     gap:8px;
-
     color:var(--rose-dark);
     font-weight:700;
     letter-spacing:1px;
@@ -226,38 +210,28 @@ body{
 
 .user-pill{
     padding:8px 15px;
-
     border-radius:30px;
-
     background:rgba(255,255,255,.65);
-
     border:1px solid rgba(201,121,145,.2);
-
     box-shadow:0 8px 25px rgba(150,100,120,.08);
-
     color:var(--rose-dark);
-
     font-size:.78rem;
     font-weight:700;
 }
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
     position:relative;
-
     text-align:center;
-
     padding:35px 20px 45px;
 }
 
 .hero-bow{
     font-size:55px;
-
-    animation:
-        bowFloat 3s ease-in-out infinite;
+    animation:bowFloat 3s ease-in-out infinite;
 }
 
 @keyframes bowFloat{
@@ -273,85 +247,67 @@ body{
 
 .hero h1{
     margin-top:10px;
-
     font-family:"DM Serif Display",serif;
-
     font-size:clamp(2.2rem,7vw,4.4rem);
-
     color:var(--rose-dark);
-
     letter-spacing:-1px;
 }
 
 .hero-script{
     margin-top:-5px;
-
     font-family:"Great Vibes",cursive;
-
     font-size:clamp(2rem,6vw,3.5rem);
-
     color:#bd7e96;
 }
 
 .hero p{
     max-width:600px;
     margin:12px auto 0;
-
     line-height:1.8;
-
     color:var(--soft);
-
     font-size:.94rem;
 }
 
-/* =========================================================
+/* =========================
    ORNAMENT
-========================================================= */
+========================= */
 
 .ornament{
     display:flex;
     align-items:center;
     justify-content:center;
     gap:12px;
-
     margin:5px auto 28px;
-
     color:#d59aae;
 }
 
 .ornament:before,
 .ornament:after{
     content:"";
-
     width:90px;
     height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #e0b1bf
-        );
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #e0b1bf
+    );
 }
 
 .ornament:after{
-    background:
-        linear-gradient(
-            90deg,
-            #e0b1bf,
-            transparent
-        );
+    background:linear-gradient(
+        90deg,
+        #e0b1bf,
+        transparent
+    );
 }
 
-/* =========================================================
+/* =========================
    DIARY
-========================================================= */
+========================= */
 
 .diary{
     position:relative;
-
     padding:28px;
-
     border-radius:28px;
 
     background:
@@ -366,58 +322,38 @@ body{
         rgba(205,150,167,.28);
 
     box-shadow:var(--shadow);
-
     margin-bottom:25px;
 }
 
-/* lace-like edge */
-
 .diary:before{
     content:"";
-
     position:absolute;
     inset:8px;
-
     border-radius:21px;
-
-    border:
-        1px dashed
-        rgba(201,121,145,.25);
-
+    border:1px dashed rgba(201,121,145,.25);
     pointer-events:none;
 }
 
 .ribbon{
     position:absolute;
-
     top:-13px;
     left:50%;
-
     transform:translateX(-50%);
-
     padding:6px 24px;
-
     background:#e9aabd;
-
     color:white;
-
     border-radius:4px 4px 12px 12px;
-
     font-size:.7rem;
     font-weight:700;
-
     letter-spacing:1px;
-
     box-shadow:0 7px 15px rgba(180,100,125,.16);
 }
 
 .ribbon:before,
 .ribbon:after{
     content:"";
-
     position:absolute;
     bottom:-10px;
-
     border-style:solid;
 }
 
@@ -433,47 +369,39 @@ body{
     border-color:#c9849a transparent transparent transparent;
 }
 
-/* =========================================================
-   RECORDING AREA
-========================================================= */
+/* =========================
+   RECORD AREA
+========================= */
 
 .record-area{
     position:relative;
     z-index:2;
-
     text-align:center;
-
     padding:20px 10px 10px;
 }
 
 .record-title{
     font-family:"DM Serif Display",serif;
-
     color:#805d66;
-
     font-size:1.45rem;
-
     margin-bottom:5px;
 }
 
 .record-sub{
     color:#a38b91;
-
     font-size:.82rem;
-
     margin-bottom:25px;
 }
 
-/* vintage microphone */
+/* =========================
+   MICROPHONE
+========================= */
 
 .mic-wrap{
     position:relative;
-
     width:150px;
     height:150px;
-
     margin:0 auto 20px;
-
     display:flex;
     align-items:center;
     justify-content:center;
@@ -482,12 +410,8 @@ body{
 .mic-ring{
     position:absolute;
     inset:0;
-
     border-radius:50%;
-
-    border:
-        1px solid
-        rgba(201,121,145,.22);
+    border:1px solid rgba(201,121,145,.22);
 
     background:
         radial-gradient(
@@ -499,8 +423,7 @@ body{
     box-shadow:
         0 15px 40px rgba(190,120,145,.12);
 
-    animation:
-        softPulse 3s ease-in-out infinite;
+    animation:softPulse 3s ease-in-out infinite;
 }
 
 @keyframes softPulse{
@@ -529,9 +452,7 @@ body{
         );
 
     color:white;
-
     font-size:33px;
-
     cursor:pointer;
 
     box-shadow:
@@ -552,8 +473,7 @@ body{
             #b94d6e
         );
 
-    animation:
-        recordBeat 1s infinite;
+    animation:recordBeat 1s infinite;
 }
 
 @keyframes recordBeat{
@@ -567,19 +487,15 @@ body{
 
 .timer{
     color:#80636b;
-
     font-weight:700;
-
     font-size:1.1rem;
-
     letter-spacing:2px;
-
     margin-bottom:18px;
 }
 
-/* =========================================================
-   CONTROLS
-========================================================= */
+/* =========================
+   BUTTONS
+========================= */
 
 .controls{
     display:flex;
@@ -590,17 +506,13 @@ body{
 
 .btn{
     border:0;
-
     border-radius:14px;
-
     padding:12px 20px;
 
     font-family:"Quicksand",sans-serif;
-
     font-weight:700;
 
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -638,15 +550,14 @@ body{
         0 9px 20px rgba(185,105,130,.16);
 }
 
-/* =========================================================
+/* =========================
    PREVIEW
-========================================================= */
+========================= */
 
 .preview{
     display:none;
 
     margin:22px auto 0;
-
     max-width:500px;
 
     padding:17px;
@@ -654,7 +565,6 @@ body{
     border-radius:17px;
 
     background:#fff7f8;
-
     border:1px solid #efd4dc;
 }
 
@@ -664,49 +574,38 @@ body{
 
 .preview-label{
     color:#9b7580;
-
     font-size:.76rem;
-
     font-weight:700;
-
     margin-bottom:8px;
 }
 
-/* =========================================================
-   UPLOAD
-========================================================= */
+/* =========================
+   FILE UPLOAD
+========================= */
 
 .upload-section{
     position:relative;
     z-index:2;
 
     margin-top:28px;
-
     padding-top:25px;
 
-    border-top:
-        1px dashed
-        #e5cbd3;
+    border-top:1px dashed #e5cbd3;
 
     text-align:center;
 }
 
 .upload-title{
     color:#87666e;
-
     font-family:"DM Serif Display",serif;
-
     font-size:1.1rem;
-
     margin-bottom:13px;
 }
 
 .file-button{
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
     gap:8px;
 
     padding:11px 18px;
@@ -714,7 +613,6 @@ body{
     border-radius:13px;
 
     background:#f5e6eb;
-
     color:#87636e;
 
     border:1px solid #e6c9d2;
@@ -722,7 +620,6 @@ body{
     cursor:pointer;
 
     font-weight:700;
-
     font-size:.82rem;
 }
 
@@ -732,27 +629,20 @@ body{
 
 .file-name{
     margin-top:10px;
-
     font-size:.76rem;
-
     color:#a38b91;
-
     word-break:break-word;
 }
 
-/* =========================================================
+/* =========================
    STATUS
-========================================================= */
+========================= */
 
 .status{
     min-height:22px;
-
     margin-top:15px;
-
     text-align:center;
-
     font-size:.78rem;
-
     color:#a1888e;
 }
 
@@ -764,39 +654,34 @@ body{
     color:#bd627d;
 }
 
-/* =========================================================
-   VOICE DIARY
-========================================================= */
+/* =========================
+   VOICE DIARY HEADING
+========================= */
 
 .section-heading{
     text-align:center;
-
     margin:38px 0 20px;
 }
 
 .section-heading h2{
     font-family:"DM Serif Display",serif;
-
     color:#805d66;
-
     font-size:1.8rem;
 }
 
 .section-heading span{
     display:block;
-
     margin-top:5px;
 
     font-family:"Great Vibes",cursive;
-
     font-size:1.65rem;
 
     color:#c4879b;
 }
 
-/* =========================================================
-   MESSAGE LIST
-========================================================= */
+/* =========================
+   MESSAGE GRID
+========================= */
 
 .messages{
     display:grid;
@@ -810,16 +695,17 @@ body{
     gap:18px;
 }
 
-/* =========================================================
+/* =========================
    VOICE LETTER
-========================================================= */
+========================= */
 
 .voice-letter{
     position:relative;
 
     padding:23px;
 
-    border-radius:20px 20px 25px 25px;
+    border-radius:
+        20px 20px 25px 25px;
 
     background:
         linear-gradient(
@@ -873,27 +759,21 @@ body{
     border-radius:50%;
 
     background:#f8dbe4;
-
     opacity:.4;
 }
 
 .letter-top{
     display:flex;
-
     justify-content:space-between;
-
     align-items:flex-start;
 
     gap:10px;
-
     margin-bottom:15px;
 }
 
 .sender{
     display:flex;
-
     align-items:center;
-
     gap:10px;
 }
 
@@ -919,28 +799,24 @@ body{
     border:3px solid white;
 
     box-shadow:
-        0 5px 12px rgba(160,100,120,.12);
+        0 5px 12px
+        rgba(160,100,120,.12);
 }
 
 .sender-name{
     font-weight:700;
-
     color:#765b63;
 }
 
 .sender-role{
     margin-top:2px;
-
     color:#af979e;
-
     font-size:.69rem;
 }
 
 .time{
     color:#b59da4;
-
     font-size:.66rem;
-
     text-align:right;
 }
 
@@ -949,7 +825,6 @@ body{
     z-index:3;
 
     width:100%;
-
     height:42px;
 }
 
@@ -961,57 +836,45 @@ body{
 
     display:flex;
     align-items:center;
-
     gap:7px;
 
     color:#bd8195;
 
     font-family:"Great Vibes",cursive;
-
     font-size:1.1rem;
 }
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
+/* =========================
+   EMPTY
+========================= */
 
 .empty{
     grid-column:1/-1;
-
     text-align:center;
-
     padding:45px 20px;
-
     color:#a68e95;
 }
 
 .empty-flower{
     font-size:45px;
-
     margin-bottom:10px;
 }
 
 .empty h3{
     font-family:"DM Serif Display",serif;
-
     color:#86656d;
-
     margin-bottom:5px;
 }
 
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 footer{
     text-align:center;
-
     margin-top:40px;
-
     color:#ad979d;
-
     font-size:.68rem;
-
     letter-spacing:1px;
 }
 
@@ -1019,9 +882,9 @@ footer .bow{
     color:#c77d94;
 }
 
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
 .toast{
     position:fixed;
@@ -1035,7 +898,6 @@ footer .bow{
         translate(-50%,25px);
 
     opacity:0;
-
     pointer-events:none;
 
     padding:12px 20px;
@@ -1046,13 +908,13 @@ footer .bow{
         rgba(255,250,250,.96);
 
     border:
-        1px solid
-        #e4bdca;
+        1px solid #e4bdca;
 
     color:#805d66;
 
     box-shadow:
-        0 12px 35px rgba(130,80,100,.18);
+        0 12px 35px
+        rgba(130,80,100,.18);
 
     font-size:.78rem;
 
@@ -1061,14 +923,12 @@ footer .bow{
 
 .toast.show{
     opacity:1;
-
-    transform:
-        translate(-50%,0);
+    transform:translate(-50%,0);
 }
 
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:600px){
 
@@ -1119,12 +979,11 @@ footer .bow{
     .voice-letter{
         padding:19px;
     }
-
 }
 
-/* =========================================================
+/* =========================
    REDUCED MOTION
-========================================================= */
+========================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1135,7 +994,6 @@ footer .bow{
         animation-iteration-count:1!important;
         scroll-behavior:auto!important;
     }
-
 }
 
 </style>
@@ -1143,9 +1001,7 @@ footer .bow{
 
 <body>
 
-<!-- ========================================================
-     BACKGROUND DECOR
-========================================================= -->
+<!-- BACKGROUND -->
 
 <div class="garden-bg">
 
@@ -1159,20 +1015,12 @@ footer .bow{
 
 </div>
 
-
-<!-- ========================================================
-     PETALS
-========================================================= -->
-
 <div id="petals"></div>
 
 
-<!-- ========================================================
-     PAGE
-========================================================= -->
+<!-- MAIN -->
 
 <main class="page">
-
 
     <!-- TOP -->
 
@@ -1184,8 +1032,7 @@ footer .bow{
         </div>
 
         <div class="user-pill">
-            <i>♡</i>
-            <span id="currentUser">Loading...</span>
+            ♡ <span id="currentUser">Loading...</span>
         </div>
 
     </div>
@@ -1220,9 +1067,7 @@ footer .bow{
     </div>
 
 
-    <!-- ====================================================
-         DIARY / RECORDER
-    ===================================================== -->
+    <!-- DIARY -->
 
     <section class="diary">
 
@@ -1269,7 +1114,7 @@ footer .bow{
             </div>
 
 
-            <!-- CONTROLS -->
+            <!-- RECORD BUTTONS -->
 
             <div class="controls">
 
@@ -1325,7 +1170,7 @@ footer .bow{
             </div>
 
 
-            <!-- FILE UPLOAD -->
+            <!-- FILE PICKER -->
 
             <div class="upload-section">
 
@@ -1369,8 +1214,6 @@ footer .bow{
             </div>
 
 
-            <!-- STATUS -->
-
             <div
                 id="status"
                 class="status"
@@ -1381,9 +1224,7 @@ footer .bow{
     </section>
 
 
-    <!-- ====================================================
-         VOICE DIARY FEED
-    ===================================================== -->
+    <!-- FEED -->
 
     <section class="section-heading">
 
@@ -1441,8 +1282,8 @@ footer .bow{
 ></div>
 
 
-<!-- ========================================================
-     FIREBASE + APP LOGIC
+<!-- =========================================================
+     FIREBASE + APPLICATION
 ========================================================= -->
 
 <script type="module">
@@ -1477,34 +1318,36 @@ from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 
 /* =========================================================
-   FIREBASE CONFIG
+   YOUR FIREBASE CONFIG
 ========================================================= */
 
 const firebaseConfig = {
 
     apiKey:
-        "YOUR_FIREBASE_API_KEY",
+        "AIzaSyACnQpTN5yjN0w91SP7bbPBXwtLD2ztdDU",
 
     authDomain:
-        "YOUR_PROJECT_ID.firebaseapp.com",
+        "love-mails.firebaseapp.com",
 
     projectId:
-        "YOUR_PROJECT_ID",
+        "love-mails",
 
     storageBucket:
-        "YOUR_PROJECT_ID.firebasestorage.app",
+        "love-mails.firebasestorage.app",
 
     messagingSenderId:
-        "YOUR_MESSAGING_SENDER_ID",
+        "572791120393",
 
     appId:
-        "YOUR_FIREBASE_APP_ID"
+        "1:572791120393:web:9ee6196b664133f9a10ed8",
 
+    measurementId:
+        "G-BJCVCT0NEG"
 };
 
 
 /* =========================================================
-   PUSHBULLET
+   PUSHBULLET TOKEN
 ========================================================= */
 
 const PUSHBULLET_ACCESS_TOKEN =
@@ -1512,7 +1355,7 @@ const PUSHBULLET_ACCESS_TOKEN =
 
 
 /* =========================================================
-   INITIALIZE FIREBASE
+   FIREBASE INITIALIZATION
 ========================================================= */
 
 let app;
@@ -1522,13 +1365,22 @@ let firebaseReady = false;
 
 try{
 
-    app = initializeApp(firebaseConfig);
+    app =
+        initializeApp(
+            firebaseConfig
+        );
 
-    storage = getStorage(app);
+    storage =
+        getStorage(app);
 
-    db = getFirestore(app);
+    db =
+        getFirestore(app);
 
     firebaseReady = true;
+
+    console.log(
+        "Firebase initialized successfully."
+    );
 
 }catch(error){
 
@@ -1545,74 +1397,117 @@ try{
 ========================================================= */
 
 const currentUserElement =
-    document.getElementById("currentUser");
+    document.getElementById(
+        "currentUser"
+    );
 
 const micButton =
-    document.getElementById("micButton");
+    document.getElementById(
+        "micButton"
+    );
 
 const startRecord =
-    document.getElementById("startRecord");
+    document.getElementById(
+        "startRecord"
+    );
 
 const stopRecord =
-    document.getElementById("stopRecord");
+    document.getElementById(
+        "stopRecord"
+    );
 
 const timer =
-    document.getElementById("timer");
+    document.getElementById(
+        "timer"
+    );
 
 const preview =
-    document.getElementById("preview");
+    document.getElementById(
+        "preview"
+    );
 
 const recordedAudio =
-    document.getElementById("recordedAudio");
+    document.getElementById(
+        "recordedAudio"
+    );
 
 const uploadRecording =
-    document.getElementById("uploadRecording");
+    document.getElementById(
+        "uploadRecording"
+    );
 
 const audioFile =
-    document.getElementById("audioFile");
+    document.getElementById(
+        "audioFile"
+    );
 
 const fileName =
-    document.getElementById("fileName");
+    document.getElementById(
+        "fileName"
+    );
 
 const uploadFile =
-    document.getElementById("uploadFile");
+    document.getElementById(
+        "uploadFile"
+    );
 
 const status =
-    document.getElementById("status");
+    document.getElementById(
+        "status"
+    );
 
 const messages =
-    document.getElementById("messages");
+    document.getElementById(
+        "messages"
+    );
 
 const toast =
-    document.getElementById("toast");
+    document.getElementById(
+        "toast"
+    );
 
 
 /* =========================================================
-   CURRENT USER
+   CURRENT LOGGED-IN USER
 ========================================================= */
 
 function getCurrentUser(){
 
     const username =
-        sessionStorage.getItem("loggedInUser") ||
-        localStorage.getItem("loggedInUser");
+        sessionStorage.getItem(
+            "loggedInUser"
+        ) ||
+        localStorage.getItem(
+            "loggedInUser"
+        );
+
 
     if(
         username === "noorazeem" ||
         username === "noor"
     ){
+
         return "Noor";
+
     }
 
-    if(username === "azeem"){
+
+    if(
+        username === "azeem"
+    ){
+
         return "Azeem";
+
     }
+
 
     return "Azeem";
 }
 
+
 const currentUser =
     getCurrentUser();
+
 
 currentUserElement.textContent =
     currentUser;
@@ -1624,13 +1519,18 @@ currentUserElement.textContent =
 
 function showToast(text){
 
-    toast.textContent = text;
+    toast.textContent =
+        text;
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
     setTimeout(
         ()=>{
-            toast.classList.remove("show");
+            toast.classList.remove(
+                "show"
+            );
         },
         3000
     );
@@ -1646,7 +1546,8 @@ function setStatus(
     type=""
 ){
 
-    status.textContent = text;
+    status.textContent =
+        text;
 
     status.className =
         "status " + type;
@@ -1654,7 +1555,7 @@ function setStatus(
 
 
 /* =========================================================
-   RECORDER
+   AUDIO RECORDER
 ========================================================= */
 
 let mediaRecorder = null;
@@ -1675,10 +1576,13 @@ let timerInterval = null;
 function updateTimer(){
 
     const mins =
-        Math.floor(seconds / 60);
+        Math.floor(
+            seconds / 60
+        );
 
     const secs =
         seconds % 60;
+
 
     timer.textContent =
         String(mins).padStart(2,"0") +
@@ -1689,7 +1593,9 @@ function updateTimer(){
 
 function resetTimer(){
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
     seconds = 0;
 
@@ -1739,7 +1645,8 @@ async function beginRecording(){
             mimeType =
                 "audio/webm;codecs=opus";
 
-        }else if(
+        }
+        else if(
             MediaRecorder.isTypeSupported(
                 "audio/mp4"
             )
@@ -1772,7 +1679,9 @@ async function beginRecording(){
                     audioChunks.push(
                         event.data
                     );
+
                 }
+
             };
 
 
@@ -1787,7 +1696,9 @@ async function beginRecording(){
                 recordedBlob =
                     new Blob(
                         audioChunks,
-                        {type}
+                        {
+                            type:type
+                        }
                     );
 
 
@@ -1825,8 +1736,10 @@ async function beginRecording(){
         stopRecord.disabled =
             false;
 
+
         uploadRecording.disabled =
             true;
+
 
         micButton.classList.add(
             "recording"
@@ -1852,13 +1765,18 @@ async function beginRecording(){
             "Recording... speak from your heart 🎀"
         );
 
-    }catch(error){
 
-        console.error(error);
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
 
         showToast(
             "Microphone permission is required."
         );
+
     }
 }
 
@@ -1875,6 +1793,7 @@ function endRecording(){
     ){
 
         mediaRecorder.stop();
+
     }
 
 
@@ -1884,9 +1803,11 @@ function endRecording(){
     stopRecord.disabled =
         true;
 
+
     micButton.classList.remove(
         "recording"
     );
+
 
     clearInterval(
         timerInterval
@@ -1916,11 +1837,13 @@ micButton.addEventListener(
 
             endRecording();
 
-        }else{
+        }
+        else{
 
             beginRecording();
 
         }
+
     }
 );
 
@@ -1966,7 +1889,8 @@ audioFile.addEventListener(
             uploadFile.disabled =
                 true;
 
-            audioFile.value = "";
+            audioFile.value =
+                "";
 
             return;
         }
@@ -1984,12 +1908,13 @@ audioFile.addEventListener(
         setStatus(
             "Audio selected — ready to save."
         );
+
     }
 );
 
 
 /* =========================================================
-   UPLOAD RECORDED
+   UPLOAD RECORDED AUDIO
 ========================================================= */
 
 uploadRecording.addEventListener(
@@ -2007,17 +1932,21 @@ uploadRecording.addEventListener(
 
 
         const extension =
-            recordedBlob.type.includes("mp4")
+            recordedBlob.type.includes(
+                "mp4"
+            )
                 ? "m4a"
                 : "webm";
 
 
         await uploadAudio(
             recordedBlob,
+
             "voice_" +
             Date.now() +
             "." +
             extension,
+
             recordedBlob.type
         );
 
@@ -2026,7 +1955,7 @@ uploadRecording.addEventListener(
 
 
 /* =========================================================
-   UPLOAD FILE
+   UPLOAD SELECTED FILE
 ========================================================= */
 
 uploadFile.addEventListener(
@@ -2049,8 +1978,11 @@ uploadFile.addEventListener(
 
         await uploadAudio(
             file,
+
             file.name,
-            file.type || "audio/mpeg"
+
+            file.type ||
+            "audio/mpeg"
         );
 
     }
@@ -2058,7 +1990,7 @@ uploadFile.addEventListener(
 
 
 /* =========================================================
-   MAIN UPLOAD FUNCTION
+   MAIN FIREBASE UPLOAD
 ========================================================= */
 
 async function uploadAudio(
@@ -2093,11 +2025,10 @@ async function uploadAudio(
 
 
         const cleanName =
-            originalName
-                .replace(
-                    /[^a-zA-Z0-9._-]/g,
-                    "_"
-                );
+            originalName.replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+            );
 
 
         const path =
@@ -2116,20 +2047,27 @@ async function uploadAudio(
             );
 
 
+        /* Upload to Firebase Storage */
+
         await uploadBytes(
             storageRef,
             audioData,
             {
-                contentType
+                contentType:
+                    contentType
             }
         );
 
+
+        /* Get public download URL */
 
         const url =
             await getDownloadURL(
                 storageRef
             );
 
+
+        /* Save metadata in Firestore */
 
         await addDoc(
             collection(
@@ -2166,9 +2104,7 @@ async function uploadAudio(
         );
 
 
-        /*
-            Pushbullet notification
-        */
+        /* Pushbullet notification */
 
         await sendPushbullet(
             currentUser
@@ -2188,8 +2124,8 @@ async function uploadAudio(
 
         resetAfterUpload();
 
-
-    }catch(error){
+    }
+    catch(error){
 
         console.error(
             "Upload error:",
@@ -2200,7 +2136,7 @@ async function uploadAudio(
         setStatus(
             "Upload failed: " +
             (
-                error.code ||
+                error.message ||
                 "Please try again."
             ),
             "error"
@@ -2218,31 +2154,39 @@ async function uploadAudio(
 
 
 /* =========================================================
-   RESET
+   RESET AFTER UPLOAD
 ========================================================= */
 
 function resetAfterUpload(){
 
-    recordedBlob = null;
+    recordedBlob =
+        null;
+
 
     preview.classList.remove(
         "visible"
     );
 
+
     recordedAudio.removeAttribute(
         "src"
     );
 
-    audioFile.value = "";
+
+    audioFile.value =
+        "";
+
 
     fileName.textContent =
         "No audio selected";
+
 
     uploadRecording.disabled =
         true;
 
     uploadFile.disabled =
         true;
+
 
     resetTimer();
 }
@@ -2259,7 +2203,7 @@ async function sendPushbullet(
     if(
         !PUSHBULLET_ACCESS_TOKEN ||
         PUSHBULLET_ACCESS_TOKEN ===
-        "YOUR_PUSHBULLET_TOKEN_HERE"
+        "o.THMoBXG8Bbg0iSQrcVocjhw66E3axHN7"
     ){
 
         console.warn(
@@ -2277,7 +2221,8 @@ async function sendPushbullet(
                 "https://api.pushbullet.com/v2/pushes",
                 {
 
-                    method:"POST",
+                    method:
+                        "POST",
 
                     headers:{
                         "Access-Token":
@@ -2290,7 +2235,8 @@ async function sendPushbullet(
                     body:
                         JSON.stringify({
 
-                            type:"note",
+                            type:
+                                "note",
 
                             title:
                                 "New Voice Mail Received! 🎙️",
@@ -2320,18 +2266,20 @@ async function sendPushbullet(
             "Pushbullet notification sent."
         );
 
-    }catch(error){
+    }
+    catch(error){
 
         console.error(
             "Pushbullet request failed:",
             error
         );
+
     }
 }
 
 
 /* =========================================================
-   VOICE FEED
+   LOAD VOICE FEED
 ========================================================= */
 
 function loadVoiceLetters(){
@@ -2351,7 +2299,7 @@ function loadVoiceLetters(){
                 </h3>
 
                 <p>
-                    Add your Firebase configuration first.
+                    Check your Firebase configuration.
                 </p>
 
             </div>
@@ -2368,6 +2316,7 @@ function loadVoiceLetters(){
                 db,
                 "voiceMails"
             ),
+
             orderBy(
                 "createdAt",
                 "desc"
@@ -2406,7 +2355,8 @@ function loadVoiceLetters(){
             }
 
 
-            messages.innerHTML = "";
+            messages.innerHTML =
+                "";
 
 
             snapshot.forEach(
@@ -2458,6 +2408,7 @@ function loadVoiceLetters(){
                 </div>
 
             `;
+
         }
     );
 }
@@ -2467,7 +2418,9 @@ function loadVoiceLetters(){
    CREATE VOICE CARD
 ========================================================= */
 
-function createVoiceCard(data){
+function createVoiceCard(
+    data
+){
 
     const card =
         document.createElement(
@@ -2498,7 +2451,11 @@ function createVoiceCard(data){
             <div class="sender">
 
                 <div class="avatar">
-                    ${sender === "Noor" ? "🌷" : "♡"}
+                    ${
+                        sender === "Noor"
+                            ? "🌷"
+                            : "♡"
+                    }
                 </div>
 
                 <div>
@@ -2525,7 +2482,9 @@ function createVoiceCard(data){
         <audio
             controls
             preload="metadata"
-            src="${escapeAttribute(data.audioURL || "")}"
+            src="${escapeAttribute(
+                data.audioURL || ""
+            )}"
         ></audio>
 
 
@@ -2541,10 +2500,12 @@ function createVoiceCard(data){
 
 
 /* =========================================================
-   DATE
+   FORMAT DATE
 ========================================================= */
 
-function formatDate(timestamp){
+function formatDate(
+    timestamp
+){
 
     if(
         !timestamp ||
@@ -2560,40 +2521,74 @@ function formatDate(timestamp){
         .toLocaleString(
             "en-PK",
             {
-                dateStyle:"medium",
-                timeStyle:"short"
+                dateStyle:
+                    "medium",
+
+                timeStyle:
+                    "short"
             }
         );
 }
 
 
 /* =========================================================
-   ESCAPE
+   SECURITY HELPERS
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(
+    value
+){
 
     return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 
-function escapeAttribute(value){
+function escapeAttribute(
+    value
+){
 
     return String(value)
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        );
 }
 
 
 /* =========================================================
-   START FEED
+   START FIRESTORE FEED
 ========================================================= */
 
 loadVoiceLetters();
@@ -2601,8 +2596,8 @@ loadVoiceLetters();
 </script>
 
 
-<!-- ========================================================
-     PETAL GENERATOR
+<!-- =========================================================
+     FLOATING PETALS
 ========================================================= -->
 
 <script>
@@ -2706,4 +2701,4 @@ setInterval(
 
 </body>
 </html>
-
+```
