@@ -1,0 +1,2709 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Noor's Secret Garden 🎀 | Voice Diary</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   NOOR'S SECRET GARDEN
+   Completely new feminine / coquette design
+========================================================= */
+
+:root{
+    --cream:#fffaf5;
+    --paper:#fffdf9;
+    --pink:#f7b8c8;
+    --pink2:#f5d5df;
+    --rose:#c97991;
+    --rose-dark:#a95873;
+    --lavender:#d9c8eb;
+    --lavender-dark:#a98bc8;
+    --green:#b9d8c0;
+    --brown:#725d61;
+    --text:#5c4c52;
+    --soft:#8d777e;
+    --white:#ffffff;
+    --shadow:0 18px 50px rgba(157,103,123,.15);
+}
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    font-family:"Quicksand",sans-serif;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(247,184,200,.55),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(217,200,235,.45),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #fffaf5,
+            #fff4f7 45%,
+            #faf5ff
+        );
+}
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+========================================================= */
+
+.garden-bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.35;
+}
+
+.glow-pink{
+    background:#ffc5d5;
+    left:-170px;
+    top:20%;
+}
+
+.glow-purple{
+    background:#ded0f0;
+    right:-180px;
+    bottom:10%;
+}
+
+.garden-flower{
+    position:absolute;
+    font-size:45px;
+    opacity:.16;
+}
+
+.flower1{
+    top:8%;
+    left:4%;
+    transform:rotate(-18deg);
+}
+
+.flower2{
+    top:42%;
+    right:4%;
+    transform:rotate(25deg);
+}
+
+.flower3{
+    bottom:5%;
+    left:7%;
+    transform:rotate(12deg);
+}
+
+.flower4{
+    top:68%;
+    right:8%;
+    transform:rotate(-15deg);
+}
+
+/* =========================================================
+   PETALS
+========================================================= */
+
+.petal{
+    position:fixed;
+    top:-30px;
+    pointer-events:none;
+    z-index:2;
+
+    opacity:.65;
+
+    animation:
+        fall linear infinite;
+}
+
+@keyframes fall{
+
+    0%{
+        transform:
+            translateY(-40px)
+            translateX(0)
+            rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.7;
+    }
+
+    50%{
+        transform:
+            translateY(50vh)
+            translateX(50px)
+            rotate(180deg);
+    }
+
+    100%{
+        transform:
+            translateY(110vh)
+            translateX(-40px)
+            rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.page{
+    position:relative;
+    z-index:5;
+
+    width:min(1050px,92%);
+    margin:auto;
+
+    padding:25px 0 60px;
+}
+
+/* =========================================================
+   TOP NAV
+========================================================= */
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:var(--rose-dark);
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.logo-ribbon{
+    font-size:25px;
+}
+
+.user-pill{
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.65);
+
+    border:1px solid rgba(201,121,145,.2);
+
+    box-shadow:0 8px 25px rgba(150,100,120,.08);
+
+    color:var(--rose-dark);
+
+    font-size:.78rem;
+    font-weight:700;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+
+    text-align:center;
+
+    padding:35px 20px 45px;
+}
+
+.hero-bow{
+    font-size:55px;
+
+    animation:
+        bowFloat 3s ease-in-out infinite;
+}
+
+@keyframes bowFloat{
+
+    0%,100%{
+        transform:translateY(0) rotate(-3deg);
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(3deg);
+    }
+}
+
+.hero h1{
+    margin-top:10px;
+
+    font-family:"DM Serif Display",serif;
+
+    font-size:clamp(2.2rem,7vw,4.4rem);
+
+    color:var(--rose-dark);
+
+    letter-spacing:-1px;
+}
+
+.hero-script{
+    margin-top:-5px;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:clamp(2rem,6vw,3.5rem);
+
+    color:#bd7e96;
+}
+
+.hero p{
+    max-width:600px;
+    margin:12px auto 0;
+
+    line-height:1.8;
+
+    color:var(--soft);
+
+    font-size:.94rem;
+}
+
+/* =========================================================
+   ORNAMENT
+========================================================= */
+
+.ornament{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+
+    margin:5px auto 28px;
+
+    color:#d59aae;
+}
+
+.ornament:before,
+.ornament:after{
+    content:"";
+
+    width:90px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e0b1bf
+        );
+}
+
+.ornament:after{
+    background:
+        linear-gradient(
+            90deg,
+            #e0b1bf,
+            transparent
+        );
+}
+
+/* =========================================================
+   DIARY
+========================================================= */
+
+.diary{
+    position:relative;
+
+    padding:28px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.94),
+            rgba(255,248,247,.90)
+        );
+
+    border:
+        1px solid
+        rgba(205,150,167,.28);
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:25px;
+}
+
+/* lace-like edge */
+
+.diary:before{
+    content:"";
+
+    position:absolute;
+    inset:8px;
+
+    border-radius:21px;
+
+    border:
+        1px dashed
+        rgba(201,121,145,.25);
+
+    pointer-events:none;
+}
+
+.ribbon{
+    position:absolute;
+
+    top:-13px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    padding:6px 24px;
+
+    background:#e9aabd;
+
+    color:white;
+
+    border-radius:4px 4px 12px 12px;
+
+    font-size:.7rem;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    box-shadow:0 7px 15px rgba(180,100,125,.16);
+}
+
+.ribbon:before,
+.ribbon:after{
+    content:"";
+
+    position:absolute;
+    bottom:-10px;
+
+    border-style:solid;
+}
+
+.ribbon:before{
+    left:0;
+    border-width:10px 10px 0 0;
+    border-color:#c9849a transparent transparent transparent;
+}
+
+.ribbon:after{
+    right:0;
+    border-width:10px 0 0 10px;
+    border-color:#c9849a transparent transparent transparent;
+}
+
+/* =========================================================
+   RECORDING AREA
+========================================================= */
+
+.record-area{
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+
+    padding:20px 10px 10px;
+}
+
+.record-title{
+    font-family:"DM Serif Display",serif;
+
+    color:#805d66;
+
+    font-size:1.45rem;
+
+    margin-bottom:5px;
+}
+
+.record-sub{
+    color:#a38b91;
+
+    font-size:.82rem;
+
+    margin-bottom:25px;
+}
+
+/* vintage microphone */
+
+.mic-wrap{
+    position:relative;
+
+    width:150px;
+    height:150px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.mic-ring{
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(201,121,145,.22);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(247,184,200,.22),
+            rgba(255,255,255,.55)
+        );
+
+    box-shadow:
+        0 15px 40px rgba(190,120,145,.12);
+
+    animation:
+        softPulse 3s ease-in-out infinite;
+}
+
+@keyframes softPulse{
+
+    50%{
+        transform:scale(1.06);
+    }
+}
+
+.mic-button{
+    position:relative;
+    z-index:2;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    border:8px solid #fff7f8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #efa8bc,
+            #d8839f
+        );
+
+    color:white;
+
+    font-size:33px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 28px rgba(190,105,130,.25);
+
+    transition:.3s;
+}
+
+.mic-button:hover{
+    transform:scale(1.06);
+}
+
+.mic-button.recording{
+    background:
+        linear-gradient(
+            145deg,
+            #d86d8c,
+            #b94d6e
+        );
+
+    animation:
+        recordBeat 1s infinite;
+}
+
+@keyframes recordBeat{
+
+    50%{
+        box-shadow:
+            0 0 0 14px rgba(216,109,140,.08),
+            0 12px 30px rgba(190,105,130,.28);
+    }
+}
+
+.timer{
+    color:#80636b;
+
+    font-weight:700;
+
+    font-size:1.1rem;
+
+    letter-spacing:2px;
+
+    margin-bottom:18px;
+}
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn{
+    border:0;
+
+    border-radius:14px;
+
+    padding:12px 20px;
+
+    font-family:"Quicksand",sans-serif;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.btn-record{
+    background:#f2b3c5;
+    color:white;
+}
+
+.btn-stop{
+    background:#eee2e7;
+    color:#80636b;
+}
+
+.btn-send{
+    background:
+        linear-gradient(
+            135deg,
+            #d99aae,
+            #bd7590
+        );
+
+    color:white;
+
+    box-shadow:
+        0 9px 20px rgba(185,105,130,.16);
+}
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.preview{
+    display:none;
+
+    margin:22px auto 0;
+
+    max-width:500px;
+
+    padding:17px;
+
+    border-radius:17px;
+
+    background:#fff7f8;
+
+    border:1px solid #efd4dc;
+}
+
+.preview.visible{
+    display:block;
+}
+
+.preview-label{
+    color:#9b7580;
+
+    font-size:.76rem;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-section{
+    position:relative;
+    z-index:2;
+
+    margin-top:28px;
+
+    padding-top:25px;
+
+    border-top:
+        1px dashed
+        #e5cbd3;
+
+    text-align:center;
+}
+
+.upload-title{
+    color:#87666e;
+
+    font-family:"DM Serif Display",serif;
+
+    font-size:1.1rem;
+
+    margin-bottom:13px;
+}
+
+.file-button{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:11px 18px;
+
+    border-radius:13px;
+
+    background:#f5e6eb;
+
+    color:#87636e;
+
+    border:1px solid #e6c9d2;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    font-size:.82rem;
+}
+
+#audioFile{
+    display:none;
+}
+
+.file-name{
+    margin-top:10px;
+
+    font-size:.76rem;
+
+    color:#a38b91;
+
+    word-break:break-word;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+    min-height:22px;
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:.78rem;
+
+    color:#a1888e;
+}
+
+.status.success{
+    color:#719778;
+}
+
+.status.error{
+    color:#bd627d;
+}
+
+/* =========================================================
+   VOICE DIARY
+========================================================= */
+
+.section-heading{
+    text-align:center;
+
+    margin:38px 0 20px;
+}
+
+.section-heading h2{
+    font-family:"DM Serif Display",serif;
+
+    color:#805d66;
+
+    font-size:1.8rem;
+}
+
+.section-heading span{
+    display:block;
+
+    margin-top:5px;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:1.65rem;
+
+    color:#c4879b;
+}
+
+/* =========================================================
+   MESSAGE LIST
+========================================================= */
+
+.messages{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(290px,1fr)
+        );
+
+    gap:18px;
+}
+
+/* =========================================================
+   VOICE LETTER
+========================================================= */
+
+.voice-letter{
+    position:relative;
+
+    padding:23px;
+
+    border-radius:20px 20px 25px 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffefd,
+            #fff6f8
+        );
+
+    border:
+        1px solid
+        rgba(210,160,175,.28);
+
+    box-shadow:
+        0 12px 35px
+        rgba(155,105,125,.10);
+
+    overflow:hidden;
+
+    animation:
+        letterIn .55s ease;
+}
+
+@keyframes letterIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(15px)
+            rotate(1deg);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+}
+
+.voice-letter:after{
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    right:-30px;
+    bottom:-30px;
+
+    border-radius:50%;
+
+    background:#f8dbe4;
+
+    opacity:.4;
+}
+
+.letter-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.sender{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.avatar{
+    width:43px;
+    height:43px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f7d1dc,
+            #ead8ef
+        );
+
+    color:#a45e76;
+
+    border:3px solid white;
+
+    box-shadow:
+        0 5px 12px rgba(160,100,120,.12);
+}
+
+.sender-name{
+    font-weight:700;
+
+    color:#765b63;
+}
+
+.sender-role{
+    margin-top:2px;
+
+    color:#af979e;
+
+    font-size:.69rem;
+}
+
+.time{
+    color:#b59da4;
+
+    font-size:.66rem;
+
+    text-align:right;
+}
+
+.voice-letter audio{
+    position:relative;
+    z-index:3;
+
+    width:100%;
+
+    height:42px;
+}
+
+.letter-footer{
+    position:relative;
+    z-index:3;
+
+    margin-top:13px;
+
+    display:flex;
+    align-items:center;
+
+    gap:7px;
+
+    color:#bd8195;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:1.1rem;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty{
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    color:#a68e95;
+}
+
+.empty-flower{
+    font-size:45px;
+
+    margin-bottom:10px;
+}
+
+.empty h3{
+    font-family:"DM Serif Display",serif;
+
+    color:#86656d;
+
+    margin-bottom:5px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+
+    margin-top:40px;
+
+    color:#ad979d;
+
+    font-size:.68rem;
+
+    letter-spacing:1px;
+}
+
+footer .bow{
+    color:#c77d94;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:22px;
+
+    z-index:100;
+
+    transform:
+        translate(-50%,25px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    padding:12px 20px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,250,250,.96);
+
+    border:
+        1px solid
+        #e4bdca;
+
+    color:#805d66;
+
+    box-shadow:
+        0 12px 35px rgba(130,80,100,.18);
+
+    font-size:.78rem;
+
+    transition:.35s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .page{
+        width:92%;
+        padding-top:16px;
+    }
+
+    .logo{
+        font-size:.72rem;
+    }
+
+    .user-pill{
+        padding:7px 10px;
+        font-size:.66rem;
+    }
+
+    .hero{
+        padding-top:22px;
+        padding-bottom:30px;
+    }
+
+    .hero-bow{
+        font-size:45px;
+    }
+
+    .diary{
+        padding:20px 15px;
+        border-radius:22px;
+    }
+
+    .record-title{
+        font-size:1.25rem;
+    }
+
+    .controls{
+        flex-direction:column;
+    }
+
+    .controls .btn{
+        width:100%;
+    }
+
+    .messages{
+        grid-template-columns:1fr;
+    }
+
+    .voice-letter{
+        padding:19px;
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *:before,
+    *:after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ========================================================
+     BACKGROUND DECOR
+========================================================= -->
+
+<div class="garden-bg">
+
+    <div class="glow glow-pink"></div>
+    <div class="glow glow-purple"></div>
+
+    <div class="garden-flower flower1">🌸</div>
+    <div class="garden-flower flower2">🌷</div>
+    <div class="garden-flower flower3">🌼</div>
+    <div class="garden-flower flower4">🌺</div>
+
+</div>
+
+
+<!-- ========================================================
+     PETALS
+========================================================= -->
+
+<div id="petals"></div>
+
+
+<!-- ========================================================
+     PAGE
+========================================================= -->
+
+<main class="page">
+
+
+    <!-- TOP -->
+
+    <div class="top">
+
+        <div class="logo">
+            <span class="logo-ribbon">🎀</span>
+            NOOR'S SECRET GARDEN
+        </div>
+
+        <div class="user-pill">
+            <i>♡</i>
+            <span id="currentUser">Loading...</span>
+        </div>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-bow">
+            🎀
+        </div>
+
+        <h1>
+            My Little Voice Diary
+        </h1>
+
+        <div class="hero-script">
+            little words, forever memories
+        </div>
+
+        <p>
+            Some feelings are too beautiful to type...
+            so leave them here in your voice. 🌷
+        </p>
+
+    </section>
+
+
+    <div class="ornament">
+        ♡
+    </div>
+
+
+    <!-- ====================================================
+         DIARY / RECORDER
+    ===================================================== -->
+
+    <section class="diary">
+
+        <div class="ribbon">
+            FOR US ♡
+        </div>
+
+
+        <div class="record-area">
+
+            <div class="record-title">
+                Leave me a little voice letter
+            </div>
+
+            <div class="record-sub">
+                Press the microphone and say whatever
+                your heart wants to say. 🎙️
+            </div>
+
+
+            <!-- MICROPHONE -->
+
+            <div class="mic-wrap">
+
+                <div class="mic-ring"></div>
+
+                <button
+                    id="micButton"
+                    class="mic-button"
+                    type="button"
+                    aria-label="Start recording"
+                >
+                    🎙️
+                </button>
+
+            </div>
+
+
+            <div
+                id="timer"
+                class="timer"
+            >
+                00:00
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <button
+                    id="startRecord"
+                    class="btn btn-record"
+                    type="button"
+                >
+                    🎙️ Start Recording
+                </button>
+
+                <button
+                    id="stopRecord"
+                    class="btn btn-stop"
+                    type="button"
+                    disabled
+                >
+                    ✋ Stop
+                </button>
+
+            </div>
+
+
+            <!-- PREVIEW -->
+
+            <div
+                id="preview"
+                class="preview"
+            >
+
+                <div class="preview-label">
+                    🎧 Listen before sending
+                </div>
+
+                <audio
+                    id="recordedAudio"
+                    controls
+                ></audio>
+
+                <div class="controls">
+
+                    <button
+                        id="uploadRecording"
+                        class="btn btn-send"
+                        type="button"
+                        disabled
+                    >
+                        💌 Save My Voice Letter
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILE UPLOAD -->
+
+            <div class="upload-section">
+
+                <div class="upload-title">
+                    Or choose a voice recording
+                </div>
+
+                <label
+                    class="file-button"
+                    for="audioFile"
+                >
+                    📁 Choose Audio
+                </label>
+
+                <input
+                    id="audioFile"
+                    type="file"
+                    accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/mp4,audio/x-m4a"
+                >
+
+                <div
+                    id="fileName"
+                    class="file-name"
+                >
+                    No audio selected
+                </div>
+
+                <div class="controls">
+
+                    <button
+                        id="uploadFile"
+                        class="btn btn-send"
+                        type="button"
+                        disabled
+                    >
+                        💗 Save Selected Audio
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         VOICE DIARY FEED
+    ===================================================== -->
+
+    <section class="section-heading">
+
+        <h2>
+            Our Voice Letters
+        </h2>
+
+        <span>
+            every little voice, a little piece of us
+        </span>
+
+    </section>
+
+
+    <section
+        id="messages"
+        class="messages"
+    >
+
+        <div class="empty">
+
+            <div class="empty-flower">
+                🌷
+            </div>
+
+            <h3>
+                Opening our little diary...
+            </h3>
+
+            <p>
+                Loading your voice memories
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        Made with <span class="bow">🎀</span> for
+        <strong>Noor & Azeem</strong>
+        · our little secret garden ♡
+    </footer>
+
+</main>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- ========================================================
+     FIREBASE + APP LOGIC
+========================================================= -->
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "YOUR_FIREBASE_API_KEY",
+
+    authDomain:
+        "YOUR_PROJECT_ID.firebaseapp.com",
+
+    projectId:
+        "YOUR_PROJECT_ID",
+
+    storageBucket:
+        "YOUR_PROJECT_ID.firebasestorage.app",
+
+    messagingSenderId:
+        "YOUR_MESSAGING_SENDER_ID",
+
+    appId:
+        "YOUR_FIREBASE_APP_ID"
+
+};
+
+
+/* =========================================================
+   PUSHBULLET
+========================================================= */
+
+const PUSHBULLET_ACCESS_TOKEN =
+    "YOUR_PUSHBULLET_TOKEN_HERE";
+
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+let app;
+let storage;
+let db;
+let firebaseReady = false;
+
+try{
+
+    app = initializeApp(firebaseConfig);
+
+    storage = getStorage(app);
+
+    db = getFirestore(app);
+
+    firebaseReady = true;
+
+}catch(error){
+
+    console.error(
+        "Firebase initialization failed:",
+        error
+    );
+
+}
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const currentUserElement =
+    document.getElementById("currentUser");
+
+const micButton =
+    document.getElementById("micButton");
+
+const startRecord =
+    document.getElementById("startRecord");
+
+const stopRecord =
+    document.getElementById("stopRecord");
+
+const timer =
+    document.getElementById("timer");
+
+const preview =
+    document.getElementById("preview");
+
+const recordedAudio =
+    document.getElementById("recordedAudio");
+
+const uploadRecording =
+    document.getElementById("uploadRecording");
+
+const audioFile =
+    document.getElementById("audioFile");
+
+const fileName =
+    document.getElementById("fileName");
+
+const uploadFile =
+    document.getElementById("uploadFile");
+
+const status =
+    document.getElementById("status");
+
+const messages =
+    document.getElementById("messages");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =========================================================
+   CURRENT USER
+========================================================= */
+
+function getCurrentUser(){
+
+    const username =
+        sessionStorage.getItem("loggedInUser") ||
+        localStorage.getItem("loggedInUser");
+
+    if(
+        username === "noorazeem" ||
+        username === "noor"
+    ){
+        return "Noor";
+    }
+
+    if(username === "azeem"){
+        return "Azeem";
+    }
+
+    return "Azeem";
+}
+
+const currentUser =
+    getCurrentUser();
+
+currentUserElement.textContent =
+    currentUser;
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(text){
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    setTimeout(
+        ()=>{
+            toast.classList.remove("show");
+        },
+        3000
+    );
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(
+    text,
+    type=""
+){
+
+    status.textContent = text;
+
+    status.className =
+        "status " + type;
+}
+
+
+/* =========================================================
+   RECORDER
+========================================================= */
+
+let mediaRecorder = null;
+
+let audioChunks = [];
+
+let recordedBlob = null;
+
+let seconds = 0;
+
+let timerInterval = null;
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function updateTimer(){
+
+    const mins =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    timer.textContent =
+        String(mins).padStart(2,"0") +
+        ":" +
+        String(secs).padStart(2,"0");
+}
+
+
+function resetTimer(){
+
+    clearInterval(timerInterval);
+
+    seconds = 0;
+
+    updateTimer();
+}
+
+
+/* =========================================================
+   START RECORDING
+========================================================= */
+
+async function beginRecording(){
+
+    try{
+
+        if(
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ){
+
+            showToast(
+                "Microphone recording is not supported."
+            );
+
+            return;
+        }
+
+
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                audio:true
+            });
+
+
+        audioChunks = [];
+
+
+        let mimeType = "";
+
+
+        if(
+            MediaRecorder.isTypeSupported(
+                "audio/webm;codecs=opus"
+            )
+        ){
+
+            mimeType =
+                "audio/webm;codecs=opus";
+
+        }else if(
+            MediaRecorder.isTypeSupported(
+                "audio/mp4"
+            )
+        ){
+
+            mimeType =
+                "audio/mp4";
+        }
+
+
+        mediaRecorder =
+            mimeType
+                ? new MediaRecorder(
+                    stream,
+                    {mimeType}
+                )
+                : new MediaRecorder(
+                    stream
+                );
+
+
+        mediaRecorder.ondataavailable =
+            event => {
+
+                if(
+                    event.data &&
+                    event.data.size
+                ){
+
+                    audioChunks.push(
+                        event.data
+                    );
+                }
+            };
+
+
+        mediaRecorder.onstop =
+            ()=>{
+
+                const type =
+                    mediaRecorder.mimeType ||
+                    "audio/webm";
+
+
+                recordedBlob =
+                    new Blob(
+                        audioChunks,
+                        {type}
+                    );
+
+
+                recordedAudio.src =
+                    URL.createObjectURL(
+                        recordedBlob
+                    );
+
+
+                preview.classList.add(
+                    "visible"
+                );
+
+
+                uploadRecording.disabled =
+                    false;
+
+
+                stream
+                    .getTracks()
+                    .forEach(
+                        track =>
+                            track.stop()
+                    );
+
+            };
+
+
+        mediaRecorder.start();
+
+
+        startRecord.disabled =
+            true;
+
+        stopRecord.disabled =
+            false;
+
+        uploadRecording.disabled =
+            true;
+
+        micButton.classList.add(
+            "recording"
+        );
+
+
+        seconds = 0;
+
+        updateTimer();
+
+
+        timerInterval =
+            setInterval(
+                ()=>{
+                    seconds++;
+                    updateTimer();
+                },
+                1000
+            );
+
+
+        setStatus(
+            "Recording... speak from your heart 🎀"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Microphone permission is required."
+        );
+    }
+}
+
+
+/* =========================================================
+   STOP RECORDING
+========================================================= */
+
+function endRecording(){
+
+    if(
+        mediaRecorder &&
+        mediaRecorder.state !== "inactive"
+    ){
+
+        mediaRecorder.stop();
+    }
+
+
+    startRecord.disabled =
+        false;
+
+    stopRecord.disabled =
+        true;
+
+    micButton.classList.remove(
+        "recording"
+    );
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    setStatus(
+        "Your little voice letter is ready ♡"
+    );
+}
+
+
+startRecord.addEventListener(
+    "click",
+    beginRecording
+);
+
+
+micButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            mediaRecorder &&
+            mediaRecorder.state === "recording"
+        ){
+
+            endRecording();
+
+        }else{
+
+            beginRecording();
+
+        }
+    }
+);
+
+
+stopRecord.addEventListener(
+    "click",
+    endRecording
+);
+
+
+/* =========================================================
+   FILE PICKER
+========================================================= */
+
+audioFile.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            audioFile.files[0];
+
+
+        if(!file){
+
+            fileName.textContent =
+                "No audio selected";
+
+            uploadFile.disabled =
+                true;
+
+            return;
+        }
+
+
+        if(
+            file.size >
+            50 * 1024 * 1024
+        ){
+
+            fileName.textContent =
+                "File is larger than 50 MB.";
+
+            uploadFile.disabled =
+                true;
+
+            audioFile.value = "";
+
+            return;
+        }
+
+
+        fileName.textContent =
+            "♡ " +
+            file.name;
+
+
+        uploadFile.disabled =
+            false;
+
+
+        setStatus(
+            "Audio selected — ready to save."
+        );
+    }
+);
+
+
+/* =========================================================
+   UPLOAD RECORDED
+========================================================= */
+
+uploadRecording.addEventListener(
+    "click",
+    async function(){
+
+        if(!recordedBlob){
+
+            showToast(
+                "Please record a voice note first."
+            );
+
+            return;
+        }
+
+
+        const extension =
+            recordedBlob.type.includes("mp4")
+                ? "m4a"
+                : "webm";
+
+
+        await uploadAudio(
+            recordedBlob,
+            "voice_" +
+            Date.now() +
+            "." +
+            extension,
+            recordedBlob.type
+        );
+
+    }
+);
+
+
+/* =========================================================
+   UPLOAD FILE
+========================================================= */
+
+uploadFile.addEventListener(
+    "click",
+    async function(){
+
+        const file =
+            audioFile.files[0];
+
+
+        if(!file){
+
+            showToast(
+                "Choose an audio file first."
+            );
+
+            return;
+        }
+
+
+        await uploadAudio(
+            file,
+            file.name,
+            file.type || "audio/mpeg"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MAIN UPLOAD FUNCTION
+========================================================= */
+
+async function uploadAudio(
+    audioData,
+    originalName,
+    contentType
+){
+
+    if(!firebaseReady){
+
+        setStatus(
+            "Firebase configuration is missing.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        setStatus(
+            "Saving your little voice letter... 💗"
+        );
+
+
+        uploadRecording.disabled =
+            true;
+
+        uploadFile.disabled =
+            true;
+
+
+        const cleanName =
+            originalName
+                .replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "_"
+                );
+
+
+        const path =
+            "voice-mails/" +
+            currentUser.toLowerCase() +
+            "/" +
+            Date.now() +
+            "_" +
+            cleanName;
+
+
+        const storageRef =
+            ref(
+                storage,
+                path
+            );
+
+
+        await uploadBytes(
+            storageRef,
+            audioData,
+            {
+                contentType
+            }
+        );
+
+
+        const url =
+            await getDownloadURL(
+                storageRef
+            );
+
+
+        await addDoc(
+            collection(
+                db,
+                "voiceMails"
+            ),
+            {
+
+                sender:
+                    currentUser,
+
+                senderUsername:
+                    sessionStorage.getItem(
+                        "loggedInUser"
+                    ) ||
+                    currentUser.toLowerCase(),
+
+                audioURL:
+                    url,
+
+                fileName:
+                    cleanName,
+
+                storagePath:
+                    path,
+
+                contentType:
+                    contentType,
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+        );
+
+
+        /*
+            Pushbullet notification
+        */
+
+        await sendPushbullet(
+            currentUser
+        );
+
+
+        setStatus(
+            "Saved in our little diary. 💗",
+            "success"
+        );
+
+
+        showToast(
+            "Voice letter saved! 🎀"
+        );
+
+
+        resetAfterUpload();
+
+
+    }catch(error){
+
+        console.error(
+            "Upload error:",
+            error
+        );
+
+
+        setStatus(
+            "Upload failed: " +
+            (
+                error.code ||
+                "Please try again."
+            ),
+            "error"
+        );
+
+
+        uploadRecording.disabled =
+            !recordedBlob;
+
+        uploadFile.disabled =
+            !audioFile.files.length;
+
+    }
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetAfterUpload(){
+
+    recordedBlob = null;
+
+    preview.classList.remove(
+        "visible"
+    );
+
+    recordedAudio.removeAttribute(
+        "src"
+    );
+
+    audioFile.value = "";
+
+    fileName.textContent =
+        "No audio selected";
+
+    uploadRecording.disabled =
+        true;
+
+    uploadFile.disabled =
+        true;
+
+    resetTimer();
+}
+
+
+/* =========================================================
+   PUSHBULLET
+========================================================= */
+
+async function sendPushbullet(
+    senderName
+){
+
+    if(
+        !PUSHBULLET_ACCESS_TOKEN ||
+        PUSHBULLET_ACCESS_TOKEN ===
+        "YOUR_PUSHBULLET_TOKEN_HERE"
+    ){
+
+        console.warn(
+            "Pushbullet token not configured."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                "https://api.pushbullet.com/v2/pushes",
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Access-Token":
+                            PUSHBULLET_ACCESS_TOKEN,
+
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            type:"note",
+
+                            title:
+                                "New Voice Mail Received! 🎙️",
+
+                            body:
+                                senderName +
+                                " has uploaded a new voice note."
+
+                        })
+
+                }
+            );
+
+
+        if(!response.ok){
+
+            console.error(
+                "Pushbullet error:",
+                response.status
+            );
+
+            return;
+        }
+
+
+        console.log(
+            "Pushbullet notification sent."
+        );
+
+    }catch(error){
+
+        console.error(
+            "Pushbullet request failed:",
+            error
+        );
+    }
+}
+
+
+/* =========================================================
+   VOICE FEED
+========================================================= */
+
+function loadVoiceLetters(){
+
+    if(!firebaseReady){
+
+        messages.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-flower">
+                    🌷
+                </div>
+
+                <h3>
+                    Firebase needs to be connected
+                </h3>
+
+                <p>
+                    Add your Firebase configuration first.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const voiceQuery =
+        query(
+            collection(
+                db,
+                "voiceMails"
+            ),
+            orderBy(
+                "createdAt",
+                "desc"
+            )
+        );
+
+
+    onSnapshot(
+        voiceQuery,
+
+        snapshot => {
+
+            if(snapshot.empty){
+
+                messages.innerHTML = `
+
+                    <div class="empty">
+
+                        <div class="empty-flower">
+                            🦋
+                        </div>
+
+                        <h3>
+                            Our diary is still empty
+                        </h3>
+
+                        <p>
+                            Leave the first voice letter. 💗
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            messages.innerHTML = "";
+
+
+            snapshot.forEach(
+                doc => {
+
+                    const data =
+                        doc.data();
+
+
+                    const card =
+                        createVoiceCard(
+                            data
+                        );
+
+
+                    messages.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        },
+
+        error => {
+
+            console.error(
+                "Firestore error:",
+                error
+            );
+
+
+            messages.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-flower">
+                        🌸
+                    </div>
+
+                    <h3>
+                        Something went wrong
+                    </h3>
+
+                    <p>
+                        Please check your Firestore rules.
+                    </p>
+
+                </div>
+
+            `;
+        }
+    );
+}
+
+
+/* =========================================================
+   CREATE VOICE CARD
+========================================================= */
+
+function createVoiceCard(data){
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "voice-letter";
+
+
+    const sender =
+        data.sender === "Noor"
+            ? "Noor"
+            : "Azeem";
+
+
+    const date =
+        formatDate(
+            data.createdAt
+        );
+
+
+    card.innerHTML = `
+
+        <div class="letter-top">
+
+            <div class="sender">
+
+                <div class="avatar">
+                    ${sender === "Noor" ? "🌷" : "♡"}
+                </div>
+
+                <div>
+
+                    <div class="sender-name">
+                        ${escapeHTML(sender)}
+                    </div>
+
+                    <div class="sender-role">
+                        voice letter
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="time">
+                ${escapeHTML(date)}
+            </div>
+
+        </div>
+
+
+        <audio
+            controls
+            preload="metadata"
+            src="${escapeAttribute(data.audioURL || "")}"
+        ></audio>
+
+
+        <div class="letter-footer">
+            kept safely in our little garden ♡
+        </div>
+
+    `;
+
+
+    return card;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(timestamp){
+
+    if(
+        !timestamp ||
+        !timestamp.toDate
+    ){
+
+        return "Just now";
+    }
+
+
+    return timestamp
+        .toDate()
+        .toLocaleString(
+            "en-PK",
+            {
+                dateStyle:"medium",
+                timeStyle:"short"
+            }
+        );
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function escapeAttribute(value){
+
+    return String(value)
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+}
+
+
+/* =========================================================
+   START FEED
+========================================================= */
+
+loadVoiceLetters();
+
+</script>
+
+
+<!-- ========================================================
+     PETAL GENERATOR
+========================================================= -->
+
+<script>
+
+const petalContainer =
+    document.getElementById(
+        "petals"
+    );
+
+
+const petalSymbols = [
+    "🌸",
+    "🌷",
+    "♡",
+    "✿",
+    "🦋"
+];
+
+
+function createPetal(){
+
+    const petal =
+        document.createElement(
+            "div"
+        );
+
+
+    petal.className =
+        "petal";
+
+
+    petal.textContent =
+        petalSymbols[
+            Math.floor(
+                Math.random() *
+                petalSymbols.length
+            )
+        ];
+
+
+    petal.style.left =
+        Math.random() *
+        100 +
+        "vw";
+
+
+    petal.style.fontSize =
+        (
+            Math.random() * 9 +
+            9
+        ) +
+        "px";
+
+
+    petal.style.animationDuration =
+        (
+            Math.random() * 8 +
+            8
+        ) +
+        "s";
+
+
+    petal.style.animationDelay =
+        (
+            Math.random() * 5
+        ) +
+        "s";
+
+
+    petalContainer.appendChild(
+        petal
+    );
+
+
+    setTimeout(
+        ()=>{
+            petal.remove();
+        },
+        18000
+    );
+}
+
+
+for(
+    let i=0;
+    i<18;
+    i++
+){
+
+    createPetal();
+
+}
+
+
+setInterval(
+    createPetal,
+    1300
+);
+
+</script>
+
+</body>
+</html>
+
