@@ -1,0 +1,1371 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Patrick+Hand&family=Quicksand:wght@400;500;600;700;800&display=swap');
+
+/* =====================================================
+   NOOR ❤️ AZEEM — LOVE POSTCARD THEME
+===================================================== */
+
+:root {
+    --pink: #f05b91;
+    --pink-dark: #d9477c;
+    --pink-soft: #ffe1ec;
+    --rose: #ff9dbd;
+    --purple: #c9b9f5;
+    --cream: #fffaf5;
+    --text: #563746;
+    --muted: #987887;
+    --paper: #fffdf8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: "Quicksand", sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            #ffe1ed 0,
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 94% 22%,
+            #e9deff 0,
+            transparent 29%
+        ),
+        radial-gradient(
+            circle at 48% 100%,
+            #fff0c9 0,
+            transparent 34%
+        ),
+        #fffaf8;
+}
+
+
+/* =====================================================
+   BACKGROUND GLOWS
+===================================================== */
+
+.bg-glow {
+    position: fixed;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+    filter: blur(45px);
+
+    opacity: .34;
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.glow-one {
+    top: 8%;
+    left: -100px;
+    background: #ff9fc2;
+}
+
+.glow-two {
+    top: 45%;
+    right: -110px;
+    background: #c8b5ff;
+}
+
+
+/* =====================================================
+   FLOATING DOODLES
+===================================================== */
+
+.floating-doodle {
+    position: fixed;
+
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+
+    color: #e88eae;
+    opacity: .48;
+
+    animation: doodleFloat 6s ease-in-out infinite;
+}
+
+.doodle-one {
+    top: 13%;
+    left: 6%;
+    font-size: 35px;
+}
+
+.doodle-two {
+    top: 37%;
+    right: 5%;
+    font-size: 28px;
+    animation-delay: -2s;
+}
+
+.doodle-three {
+    bottom: 20%;
+    left: 7%;
+    font-size: 25px;
+    animation-delay: -3s;
+}
+
+.doodle-four {
+    bottom: 12%;
+    right: 7%;
+    font-size: 28px;
+    animation-delay: -1s;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.alarm-page {
+    position: relative;
+    z-index: 2;
+
+    width: min(680px, 100%);
+
+    margin: 0 auto;
+
+    padding: 30px 20px 35px;
+}
+
+
+/* =====================================================
+   BACK LINK
+===================================================== */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin: 0 0 20px 4px;
+    padding: 9px 15px;
+
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.75);
+
+    text-decoration: none;
+    color: #98647b;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow: 0 5px 16px rgba(120,70,90,.06);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.back-link:hover {
+    transform: translateX(-3px);
+    background: #fff;
+}
+
+
+/* =====================================================
+   POSTCARD
+===================================================== */
+
+.love-postcard {
+    position: relative;
+
+    width: 100%;
+
+    padding: 36px 38px 28px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.97),
+            rgba(255,249,245,.97)
+        );
+
+    border: 1px solid #fff;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 25px 65px rgba(166,92,123,.15),
+        0 3px 10px rgba(166,92,123,.05);
+
+    animation: postcardAppear .7s ease both;
+}
+
+/* Paper outline */
+
+.love-postcard::before {
+    content: "";
+
+    position: absolute;
+    inset: 9px;
+
+    border: 1px dashed rgba(209,137,163,.35);
+
+    pointer-events: none;
+}
+
+/* Soft paper corner detail */
+
+.love-postcard::after {
+    content: "♡";
+
+    position: absolute;
+
+    right: 15px;
+    bottom: 4px;
+
+    font-family: "Patrick Hand", cursive;
+    font-size: 25px;
+
+    color: rgba(229,134,166,.35);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   POSTCARD STAMP
+===================================================== */
+
+.postcard-stamp {
+    position: absolute;
+
+    top: 23px;
+    right: 24px;
+
+    width: 56px;
+    height: 67px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff1f6,
+            #ffe0eb
+        );
+
+    border: 2px dashed #e5a1b8;
+
+    transform: rotate(6deg);
+
+    color: #ce6f93;
+}
+
+.postcard-stamp span {
+    font-size: 25px;
+    line-height: 1;
+}
+
+.postcard-stamp small {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.postcard-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding-bottom: 19px;
+
+    border-bottom: 1px solid #f0dfe4;
+}
+
+.mini-label {
+    color: #a98091;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.postmark {
+    margin-left: auto;
+    margin-right: 78px;
+
+    padding: 5px 8px;
+
+    border: 1px solid #e2b6c6;
+    border-radius: 3px;
+
+    color: #ca8ba2;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    transform: rotate(-5deg);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title-area {
+    position: relative;
+
+    padding: 31px 0 23px;
+
+    text-align: center;
+}
+
+.tiny-heart {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff0f6,
+            #ffe0eb
+        );
+
+    box-shadow:
+        0 10px 25px rgba(228,107,153,.13);
+
+    font-size: 30px;
+
+    animation: littleHeartbeat 2.5s ease-in-out infinite;
+}
+
+.title-area h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3rem, 9vw, 4.5rem);
+
+    font-weight: 400;
+    line-height: 1;
+
+    color: #573747;
+}
+
+.handwriting {
+    display: inline-block;
+
+    margin-top: 11px;
+
+    font-family: "Patrick Hand", cursive;
+    font-size: 29px;
+
+    color: var(--pink-dark);
+
+    transform: rotate(-2deg);
+}
+
+
+/* =====================================================
+   LETTER MESSAGE
+===================================================== */
+
+.letter-message {
+    padding: 24px 24px 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7f8,
+            #fffaf3
+        );
+
+    border: 1px solid #f5e6e7;
+    border-radius: 5px;
+
+    box-shadow:
+        0 7px 20px rgba(112,70,84,.045);
+
+    position: relative;
+}
+
+/* Decorative paper tape */
+
+.letter-message::before {
+    content: "";
+
+    position: absolute;
+
+    top: -9px;
+    left: 50%;
+
+    width: 78px;
+    height: 20px;
+
+    background: rgba(255,204,221,.66);
+
+    transform: translateX(-50%) rotate(-2deg);
+}
+
+.message-top {
+    margin-bottom: 12px;
+
+    font-family: "Patrick Hand", cursive;
+    font-size: 23px;
+
+    color: #c65d86;
+}
+
+.letter-message p {
+    margin-top: 10px;
+
+    font-family: "Patrick Hand", cursive;
+    font-size: 20px;
+
+    line-height: 1.5;
+
+    color: #745564;
+}
+
+.highlight-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin: 20px 0 13px;
+    padding: 15px 10px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #ffe2ed,
+            #fff0f5
+        );
+
+    border: 1px dashed #e9a3ba;
+    border-radius: 5px;
+
+    text-align: center;
+}
+
+.highlight-message span {
+    font-size: 17px;
+}
+
+.highlight-message strong {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(19px, 4vw, 24px);
+    font-weight: 400;
+
+    color: #cb4e80;
+}
+
+.letter-message .waiting-text {
+    margin-top: 15px;
+
+    color: #9c7083;
+    font-size: 18px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   POSTCARD DIVIDER
+===================================================== */
+
+.postcard-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 23px 0;
+}
+
+.postcard-divider span {
+    color: #d983a3;
+    font-size: 15px;
+}
+
+.postcard-divider i {
+    width: 48px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e9b7c7,
+            transparent
+        );
+}
+
+
+/* =====================================================
+   ONLINE BUTTON
+===================================================== */
+
+.online-button {
+    position: relative;
+
+    width: 100%;
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    padding: 16px 17px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.75);
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f879a7,
+            #eb528b 55%,
+            #d9447b
+        );
+
+    box-shadow:
+        0 12px 27px rgba(219,71,126,.22),
+        inset 0 1px 0 rgba(255,255,255,.4);
+
+    color: white;
+
+    font-family: "Quicksand", sans-serif;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+}
+
+.online-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 17px 32px rgba(219,71,126,.3),
+        inset 0 1px 0 rgba(255,255,255,.4);
+
+    filter: saturate(1.06);
+}
+
+.online-button:active {
+    transform: scale(.98);
+}
+
+.online-button:focus-visible {
+    outline: 3px solid #eaa0bc;
+    outline-offset: 4px;
+}
+
+.online-button.is-sending {
+    opacity: .85;
+    cursor: wait;
+    pointer-events: none;
+}
+
+.button-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 23px;
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
+    text-align: center;
+}
+
+.button-arrow {
+    position: relative;
+    z-index: 2;
+
+    font-size: 22px;
+}
+
+/* Shine sweep */
+
+.button-shine {
+    position: absolute;
+
+    top: -40%;
+    left: -60%;
+
+    width: 35%;
+    height: 180%;
+
+    background: rgba(255,255,255,.2);
+
+    transform: rotate(20deg);
+
+    animation: buttonShine 4s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   STATUS MESSAGE
+===================================================== */
+
+.status-box {
+    min-height: 0;
+
+    margin-top: 13px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.5;
+    text-align: center;
+
+    color: #765268;
+
+    overflow-wrap: anywhere;
+}
+
+.status-box:not(:empty) {
+    padding: 12px 14px;
+
+    background: #fff2f6;
+
+    border: 1px dashed #efc0d0;
+    border-radius: 5px;
+
+    animation: statusAppear .3s ease;
+}
+
+
+/* =====================================================
+   CONNECTION NOTE
+===================================================== */
+
+.connection-note {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    margin-top: 22px;
+    padding: 14px;
+
+    background: #fff9ee;
+
+    border: 1px dashed #ead8bc;
+    border-radius: 5px;
+}
+
+.note-icon {
+    width: 39px;
+    height: 39px;
+
+    flex: 0 0 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff0f5;
+
+    font-size: 19px;
+}
+
+.connection-note > div:nth-child(2) {
+    flex: 1;
+}
+
+.connection-note strong {
+    display: block;
+
+    color: #775064;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.connection-note span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #a18792;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.note-arrow {
+    color: #d18aa4;
+    font-size: 21px;
+}
+
+
+/* =====================================================
+   SIGNATURE
+===================================================== */
+
+.letter-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 2px;
+
+    margin: 24px 0 22px;
+
+    transform: rotate(-2deg);
+}
+
+.letter-signature span {
+    font-family: "Patrick Hand", cursive;
+
+    color: #9c7487;
+
+    font-size: 18px;
+}
+
+.letter-signature strong {
+    font-family: "Patrick Hand", cursive;
+
+    color: #d65387;
+
+    font-size: 28px;
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   POSTCARD FOOTER
+===================================================== */
+
+.postcard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #f0dfe4;
+
+    color: #bc8a9e;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+
+/* =====================================================
+   BOTTOM NOTE
+===================================================== */
+
+.bottom-note {
+    margin-top: 22px;
+
+    text-align: center;
+
+    color: #a17d8d;
+
+    font-family: "Patrick Hand", cursive;
+    font-size: 19px;
+
+    line-height: 1.6;
+}
+
+.bottom-note strong {
+    display: block;
+
+    color: #d65387;
+
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   ACCESS SCREEN
+===================================================== */
+
+.access-screen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            #ffe4ef,
+            transparent 45%
+        ),
+        #fffaf8;
+
+    text-align: center;
+}
+
+.access-screen.show {
+    display: flex;
+}
+
+.access-card {
+    position: relative;
+
+    width: min(420px, 100%);
+
+    padding: 38px 27px;
+
+    background: var(--paper);
+
+    border: 1px solid #f1dce5;
+    border-radius: 6px;
+
+    box-shadow:
+        0 20px 55px rgba(166,92,123,.14);
+}
+
+.access-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 8px;
+
+    border: 1px dashed #ecc5d3;
+
+    pointer-events: none;
+}
+
+.access-icon {
+    margin-bottom: 10px;
+    font-size: 44px;
+}
+
+.access-card h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 34px;
+    font-weight: 400;
+
+    color: #d65387;
+}
+
+.access-card p {
+    margin-top: 12px;
+
+    color: #765268;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.access-card span {
+    display: block;
+
+    margin-top: 15px;
+
+    font-family: "Patrick Hand", cursive;
+
+    color: #a17d8d;
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   CLICK PARTICLES & SPARKLES
+===================================================== */
+
+.click-particle {
+    position: fixed;
+
+    z-index: 1100;
+
+    pointer-events: none;
+    user-select: none;
+
+    font-size: 19px;
+
+    animation: particlePop .9s ease-out forwards;
+}
+
+.sparkle {
+    position: fixed;
+
+    z-index: 1050;
+
+    pointer-events: none;
+    user-select: none;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 7px #ff88b1,
+        0 0 15px #ffb0cc;
+
+    animation: sparklePop 1s ease-out forwards;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes postcardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(22px) rotate(-1deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+@keyframes doodleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(7deg);
+    }
+}
+
+@keyframes littleHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.08);
+    }
+
+    20% {
+        transform: scale(.98);
+    }
+
+    30% {
+        transform: scale(1.05);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes buttonShine {
+    0%, 15% {
+        left: -60%;
+    }
+
+    60%, 100% {
+        left: 130%;
+    }
+}
+
+@keyframes statusAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes particlePop {
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.6);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--move-x, 0px)),
+                calc(-50% + var(--move-y, -70px))
+            )
+            scale(1.35)
+            rotate(25deg);
+    }
+}
+
+@keyframes sparklePop {
+    0% {
+        opacity: 0;
+        transform: scale(.3) rotate(0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(90deg);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .alarm-page {
+        padding: 23px 14px 30px;
+    }
+
+    .love-postcard {
+        padding: 31px 24px 25px;
+    }
+
+    .postcard-stamp {
+        top: 18px;
+        right: 18px;
+
+        width: 48px;
+        height: 58px;
+    }
+
+    .postcard-stamp span {
+        font-size: 22px;
+    }
+
+    .postmark {
+        margin-right: 64px;
+        font-size: 7px;
+    }
+
+    .title-area h1 {
+        font-size: 3.5rem;
+    }
+
+    .letter-message {
+        padding: 22px 17px 19px;
+    }
+
+    .letter-message p {
+        font-size: 19px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE PHONES
+===================================================== */
+
+@media (max-width: 430px) {
+
+    .alarm-page {
+        padding: 17px 11px 24px;
+    }
+
+    .back-link {
+        margin-bottom: 14px;
+    }
+
+    .love-postcard {
+        padding: 28px 15px 21px;
+    }
+
+    .love-postcard::before {
+        inset: 6px;
+    }
+
+    .postcard-header {
+        padding-bottom: 14px;
+    }
+
+    .mini-label {
+        max-width: 165px;
+
+        font-size: 8px;
+        letter-spacing: 1.1px;
+    }
+
+    .postmark {
+        margin-right: 57px;
+
+        padding: 4px 5px;
+
+        font-size: 6px;
+        letter-spacing: .5px;
+    }
+
+    .postcard-stamp {
+        top: 15px;
+        right: 12px;
+
+        width: 42px;
+        height: 50px;
+    }
+
+    .postcard-stamp span {
+        font-size: 19px;
+    }
+
+    .postcard-stamp small {
+        font-size: 7px;
+    }
+
+    .title-area {
+        padding: 27px 0 20px;
+    }
+
+    .tiny-heart {
+        width: 55px;
+        height: 55px;
+
+        margin-bottom: 12px;
+
+        font-size: 26px;
+    }
+
+    .title-area h1 {
+        font-size: 3rem;
+    }
+
+    .handwriting {
+        font-size: 25px;
+    }
+
+    .letter-message {
+        padding: 21px 13px 17px;
+    }
+
+    .message-top {
+        font-size: 21px;
+    }
+
+    .letter-message p {
+        font-size: 18px;
+        line-height: 1.45;
+    }
+
+    .highlight-message {
+        gap: 6px;
+
+        margin: 17px 0 11px;
+        padding: 13px 6px;
+    }
+
+    .highlight-message strong {
+        font-size: 19px;
+    }
+
+    .highlight-message span {
+        font-size: 14px;
+    }
+
+    .letter-message .waiting-text {
+        font-size: 17px;
+    }
+
+    .postcard-divider {
+        margin: 19px 0;
+        gap: 7px;
+    }
+
+    .postcard-divider i {
+        width: 36px;
+    }
+
+    .online-button {
+        min-height: 65px;
+
+        gap: 7px;
+        padding: 13px 9px;
+    }
+
+    .button-icon {
+        font-size: 20px;
+    }
+
+    .button-text {
+        font-size: 10px;
+        letter-spacing: .35px;
+    }
+
+    .button-arrow {
+        font-size: 19px;
+    }
+
+    .status-box {
+        font-size: 12px;
+    }
+
+    .connection-note {
+        gap: 7px;
+
+        margin-top: 18px;
+        padding: 10px 8px;
+    }
+
+    .note-icon {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+
+        font-size: 16px;
+    }
+
+    .connection-note strong {
+        font-size: 10px;
+    }
+
+    .connection-note span {
+        font-size: 9px;
+    }
+
+    .note-arrow {
+        font-size: 16px;
+    }
+
+    .letter-signature {
+        margin: 21px 0;
+    }
+
+    .letter-signature span {
+        font-size: 17px;
+    }
+
+    .letter-signature strong {
+        font-size: 25px;
+    }
+
+    .postcard-footer {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .bottom-note {
+        margin-top: 17px;
+        font-size: 17px;
+    }
+
+    .floating-doodle {
+        opacity: .32;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 350px) {
+
+    .love-postcard {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .title-area h1 {
+        font-size: 2.6rem;
+    }
+
+    .postmark {
+        margin-right: 52px;
+    }
+
+    .button-text {
+        font-size: 9px;
+    }
+
+    .connection-note {
+        gap: 5px;
+    }
+
+    .note-icon {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+    }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
