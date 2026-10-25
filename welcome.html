@@ -722,9 +722,9 @@
         <span class="btn-icon">🎶</span> Music Hub
       </a>
 
-      <!-- FIXED LINK HERE -->
-      <a href="./bell%20page.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
-        <span class="btn-icon">🥰</span> Wake Your Hubby
+      <!-- AI Assistant Link Updated Here -->
+      <a href="./AI%20assistant/ai.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
+        <span class="btn-icon">🤖</span> AI Assistant
       </a>
       
       <a href="./Love%20mail/login_page.html" class="royal-btn btn-royal-login reveal reveal-d7">
@@ -849,7 +849,6 @@
       const left = Math.random() * 90 + 5;
       line.style.left = left + '%';
       
-      // Speed tez ki gayi hai (duration 8s se 14s tak taake tezi se upar jayein)
       const duration = Math.random() * 6 + 8;
       line.style.animationDuration = duration + 's';
       line.style.fontSize = (Math.random() * 8 + 14) + 'px';
@@ -858,11 +857,9 @@
       setTimeout(() => line.remove(), (duration + 1) * 1000);
     }
 
-    // Shuru mein zyada lines generate hongi aur interval fast kar diya hai taake continuous flow bane
     for (let i = 0; i < 15; i++) {
       setTimeout(() => createShinyLine(), i * 300);
     }
-    // Har 600ms baad eik nayi line continuous aati rahegi
     setInterval(createShinyLine, 600);
 
     // ══════════ SCROLLING QUOTE TICKER ══════════
