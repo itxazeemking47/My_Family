@@ -1,0 +1,1140 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Patrick+Hand&family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+    --pink: #f05b91;
+    --pink-light: #ffd9e7;
+    --rose: #ff8eb5;
+    --purple: #8d7bd1;
+    --yellow: #f4c95d;
+    --blue: #70b9dc;
+    --mint: #74c9a2;
+    --cream: #fffaf5;
+    --text: #563746;
+    --muted: #967684;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: "Quicksand", sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(circle at 10% 10%, #ffe3ed 0, transparent 28%),
+        radial-gradient(circle at 90% 15%, #e8ddff 0, transparent 30%),
+        radial-gradient(circle at 50% 100%, #fff0c8 0, transparent 35%),
+        #fffaf8;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.bg-glow {
+    position: fixed;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    filter: blur(45px);
+
+    opacity: .35;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+.glow-1 {
+    top: 10%;
+    left: -80px;
+    background: #ff9fc2;
+}
+
+.glow-2 {
+    top: 45%;
+    right: -100px;
+    background: #c5b4ff;
+}
+
+.glow-3 {
+    bottom: -100px;
+    left: 35%;
+    background: #ffe18a;
+}
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+.floating-heart {
+    position: fixed;
+
+    pointer-events: none;
+
+    color: #f59ab9;
+
+    opacity: .35;
+
+    z-index: 0;
+
+    animation: floatingHeart 6s ease-in-out infinite;
+}
+
+.heart-1 {
+    top: 17%;
+    left: 5%;
+    font-size: 28px;
+}
+
+.heart-2 {
+    top: 40%;
+    right: 6%;
+    font-size: 22px;
+    animation-delay: 1s;
+}
+
+.heart-3 {
+    bottom: 18%;
+    left: 7%;
+    font-size: 18px;
+    animation-delay: 2s;
+}
+
+.heart-4 {
+    bottom: 8%;
+    right: 9%;
+    font-size: 30px;
+    animation-delay: 3s;
+}
+
+
+/* =====================================================
+   ENVELOPE SCREEN
+===================================================== */
+
+.envelope-screen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff1f7 0,
+            #ffe4ef 55%,
+            #f8eaff 100%
+        );
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.envelope-screen.opened {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.tiny-label {
+    margin-bottom: 28px;
+
+    color: #a66c82;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+.envelope-area {
+    position: relative;
+
+    width: min(420px, 90vw);
+    height: 300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope-shadow {
+    position: absolute;
+
+    bottom: 15px;
+
+    width: 80%;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: rgba(180, 88, 125, .18);
+
+    filter: blur(14px);
+}
+
+.envelope {
+    position: relative;
+
+    width: 360px;
+    height: 235px;
+
+    max-width: 90vw;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            0 25px 35px rgba(194, 89, 132, .22)
+        );
+
+    transition: transform .35s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-6px) rotate(-1deg);
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffb5cc,
+            #ff88ae
+        );
+
+    border-radius: 8px;
+
+    z-index: 1;
+}
+
+.envelope-front {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 68%;
+
+    background: #ff9cbc;
+
+    clip-path: polygon(
+        0 0,
+        50% 65%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    z-index: 4;
+}
+
+.envelope-flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65%;
+
+    background: #ffadc7;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 75%
+    );
+
+    transform-origin: top center;
+
+    z-index: 5;
+
+    transition:
+        transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+.letter {
+    position: absolute;
+
+    left: 8%;
+
+    bottom: 15px;
+
+    width: 84%;
+    height: 205px;
+
+    padding: 25px 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffefb,
+            #fff8f1
+        );
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 10px 25px rgba(80, 50, 60, .12);
+
+    z-index: 2;
+
+    transition:
+        transform 1s cubic-bezier(.2,.8,.2,1),
+        bottom 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope.open .letter {
+    bottom: 105px;
+
+    transform: translateY(-25px);
+}
+
+.letter-top {
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #b67c91;
+}
+
+.letter h1 {
+    margin-top: 14px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 36px;
+
+    font-weight: 400;
+
+    color: #5b3748;
+}
+
+.letter h1 span {
+    font-size: 28px;
+}
+
+.letter p {
+    margin-top: 5px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 20px;
+
+    color: #a0697f;
+}
+
+.letter-line {
+    width: 80px;
+    height: 1px;
+
+    margin: 13px auto;
+
+    background: #e8a5ba;
+}
+
+.letter small {
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 16px;
+
+    color: #d05c86;
+}
+
+
+/* =====================================================
+   HEART SEAL
+===================================================== */
+
+.seal-button {
+    position: absolute;
+
+    left: 50%;
+    top: 56%;
+
+    transform: translate(-50%, -50%);
+
+    width: 62px;
+    height: 62px;
+
+    border: 6px solid #fff4f7;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ed548b,
+            #d93e77
+        );
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    box-shadow:
+        0 8px 22px rgba(196, 61, 108, .3);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.seal-button:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.1);
+
+    box-shadow:
+        0 12px 28px rgba(196, 61, 108, .38);
+}
+
+.envelope-hint {
+    margin-top: 27px;
+
+    font-family: "Patrick Hand", cursive;
+
+    color: #9d7182;
+
+    font-size: 19px;
+
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   MAIN WORLD
+===================================================== */
+
+.main-world {
+    width: min(1050px, 100%);
+
+    margin: auto;
+
+    padding: 55px 20px 45px;
+
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease .25s,
+        transform .8s ease .25s;
+}
+
+.main-world.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    position: relative;
+
+    max-width: 720px;
+
+    margin: 0 auto 38px;
+
+    padding: 45px 25px 38px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.92),
+            rgba(255,247,241,.86)
+        );
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 20px 55px rgba(171, 103, 128, .12);
+
+    border-radius: 7px;
+
+    transform: rotate(-.4deg);
+}
+
+.postcard-stamp {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    width: 50px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px dashed #e2a2b8;
+
+    color: #df7196;
+
+    font-size: 25px;
+
+    transform: rotate(6deg);
+
+    background: #fff5f8;
+}
+
+.postcard-label {
+    color: #c18197;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.hero h1 {
+    margin-top: 10px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3rem, 9vw, 5.3rem);
+
+    font-weight: 400;
+
+    line-height: .95;
+
+    color: #593848;
+}
+
+.hero h1 span {
+    font-size: .6em;
+}
+
+.handwriting {
+    margin-top: 15px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 27px;
+
+    color: #d25d87;
+
+    transform: rotate(-2deg);
+}
+
+.hero-text {
+    max-width: 530px;
+
+    margin: 15px auto 0;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #80616f;
+}
+
+.postcard-divider {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.postcard-divider i {
+    width: 55px;
+    height: 1px;
+
+    background: #e5b1c1;
+}
+
+.postcard-divider span {
+    color: #dc7397;
+}
+
+
+/* =====================================================
+   MEMORY GRID
+===================================================== */
+
+.memory-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   MEMORY CARD
+===================================================== */
+
+.memory-card {
+    position: relative;
+
+    min-height: 280px;
+
+    padding: 31px 27px 25px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 15px 35px rgba(100, 65, 80, .11);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.memory-card:nth-child(odd) {
+    transform: rotate(-.8deg);
+}
+
+.memory-card:nth-child(even) {
+    transform: rotate(.8deg);
+}
+
+.memory-card:hover {
+    transform:
+        translateY(-8px)
+        rotate(0deg);
+
+    box-shadow:
+        0 22px 45px rgba(100, 65, 80, .18);
+}
+
+.pink-card {
+    background: #ffe1ec;
+}
+
+.yellow-card {
+    background: #fff0b9;
+}
+
+.purple-card {
+    background: #e5ddff;
+}
+
+.blue-card {
+    background: #d9f1ff;
+}
+
+.mint-card {
+    background: #d9f5e7;
+}
+
+.rose-card {
+    background: #ffd9d9;
+}
+
+
+/* =====================================================
+   CARD TAPE
+===================================================== */
+
+.card-tape {
+    position: absolute;
+
+    top: -12px;
+    left: 50%;
+
+    width: 95px;
+    height: 30px;
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    background:
+        rgba(255,255,255,.62);
+
+    opacity: .85;
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.card-number {
+    position: absolute;
+
+    top: 16px;
+    right: 19px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 20px;
+
+    color: rgba(90, 55, 70, .35);
+}
+
+.card-icon {
+    font-size: 42px;
+
+    margin-bottom: 15px;
+}
+
+.card-label {
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: rgba(80, 48, 65, .55);
+}
+
+.card-content h2 {
+    margin-top: 5px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    font-weight: 400;
+
+    color: #563645;
+}
+
+.card-content p {
+    margin-top: 12px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 18px;
+
+    line-height: 1.25;
+
+    color: #7b5968;
+}
+
+.card-link {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #754357;
+}
+
+.card-link span {
+    font-size: 20px;
+
+    transition: transform .2s ease;
+}
+
+.memory-card:hover .card-link span {
+    transform: translateX(6px);
+}
+
+
+/* =====================================================
+   DRIVE
+===================================================== */
+
+.drive-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 28px;
+
+    padding: 22px 24px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background:
+        rgba(255,255,255,.82);
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 15px 35px rgba(100,65,80,.09);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.drive-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 20px 40px rgba(100,65,80,.14);
+}
+
+.drive-icon {
+    width: 55px;
+    height: 55px;
+
+    flex: 0 0 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #f0eaff;
+
+    font-size: 27px;
+}
+
+.drive-card span {
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #9b8290;
+}
+
+.drive-card h3 {
+    margin-top: 2px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 24px;
+
+    font-weight: 400;
+}
+
+.drive-card p {
+    margin-top: 2px;
+
+    font-family: "Patrick Hand", cursive;
+
+    color: #957685;
+
+    font-size: 16px;
+}
+
+.drive-card strong {
+    margin-left: auto;
+
+    font-size: 25px;
+
+    color: #c66c91;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    text-align: center;
+
+    margin-top: 45px;
+}
+
+.footer-heart {
+    color: #e65a8c;
+
+    font-size: 25px;
+}
+
+footer p {
+    margin-top: 5px;
+
+    font-family: "Patrick Hand", cursive;
+
+    color: #9d7c8a;
+
+    font-size: 18px;
+}
+
+footer strong {
+    display: block;
+
+    margin-top: 2px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 24px;
+
+    font-weight: 400;
+
+    color: #684052;
+}
+
+footer small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #b1929f;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+.sparkle {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 10px #ff72a8;
+
+    animation:
+        sparkle .9s ease-out forwards;
+}
+
+@keyframes sparkle {
+
+    0% {
+        opacity: 0;
+        transform: scale(.3) rotate(0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(90deg);
+    }
+}
+
+@keyframes floatingHeart {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(7deg);
+    }
+}
+
+@keyframes hintPulse {
+
+    0%, 100% {
+        opacity: .65;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .envelope-area {
+        height: 265px;
+    }
+
+    .envelope {
+        width: 330px;
+        height: 215px;
+    }
+
+    .letter {
+        height: 190px;
+    }
+
+    .envelope.open .letter {
+        bottom: 95px;
+    }
+
+    .memory-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .memory-card {
+        min-height: 260px;
+    }
+
+    .hero {
+        padding:
+            38px
+            17px
+            30px;
+    }
+
+    .postcard-stamp {
+        width: 42px;
+        height: 48px;
+
+        top: 14px;
+        right: 13px;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 390px) {
+
+    .envelope {
+        width: 300px;
+        height: 195px;
+    }
+
+    .envelope-area {
+        height: 245px;
+    }
+
+    .letter {
+        height: 175px;
+    }
+
+    .letter h1 {
+        font-size: 30px;
+    }
+
+    .letter p {
+        font-size: 17px;
+    }
+
+    .seal-button {
+        width: 55px;
+        height: 55px;
+
+        font-size: 23px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .handwriting {
+        font-size: 23px;
+    }
+
+    .card-content h2 {
+        font-size: 27px;
+    }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
