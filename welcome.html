@@ -722,7 +722,8 @@
         <span class="btn-icon">🎶</span> Music Hub
       </a>
 
-      <a href="/bell%20page.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
+      <!-- FIXED LINK HERE -->
+      <a href="./bell%20page.html" class="royal-btn btn-royal-hubby reveal reveal-d6">
         <span class="btn-icon">🥰</span> Wake Your Hubby
       </a>
       
@@ -816,7 +817,7 @@
     }
     animateParticles();
 
-    // ══════════ RISING SHINY TEXTS ══════════
+    // ══════════ RISING SHINY TEXTS (FASTER & CONTINUOUS) ══════════
     const urduQuotes = [
       "Mohabbat mein har lamha priceless hota hai 💕",
       "Tum meri duniya ka sabse khoobsurat hissa ho ✨",
@@ -847,20 +848,22 @@
       line.textContent = quote;
       const left = Math.random() * 90 + 5;
       line.style.left = left + '%';
-      const duration = Math.random() * 15 + 20;
+      
+      // Speed tez ki gayi hai (duration 8s se 14s tak taake tezi se upar jayein)
+      const duration = Math.random() * 6 + 8;
       line.style.animationDuration = duration + 's';
-      line.style.animationDelay = Math.random() * 2 + 's';
       line.style.fontSize = (Math.random() * 8 + 14) + 'px';
+      
       shinyWall.appendChild(line);
-      setTimeout(() => line.remove(), (duration + 3) * 1000);
+      setTimeout(() => line.remove(), (duration + 1) * 1000);
     }
 
-    // Spawn initial batch
-    for (let i = 0; i < 8; i++) {
-      setTimeout(() => createShinyLine(), i * 800);
+    // Shuru mein zyada lines generate hongi aur interval fast kar diya hai taake continuous flow bane
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => createShinyLine(), i * 300);
     }
-    // Keep spawning
-    setInterval(createShinyLine, 3000);
+    // Har 600ms baad eik nayi line continuous aati rahegi
+    setInterval(createShinyLine, 600);
 
     // ══════════ SCROLLING QUOTE TICKER ══════════
     const tickerQuotes = [
